@@ -147,6 +147,101 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/11/12/explainable2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="qyt">
+      <meta itemprop="description" content="不要放弃自由去选择保障，到头来你两者都得不到">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="24kmagic">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/11/12/explainable2/" class="post-title-link" itemprop="url">[ACTF2020 新生赛]Include1题解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-11-12 19:35:00 / 修改时间：19:45:14" itemprop="dateCreated datePublished" datetime="2025-11-12T19:35:00+08:00">2025-11-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/answer/" itemprop="url" rel="index"><span itemprop="name">answer</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>解题之前，我们需要知道有个东西可以帮助我们视奸别人的密码日记本</p>
+<p>那就是 php:&#x2F;&#x2F;filter<br>！</p>
+<p>##视奸好物php:&#x2F;&#x2F;filter</p>
+<p>格式：xxx.php?xxx&#x3D;php:&#x2F;&#x2F;filter&#x2F;convert.base64-encode&#x2F;resource&#x3D;xxx.php</p>
+<p>&nbsp;     ?xxx&#x3D;php:&#x2F;&#x2F;filter #视奸好物           &#x2F;convert.base64-encode&#x2F;  #编码        resource&#x3D;xxx.php #你要视奸哪本日记本呢</p>
+<p>很多时候我们知道对方有个叫做xxx.php的密码本，但是由于它有个机制就是：</p>
+<p>如果你翻看它，它会让里面所有的内容隐身（对于php文件来说，翻看会导致它只会执行，并不会echo，所以你看不到内容）</p>
+<p>有什么方法可以让我们看到呢？如果我们只是让把他日记本里的中文内容抄写成英文呢？准确来说只是复制一下，不算翻看吧哈哈哈哈哈</p>
+<p>那么就需要用到编码 &#x2F;convert.base64-encode&#x2F;</p>
+<p>提示：PHP 文件的特性：会执行代码，不显示源码里的隐藏内容</p>
+<p>进入正题</p>
+<p><img src="https://imgtu.com/uploads/m1usmnrl/r-pasted-2025-11-12t11-13-40-303z.webp" alt="pasted-2025-11-12T11-13-40-303Z.png"></p>
+<p>并没有发现flag具体内容</p>
+<p>tips点开，啥东西都没有啊</p>
+<p><img src="https://imgtu.com/uploads/m1x3xfv1/r-pasted-2025-11-12t11-15-03-261z.webp" alt="pasted-2025-11-12T11-15-03-261Z.png"></p>
+<p>看一下抓包内容吧！</p>
+<p><img src="https://imgtu.com/uploads/m1rq8k7v/r-pasted-2025-11-12t11-11-49-602z.webp" alt="pasted-2025-11-12T11-11-49-602Z.png"><br>响应的最后 告诉我们：</p>
+<meta charset="utf8">
+
+<p><a href="?file=flag.php">tips</a></p>
+<p>提示：PHP 文件的特性：会执行代码，不显示源码里的隐藏内容</p>
+<p>是不是要去看看这个php文件啊，关键是要是直接放在url后面它会隐身，那么就要用到 视奸好物php:&#x2F;&#x2F;filter</p>
+<p>?xxx&#x3D;php:&#x2F;&#x2F;filter&#x2F;convert.base64-encode&#x2F;resource&#x3D;xxx.php</p>
+<p>（前面那个xxx是服务器要接受的参数名，后面那个xxx才是我们要看的日记本）</p>
+<p>改成</p>
+<p>?file&#x3D;php:&#x2F;&#x2F;filter&#x2F;convert.base64-encode&#x2F;resource&#x3D;flag.php</p>
+<p>url跟上这一串就可以看到一堆看不懂的文字了，咱们再用谷歌解码就得到flagle</p>
+<p><img src="https://imgtu.com/uploads/m2f356j3/r-pasted-2025-11-12t11-25-51-533z.webp" alt="pasted-2025-11-12T11-25-51-533Z.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2025/11/12/explainable1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -172,7 +267,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2025-11-12 17:50:00 / 修改时间：18:31:19" itemprop="dateCreated datePublished" datetime="2025-11-12T17:50:00+08:00">2025-11-12</time>
+              <time title="创建时间：2025-11-12 17:50:00 / 修改时间：18:57:47" itemprop="dateCreated datePublished" datetime="2025-11-12T17:50:00+08:00">2025-11-12</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -195,17 +290,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>#1.看到一只超级可爱的小猫，这个网页也看起来特别干净和可爱，字体也很好看！</p>
+          <p>##1.看到一只超级可爱的小猫，这个网页也看起来特别干净和可爱，字体也很好看！</p>
 <p><a target="_blank" rel="noopener" href="https://imgtu.com/upload/lyycwd6m/pasted-2025-11-12t10-10-59-785z"><img src="https://imgtu.com/uploads/lyycwd6m/r-pasted-2025-11-12t10-10-59-785z.webp" alt="pasted-2025-11-12T10-10-59-785Z.png"></a></p>
-<p>#2.怎么啥提示都没有？抓个包试试？</p>
+<p>##2.怎么啥提示都没有？抓个包试试？</p>
 <p><a target="_blank" rel="noopener" href="https://imgtu.com/upload/lywzdm2e/pasted-2025-11-12t10-10-10-832z"><img src="https://imgtu.com/uploads/lywzdm2e/r-pasted-2025-11-12t10-10-10-832z.webp" alt="pasted-2025-11-12T10-10-10-832Z.png"></a></p>
-<p>#3.看到最后的灰色文字</p>
+<p>##3.看到最后的灰色文字</p>
 <p>&nbsp;$cat&#x3D;$_GET[‘cat’];         从url中我们get到一个关于cat的参数，并把它存放到到 cat 里面；</p>
 <p>&nbsp;       echo $cat;			echo相当于print；		</p>
 <p>&nbsp;       if($cat&#x3D;&#x3D;’dog’){		如果cat的值 &#x3D; ’dog‘</p>
 <p>&nbsp;           echo ‘Syc{cat_cat_cat_cat}’;		我们就可以得到这个很像flag形状的东西了！</p>
 <p>&nbsp;       }</p>
-<p>#4.解决：</p>
+<p>##4.解决：</p>
 <p>那么就让url中显示cat&#x3D;dog就ok</p>
 <p>做法 ：一堆东西后面跟上           ?cat&#x3D;’dog’       这玩意就行</p>
 <p><a target="_blank" rel="noopener" href="https://imgtu.com/upload/lyzlgb2f/pasted-2025-11-12t10-11-45-085z"><img src="https://imgtu.com/uploads/lyzlgb2f/r-pasted-2025-11-12t10-11-45-085z.webp" alt="pasted-2025-11-12T10-11-45-085Z.png"></a></p>
@@ -254,7 +349,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2025-11-12 16:56:00 / 修改时间：17:00:31" itemprop="dateCreated datePublished" datetime="2025-11-12T16:56:00+08:00">2025-11-12</time>
+              <time title="创建时间：2025-11-12 16:56:00 / 修改时间：19:36:58" itemprop="dateCreated datePublished" datetime="2025-11-12T16:56:00+08:00">2025-11-12</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -279,7 +374,7 @@
       
           <h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><h2 id="简单版本"><a href="#简单版本" class="headerlink" title="简单版本"></a>简单版本</h2><ol>
 <li>打开 <code>source/_posts</code> 里的新.md 文件，写内容 + 粘图片；</li>
-<li>执行命令预览：<code>hexo server -p 4001</code>；</li>
+<li>执行命令预览：<code>hexo server -p 4001</code>；   <code>hexo clean &amp;&amp; hexo server -p 4001</code></li>
 <li>执行命令发布：<code>hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</code>。</li>
 </ol>
 
@@ -507,7 +602,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -516,7 +611,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>

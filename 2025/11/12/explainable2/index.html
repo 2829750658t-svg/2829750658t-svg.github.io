@@ -20,17 +20,27 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="不要放弃自由去选择保障，到头来你两者都得不到">
-<meta property="og:type" content="website">
-<meta property="og:title" content="24kmagic">
-<meta property="og:url" content="http://example.com/archives/index.html">
+  <meta name="description" content="解题之前，我们需要知道有个东西可以帮助我们视奸别人的密码日记本 那就是 php:&#x2F;&#x2F;filter！ ##视奸好物php:&#x2F;&#x2F;filter 格式：xxx.php?xxx&#x3D;php:&#x2F;&#x2F;filter&#x2F;convert.base64-encode&#x2F;resource&#x3D;xxx.php &nbsp;     ?xx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[ACTF2020 新生赛]Include1题解">
+<meta property="og:url" content="http://example.com/2025/11/12/explainable2/index.html">
 <meta property="og:site_name" content="24kmagic">
-<meta property="og:description" content="不要放弃自由去选择保障，到头来你两者都得不到">
+<meta property="og:description" content="解题之前，我们需要知道有个东西可以帮助我们视奸别人的密码日记本 那就是 php:&#x2F;&#x2F;filter！ ##视奸好物php:&#x2F;&#x2F;filter 格式：xxx.php?xxx&#x3D;php:&#x2F;&#x2F;filter&#x2F;convert.base64-encode&#x2F;resource&#x3D;xxx.php &nbsp;     ?xx">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imgtu.com/uploads/m1usmnrl/r-pasted-2025-11-12t11-13-40-303z.webp">
+<meta property="og:image" content="https://imgtu.com/uploads/m1x3xfv1/r-pasted-2025-11-12t11-15-03-261z.webp">
+<meta property="og:image" content="https://imgtu.com/uploads/m1rq8k7v/r-pasted-2025-11-12t11-11-49-602z.webp">
+<meta property="og:image" content="https://imgtu.com/uploads/m2f356j3/r-pasted-2025-11-12t11-25-51-533z.webp">
+<meta property="article:published_time" content="2025-11-12T11:35:00.000Z">
+<meta property="article:modified_time" content="2025-11-12T11:45:14.868Z">
 <meta property="article:author" content="qyt">
+<meta property="article:tag" content="answer">
+<meta property="article:tag" content="content">
+<meta property="article:tag" content="ctf">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgtu.com/uploads/m1usmnrl/r-pasted-2025-11-12t11-13-40-303z.webp">
 
-<link rel="canonical" href="http://example.com/archives/">
+<link rel="canonical" href="http://example.com/2025/11/12/explainable2/">
 
 
 <script id="page-configurations">
@@ -38,12 +48,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>归档 | 24kmagic</title>
+  <title>[ACTF2020 新生赛]Include1题解 | 24kmagic</title>
   
 
 
@@ -141,130 +151,118 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 5 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/11/12/explainable2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="qyt">
+      <meta itemprop="description" content="不要放弃自由去选择保障，到头来你两者都得不到">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="24kmagic">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [ACTF2020 新生赛]Include1题解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-11-12 19:35:00 / 修改时间：19:45:14" itemprop="dateCreated datePublished" datetime="2025-11-12T19:35:00+08:00">2025-11-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/answer/" itemprop="url" rel="index"><span itemprop="name">answer</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2025</span>
-    </div>
+        <p>解题之前，我们需要知道有个东西可以帮助我们视奸别人的密码日记本</p>
+<p>那就是 php:&#x2F;&#x2F;filter<br>！</p>
+<p>##视奸好物php:&#x2F;&#x2F;filter</p>
+<p>格式：xxx.php?xxx&#x3D;php:&#x2F;&#x2F;filter&#x2F;convert.base64-encode&#x2F;resource&#x3D;xxx.php</p>
+<p>&nbsp;     ?xxx&#x3D;php:&#x2F;&#x2F;filter #视奸好物           &#x2F;convert.base64-encode&#x2F;  #编码        resource&#x3D;xxx.php #你要视奸哪本日记本呢</p>
+<p>很多时候我们知道对方有个叫做xxx.php的密码本，但是由于它有个机制就是：</p>
+<p>如果你翻看它，它会让里面所有的内容隐身（对于php文件来说，翻看会导致它只会执行，并不会echo，所以你看不到内容）</p>
+<p>有什么方法可以让我们看到呢？如果我们只是让把他日记本里的中文内容抄写成英文呢？准确来说只是复制一下，不算翻看吧哈哈哈哈哈</p>
+<p>那么就需要用到编码 &#x2F;convert.base64-encode&#x2F;</p>
+<p>提示：PHP 文件的特性：会执行代码，不显示源码里的隐藏内容</p>
+<p>进入正题</p>
+<p><img src="https://imgtu.com/uploads/m1usmnrl/r-pasted-2025-11-12t11-13-40-303z.webp" alt="pasted-2025-11-12T11-13-40-303Z.png"></p>
+<p>并没有发现flag具体内容</p>
+<p>tips点开，啥东西都没有啊</p>
+<p><img src="https://imgtu.com/uploads/m1x3xfv1/r-pasted-2025-11-12t11-15-03-261z.webp" alt="pasted-2025-11-12T11-15-03-261Z.png"></p>
+<p>看一下抓包内容吧！</p>
+<p><img src="https://imgtu.com/uploads/m1rq8k7v/r-pasted-2025-11-12t11-11-49-602z.webp" alt="pasted-2025-11-12T11-11-49-602Z.png"><br>响应的最后 告诉我们：</p>
+<meta charset="utf8">
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2025-11-12T19:35:00+08:00"
-              content="2025-11-12">
-          11-12
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2025/11/12/explainable2/" itemprop="url">
-            <span itemprop="name">[ACTF2020 新生赛]Include1题解</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2025-11-12T17:50:00+08:00"
-              content="2025-11-12">
-          11-12
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2025/11/12/explainable1/" itemprop="url">
-            <span itemprop="name">[极客大挑战 2019]Havefun1题解</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2025-11-12T16:56:00+08:00"
-              content="2025-11-12">
-          11-12
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2025/11/12/introduction/" itemprop="url">
-            <span itemprop="name">Hexo + GitHub Pages 写文 + 发布完整流程总结</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2025-11-12T16:00:00+08:00"
-              content="2025-11-12">
-          11-12
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2025/11/12/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2omg/" itemprop="url">
-            <span itemprop="name">我的第一篇博客omg</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2025-11-11T08:59:35+08:00"
-              content="2025-11-11">
-          11-11
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2025/11/11/hello-world/" itemprop="url">
-            <span itemprop="name">Hello World</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+<p><a href="?file=flag.php">tips</a></p>
+<p>提示：PHP 文件的特性：会执行代码，不显示源码里的隐藏内容</p>
+<p>是不是要去看看这个php文件啊，关键是要是直接放在url后面它会隐身，那么就要用到 视奸好物php:&#x2F;&#x2F;filter</p>
+<p>?xxx&#x3D;php:&#x2F;&#x2F;filter&#x2F;convert.base64-encode&#x2F;resource&#x3D;xxx.php</p>
+<p>（前面那个xxx是服务器要接受的参数名，后面那个xxx才是我们要看的日记本）</p>
+<p>改成</p>
+<p>?file&#x3D;php:&#x2F;&#x2F;filter&#x2F;convert.base64-encode&#x2F;resource&#x3D;flag.php</p>
+<p>url跟上这一串就可以看到一堆看不懂的文字了，咱们再用谷歌解码就得到flagle</p>
+<p><img src="https://imgtu.com/uploads/m2f356j3/r-pasted-2025-11-12t11-25-51-533z.webp" alt="pasted-2025-11-12T11-25-51-533Z.png"></p>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ctf/" rel="tag"># ctf</a>
+              <a href="/tags/answer/" rel="tag"># answer</a>
+              <a href="/tags/content/" rel="tag"># content</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/11/12/explainable1/" rel="prev" title="[极客大挑战 2019]Havefun1题解">
+      <i class="fa fa-chevron-left"></i> [极客大挑战 2019]Havefun1题解
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
 
