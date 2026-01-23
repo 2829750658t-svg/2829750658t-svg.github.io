@@ -1,13 +1,15 @@
 ﻿---
 title: "misc_answer"
 date: 2026-01-21 19:39:43
-categories: 默认分类
-tags: [笔记]
+categories:
+  - ctf题解
+  - misc
+tags: [misc]
 ---
 
 
 
-
+## misc题解
 
 bf6题解：
 
@@ -100,7 +102,7 @@ unzip -P 1234 1D7.zip  # -P指定密码，解压后查看4number.txt拿到flag
 
 “00 00 02 A7”为图像的宽，24像素
 ”00 00 01 00“为图像的高，24像素
-![image-20251217150833002](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251217150833002.png)
+![image-20251217150833002](/images/image-20251217150833002.png)
 
 3.高也改成“00 00 02 A7”
 
@@ -122,7 +124,7 @@ unzip -P 1234 1D7.zip  # -P指定密码，解压后查看4number.txt拿到flag
 
 2.根据图片，点击分析，点击追踪流，选择http看到密码，即flag
 
-![屏幕截图 2025-12-17 153428](C:\Users\21709\Pictures\Screenshots\屏幕截图 2025-12-17 153428.png)
+![屏幕截图 2025-12-17 153428](/images/屏幕截图 2025-12-17 153428.png)
 
 
 
@@ -142,7 +144,7 @@ unzip -P 1234 1D7.zip  # -P指定密码，解压后查看4number.txt拿到flag
 
 1.exe改成txt，发现先开头什么jpg，base64，把逗号后面的全部base64解密
 
-![image-20251217155500971](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251217155500971.png)
+![image-20251217155500971](/images/image-20251217155500971.png)
 
 
 
@@ -154,7 +156,7 @@ unzip -P 1234 1D7.zip  # -P指定密码，解压后查看4number.txt拿到flag
 
 https://the-x.cn/encodings/Base64.aspx
 
-![image-20251217154521265](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251217154521265.png)
+![image-20251217154521265](/images/image-20251217154521265.png)
 
 
 
@@ -164,7 +166,7 @@ https://the-x.cn/encodings/Base64.aspx
 
 
 
-![image-20251217155311781](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251217155311781.png)
+![image-20251217155311781](/images/image-20251217155311781.png)
 
 
 
@@ -190,7 +192,7 @@ https://the-x.cn/encodings/Base64.aspx
 
 如果没有这中一件解码拿文件我们可以看到utf-8是乱码，试试16进制hex
 
-![image-20251218212909920](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251218212909920.png)
+![image-20251218212909920](/images/image-20251218212909920.png)
 
 
 
@@ -218,7 +220,7 @@ https://the-x.cn/encodings/Base64.aspx
 
 1.0110发现有pk压缩包，还有个docx
 
-![image-20251218214521489](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251218214521489.png)
+![image-20251218214521489](/images/image-20251218214521489.png)
 
 
 
@@ -272,7 +274,7 @@ cat 福利.docx  //又发现pk文件头
 
 
 
-![image-20251218220400272](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251218220400272.png)
+![image-20251218220400272](/images/image-20251218220400272.png)
 
 
 
@@ -288,7 +290,7 @@ cat 福利.docx  //又发现pk文件头
 
 
 
-![image-20251220163705385](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251220163705385.png)
+![image-20251220163705385](/images/image-20251220163705385.png)
 
 
 
@@ -306,7 +308,7 @@ cat 福利.docx  //又发现pk文件头
 
 
 
-![屏幕截图 2025-12-20 164112](C:\Users\21709\Pictures\Screenshots\屏幕截图 2025-12-20 164112.png)
+![屏幕截图 2025-12-20 164112](/images/屏幕截图 2025-12-20 164112.png)
 
 
 
@@ -332,15 +334,15 @@ cat 福利.docx  //又发现pk文件头
 
 
 
-![image-20251220164742430](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251220164742430.png)
+![image-20251220164742430](/images/image-20251220164742430.png)
 
 
 
-![image-20251220164954811](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251220164954811.png)
+![image-20251220164954811](/images/image-20251220164954811.png)
 
 
 
-![image-20251220164727740](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251220164727740.png)
+![image-20251220164727740](/images/image-20251220164727740.png)
 
 
 
@@ -364,7 +366,7 @@ cat 福利.docx  //又发现pk文件头
 
 
 
-![image-20251220165504312](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251220165504312.png)
+![image-20251220165504312](/images/image-20251220165504312.png)
 
 
 
@@ -396,14 +398,13 @@ cat 福利.docx  //又发现pk文件头
 
 
 
-![image-20251220174136448](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251220174136448.png)
+![image-20251220174136448](/images/image-20251220174136448.png)
 
 
 
 
 
-![image-20251220174526862](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251220174526862.png)
-
+![image-20251220174526862](/images/image-20251220174526862.png)
 
 
 

@@ -1,13 +1,18 @@
 ﻿---
 title: "ook_code"
 date: 2026-01-21 19:39:43
-categories: 默认分类
-tags: [笔记]
+categories:
+  - ctf学习
+  - crypto
+  - ook编码
+tags: [碰到的一些编码]
 ---
 
 
 
 
+
+## Ook编码详解
 
 ## [Ook编码详解](https://ctf.bugku.com/tool/brainfuck)
 

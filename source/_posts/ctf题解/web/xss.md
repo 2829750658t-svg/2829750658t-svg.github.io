@@ -1,11 +1,15 @@
 ﻿---
-title: "xss"
+title: web-xss
 date: 2026-01-21 19:39:43
-categories: 默认分类
-tags: [笔记]
+tags: [web-xss]
+categories:
+  - ctf题解
+  - web
 ---
 
 
+
+## web-xss
 
 1.反射型（外部输入后，在浏览器端输出触发）
 

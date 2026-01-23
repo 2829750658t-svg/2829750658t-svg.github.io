@@ -1,7 +1,9 @@
 ﻿---
 title: "sql_notes"
 date: 2026-01-21 19:39:43
-categories: 默认分类
+categories:
+  - ctf学习
+  - web
 tags: [笔记]
 ---
 

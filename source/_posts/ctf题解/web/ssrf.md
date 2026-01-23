@@ -1,13 +1,15 @@
 ﻿---
-title: "ssrf"
+title:  web-ssrf
 date: 2026-01-21 19:39:43
-categories: 默认分类
-tags: [笔记]
+tags: [web-ssrf]
+categories:
+  - ctf题解
+  - web
 ---
 
 
 
-
+## web-ssrf
 
 ## 		SSRF = 服务器端请求伪造
 
@@ -35,11 +37,11 @@ python dirsearch.py -u "http://3992b9c4-b99e-44db-96b6-111d3cb92681.node5.buuoj.
 
 
 
-![image-20251217210112375](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251217210112375.png![image-20251217210507607](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251217210507607.png)
+![image-20251217210112375](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251217210112375.png![image-20251217210507607](/images/image-20251217210507607.png)
 
 
 
-![image-20251217204024349](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251217204024349.png)
+![image-20251217204024349](/images/image-20251217204024349.png)
 
 打开备份文件
 
@@ -114,7 +116,7 @@ class UserInfo
 
 注册，登录，发现蓝字
 
-![image-20251217215524707](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251217215524707.png)
+![image-20251217215524707](/images/image-20251217215524707.png)
 
 
 
@@ -124,19 +126,19 @@ class UserInfo
 
 
 
-![image-20251217215543418](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251217215543418.png)
+![image-20251217215543418](/images/image-20251217215543418.png)
 
 
 
 发现过滤
 
-![image-20251217210311771](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251217210311771.png)
+![image-20251217210311771](/images/image-20251217210311771.png)
 
 
 
 
 
-![image-20251217210702831](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251217210702831.png)
+![image-20251217210702831](/images/image-20251217210702831.png)
 
 
 
@@ -157,7 +159,7 @@ view.php?no=-1%20union/**/select%201,2,3,4--+
 
 这就是为什么我前面在输入1的时候注入点一直返回admin用户名，而没有任何回显
 
-![image-20251217212408795](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251217212408795.png)
+![image-20251217212408795](/images/image-20251217212408795.png)
 
 
 
@@ -171,7 +173,7 @@ view.php?no=-1%20union/**/select 1,database(),3,4--+
 
 
 
-![image-20251217212559085](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251217212559085.png)
+![image-20251217212559085](/images/image-20251217212559085.png)
 
 2. 3
 
@@ -238,9 +240,9 @@ load_file('/tmp/flag.php')
 
 为什么是这个路径，报错时候有显示，请看下图：
 
-![image-20251217214135585](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251217214135585.png)
+![image-20251217214135585](/images/image-20251217214135585.png)
 
-![image-20251217213911581](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251217213911581.png)
+![image-20251217213911581](/images/image-20251217213911581.png)
 
 
 

@@ -1,11 +1,15 @@
 ﻿---
-title: "sqlzhuru"
+title: web-sql注入
 date: 2026-01-21 19:39:43
-categories: 默认分类
-tags: [笔记]
+tags: [web-sql注入]
+categories:
+  - ctf题解
+  - web
 ---
 
----
+
+
+## web-sql注入
 
 ## 08 第八章 天衍真言，星图显圣 题解
 

@@ -1,9 +1,15 @@
 ﻿---
-title: "Logic Flaw"
+title: web-逻辑漏洞
 date: 2026-01-21 19:39:43
-categories: 默认分类
-tags: [笔记]
+tags: [web-逻辑漏洞]
+categories:
+  - ctf题解
+  - web
 ---
+
+
+
+## web-逻辑漏洞
 
 基础脚本：
 
@@ -78,7 +84,7 @@ if (isset($_POST['password'])) {
 
 2.科学计数法
 
-![image-20260101182325159](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20260101182325159.png)
+![image-20260101182325159](/images/image-20260101182325159.png)
 
 你发现直接输入数字它显示太长了，用科学计数法就ok
 
@@ -88,11 +94,11 @@ if (isset($_POST['password'])) {
 
 构造请求中，cookie的参数是-b
 
-![image-20260101182556727](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20260101182556727.png)
+![image-20260101182556727](/images/image-20260101182556727.png)
 
 千辛万苦改完了，但是他说你不是他的学生
 
-![image-20260101182624105](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20260101182624105.png)
+![image-20260101182624105](/images/image-20260101182624105.png)
 
 这里抓包后看到了user=0，就说明你不是学生嘛，那把值改成1不就真了
 
@@ -149,7 +155,7 @@ float(3.1)
 bool(true)
 ```
 
-![image-20260101194019184](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20260101194019184.png)
+![image-20260101194019184](/images/image-20260101194019184.png)
 
 
 
@@ -195,7 +201,7 @@ bool(true)
 
 所以直接改url就行了，但是如果你直接输入 num=readfile(文件路径),发现被禁止了（就是我前面说的waf），所以我们要绕过waf
 
-![image-20260101193118587](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20260101193118587.png)
+![image-20260101193118587](/images/image-20260101193118587.png)
 
 
 
@@ -211,7 +217,7 @@ bool(true)
 
 
 
-![image-20260101185924710](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20260101185924710.png)
+![image-20260101185924710](/images/image-20260101185924710.png)
 
 这里500报错说明你已经进入后端（绕过flag了），只是php解析错误了（你语法不正确嘛）
 
@@ -233,7 +239,7 @@ http://node5.buuoj.cn:27002/calc.php?%20num=var_dump(scandir(char(46)))
 
 
 
-![image-20260101190705612](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20260101190705612.png)
+![image-20260101190705612](/images/image-20260101190705612.png)
 
 
 
@@ -241,7 +247,7 @@ http://node5.buuoj.cn:27002/calc.php?%20num=var_dump(scandir(char(46)))
 
 
 
-![image-20260101190756691](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20260101190756691.png)
+![image-20260101190756691](/images/image-20260101190756691.png)
 
 
 
@@ -263,11 +269,11 @@ highlight_file()
 
 这里因为没有输入路径，只是输入了文件名，所以错了
 
-![image-20260101191116410](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20260101191116410.png)
+![image-20260101191116410](/images/image-20260101191116410.png)
 
 
 
-![image-20260101192942012](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20260101192942012.png)
+![image-20260101192942012](/images/image-20260101192942012.png)
 
 
 
@@ -431,7 +437,7 @@ payload2
 
 2.得到沙箱
 
-![image-20251220205145783](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251220205145783.png)
+![image-20251220205145783](/images/image-20251220205145783.png)
 
 
 
@@ -441,7 +447,7 @@ payload2
 
 
 
-![image-20251220205251772](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251220205251772.png)
+![image-20251220205251772](/images/image-20251220205251772.png)
 
 
 
@@ -1063,7 +1069,7 @@ system被禁用了
 
 
 
-![image-20251227163010489](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251227163010489.png)
+![image-20251227163010489](/images/image-20251227163010489.png)
 
 
 
@@ -1130,7 +1136,7 @@ eval作为一个语言构造器，并不能被当作函数调用，
 
 
 
-![image-20251227201231091](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251227201231091.png)
+![image-20251227201231091](/images/image-20251227201231091.png)
 
 
 
@@ -1603,11 +1609,15 @@ if (md5($a) == md5($b))
 
 3.强比较绕过
 
-根据有无string看
+根据有无string看，是否可以数组绕过
 
 https://blog.csdn.net/m0_73818134/article/details/131793815
 
+例子：
 
+a=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%00%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%55%5d%83%60%fb%5f%07%fe%a2
+
+b=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%02%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%d5%5d%83%60%fb%5f%07%fe%a2
 
 
 

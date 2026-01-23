@@ -1,14 +1,28 @@
 ﻿---
-title: "sstizhuru"
+title: web-ssti注入
 date: 2026-01-21 19:39:43
 disableNunjucks: true
-categories: 默认分类
-tags: [笔记]
+tags: [ssti注入]
+categories:
+  - ctf题解
+  - web
 ---
 
-# 模板注入初步[¶](https://hello-ctf.com/hc-web/ssti/#_1)
 
-> [ProbiusOfficial/Hello-CTF](https://github.com/ProbiusOfficial/Hello-CTF)
+
+
+
+## web-ssti注入
+
+
+
+
+
+
+
+### 模板注入初步https://hello-ctf.com/hc-web/ssti/#_1
+
+> ### [ProbiusOfficial/Hello-CTF](https://github.com/ProbiusOfficial/Hello-CTF)
 
 ## 前置知识[¶](https://hello-ctf.com/hc-web/ssti/#_2)
 
@@ -24,13 +38,13 @@ tags: [笔记]
 
 **绿色** 部分为 **静态内容** ，而 **橙色** 部分则是 **动态占位符** 
 
-![image-20231128133158187](https://hello-ctf.com/hc-web/assets/image-20231128133158187.png)
+![image-20231128133158187](/images/image-20231128133158187.png)
 
 大多数模板的工作流程：
 
 **定义模板  ->  传递数据  -> 渲染模板  -> 输出生成**
 
-![image-20231128135756055](https://hello-ctf.com/hc-web/assets/image-20231128135756055.png)
+![image-20231128135756055](/images/image-20231128135756055.png)
 
 ### 什么是模板注入[¶](https://hello-ctf.com/hc-web/ssti/#_4)
 
@@ -78,7 +92,7 @@ if __name__ == '__main__':
 
 当我们传入 {{9*9}} 时他会帮我们运算后输出 81
 
-![image-20231128141012093](https://hello-ctf.com/hc-web/assets/image-20231128141012093.png)
+![image-20231128141012093](/images/image-20231128141012093.png)
 
 ## Python模板注入一般流程[¶](https://hello-ctf.com/hc-web/ssti/#python)
 
@@ -739,7 +753,7 @@ app bin boot dev entrypoint.sh etc flag home lib lib64 media mnt opt proc root r
 
 
 
-![image-20251224203920593](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251224203920593.png)
+![image-20251224203920593](/images/image-20251224203920593.png)
 
 
 
@@ -767,9 +781,9 @@ http://127.0.0.1:10745/?a=rev --HDdss cat /flag&password=1
 
 
 
-![image-20251224203954397](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251224203954397.png)
+![image-20251224203954397](/images/image-20251224203954397.png)
 
-![image-20251224204057314](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251224204057314.png)
+![image-20251224204057314](/images/image-20251224204057314.png)
 
 
 
@@ -797,7 +811,7 @@ http://127.0.0.1:10745/?a=rev --HDdss cat /flag&password=1
 
 好吧，我瞎了，看了题解发现
 
-![image-20251227115027878](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251227115027878.png)
+![image-20251227115027878](/images/image-20251227115027878.png)
 
 
 
@@ -807,7 +821,7 @@ http://127.0.0.1:10745/?a=rev --HDdss cat /flag&password=1
 
 发现惊喜！！！！！！！！
 
-![image-20251227135455493](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251227135455493.png)
+![image-20251227135455493](/images/image-20251227135455493.png)
 
 
 
@@ -835,7 +849,7 @@ http://127.0.0.1:10745/?a=rev --HDdss cat /flag&password=1
 
 
 
-![屏幕截图 2025-12-27 135344](C:\Users\21709\Pictures\Screenshots\屏幕截图 2025-12-27 135344.png)
+![屏幕截图 2025-12-27 135344](/images/屏幕截图 2025-12-27 135344.png)
 
 
 
@@ -1168,15 +1182,15 @@ GET /file?filename=/hints.txt&filehash=637657bcdc2a447924cb73ee504343f2
 
 那么就得到了这个入口，进去之后的msg就是注入点
 
-![image-20260118094751344](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20260118094751344.png)
+![image-20260118094751344](/images/image-20260118094751344.png)
 
 
 
 我们试试其他：
 
-![image-20260118094913939](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20260118094913939.png)
+![image-20260118094913939](/images/image-20260118094913939.png)
 
-![image-20260118094946270](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20260118094946270.png)
+![image-20260118094946270](/images/image-20260118094946270.png)
 
 说明有过滤
 
@@ -1184,7 +1198,7 @@ GET /file?filename=/hints.txt&filehash=637657bcdc2a447924cb73ee504343f2
 
 但是没关系，试试看handler.settings
 
-![image-20260118095107239](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20260118095107239.png)
+![image-20260118095107239](/images/image-20260118095107239.png)
 
 得到cookie！
 

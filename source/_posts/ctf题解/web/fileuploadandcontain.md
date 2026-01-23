@@ -1,9 +1,13 @@
 ﻿---
-title: "fileuploadandcontain"
+title: web-文件上传+包含
 date: 2026-01-21 19:39:43
-categories: 默认分类
-tags: [笔记]
+tags: [web-文件上传+包含]
+categories:
+  - ctf题解
+  - web
 ---
+
+## web-文件上传+包含
 
 ## [第二章 web进阶]文件上传 1 文件上传漏洞 题解
 
@@ -352,7 +356,7 @@ php://filter/read=convert.base64-encode/resource=./flag.php
 
 
 
-![image-20251218152437400](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251218152437400.png)
+![image-20251218152437400](/images/image-20251218152437400.png)
 
 
 

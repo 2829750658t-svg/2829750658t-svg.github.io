@@ -1,13 +1,15 @@
 ﻿---
 title: "notectf"
 date: 2026-01-21 19:39:43
-categories: 默认分类
-tags: [笔记]
+categories:
+  - ctf学习
+  - 网课笔记
+tags: [ctf相关]
 ---
 
 
 
-# ctf
+## ctf
 
 
 

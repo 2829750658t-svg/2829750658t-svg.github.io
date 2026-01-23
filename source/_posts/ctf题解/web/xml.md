@@ -1,13 +1,17 @@
 ﻿---
-title: "xml"
+title: web-xml
 date: 2026-01-21 19:39:43
-categories: 默认分类
-tags: [笔记]
+tags: [web-xml]
+categories:
+  - ctf题解
+  - web
 ---
 
 
 
-![image-20251226212439507](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251226212439507.png)
+## web-xml
+
+![image-20251226212439507](/images/image-20251226212439507.png)
 
 
 

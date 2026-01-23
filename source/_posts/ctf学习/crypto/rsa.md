@@ -1,13 +1,16 @@
 ﻿---
 title: "rsa"
 date: 2026-01-21 19:39:43
-categories: 默认分类
-tags: [笔记]
+categories:
+  - ctf学习
+  - crypto
+  - rsa
+tags: [密码笔记]
 ---
 
 # 
 
-# RSA 核心笔记（大白话版）
+## RSA 核心笔记
 
 ## 一、加解密核心公式
 

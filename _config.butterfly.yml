@@ -1,0 +1,155 @@
+# =========================================================
+# Butterfly 现成全功能整合版 
+# =========================================================
+
+# 网站图标
+favicon: /images/favicon.png
+
+# 顶部导航
+nav:
+  logo:
+  display_title: true
+  fixed: true
+
+# 首页背景
+index_img: /images/bj2.jpg
+default_top_img: /images/bj2.jpg
+
+# 首页文章节选样式 (注意冒号后的空格！)
+index_post_style: left_and_right
+
+# 搜索 adaptive_background
+adaptive_background:
+  enable: true # 开启自适应背景颜色
+
+# 首页副标题打字机效果
+subtitle:
+  enable: true
+  sub:
+    - "HOW'S EVERYTHING GOING?"
+    - "最近怎么样呢，我的朋友?"
+
+# 开启首页大图下方的向下滚动箭头
+chat_button:
+  scroll_down: true
+
+# 1. 菜单配置
+menu:
+  首页: / || fas fa-home
+  时间轴: /archives/ || fas fa-archive
+  标签: /tags/ || fas fa-tags
+  分类: /categories/ || fas fa-folder-open
+  友情链接: /link/ || fas fa-link
+  关于我: /about/ || fas fa-user
+
+# 2. 侧边栏整体配置 (所有的 aside 功能都在这一个大项下)
+aside:
+  enable: true
+  hide: false
+  button: true
+  mobile: true
+  position: left
+  # 侧边栏卡片的显示顺序
+  card_list:
+    - name: card_author
+    - name: card_announcement
+    - name: card_recent_post
+    - name: card_categories
+    - name: card_tags
+    - name: card_archives
+    - name: card_webinfo
+  # 公告栏内容 (必须缩进在 aside 里面)
+  card_announcement:
+    enable: true
+    content: "很高兴能向你展示我的博客"
+
+# 搜索并开启这个（波浪效果）
+footer:
+  owner:
+    enable: true
+    name: qyt
+  # 开启底部的波浪效果，这会让网页底部非常灵动
+  beautify: true
+
+# 3. 个人卡片独立配置
+card_author:
+  enable: true
+  avatar:
+    img: /images/favicon.png
+    effect: false
+  button:
+    enable: false
+
+# 4. 分类卡片配置
+card_categories:
+  enable: true
+  limit: 0
+  expand: true
+
+# 4. 代码块增强 (CTF 必备，支持一键复制和折叠)
+code_blocks:
+  line_number: true
+  copy: true
+  highlight_theme: mac # 让代码块看起来像 Mac 窗口
+  height_limit: 500 # 超过高度自动折叠
+
+# 5. 文章页面功能
+social_share:
+  enable: true # 开启分享
+reward:
+  enable: true # 打赏功能
+  QR_code:
+    - img: /images/wechat.jpg
+      text: 微信
+    - img: /images/alipay.jpg
+      text: 支付宝
+
+# 6. 搜索功能
+local_search:
+  enable: true
+  preload: false
+  labels:
+    title: 搜索文章
+    placeholder: 输入关键字...
+
+# 7. 评论系统 (预留给大佬，以后你可以开启 Waline 或 Valine)
+comments:
+  use:
+    - Giscus
+  text: true
+
+giscus:
+  repo: 2829750658t-svg/2829750658t-svg.github.io
+  repo_id: R_kgDOQS61dQ # 去 giscus.app 网页下面拷你自己的 ID
+  category: Announcements
+  category_id: DIC_kwDOQS61dc4C1UR- # 去 giscus.app 网页下面拷你自己的 ID
+  theme: light
+  lang: zh-CN
+
+card_webinfo:
+  enable: true
+  post_count: true
+  last_push_date: true
+  runtime_count: true # 显示网站运行天数
+  site_uv: true       # 本站访客数 (这就是你要的)
+  site_pv: true       # 本站总浏览量 (这就是你要的)
+
+# 真实访客统计 (不蒜子统计)
+busuanzi:
+  site_uv: true # 本站访客数
+  site_pv: true # 本站总浏览量
+
+social:
+  fab fa-github: https://github.com/2829750658t-svg || GitHub
+  # --- 新增的社交媒体 ---
+  fab fa-zhihu: https://www.zhihu.com/people/7e5acf574f89c3cba9460c739673e2cf || 知乎
+  fas fa-notes-medical: https://xhslink.com/m/2t0Ndc1uvYL || 小红书
+  fas fa-music: https://163cn.tv/Z9ohElT || 网易云音乐
+  fab fa-instagram: https://www.instagram.com/tenyeahqweyeah?igsh=NG92enl2NTE0NGMx&utm_source=qr || Instagram
+
+# 这里的 inject 应该在文件的顶格，或者在某个分类下的正确缩进处
+inject:
+  enable: true
+  head:
+    - <meta name="google-site-verification" content="xcoxCJdnrLSrFpybmYmk6WSRqz-H1rnZB7BKSjdkWD0" />
+    - <meta name="google-site-verification" content="H8Bhbw_EXOKyVq27SUdcn_avXaVqBOWzs2lPJV_HSVw" />

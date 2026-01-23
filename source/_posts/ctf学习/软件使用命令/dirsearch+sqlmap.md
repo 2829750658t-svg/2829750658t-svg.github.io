@@ -1,8 +1,10 @@
 ﻿---
 title: "dirsearch+sqlmap"
 date: 2026-01-21 19:39:43
-categories: 默认分类
-tags: [笔记]
+categories:
+  - ctf学习
+  - 软件使用命令
+tags: [dirsearch+sqlmap]
 ---
 
 ## dirsearch

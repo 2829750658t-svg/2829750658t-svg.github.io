@@ -1,8 +1,11 @@
 ﻿---
-title: "inform_collect"
+title: web-信息收集
 date: 2026-01-21 19:39:43
-categories: 默认分类
-tags: [笔记]
+tags: [web-信息收集]
+categories:
+  - ctf题解
+  - web
+
 ---
 
 
@@ -13,19 +16,25 @@ tags: [笔记]
 
 
 
+
+
+## web-信息收集
+
+
+
 ## buuctf 禁止套娃
 
 1.找不到flag，没有思路，dir扫描
 
 git泄露
 
-![image-20251220213424261](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251220213424261.png)
+![image-20251220213424261](/images/image-20251220213424261.png)
 
 
 
 2.githack工具获取源码
 
-![image-20251220213357128](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251220213357128.png)
+![image-20251220213357128](/images/image-20251220213357128.png)
 
 
 
@@ -94,7 +103,7 @@ if(isset($_GET['exp'])){
 
 
 
-![屏幕截图 2025-12-20 212227](C:\Users\21709\Pictures\Screenshots\屏幕截图 2025-12-20 212227.png)
+![屏幕截图 2025-12-20 212227](/images/屏幕截图 2025-12-20 212227.png)
 
 
 

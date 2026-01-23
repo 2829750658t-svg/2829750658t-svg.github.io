@@ -1,9 +1,17 @@
 ﻿---
 title: "codetijie"
 date: 2026-01-21 19:56:05
-categories: 默认分类
-tags: [笔记]
+categories:
+  - ctf题解
+  - crypto
+tags: [crypto]
 ---
+
+
+
+## crypto题解
+
+
 
 ## 大帝的密码武器
 
@@ -91,7 +99,7 @@ Ook! 使用一组固定的短语来表示操作符，每个短语由两个单词
 
 
 
-![image-20251225194916353](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251225194916353.png)
+![image-20251225194916353](/images/image-20251225194916353.png)
 
 
 
@@ -128,7 +136,7 @@ https://online-barcode-reader.inliteresearch.com/
 
 
 
-![image-20251225200017128](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251225200017128.png)
+![image-20251225200017128](/images/image-20251225200017128.png)
 
 
 
@@ -182,7 +190,7 @@ text is a plain English text which only consists of lowercase letters (without a
 
 维吉尼亚对照表
 
-![img](https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Vigen%C3%A8re_square.svg/330px-Vigen%C3%A8re_square.svg.png)
+![img](/images/330px-Vigen%C3%A8re_square.svg.png)
 
 
 
@@ -242,6 +250,5 @@ moectf{the_key_of_vigenere_is_rxyyds}
 
 
 
-![image-20251225205747380](C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251225205747380.png)
-
+![image-20251225205747380](/images/image-20251225205747380.png)
 

@@ -1,15 +1,17 @@
 ﻿---
 title: "misc"
 date: 2026-01-21 19:39:43
-categories: 默认分类
-tags: [笔记]
+categories:
+  - ctf学习
+  - misc
+tags: [misc笔记]
 ---
 
 
 
 
 
-# ZIP 明文爆破笔记（CTF 实战版）
+## ZIP 明文爆破笔记
 
 ## 一、核心原理
 

@@ -1,15 +1,17 @@
 ﻿---
 title: "ssrf"
 date: 2026-01-21 19:56:05
-categories: 默认分类
-tags: [笔记]
+categories:
+  - ctf学习
+  - web
+tags: [ssrf]
 ---
 
 
 
 
 
-# ssrf
+## ssrf
 
 **SSRF 就是让 Web 服务器替你干活，去访问它能到但你不能到的地址**。
 

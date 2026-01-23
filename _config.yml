@@ -13,7 +13,7 @@ timezone: Asia/Shanghai    #中国的时区
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://2829750658t-svg.github.io
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -28,7 +28,7 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
-skip_render:
+skip_render: googledf67b80e41a7de35.html
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -40,7 +40,7 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
 relative_link: false
 future: true
 syntax_highlighter: highlight.js
@@ -97,7 +97,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next   #主题改为next
+theme: butterfly   #主题改为next
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
@@ -105,3 +105,7 @@ deploy:
   type: git
   repository: https://github.com/2829750658t-svg/2829750658t-svg.github.io.git
   branch: main
+
+# Sitemap 配置
+sitemap:
+  path: sitemap.xml
