@@ -1,0 +1,558 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>linux指令 | 24kmagic</title><meta name="author" content="qyt"><meta name="copyright" content="qyt"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="linux指令1.通用格式：command [-options] [parameter] 1.command：命令本身 2.-options：命令选项，可控制命令的行为细节（可选） 3.parameter：命令参数，用于命令的指向目标（可选） 实例： *ls -l&#x2F;home&#x2F;itheima   以列表的形式，显示&#x2F;home&#x2F;itheima目录内的内容 *cp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux指令">
+<meta property="og:url" content="https://2829750658t-svg.github.io/2026/01/21/linux%E5%AD%A6%E4%B9%A0/linux%E6%8C%87%E4%BB%A4/index.html">
+<meta property="og:site_name" content="24kmagic">
+<meta property="og:description" content="linux指令1.通用格式：command [-options] [parameter] 1.command：命令本身 2.-options：命令选项，可控制命令的行为细节（可选） 3.parameter：命令参数，用于命令的指向目标（可选） 实例： *ls -l&#x2F;home&#x2F;itheima   以列表的形式，显示&#x2F;home&#x2F;itheima目录内的内容 *cp">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://2829750658t-svg.github.io/img/butterfly-icon.png">
+<meta property="article:published_time" content="2026-01-21T11:38:14.000Z">
+<meta property="article:modified_time" content="2026-01-23T04:54:43.294Z">
+<meta property="article:author" content="qyt">
+<meta property="article:tag" content="linux命令">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://2829750658t-svg.github.io/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "linux指令",
+  "url": "https://2829750658t-svg.github.io/2026/01/21/linux%E5%AD%A6%E4%B9%A0/linux%E6%8C%87%E4%BB%A4/",
+  "image": "https://2829750658t-svg.github.io/img/butterfly-icon.png",
+  "datePublished": "2026-01-21T11:38:14.000Z",
+  "dateModified": "2026-01-23T04:54:43.294Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "qyt",
+      "url": "https://2829750658t-svg.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/favicon.png"><link rel="canonical" href="https://2829750658t-svg.github.io/2026/01/21/linux%E5%AD%A6%E4%B9%A0/linux%E6%8C%87%E4%BB%A4/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'linux指令',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="google-site-verification" content="xcoxCJdnrLSrFpybmYmk6WSRqz-H1rnZB7BKSjdkWD0" /><meta name="google-site-verification" content="H8Bhbw_EXOKyVq27SUdcn_avXaVqBOWzs2lPJV_HSVw" /><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(/images/bj2.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">24kmagic</span></a><a class="nav-page-title" href="/"><span class="site-name">linux指令</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">linux指令</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-01-21T11:38:14.000Z" title="发表于 2026-01-21 19:38:14">2026-01-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-01-23T04:54:43.294Z" title="更新于 2026-01-23 12:54:43">2026-01-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/linux%E5%AD%A6%E4%B9%A0/">linux学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="linux指令"><a href="#linux指令" class="headerlink" title="linux指令"></a>linux指令</h2><p><strong>1.通用格式：command [-options] [parameter]</strong></p>
+<p>1.command：命令本身</p>
+<p>2.-options：命令选项，可控制命令的行为细节（可选）</p>
+<p>3.parameter：命令参数，用于命令的指向目标（可选）</p>
+<p>实例：</p>
+<p>*ls -l&#x2F;home&#x2F;itheima </p>
+<p> 以列表的形式，显示&#x2F;home&#x2F;itheima目录内的内容</p>
+<p>*cp -r test1 test2</p>
+<p><strong>2.ls命令的参数和选项</strong></p>
+<p>1.ls命令的参数</p>
+<p>作用：指定查看文件夹（目录）的内容</p>
+<p>若不给参数，查看的是 当前工作目录 的内容</p>
+<p>&#x2F; ：根目录</p>
+<p>2.ls命令的选项j</p>
+<p>-a （all）展示隐藏内容（以.开头文件默认被隐藏，要用-a显示）</p>
+<p>-l  以列表形式展示，并展示更多细节</p>
+<p>-h 需和-l搭配用，人性化显示文件大小单位</p>
+<p>命令的选项组合使用</p>
+<p>例：ls-lah  &#x3D;  ls -a -l -h</p>
+<p><strong>3.cd pwd 命令</strong></p>
+<p>1.cd：change directory</p>
+<p>语法：cd [Linux路径]</p>
+<p>cd无选项，只有参数，表示要切换到哪个目录下</p>
+<p>cd直接执行，不写参数，表示回到用户的home目录s</p>
+<p><img src="/images/image-20260121191957243.png" alt="image-20260121191957243"></p>
+<p><img src="/images/image-20260121192021098.png" alt="image-20260121192021098"></p>
+<p>2.pwd命令（print work directory）</p>
+<p>直接用ls验证不恰当，用pwd查看当前的工作目录</p>
+<p>语法：pwd （无需选项和参数，直接输入即可）</p>
+<p><strong>4.相对路径 绝对路径 特殊路径符</strong></p>
+<p>cd &#x2F;home&#x2F;itheima&#x2F;desktop 绝对路径：以根目录为起点  有&#x2F;</p>
+<p>cd desktop              相对路径：以当前目录为起点 无&#x2F;</p>
+<p>特殊路径符</p>
+<p>.  表示当前目录</p>
+<p>.. 表示上一级目录</p>
+<p>~ 表示home目录</p>
+<p><img src="/images/$2" alt="$1"></p>
+<p><strong>5.创建目录命令</strong></p>
+<p><strong>mkdir</strong>命令（make directory）</p>
+<p>语法：mkdir [-p] linux路径</p>
+<p>1.参数必填，相对&#x2F;绝对路径均可</p>
+<p>2.-p可选填，表示自动创建不存在的父目录，是用于创建连续多层次的目录</p>
+<p>例子：</p>
+<p>mkdir bigtest</p>
+<p>ls</p>
+<p>mkdir &#x2F;home&#x2F;bigtest&#x2F;test1</p>
+<p>ls</p>
+<p>mkdir .&#x2F;test2</p>
+<p>ls</p>
+<p>cd Desktop</p>
+<p>pwd</p>
+<p>mkdir ..&#x2F;test3</p>
+<p>cd ..</p>
+<p>ls</p>
+<p>mkdir ~&#x2F;test4</p>
+<p>ls</p>
+<p><img src="/images/image-20260121192125053.png" alt="image-20260121192125053"></p>
+<p>3.创建文件夹要保证操作都在home内，超出无权限</p>
+<p><strong>6.touch cat more 命令</strong></p>
+<p><strong>题外话：CTRL+l  清空屏幕</strong></p>
+<p>touch命令 创建文件</p>
+<p>1.无选项，参数必填（路径），绝对、相对、特殊路径均可使用</p>
+<p>cat命令 查看文件内容</p>
+<p>语法：cat Linux路径</p>
+<p>1.无选项，参数必填（被查看文件路径），绝对、相对、特殊路径均可使用</p>
+<p>more命令 查看文件内容</p>
+<p>语法：more Linux路径</p>
+<p>1.无选项，参数必填（被查看文件路径），绝对、相对、特殊路径均可使用</p>
+<p>2.与cat不同的是：</p>
+<p>cat直接将内容全部显示出来</p>
+<p>more支持翻页（通过空格翻页，通过q退出），若内容过多，可一页一页展示</p>
+<p><strong>7.cp mv rm 命令</strong></p>
+<p><strong>cp复制文件&#x2F;文件夹 copy</strong></p>
+<p>语法：cp [-r] 参数1 参数2</p>
+<p>1.-r选项，可选，用于复制文件夹使用，表示递归</p>
+<p>2.参数1：Linux路径，表示被复制文件或文件夹</p>
+<p>3.参数2：Linux路径，表示要复制去哪</p>
+<p><strong>mv移动文件&#x2F;文件夹 move</strong></p>
+<p>语法：mv 参数1 参数2</p>
+<p>1.参数1：路径，表示被移动的文件&#x2F;文件夹</p>
+<p>2.参数2：表示要移动去的地方。若目标不存在，则将参数1进行改名，以确保目标存在</p>
+<p><strong>rm删除文件&#x2F;文件夹 remove</strong></p>
+<p>语法：rm [-r -f] 参数1 参数2 ……参数N</p>
+<p>1.-r用于删除文件夹。-f表示force，强制删除（不会弹出提示确认信息）</p>
+<p> 普通用户删除内容不会弹出提示，只有root管理员用户删除才会有</p>
+<p>2.参数1、参数2……参数N 表示要删除的文件或文件夹路径，按照空格隔开</p>
+<p><strong>rm删除文件&#x2F;文件夹-通配符</strong></p>
+<p>rm命令支持通配符*，用来做模糊匹配</p>
+<p>1.符号*表示通配符，即匹配容易内容（包括空）</p>
+<p>例子：</p>
+<p>test*，表示匹配任何以test开头的内容</p>
+<p>*test，表示匹配任何以test结尾的内容</p>
+<p><em>test</em>，表示匹配任何包含test的内容</p>
+<p><img src="/images/image-20260121192233605.png" alt="image-20260121192233605"></p>
+<p><strong>7.which find命令</strong></p>
+<p>which命令</p>
+<p>语法：which 要查找的命令</p>
+<p>find命令-按文件名查找文件</p>
+<p>语法：find 起始路径 -name ‘’被查找文件名’’</p>
+<p>find命令-通配符</p>
+<p>同上</p>
+<p>find命令-按文件大小查找文件</p>
+<p>语法：find 起始路径 -size +&#x2F;-n[kMG]</p>
+<p>1.+、-表示 大于、小于</p>
+<p>2.n表示大小数字</p>
+<p>3.kMG表示大小单位，k（小写）表示kb，M表示MB，G表示GB</p>
+<p>例子：find &#x2F; -size &#x3D;100k</p>
+<p>题外话：CTRL+c 表示停止</p>
+<p><strong>8.echo，tail，重定向符</strong></p>
+<p>echo</p>
+<p>语法：echo 输出内容</p>
+<p>1.相当于print</p>
+<p>2.复杂内容用“”</p>
+<p>反引号  </p>
+<p>无需选项，只有一个参数（表示要输出的内容，复杂内容可以用双引号包括）</p>
+<p>作用：包围的内容作为命令去执行，而不是普通内容</p>
+<p>例子：echo pwd  &#x2F;&#x2F;输出pwd</p>
+<p>echo <code>pwd</code></p>
+<p>行使命令</p>
+<p>重定向符&gt;和&gt;&gt;</p>
+<p>&gt;   将左侧命令的结果，覆盖写入到符号右侧指定文件中</p>
+<p>&gt;&gt; 将左侧命令结果，追加写入到符号右侧指定文件中</p>
+<p><strong>9.tail命令</strong></p>
+<p>作用：查看文件尾部内容，跟踪文件的最新更改</p>
+<p>语法：tail [-f -num] Linux路径</p>
+<p>参数：表示Linux路径，表示被跟踪的文件</p>
+<p>选项：-f，表示持续跟踪</p>
+<p>选项：num，表示查看尾部多少行，不填默认10行</p>
+<p><strong>10.grep命令</strong></p>
+<p>语法： grep [-n] 关键字 文件路径</p>
+<p>1.选项-n 可选 ，表示在结果中显示匹配的行的行号</p>
+<p>2.参数，关键字，必填，表示过滤的关键字，若带有空格等其他特殊符号，建议使用“”</p>
+<p>3.参数， 文件路径，必填，表示要过滤内容的文件路径，可作为内容输入端口</p>
+<p><strong>10.wc命令 做数量统计</strong></p>
+<p>1.语法： wc [-c -m -l -w] 文件路径</p>
+<p>2.选项：</p>
+<p>-c 统计bytes数量</p>
+<p>-m 统计字符数量</p>
+<p>-l 统计行数</p>
+<p>-w 统计单词数量</p>
+<p>3.参数：文件路径，被统计的文件，可作为内容输入端口</p>
+<p><strong>12.管道符|</strong></p>
+<p>1.含义：将管道符左边的命令结果，作为右边命令的输入</p>
+<p>例子：</p>
+<p>cat tes.text | grep f</p>
+<p>cat tes.text | grep f | grep u</p>
+<p>ls | grep test</p>
+<p><strong>13.vi vim 编辑器</strong></p>
+<p>1.使用命令：</p>
+<p>vim 文件路径</p>
+<p>若存在，打开；不存在，创建</p>
+<p>2.命令：</p>
+<p>i 在当前光标位置进入输入模式</p>
+<p>a 在当前光标位置后，进入输入模式</p>
+<p>I 在当前开进入输入模式</p>
+<p>A 在当前行结尾，进入输入模式</p>
+<p>o 当前光标下一行进入命令模式</p>
+<p>O 当前光标上一行进入输入模式</p>
+<p>esc 返回命令模式</p>
+<p><img src="/images/image-20260121192314419.png" alt="image-20260121192314419"></p>
+<p>快捷键</p>
+<p><img src="/images/image-20260121192333909.png" alt="image-20260121192333909"></p>
+<p><img src="/images/image-20260121192349191.png" alt="image-20260121192349191"></p>
+<p>底线命令模式：</p>
+<p>:wq保存并退出</p>
+<p>:q退出</p>
+<p>:q!强制退出</p>
+<p>:w保存</p>
+<p>:set nu显示行号</p>
+<p>:set paste设置粘贴模式</p>
+<p><strong>13.用户和权限</strong></p>
+<p>1.超级管理员：root</p>
+<p>进入格式：</p>
+<p>su - root </p>
+<p> 普通：在自己home内有权限</p>
+<p>su命令</p>
+<p>语法：su - 用户名</p>
+<p>1.符号可选，建议带上</p>
+<p>2.用户名省略表示切换到root</p>
+<p>3.切换后，可以通过exit 或者 CTRL+d退回上一个用户</p>
+<p>sudo命令</p>
+<p>1.长时间使用root会有破坏，所以我们用sudo作为临时普通授权</p>
+<p>2.语法：</p>
+<p>sudo 其他命令</p>
+<p><strong>14.用户和用户组管理</strong></p>
+<p>用户组管理：</p>
+<p>1.以下命令需要root用户执行</p>
+<p>2.创建用户组：</p>
+<p>groupadd 用户组名</p>
+<p>3.删除</p>
+<p>groupdel</p>
+<p>15.用户管理：</p>
+<p>1.创建用户：</p>
+<p>useradd [-g -d] 用户名</p>
+<p>-g：指定用户的组，不用会自动创建同名组</p>
+<p>如果已经有同名组，必须使用-g</p>
+<p>-d：指定用户home路径，不指定home’目录默认在：&#x2F;home&#x2F;用户名</p>
+<p>2.删除</p>
+<p>usedel [-r] 用户名</p>
+<p>-r 删除用户的home目录，不使用不删除</p>
+<p>3.查看用户所属组</p>
+<p>id [用户名]</p>
+<p>4修改用户所属组</p>
+<p>usermod -aG 用户组 用户名</p>
+<p>3.getent命令</p>
+<p>1.可以查看当前系统中有哪些用户</p>
+<p>语法：getent passwd</p>
+<p>用户名：密码（x）：用户id：组id：描述信息（无用）</p>
+<p>：home目录：执行终端（默认bash）</p>
+<p>2.可以查看当前系统中有哪些组</p>
+<p>语法：getent group</p>
+<p>组名称：组认证（显示为x）：组id</p>
+<p>认知权限信息</p>
+<p>通过ls-l 可以以列表形式查看内容，并显示权限细节</p>
+<p>1.权限细节</p>
+<p>权限细节共10个槽位</p>
+<p>举例：drwxr-xr-x</p>
+<p>-&#x2F;d&#x2F;l r&#x2F;- w&#x2F;- x&#x2F;- r&#x2F;- w&#x2F;- x&#x2F;- r&#x2F;- w&#x2F;- x&#x2F;-</p>
+<p>​     用户权限    用户组权限  其他用户权限</p>
+<p>第一槽位中：</p>
+<p>d表示文件夹</p>
+<p>l表示软链接</p>
+<p>-表示文件</p>
+<p>后续槽位中：</p>
+<p>-表示无权限</p>
+<p>r：read读权限（查看）</p>
+<p>w：write写权限（文件：修改）（文件夹：创建 删除 改名）</p>
+<p>x：执行权限（文件：可以将文件作为执行程序 ）（文件夹：可以更改工作目录到此文件夹，即 cd进入）</p>
+<p>chmod修改权限信息（只有文件文件夹的所属用户或root可以修改）</p>
+<p>1.语法：chmod [-R] 权限 文件或文件夹</p>
+<p>举例：</p>
+<p>chmod u&#x3D;rmx,g&#x3D;rx,o&#x3D;x hello.txt</p>
+<p>（其中：u表示user所属用户权限，g表示group组权限，o表示other其他用户权限）</p>
+<p>chmod -R u&#x3D;rwx,g&#x3D;rx,o&#x3D;x test 改后：rwxr-x–x</p>
+<p>-R表示不仅修改它本身，把里面的文件都一起修改</p>
+<p>chmod 751 hello.txt</p>
+<p><img src="/images/image-20260121192412310.png" alt="image-20260121192412310"></p>
+<p>chown修改文件、文件夹的所属用户、用户组</p>
+<p>普通用户无法修改，只能root</p>
+<p>1.语法：chown [-R] [用户] [:] [用户组] 文件或文件夹</p>
+<p>选项：</p>
+<p>-R 同chmod，对文件夹内全部内容应用相同规则</p>
+<p>用户：修改所属用户</p>
+<p>用户组：修改所属用户组</p>
+<p>：用于分隔用户和用户组</p>
+<p>2.实例：</p>
+<p>chown root：itheima hello.text</p>
+<p>将hello.text所属用户改为root，所属用户组改为itheima</p>
+<p>chown -R root test</p>
+<p>将未见加test所属的用户修改为root，并对文件夹内全部内用应用同样规则</p>
+<p>3.切换root</p>
+<p>su -</p>
+<p>快捷键：</p>
+<p>1.CTRL+c 强制停止</p>
+<p>2.CTRL+d 退出用户登录或退出程序</p>
+<p>3.history：查看历史输入的命令</p>
+<p>grep 筛选的东西</p>
+<p>4.！</p>
+<p>！p搜索离现在最近的跑开头的命令</p>
+<p>5.ctrl a：跳到命令开头</p>
+<p>6.ctrl e：跳到命令结尾</p>
+<p>7.ctrl 左键：左跳一单词</p>
+<p>8.ctrl 右键：右跳一单词</p>
+<p>9.ctrl l：清屏</p>
+<p>clear</p>
+<p>软件管理器rpm的安装</p>
+<p>yum&#x2F;apt：联网自动化安装Linux软件，自动解决依赖问题</p>
+<p>yum：centos</p>
+<p>apt：debiansu （ubuntu）</p>
+<p>1.语法：yum [-y] [install | remove | search] 程序名称</p>
+<p>apt [-y] [install | remove | search] 程序名称</p>
+<p>-y：不在询问</p>
+<p>2.要求：</p>
+<p>需要root权限：su&#x2F;sudo提权</p>
+<p>sudo su - root</p>
+<p>需要联网</p>
+<p>systemctl命令</p>
+<p>0.目的：控制软件的启动和关闭</p>
+<p> 服务：能够被这个命令管理的软件</p>
+<p>例如：</p>
+<p>NetworkManager主网络服务</p>
+<p>network副网络服务</p>
+<p>firewalld防火墙服务</p>
+<p>sshd，ssh远程登陆</p>
+<p>1.语法：</p>
+<p>systemctl start | stop | status | enable | disable 服务名</p>
+<p>1.1 status 查看状态</p>
+<p>enable 开启开机自启</p>
+<p>disable关闭开机自启</p>
+<p>软连接（快捷方式）</p>
+<p>ln命令创建软连接</p>
+<ol>
+<li>语法：</li>
+</ol>
+<p>ln -s 参数1 ~参数2</p>
+<p>-s 选项： 创建软连接</p>
+<p>参数1 ： 被链接的文件或文件夹</p>
+<p>参数2 ： 链接到哪里去</p>
+<ol start="2">
+<li>例子</li>
+</ol>
+<p>ln -s &#x2F;etc&#x2F;yum.conf ~&#x2F;yum.conf</p>
+<p>ln -s &#x2F;etc&#x2F;yum&#x2F; ~&#x2F;yum </p>
+<p>日期和时区</p>
+<ol>
+<li>date</li>
+</ol>
+<p>通过date命令在命令行中查看系统时间</p>
+<p>语法：date [-d] [+格式化字符串]</p>
+<p>​        -d 按照给定字符串显示日期，一般用于日期计算</p>
+<p>​        格式化字符：通过特定字符串标记，来控制显示的日期格式</p>
+<ol>
+<li>%Y 年</li>
+<li>%y 年份后2位（2006）：06 01-99</li>
+<li>%m 月份   01-12</li>
+<li>%d 日  01-31</li>
+<li>%H  时00-23</li>
+<li>%M min 00-59</li>
+<li>%S s秒 00-60</li>
+</ol>
+<p>%s 自1970-01-01 00：00：00 UT</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://2829750658t-svg.github.io">qyt</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://2829750658t-svg.github.io/2026/01/21/linux%E5%AD%A6%E4%B9%A0/linux%E6%8C%87%E4%BB%A4/">https://2829750658t-svg.github.io/2026/01/21/linux%E5%AD%A6%E4%B9%A0/linux%E6%8C%87%E4%BB%A4/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://2829750658t-svg.github.io" target="_blank">24kmagic</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/linux%E5%91%BD%E4%BB%A4/">linux命令</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/images/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/images/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/images/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/images/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/01/21/ctf%E5%AD%A6%E4%B9%A0/crypto/note/" title="note"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">note</div></div><div class="info-2"><div class="info-item-1">密码笔记HEX、DEC、OCT 和 BIN含义如下：  HEX，英文全称 Hexadecimal，表示十六进制。 DEC，英文全称 Decimal，表示十进制。 OCT，英文全称 Octal，表示八进制。 BIN，英文全称 Binary，表示二进制。  1.Quoted-printabl     可打印字符 引用 编码Quoted-printable编码是一种二进制数据在Internet上传输时的一种编码方式。 它将二进制数据转换成可打印的ASCII字符。 这种编码方式将每个非可打印字符 (ASCII值小于32或大于126)，如二进制数据的控制字符或扩展字符 (如汉字)，转换为一个等号”&#x3D;“加上它的ASCII值的16进制表示，如”x0A”会变成”&#x3D;0A”。 2.栅栏密码123 栅栏密码是一种简单的替换式密码 加密过程 以明文 “THIS IS ZHISHITOM” 为例，去除空格后得到 “THISISZHISHITOM”。如果设置栏数为3进行加密，加密过程如下：  第一组：T H I S I 第二组：S Z H I S 第三组：H I T O M  按列取出字...</div></div></div></a><a class="pagination-related" href="/2026/01/21/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2omg/" title="我的第一篇博客omg"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">我的第一篇博客omg</div></div><div class="info-2"><div class="info-item-1">-– 我的第一篇博客omg这是我的第一篇博客， 是25.11.12写的， 当时带着好奇心来到网安专业，进入了ctf学习，埋头学着学着喜欢上了这个我之前觉得很深奥的世界，看到了很多大佬的博客，决定自己也要写个博客，我觉得真的很想在这里搭建了属于自己的知识世界，我想要把学习内容记录在自己的博客里，于是留下了一篇关于sqlmap怎么打开和使用的笔记。 感觉自己当时好笨，怎么连sqlmap的使用都不会； 但是又觉得当时自己在探索未知事务的样子也很可爱。 现在是26.1.21， 隔了这么久，期间经历了社团选拔，英语四级考试，长城杯比赛，期末考试，终于有时间再来为我的博客增添一些家具了。（我一直想着等寒假了我就有空了） 欢迎大家来到这里，或许这里还有很多不足，我会慢慢把一些功能丰富上去的。 我想说：我热爱这个领域，不仅是因为它是我的专业，更因为它这位朋友让我间接认识了很多大佬，思路，知识。 我爱它，它是我大学生活里面最重要的朋友，也是我的唯一陪伴。 </div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">qyt</div><div class="author-info-description">不要放弃自由去选择保障，到头来你两者都得不到</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/2829750658t-svg" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.zhihu.com/people/7e5acf574f89c3cba9460c739673e2cf" target="_blank" title="知乎"><i class="fab fa-zhihu"></i></a><a class="social-icon" href="https://xhslink.com/m/2t0Ndc1uvYL" target="_blank" title="小红书"><i class="fas fa-notes-medical"></i></a><a class="social-icon" href="https://163cn.tv/Z9ohElT" target="_blank" title="网易云音乐"><i class="fas fa-music"></i></a><a class="social-icon" href="https://www.instagram.com/tenyeahqweyeah?igsh=NG92enl2NTE0NGMx&amp;utm_source=qr" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">很高兴能向你展示我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#linux%E6%8C%87%E4%BB%A4"><span class="toc-number">1.</span> <span class="toc-text">linux指令</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/23/my-article/" title="my-article">my-article</a><time datetime="2026-01-23T03:41:18.000Z" title="发表于 2026-01-23 11:41:18">2026-01-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/ctf%E5%AD%A6%E4%B9%A0/web/ssrf/" title="ssrf">ssrf</a><time datetime="2026-01-21T11:56:05.000Z" title="发表于 2026-01-21 19:56:05">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/ctf%E9%A2%98%E8%A7%A3/crypto/codetijie/" title="codetijie">codetijie</a><time datetime="2026-01-21T11:56:05.000Z" title="发表于 2026-01-21 19:56:05">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/ctf%E5%AD%A6%E4%B9%A0/web/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/" title="逻辑漏洞">逻辑漏洞</a><time datetime="2026-01-21T11:56:05.000Z" title="发表于 2026-01-21 19:56:05">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/ctf%E5%AD%A6%E4%B9%A0/web/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" title="内网渗透">内网渗透</a><time datetime="2026-01-21T11:56:05.000Z" title="发表于 2026-01-21 19:56:05">2026-01-21</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By qyt</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const getGiscusTheme = theme => theme === 'dark' ? 'dark' : 'light'
+
+  const createScriptElement = config => {
+    const ele = document.createElement('script')
+    Object.entries(config).forEach(([key, value]) => {
+      ele.setAttribute(key, value)
+    })
+    return ele
+  }
+
+  const loadGiscus = (el = document, key) => {
+    const mappingConfig = isShuoshuo
+      ? { 'data-mapping': 'specific', 'data-term': key }
+      : { 'data-mapping': (option && option['data-mapping']) || 'pathname' }
+
+    const giscusConfig = {
+      src: 'https://giscus.app/client.js',
+      'data-repo': '2829750658t-svg/2829750658t-svg.github.io',
+      'data-repo-id': 'R_kgDOQS61dQ',
+      'data-category-id': 'DIC_kwDOQS61dc4C1UR-',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true,
+      ...option,
+      ...mappingConfig
+    }
+
+    const scriptElement = createScriptElement(giscusConfig)
+
+    el.querySelector('#giscus-wrap').appendChild(scriptElement)
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGiscus = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const changeGiscusTheme = theme => {
+    const iframe = document.querySelector('#giscus-wrap iframe')
+    if (iframe) {
+      const message = {
+        giscus: {
+          setConfig: {
+            theme: getGiscusTheme(theme)
+          }
+        }
+      }
+      iframe.contentWindow.postMessage(message, 'https://giscus.app')
+    }
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if (isShuoshuo) {
+    'Giscus' === 'Giscus'
+      ? window.shuoshuoComment = { loadComment: loadGiscus }
+      : window.loadOtherComment = loadGiscus
+    return
+  }
+
+  if ('Giscus' === 'Giscus' || !false) {
+    if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment = loadGiscus
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>web-ssrf | 24kmagic</title><meta name="author" content="qyt"><meta name="copyright" content="qyt"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="web-ssrfSSRF &#x3D; 服务器端请求伪造特点 主体是服务器：请求是「服务器发起」的，不是你的电脑； 权限是服务器的权限：服务器能访问的资源（本地文件、内网 IP），你本来访问不到，但通过 SSRF 就能间接访问； 核心是 “伪造请求”：你伪造一个服务器会执行的请求（比如本地文件地址、内网地址），服务器替你执行。  [网鼎杯 2018]Fakebook11.注册登陆界面，sqlmap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web-ssrf">
+<meta property="og:url" content="https://2829750658t-svg.github.io/2026/01/21/ctf%E9%A2%98%E8%A7%A3/web/ssrf/index.html">
+<meta property="og:site_name" content="24kmagic">
+<meta property="og:description" content="web-ssrfSSRF &#x3D; 服务器端请求伪造特点 主体是服务器：请求是「服务器发起」的，不是你的电脑； 权限是服务器的权限：服务器能访问的资源（本地文件、内网 IP），你本来访问不到，但通过 SSRF 就能间接访问； 核心是 “伪造请求”：你伪造一个服务器会执行的请求（比如本地文件地址、内网地址），服务器替你执行。  [网鼎杯 2018]Fakebook11.注册登陆界面，sqlmap">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://2829750658t-svg.github.io/img/butterfly-icon.png">
+<meta property="article:published_time" content="2026-01-21T11:39:43.000Z">
+<meta property="article:modified_time" content="2026-01-23T04:48:58.941Z">
+<meta property="article:author" content="qyt">
+<meta property="article:tag" content="web-ssrf">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://2829750658t-svg.github.io/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "web-ssrf",
+  "url": "https://2829750658t-svg.github.io/2026/01/21/ctf%E9%A2%98%E8%A7%A3/web/ssrf/",
+  "image": "https://2829750658t-svg.github.io/img/butterfly-icon.png",
+  "datePublished": "2026-01-21T11:39:43.000Z",
+  "dateModified": "2026-01-23T04:48:58.941Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "qyt",
+      "url": "https://2829750658t-svg.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/favicon.png"><link rel="canonical" href="https://2829750658t-svg.github.io/2026/01/21/ctf%E9%A2%98%E8%A7%A3/web/ssrf/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'web-ssrf',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="google-site-verification" content="xcoxCJdnrLSrFpybmYmk6WSRqz-H1rnZB7BKSjdkWD0" /><meta name="google-site-verification" content="H8Bhbw_EXOKyVq27SUdcn_avXaVqBOWzs2lPJV_HSVw" /><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(/images/bj2.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">24kmagic</span></a><a class="nav-page-title" href="/"><span class="site-name">web-ssrf</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">web-ssrf</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-01-21T11:39:43.000Z" title="发表于 2026-01-21 19:39:43">2026-01-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-01-23T04:48:58.941Z" title="更新于 2026-01-23 12:48:58">2026-01-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/ctf%E9%A2%98%E8%A7%A3/">ctf题解</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/ctf%E9%A2%98%E8%A7%A3/web/">web</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="web-ssrf"><a href="#web-ssrf" class="headerlink" title="web-ssrf"></a>web-ssrf</h2><h2 id="SSRF-服务器端请求伪造"><a href="#SSRF-服务器端请求伪造" class="headerlink" title="SSRF &#x3D; 服务器端请求伪造"></a>SSRF &#x3D; 服务器端请求伪造</h2><h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ol>
+<li><strong>主体是服务器</strong>：请求是「服务器发起」的，不是你的电脑；</li>
+<li><strong>权限是服务器的权限</strong>：服务器能访问的资源（本地文件、内网 IP），你本来访问不到，但通过 SSRF 就能间接访问；</li>
+<li><strong>核心是 “伪造请求”</strong>：你伪造一个服务器会执行的请求（比如本地文件地址、内网地址），服务器替你执行。</li>
+</ol>
+<h2 id="网鼎杯-2018-Fakebook"><a href="#网鼎杯-2018-Fakebook" class="headerlink" title="[网鼎杯 2018]Fakebook"></a>[网鼎杯 2018]Fakebook</h2><h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><p>1.注册登陆界面，sqlmap扫描</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python dirsearch.py <span class="literal">-u</span> <span class="string">&quot;http://3992b9c4-b99e-44db-96b6-111d3cb92681.node5.buuoj.cn:81/&quot;</span> <span class="literal">-e</span> php <span class="literal">--threads</span> <span class="number">1</span> <span class="literal">--delay</span> <span class="number">3</span> <span class="literal">-w</span> ./ctf_core.txt</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20251217210112375.png![image-20251217210507607](/images/image-20251217210507607.png" alt="image-20251217210112375"></p>
+<p><img src="/images/image-20251217204024349.png" alt="image-20251217204024349"></p>
+<p>打开备份文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class UserInfo</span><br><span class="line">&#123;</span><br><span class="line">    public $name = &quot;&quot;;</span><br><span class="line">    public $age = 0;</span><br><span class="line">    public $blog = &quot;&quot;;</span><br><span class="line"></span><br><span class="line">    public function __construct($name, $age, $blog)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;name = $name;</span><br><span class="line">        $this-&gt;age = (int)$age;</span><br><span class="line">        $this-&gt;blog = $blog;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function get($url)</span><br><span class="line">    &#123;</span><br><span class="line">        $ch = curl_init();</span><br><span class="line"></span><br><span class="line">        curl_setopt($ch, CURLOPT_URL, $url);</span><br><span class="line">        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);</span><br><span class="line">        $output = curl_exec($ch);</span><br><span class="line">        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);</span><br><span class="line">        if($httpCode == 404) &#123;</span><br><span class="line">            return 404;</span><br><span class="line">        &#125;</span><br><span class="line">        curl_close($ch);</span><br><span class="line"></span><br><span class="line">        return $output;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function getBlogContents ()</span><br><span class="line">    &#123;</span><br><span class="line">        return $this-&gt;get($this-&gt;blog);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function isValidBlog ()</span><br><span class="line">    &#123;</span><br><span class="line">        $blog = $this-&gt;blog;</span><br><span class="line">        return preg_match(&quot;/^(((http(s?))\:\/\/)?)([0-9a-zA-Z\-]+\.)+[a-zA-Z]&#123;2,6&#125;(\:[0-9]+)?(\/\S*)?$/i&quot;, $blog);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>方法一：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用户构造恶意序列化字符串 → 后端用unserialize()解析 → 生成篡改了blog属性的UserInfo对象 → 调用getBlogContents() → 执行curl_exec() → 读取flag.php</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+<p>方法2：sql注入</p>
+<p>注册，登录，发现蓝字</p>
+<p><img src="/images/image-20251217215524707.png" alt="image-20251217215524707"></p>
+<p>点击得到no参数</p>
+<p><img src="/images/image-20251217215543418.png" alt="image-20251217215543418"></p>
+<p>发现过滤</p>
+<p><img src="/images/image-20251217210311771.png" alt="image-20251217210311771"></p>
+<p><img src="/images/image-20251217210702831.png" alt="image-20251217210702831"></p>
+<p>2.1</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">view.php?no=-1%20union/**/select%201,2,3,4--+</span><br></pre></td></tr></table></figure>
+
+<p>为什么是-1不是1？</p>
+<ol>
+<li><strong>no&#x3D;-1</strong>：靶机里根本没有编号为 - 1 的记录，原 SQL 查询返回空结果；此时<code>union select</code>的结果会补位显示在页面上，注入成功。</li>
+<li><strong>no&#x3D;1</strong>：靶机里有编号为 1 的真实记录，原 SQL 查询结果会覆盖<code>union select</code>的结果，你看不到注入效果（或因列类型不兼容直接报错），看似 “失败”。</li>
+</ol>
+<p>核心就一句话：<code>-1</code>让原查询无结果，注入语句的结果能显示；<code>1</code>让原查询有结果，把注入结果盖住了。</p>
+<p>这就是为什么我前面在输入1的时候注入点一直返回admin用户名，而没有任何回显</p>
+<p><img src="/images/image-20251217212408795.png" alt="image-20251217212408795"></p>
+<p>得到回显位为2</p>
+<p>2.2</p>
+<p>view.php?no&#x3D;-1%20union&#x2F;**&#x2F;select 1,database(),3,4–+</p>
+<p><img src="/images/image-20251217212559085.png" alt="image-20251217212559085"></p>
+<ol start="2">
+<li><p>3</p>
+<p>?no&#x3D;-1 union&#x2F;<strong>&#x2F;select 1,user(),3,4–+　　　　&#x2F;&#x2F;数据库信息</strong>,查看权限</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@localhos</span><br></pre></td></tr></table></figure>
+
+<p>为什么要查看权限？</p>
+<p>① <strong>确认权限</strong>：<code>user()</code>能看当前数据库用户的权限（比如是不是 root）——root 权限能直接读 &#x2F; 写文件、查所有库，普通用户只能查当前库；</p>
+<p>② <strong>定位目标</strong>：<code>database()</code>能知道靶机的核心数据库名（比如<code>buu_flag</code>），后续直接查这个库的表 &#x2F; 字段，就能找到 flag；</p>
+<p>③ <strong>验证环境</strong>：比如查<code>version()</code>（数据库版本），能判断用什么注入技巧（比如 MySQL5.5 和 8.0 的注入方法有差异）。</p>
+<p>是root权限，利用load_file()函数可以用绝对路径去加载一个文件，</p>
+<p>load_file(file_name):file_name是一个完整的路径，</p>
+<p>于是我们直接用var&#x2F;www&#x2F;html&#x2F;flag.php路径去访问一下这个文件</p>
+<h3 id="一、核心原理"><a href="#一、核心原理" class="headerlink" title="一、核心原理"></a>一、核心原理</h3><p><code>load_file()</code> 是 MySQL 的文件读取函数，root 权限下能直接读取服务器上的文件；<code>/var/www/html/</code> 是 Linux 服务器中 PHP 网站的默认根目录，<code>flag.php</code> 大概率放在这里，把这个路径传给<code>load_file()</code>，就能通过 SQL 注入读取文件内容。</p>
+<ol>
+<li>写法：<code>union select 1,load_file(&#39;绝对路径&#39;),3,4</code>（把路径换成<code>/var/www/html/flag.php</code>）；</li>
+<li>操作：浏览器直接访问拼接后的 URL，页面会显示<code>flag.php</code>的内容；</li>
+<li>兜底：读不到就换路径 &#x2F; 加<code>hex()</code>转码，CTF 靶机的<code>flag.php</code>几乎都在<code>/var/www/html/</code>下，root 权限必能读到</li>
+</ol>
+<h3 id="二、注入语句写法"><a href="#二、注入语句写法" class="headerlink" title="二、注入语句写法"></a>二、注入语句写法</h3><p> <code>user()</code> 替换成 <code>load_file(&#39;/var/www/html/flag.php&#39;)</code> 即可，最终完整 URL：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">view.php?no=-1union/**/select 1,load_file(&quot;/var/www/html/flag.php&quot;),3,4--+</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 备用1：网站根目录简写</span><br><span class="line">load_file(&#x27;/var/www/flag.php&#x27;)</span><br><span class="line"># 备用2：nginx/apache默认路径</span><br><span class="line">load_file(&#x27;/usr/share/nginx/html/flag.php&#x27;)</span><br><span class="line"># 备用3：临时目录</span><br><span class="line">load_file(&#x27;/tmp/flag.php&#x27;)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>为什么是这个路径，报错时候有显示，请看下图：</p>
+<p><img src="/images/image-20251217214135585.png" alt="image-20251217214135585"></p>
+<p><img src="/images/image-20251217213911581.png" alt="image-20251217213911581"></p>
+<p>注入之后发现并没有flag，去抓包看看</p>
+<p><strong>view.php?no&#x3D;-1%20union&#x2F;</strong>&#x2F;select 1,group_concat,3,4–+</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://2829750658t-svg.github.io">qyt</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://2829750658t-svg.github.io/2026/01/21/ctf%E9%A2%98%E8%A7%A3/web/ssrf/">https://2829750658t-svg.github.io/2026/01/21/ctf%E9%A2%98%E8%A7%A3/web/ssrf/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://2829750658t-svg.github.io" target="_blank">24kmagic</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/web-ssrf/">web-ssrf</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/images/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/images/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/images/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/images/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/01/21/ctf%E9%A2%98%E8%A7%A3/web/sstizhuru/" title="web-ssti注入"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">web-ssti注入</div></div><div class="info-2"><div class="info-item-1">web-ssti注入模板注入初步https://hello-ctf.com/hc-web/ssti/#_1 ProbiusOfficial&#x2F;Hello-CTF 前置知识¶在开始之前，我们先大概介绍一下什么是模板，什么又是模板注入。 什么是模板¶模板 是一种用于生成动态内容的工具。   它们通常包含两个基本部分： 比如下图为 Hello-CTFtime 项目中，渲染比赛列表的时候用到的模板： 绿色 部分为 静态内容 ，而 橙色 部分则是 动态占位符   大多数模板的工作流程： 定义模板  -&gt;  传递数据  -&gt; 渲染模板  -&gt; 输出生成  什么是模板注入¶我们之前在说SQL注入的时候，这样描述SQL注入 “通过可控输入点达到非预期执行数据库语句”，比如后台预期的语句是： 1SELECT username,password FROM users WHERE id = &quot;数据传递点&quot;  在预期情况下，数据传递点只会是 1，2，3，4…… 但是我们要是让数据传入点的值为 1&quot; union select 1,group_conc...</div></div></div></a><a class="pagination-related" href="/2026/01/21/ctf%E9%A2%98%E8%A7%A3/web/inform_collect/" title="web-信息收集"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">web-信息收集</div></div><div class="info-2"><div class="info-item-1">web-信息收集buuctf 禁止套娃1.找不到flag，没有思路，dir扫描 git泄露  2.githack工具获取源码  3.代码分析 123456789101112131415161718192021222324252627&lt;?phpinclude &quot;flag.php&quot;;echo &quot;flag在哪里呢？&lt;br&gt;&quot;;if(isset($_GET[&#x27;exp&#x27;]))&#123;    if (!preg_match(&#x27;/data:\/\/|filter:\/\/|php:\/\/|phar:\/\//i&#x27;, $_GET[&#x27;exp&#x27;])) &#123;                       //preg_replace(正则, NULL, $_GET[&#x27;exp&#x27;]) -&gt;把输入中正则部分给删掉            if(&#x27;;&#x27; === preg_replace(&#x27;/[a-z,_]+\((?R)?\)/&...</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">qyt</div><div class="author-info-description">不要放弃自由去选择保障，到头来你两者都得不到</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/2829750658t-svg" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.zhihu.com/people/7e5acf574f89c3cba9460c739673e2cf" target="_blank" title="知乎"><i class="fab fa-zhihu"></i></a><a class="social-icon" href="https://xhslink.com/m/2t0Ndc1uvYL" target="_blank" title="小红书"><i class="fas fa-notes-medical"></i></a><a class="social-icon" href="https://163cn.tv/Z9ohElT" target="_blank" title="网易云音乐"><i class="fas fa-music"></i></a><a class="social-icon" href="https://www.instagram.com/tenyeahqweyeah?igsh=NG92enl2NTE0NGMx&amp;utm_source=qr" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">很高兴能向你展示我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#web-ssrf"><span class="toc-number">1.</span> <span class="toc-text">web-ssrf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SSRF-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0"><span class="toc-number">2.</span> <span class="toc-text">SSRF &#x3D; 服务器端请求伪造</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E7%82%B9"><span class="toc-number">3.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E9%BC%8E%E6%9D%AF-2018-Fakebook"><span class="toc-number">4.</span> <span class="toc-text">[网鼎杯 2018]Fakebook</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1"><span class="toc-number">4.1.</span> <span class="toc-text">1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86"><span class="toc-number">4.2.</span> <span class="toc-text">一、核心原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%B3%A8%E5%85%A5%E8%AF%AD%E5%8F%A5%E5%86%99%E6%B3%95"><span class="toc-number">4.3.</span> <span class="toc-text">二、注入语句写法</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/23/my-article/" title="my-article">my-article</a><time datetime="2026-01-23T03:41:18.000Z" title="发表于 2026-01-23 11:41:18">2026-01-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/ctf%E5%AD%A6%E4%B9%A0/web/ssrf/" title="ssrf">ssrf</a><time datetime="2026-01-21T11:56:05.000Z" title="发表于 2026-01-21 19:56:05">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/ctf%E9%A2%98%E8%A7%A3/crypto/codetijie/" title="codetijie">codetijie</a><time datetime="2026-01-21T11:56:05.000Z" title="发表于 2026-01-21 19:56:05">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/ctf%E5%AD%A6%E4%B9%A0/web/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/" title="逻辑漏洞">逻辑漏洞</a><time datetime="2026-01-21T11:56:05.000Z" title="发表于 2026-01-21 19:56:05">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/ctf%E5%AD%A6%E4%B9%A0/web/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" title="内网渗透">内网渗透</a><time datetime="2026-01-21T11:56:05.000Z" title="发表于 2026-01-21 19:56:05">2026-01-21</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By qyt</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const getGiscusTheme = theme => theme === 'dark' ? 'dark' : 'light'
+
+  const createScriptElement = config => {
+    const ele = document.createElement('script')
+    Object.entries(config).forEach(([key, value]) => {
+      ele.setAttribute(key, value)
+    })
+    return ele
+  }
+
+  const loadGiscus = (el = document, key) => {
+    const mappingConfig = isShuoshuo
+      ? { 'data-mapping': 'specific', 'data-term': key }
+      : { 'data-mapping': (option && option['data-mapping']) || 'pathname' }
+
+    const giscusConfig = {
+      src: 'https://giscus.app/client.js',
+      'data-repo': '2829750658t-svg/2829750658t-svg.github.io',
+      'data-repo-id': 'R_kgDOQS61dQ',
+      'data-category-id': 'DIC_kwDOQS61dc4C1UR-',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true,
+      ...option,
+      ...mappingConfig
+    }
+
+    const scriptElement = createScriptElement(giscusConfig)
+
+    el.querySelector('#giscus-wrap').appendChild(scriptElement)
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGiscus = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const changeGiscusTheme = theme => {
+    const iframe = document.querySelector('#giscus-wrap iframe')
+    if (iframe) {
+      const message = {
+        giscus: {
+          setConfig: {
+            theme: getGiscusTheme(theme)
+          }
+        }
+      }
+      iframe.contentWindow.postMessage(message, 'https://giscus.app')
+    }
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if (isShuoshuo) {
+    'Giscus' === 'Giscus'
+      ? window.shuoshuoComment = { loadComment: loadGiscus }
+      : window.loadOtherComment = loadGiscus
+    return
+  }
+
+  if ('Giscus' === 'Giscus' || !false) {
+    if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment = loadGiscus
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

