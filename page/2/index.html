@@ -1,0 +1,226 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>24kmagic</title><meta name="author" content="qyt"><meta name="copyright" content="qyt"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="不要放弃自由去选择保障，到头来你两者都得不到">
+<meta property="og:type" content="website">
+<meta property="og:title" content="24kmagic">
+<meta property="og:url" content="https://2829750658t-svg.github.io/page/2/">
+<meta property="og:site_name" content="24kmagic">
+<meta property="og:description" content="不要放弃自由去选择保障，到头来你两者都得不到">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://2829750658t-svg.github.io/img/butterfly-icon.png">
+<meta property="article:author" content="qyt">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://2829750658t-svg.github.io/img/butterfly-icon.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/images/favicon.png"><link rel="canonical" href="https://2829750658t-svg.github.io/page/2/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '24kmagic',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="google-site-verification" content="xcoxCJdnrLSrFpybmYmk6WSRqz-H1rnZB7BKSjdkWD0" /><meta name="google-site-verification" content="H8Bhbw_EXOKyVq27SUdcn_avXaVqBOWzs2lPJV_HSVw" /><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page fixed" id="page-header" style="background-image: url(/images/bj2.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">24kmagic</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">24kmagic</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/2829750658t-svg" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.zhihu.com/people/7e5acf574f89c3cba9460c739673e2cf" target="_blank" title="知乎"><i class="fab fa-zhihu"></i></a><a class="social-icon" href="https://xhslink.com/m/2t0Ndc1uvYL" target="_blank" title="小红书"><i class="fas fa-notes-medical"></i></a><a class="social-icon" href="https://163cn.tv/Z9ohElT" target="_blank" title="网易云音乐"><i class="fas fa-music"></i></a><a class="social-icon" href="https://www.instagram.com/tenyeahqweyeah?igsh=NG92enl2NTE0NGMx&amp;utm_source=qr" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/15ed5e35.html" title="dirsearch+sqlmap">dirsearch+sqlmap</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-01-21T11:39:43.000Z" title="发表于 2026-01-21 19:39:43">2026-01-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E5%AD%A6%E4%B9%A0/">ctf学习</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E5%AD%A6%E4%B9%A0/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4/">软件使用命令</a></span></div><div class="content">dirsearchpython dirsearch.py -u “http:&#x2F;&#x2F;…” -t 1 -d 5 –full-url -R 5 -w .&#x2F;ctf_high.txt python dirsearch.py -u “http:&#x2F;&#x2F;…” -t 1 -d 5 -w .&#x2F;ctf_high.txt sqlmapsqlmap -u “鐩爣URL” –tamper&#x3D;space2comment.py,base64encode.py –random-agent –delay 1 python sqlmap.py -u “http:&#x2F;&#x2F;…” –batch –risk&#x3D;3 –level&#x3D;5 sqlmap -u “http:&#x2F;&#x2F;…” –batch –risk&#x3D;3 –level&#x3D;5 –threads&#x3D;10 –dbs –dbms&#x3D;MySQL –technique&#x3D;B,U,E,T,OR –tamper&#x3D;betwee...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/1afe1991.html" title="notectf">notectf</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-01-21T11:39:43.000Z" title="发表于 2026-01-21 19:39:43">2026-01-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E5%AD%A6%E4%B9%A0/">ctf学习</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E5%AD%A6%E4%B9%A0/%E7%BD%91%E8%AF%BE%E7%AC%94%E8%AE%B0/">网课笔记</a></span></div><div class="content">ctf1.python requests2.信息收集2.1谷歌黑客搜索语法 fofa github泄露源码和账号密码 2.2 主动信息收集 网站指纹识别 端口扫描 目录扫描 子域名扫描 漏洞扫描 3. XSS 攻击3.1 反射型（非持久）  特征：恶意代码通过 URL 传入，单次请求生效  常见攻击方式： 重定向： 1&lt;script&gt;window.location=&quot;恶意网址&quot;&lt;/script&gt;     图片加载恶意脚本： 1&lt;img src=&quot;http://BeEF_IP:3000/hook.js&quot;&gt;     脚本标签： 1&lt;script src=&quot;恶意xss.js&quot;&gt;&lt;/script&gt;     绕过滤：大小写、URL&#x2F;Base64 编码 1&lt;ScrIpT&gt;      URL/Base64 编码  3.2 存储型（持久）  特征：恶意代码存到服务器（数据库 &#x2F; 留言板等），所有访问者中招 核心：代码提交后被持久化，影响范围更广 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/7fa71aba.html" title="misc">misc</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-01-21T11:39:43.000Z" title="发表于 2026-01-21 19:39:43">2026-01-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E5%AD%A6%E4%B9%A0/">ctf学习</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E5%AD%A6%E4%B9%A0/misc/">misc</a></span></div><div class="content">ZIP 明文爆破笔记一、核心原理1. 加密逻辑（ZipCrypto 算法） 加密：明文 XOR 密码流 &#x3D; 密文 解密：密文 XOR 密码流 &#x3D; 明文 反推密码流：明文 XOR 密文 &#x3D; 密码流  2. XOR（异或）规则二进制运算：相同为 0，不同为 1 例：a（01100001）XOR 5（00000101）&#x3D; d（01100100）；d XOR 5 又变回 a 3. 明文爆破本质已知明文 + 对应密文→算密码流→反推 ZIP 的 3 个核心密钥（key0&#x2F;key1&#x2F;key2）→用密钥解密整个 ZIP 前提：仅对 ZIP 传统加密有效，AES256 加密无效！ 二、bkcrack 使用条件 ZIP 内文件未压缩（检查：bkcrack -L 压缩包.zip）  已知至少12 字节明文（8 字节连续）+ 明文在文件中的位置（偏移）  三、题目bkcrack 无法直接破解 ZIP 密码，必须靠 “已知明文”和“你已有密文” 反推加密密钥，再用密钥解密 不管是字符明文还是文件头明文，核心是： 准备明文文件 → 得密钥 → 用...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/f4fd6ff9.html" title="misc_answer">misc_answer</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-01-21T11:39:43.000Z" title="发表于 2026-01-21 19:39:43">2026-01-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E9%A2%98%E8%A7%A3/">ctf题解</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E9%A2%98%E8%A7%A3/misc/">misc</a></span></div><div class="content">misc题解bf6题解： 1.压缩包，放kali，有png，用bk 2.准备png开头 明文文件 echo 开头码 | xxd -r ps &gt; 明文文件 3.得到密钥 bkcrack -C -c -p -o 4.解密压缩文件 bkcrack -C -c -k -d 5.发现图片有隐藏的10编码，steg打开得到乱码，图片comment里面有密钥，解码后flag 二维码1一个完整的 JPG 文件由 FF D8 开头，FF D9结尾 在使用图片浏览器时，图片浏览器会忽略 FF D9 以后的内容，因此可以在 JPG 文件中加入其他文件。其他文件隐藏如png.gif文件隐藏也是这个道理。 123456789101112131415161718192021222324252627282930313233343536373839# ========== 前期定位工具 &amp; 切换工作目录 ==========# 1. （尝试找bkcrack目录失败，改用全局查找工具路径）which bkcrack  # 确认bkcrack路径：/usr/local/bin/bkcrack# 2. ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/54983b3f.html" title="pwntijie">pwntijie</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-01-21T11:39:43.000Z" title="发表于 2026-01-21 19:39:43">2026-01-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E9%A2%98%E8%A7%A3/">ctf题解</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E9%A2%98%E8%A7%A3/pwn/">pwn</a></span></div><div class="content">pwn题解1.虚拟机连接靶机：nc 网址 端口 2.ls查看到flag 3.cat flag  </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/6cdf2554.html" title="web-文件上传+包含">web-文件上传+包含</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-01-21T11:39:43.000Z" title="发表于 2026-01-21 19:39:43">2026-01-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E9%A2%98%E8%A7%A3/">ctf题解</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E9%A2%98%E8%A7%A3/web/">web</a></span></div><div class="content">web-文件上传+包含[第二章 web进阶]文件上传 1 文件上传漏洞 题解1.上传webshell.jpg文件 2.发现上传成功却无法打开 是因为上传的目录是随机的，所以用御剑扫描即可，找到对应网页 打开 [ACTF2020 新生赛]Upload 1十分波折的一道题目哈 1.文件上传php，失败，显示只能jpg等一堆正常格式 2.上传木马jpg，改成php，nonono 3.那改成phtml？黑名单绕过，可以 4.蚁剑连接得到flag 注意linux系统查看当前目录flag需要 cat &#x2F;flag 1234561. 直接上传.php文件 → 失败（前端/后端检测后缀，仅允许jpg/png等图片格式）；2. 上传图片马）→ 尝试抓包改回.php → 提示no（后端黑名单拦截.php）；3. 黑名单绕过：改后缀为.phtml（Apache默认解析.phtml为PHP）→ 上传成功；    细节：Content-Type为image/jpeg不改（绕MIME校验），仅改filename为xxx.phtml；4. 蚁剑连接：5. 拿flag：Linux系统下执行命令 cat ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/63fbbf92.html" title="web-逻辑漏洞">web-逻辑漏洞</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-01-21T11:39:43.000Z" title="发表于 2026-01-21 19:39:43">2026-01-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E9%A2%98%E8%A7%A3/">ctf题解</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E9%A2%98%E8%A7%A3/web/">web</a></span></div><div class="content">web-逻辑漏洞[极客大挑战 2019]BuyFlag1题目：我一开始是想去把xff改成学校的特定内网ip，发现根本没有用，因为你不知道ip是啥啊 1234567891011FlagFlag need your 100000000 moneyattentionIf you want to buy the FLAG:You must be a student from CUIT!!!You must be answer the correct password!!!Only Cuit&#x27;s students can buy the FLAG    由题，没思路，看源码 1234567891011&lt;!--	~~~post money and password~~~if (isset($_POST[&#x27;password&#x27;])) &#123;	$password = $_POST[&#x27;password&#x27;];	if (is_numeric($password)) &#123;		echo &quot;password can&#x27;t ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/6c876023.html" title="web-信息收集">web-信息收集</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-01-21T11:39:43.000Z" title="发表于 2026-01-21 19:39:43">2026-01-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E9%A2%98%E8%A7%A3/">ctf题解</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E9%A2%98%E8%A7%A3/web/">web</a></span></div><div class="content">web-信息收集buuctf 禁止套娃1.找不到flag，没有思路，dir扫描 git泄露  2.githack工具获取源码  3.代码分析 123456789101112131415161718192021222324252627&lt;?phpinclude &quot;flag.php&quot;;echo &quot;flag在哪里呢？&lt;br&gt;&quot;;if(isset($_GET[&#x27;exp&#x27;]))&#123;    if (!preg_match(&#x27;/data:\/\/|filter:\/\/|php:\/\/|phar:\/\//i&#x27;, $_GET[&#x27;exp&#x27;])) &#123;                       //preg_replace(正则, NULL, $_GET[&#x27;exp&#x27;]) -&gt;把输入中正则部分给删掉            if(&#x27;;&#x27; === preg_replace(&#x27;/[a-z,_]+\((?R)?\)/&...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/7f1f5ac3.html" title="web-sql注入">web-sql注入</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-01-21T11:39:43.000Z" title="发表于 2026-01-21 19:39:43">2026-01-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E9%A2%98%E8%A7%A3/">ctf题解</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E9%A2%98%E8%A7%A3/web/">web</a></span></div><div class="content">web-sql注入08 第八章 天衍真言，星图显圣 题解1.判断字段数order by 2 2.判断回显位 ‘union select  1,2# Welcome 1 3.数据库名 ‘union select database()# Welcome user 4.尝试查询数据库名为user下的所有表名 ‘union select group_concat(table_name),2 from information_schema.tables where table_schema&#x3D;’user’# Welcome flag,users 5.尝试查询 数据库名为user，表名为flag 下的所有列名 ‘union select group_concat(column_name),2 from information_schema.columns where table_schema&#x3D;’user’ and table_name&#x3D;’flag’# Welcome value 6.查找数据 错误答案：’union select value,2 from flag...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/f0b16724.html" title="web-ssrf">web-ssrf</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-01-21T11:39:43.000Z" title="发表于 2026-01-21 19:39:43">2026-01-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E9%A2%98%E8%A7%A3/">ctf题解</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E9%A2%98%E8%A7%A3/web/">web</a></span></div><div class="content">web-ssrfSSRF &#x3D; 服务器端请求伪造特点 主体是服务器：请求是「服务器发起」的，不是你的电脑； 权限是服务器的权限：服务器能访问的资源（本地文件、内网 IP），你本来访问不到，但通过 SSRF 就能间接访问； 核心是 “伪造请求”：你伪造一个服务器会执行的请求（比如本地文件地址、内网地址），服务器替你执行。  [网鼎杯 2018]Fakebook11.注册登陆界面，sqlmap扫描 1python dirsearch.py -u &quot;http://3992b9c4-b99e-44db-96b6-111d3cb92681.node5.buuoj.cn:81/&quot; -e php --threads 1 --delay 3 -w ./ctf_core.txt      打开备份文件 1234567891011121314151617181920212223242526272829303132333435363738394041424344&lt;?phpclass UserInfo&#123;    public $name = &quot;&quo...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#content-inner">3</a><a class="extend next" rel="next" href="/page/3/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">qyt</div><div class="author-info-description">不要放弃自由去选择保障，到头来你两者都得不到</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/2829750658t-svg" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.zhihu.com/people/7e5acf574f89c3cba9460c739673e2cf" target="_blank" title="知乎"><i class="fab fa-zhihu"></i></a><a class="social-icon" href="https://xhslink.com/m/2t0Ndc1uvYL" target="_blank" title="小红书"><i class="fas fa-notes-medical"></i></a><a class="social-icon" href="https://163cn.tv/Z9ohElT" target="_blank" title="网易云音乐"><i class="fas fa-music"></i></a><a class="social-icon" href="https://www.instagram.com/tenyeahqweyeah?igsh=NG92enl2NTE0NGMx&amp;utm_source=qr" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">很高兴能向你展示我的博客</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/0.html" title="无标题">无标题</a><time datetime="2026-01-28T07:13:34.441Z" title="发表于 2026-01-28 15:13:34">2026-01-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/0.html" title="无标题">无标题</a><time datetime="2026-01-28T07:12:58.899Z" title="发表于 2026-01-28 15:12:58">2026-01-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/66b634a7.html" title="my-article">my-article</a><time datetime="2026-01-23T03:41:18.000Z" title="发表于 2026-01-23 11:41:18">2026-01-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/2b37188e.html" title="codetijie">codetijie</a><time datetime="2026-01-21T11:56:05.000Z" title="发表于 2026-01-21 19:56:05">2026-01-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/b7a1d97e.html" title="ssrf">ssrf</a><time datetime="2026-01-21T11:56:05.000Z" title="发表于 2026-01-21 19:56:05">2026-01-21</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/categories/" title="查看更多">
+      <i class="fas fa-angle-right"></i></a>
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/ctf%E5%AD%A6%E4%B9%A0/"><span class="card-category-list-name">ctf学习</span><span class="card-category-list-count">10</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/ctf%E5%AD%A6%E4%B9%A0/crypto/"><span class="card-category-list-name">crypto</span><span class="card-category-list-count">3</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/ctf%E5%AD%A6%E4%B9%A0/crypto/ook%E7%BC%96%E7%A0%81/"><span class="card-category-list-name">ook编码</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/ctf%E5%AD%A6%E4%B9%A0/crypto/rsa/"><span class="card-category-list-name">rsa</span><span class="card-category-list-count">2</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/ctf%E5%AD%A6%E4%B9%A0/misc/"><span class="card-category-list-name">misc</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/ctf%E5%AD%A6%E4%B9%A0/web/"><span class="card-category-list-name">web</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/ctf%E5%AD%A6%E4%B9%A0/%E7%BD%91%E8%AF%BE%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">网课笔记</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/ctf%E5%AD%A6%E4%B9%A0/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4/"><span class="card-category-list-name">软件使用命令</span><span class="card-category-list-count">1</span></a></li></ul></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/misc/" style="font-size: 1.1em; color: #999">misc</a> <a href="/tags/ssrf/" style="font-size: 1.1em; color: #999">ssrf</a> <a href="/tags/web-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" style="font-size: 1.1em; color: #999">web-信息收集</a> <a href="/tags/web-xss/" style="font-size: 1.1em; color: #999">web-xss</a> <a href="/tags/%E7%A2%B0%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AF%86%E7%A0%81/" style="font-size: 1.1em; color: #999">碰到的一些密码</a> <a href="/tags/linux%E5%91%BD%E4%BB%A4/" style="font-size: 1.1em; color: #999">linux命令</a> <a href="/tags/web-%E6%9C%AA%E6%95%B4%E7%90%86/" style="font-size: 1.1em; color: #999">web-未整理</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 1.1em; color: #999">笔记</a> <a href="/tags/ctf%E7%9B%B8%E5%85%B3/" style="font-size: 1.1em; color: #999">ctf相关</a> <a href="/tags/web-sql%E6%B3%A8%E5%85%A5/" style="font-size: 1.1em; color: #999">web-sql注入</a> <a href="/tags/ssti%E6%B3%A8%E5%85%A5/" style="font-size: 1.1em; color: #999">ssti注入</a> <a href="/tags/pwn/" style="font-size: 1.1em; color: #999">pwn</a> <a href="/tags/web-%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/" style="font-size: 1.1em; color: #999">web-逻辑漏洞</a> <a href="/tags/crypto/" style="font-size: 1.1em; color: #999">crypto</a> <a href="/tags/dirsearch-sqlmap/" style="font-size: 1.1em; color: #999">dirsearch+sqlmap</a> <a href="/tags/git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" style="font-size: 1.1em; color: #999">git使用方法</a> <a href="/tags/web-xml/" style="font-size: 1.1em; color: #999">web-xml</a> <a href="/tags/web-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-%E5%8C%85%E5%90%AB/" style="font-size: 1.1em; color: #999">web-文件上传+包含</a> <a href="/tags/web-ssrf/" style="font-size: 1.1em; color: #999">web-ssrf</a> <a href="/tags/%E7%A2%B0%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BC%96%E7%A0%81/" style="font-size: 1.1em; color: #999">碰到的一些编码</a> <a href="/tags/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" style="font-size: 1.1em; color: #999">第一篇博客</a> <a href="/tags/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/" style="font-size: 1.1em; color: #999">逻辑漏洞</a> <a href="/tags/misc%E7%AC%94%E8%AE%B0/" style="font-size: 1.1em; color: #999">misc笔记</a> <a href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" style="font-size: 1.1em; color: #999">内网渗透</a> <a href="/tags/%E5%AF%86%E7%A0%81%E7%AC%94%E8%AE%B0/" style="font-size: 1.1em; color: #999">密码笔记</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/01/">
+            <span class="card-archive-list-date">
+              一月 2026
+            </span>
+            <span class="card-archive-list-count">28</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/11/">
+            <span class="card-archive-list-date">
+              十一月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">29</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-01-28T07:19:10.504Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By qyt</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: str => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: subtitleType => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        btf.getScript('https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  },
+  processSubtitle: (content, extraContents = []) => {
+    if (true) {
+      const sub = ["HOW'S EVERYTHING GOING?","最近怎么样呢，我的朋友?"].slice()
+
+      if (extraContents.length > 0) {
+        sub.unshift(...extraContents)
+      }
+
+      if (typeof content === 'string') {
+        sub.unshift(content)
+      } else if (Array.isArray(content)) {
+        sub.unshift(...content)
+      }
+
+      sub.length > 0 && typedJSFn.init(sub)
+    } else {
+      document.getElementById('subtitle').textContent = typeof content === 'string' ? content :
+        (Array.isArray(content) && content.length > 0 ? content[0] : '')
+    }
+  }
+}
+btf.addGlobalFn('pjaxSendOnce', () => { typed.destroy() }, 'typedDestroy')
+</script><script>function subtitleType () {
+  typedJSFn.processSubtitle(["HOW'S EVERYTHING GOING?","最近怎么样呢，我的朋友?"])
+}
+typedJSFn.run(subtitleType)</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
