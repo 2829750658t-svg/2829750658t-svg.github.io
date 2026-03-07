@@ -1,0 +1,243 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>24kmagic</title><meta name="author" content="qyt"><meta name="copyright" content="qyt"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="不要放弃自由去选择保障，到头来你两者都得不到">
+<meta property="og:type" content="website">
+<meta property="og:title" content="24kmagic">
+<meta property="og:url" content="https://2829750658t-svg.github.io/">
+<meta property="og:site_name" content="24kmagic">
+<meta property="og:description" content="不要放弃自由去选择保障，到头来你两者都得不到">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://2829750658t-svg.github.io/img/butterfly-icon.png">
+<meta property="article:author" content="qyt">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://2829750658t-svg.github.io/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "24kmagic",
+  "alternateName": [
+    "2829750658t-svg.github.io"
+  ],
+  "url": "https://2829750658t-svg.github.io/"
+}</script><link rel="shortcut icon" href="/images/favicon.png"><link rel="canonical" href="https://2829750658t-svg.github.io/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '24kmagic',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="google-site-verification" content="xcoxCJdnrLSrFpybmYmk6WSRqz-H1rnZB7BKSjdkWD0" /><meta name="google-site-verification" content="H8Bhbw_EXOKyVq27SUdcn_avXaVqBOWzs2lPJV_HSVw" /><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">87</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">26</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page fixed" id="page-header" style="background-image: url(/images/bj2.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">24kmagic</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">24kmagic</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/2829750658t-svg" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.zhihu.com/people/7e5acf574f89c3cba9460c739673e2cf" target="_blank" title="知乎"><i class="fab fa-zhihu"></i></a><a class="social-icon" href="https://xhslink.com/m/2t0Ndc1uvYL" target="_blank" title="小红书"><i class="fas fa-notes-medical"></i></a><a class="social-icon" href="https://163cn.tv/Z9ohElT" target="_blank" title="网易云音乐"><i class="fas fa-music"></i></a><a class="social-icon" href="https://www.instagram.com/tenyeahqweyeah?igsh=NG92enl2NTE0NGMx&amp;utm_source=qr" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/e2b06f23.html" title="reverse1">reverse1</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-03-07T07:03:51.000Z" title="发表于 2026-03-07 15:03:51">2026-03-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/reverse/">reverse</a></span></div><div class="content">reverse 1快捷键：shift+f12 字符串搜索窗口 x交叉搜索 f5反汇编c r数字转ascii 解法:进去是一个exe程序，可以用脱壳软件脱壳， 但是这个没有壳 直接ida反汇编就ok 1.查看shift+f12 字符串搜索窗口，搜flag，找到相关内容 双击打开，再交叉引用找到文件位置并打开（找到这个字符串在什么时候被引用了），反汇编c看代码  1.1 strncmp函数strncmp(Str1, Str2, v5) 比较前两个字符串，前v5个位置； 相等值为0； 大于值为正数； 小于值为负数； str1是什么？ -&gt;  sub_1400111D1(“input the flag:”);猜测d1是printf；  sub_14001128F(“%20s”, Str1); 可以看到str1是我们输入的内容； str2是什么？ -&gt; 寻找这个字符串  1.2 for循环遍历，把所有ascii为111的字符都换为48这里光标指向后按r，可以把ascii转字符 得到：  1.3 综合12if ( !strncmp(Str1, Str2, v5) )  sub_1...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/f8cca232.html" title="reverse2">reverse2</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-03-07T07:03:51.000Z" title="发表于 2026-03-07 15:03:51">2026-03-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/reverse/">reverse</a></span></div><div class="content">reverse 2按下shift+f12  进入字符串窗口看到  .rodata:0000000000400925	00000018	C	this is the right flag! .data:0000000000601080	00000012	C	{hacking_for_fun}  双击字符串进入这界面，点击aThisIsTheRight，按x键  弹出，按ok  来到新界面，按f5可以反编译c  来到  1234567891011121314151617181920212223242526272829int __fastcall main(int argc, const char **argv, const char **envp)&#123;  int stat_loc; // [rsp+4h] [rbp-3Ch] BYREF  int i; // [rsp+8h] [rbp-38h]  __pid_t pid; // [rsp+Ch] [rbp-34h]  char s2[24]; // [rsp+10h] [rbp-30h] BYREF  unsigned __i...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/5828cfdd.html" title="xor 1">xor 1</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-03-07T07:03:51.000Z" title="发表于 2026-03-07 15:03:51">2026-03-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/reverse/">reverse</a></span></div><div class="content">xor1找到 1234567891011121314151617181920212223int __fastcall main(int argc, const char **argv, const char **envp)&#123;  int i; // [rsp+2Ch] [rbp-124h]  char __b[264]; // [rsp+40h] [rbp-110h] BYREF  memset(__b, 0, 0x100u);  printf(&quot;Input your flag:\n&quot;);  get_line(__b, 256);  if ( strlen(__b) != 33 )    goto LABEL_7;  for ( i = 1; i &lt; 33; ++i )    __b[i] ^= __b[i - 1];        //异或：b[i]=b[i]^b[i-1]      if ( !strncmp(__b, global, &#x27;!&#x27;) )  	//你的输出要和global一摸一样    printf(&quot;...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/f11be5b3.html" title="内涵的软件1">内涵的软件1</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-03-07T07:03:51.000Z" title="发表于 2026-03-07 15:03:51">2026-03-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/reverse/">reverse</a></span></div><div class="content">内涵的软件1shift+f12 搜flag，发现无用信息 尝试搜{ 找到flag  </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/77de94ea.html" title="新年快乐 1">新年快乐 1</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-03-07T07:03:51.000Z" title="发表于 2026-03-07 15:03:51">2026-03-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/reverse/">reverse</a></span></div><div class="content">新年快乐1需要下载查壳和脱壳软件 我用的是Exeinfo PE和upx 解题：有壳upx 1 upx脱壳 这里怎么直接看是否有壳呢？ida一打开函数很少就两三个 为什么函数少就说明有壳？正常的程序在编译时会引入大量的库函数和初始化代码，F5 之后你会看到一长串函数名。  加壳的逻辑：壳本质上是一个“外壳程序”，把真正的代码压缩并加密存在数据段里。 当你打开加壳的文件时，IDA 看到的只是壳的自解压代码。 两三个函数：这通常就是壳的全部——一个负责解压的函数，一个负责跳转到真实入口点（OEP）的函数。   在按照前面 reverse1和2 内涵的软件1的思路：查可疑字符串，定位后交叉搜索，再看反汇编代码  得到flag{HappyNewYear!} </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/66a6963f.html" title="moectf2025 base">moectf2025 base</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-03-07T07:03:45.000Z" title="发表于 2026-03-07 15:03:45">2026-03-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/reverse/">reverse</a></span></div><div class="content">moectf2025 baseBase编码是一种将二进制数据转换为可打印字符的编码方式。 它将二进制数据按照一定规则映射为一组字符，以便于传输和存储。 寻找字符串  moectf{Y0u_C4n_G00d_At_B45e64!!} </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/152da731.html" title="moectf2025 catch">moectf2025 catch</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-03-07T07:03:45.000Z" title="发表于 2026-03-07 15:03:45">2026-03-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/reverse/">reverse</a></span></div><div class="content">moectf2025 catch知识点：1.ROT13ROT13 的全称是 Rotate by 13 places（循环右移13位）。 字母表一共有 26 个字母，13 恰好是它的一半。这个加密方法就是把字母表对折：  A 变成第 14 个字母 N B 变成第 15 个字母 O …以此类推  它的特点是：  对称性：如果你对一个词做两次 ROT13，它就会变回原样。 只换字母：数字（如 4）、符号（如 {、_）完全不受影响。  题目提示：IDA pro 9.0 推出了针对 C++ exception 的优化 但是这并不意味着所有的 try catch 都能被正确反编译  查找字符串发现了疑似flag的字符串还有一个try to catch me .data:0000000140027120	00000027	C	zbrpgs{F4z3_Ge1px_jvgu_@sybjre_qrfhjn} 既然题目提示了catch，我们去找到try to catch me的位置，一探究竟 try to catch me1234567891011 printf(&quot;try to catch ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/f944ee3b.html" title="moectf2025 speed">moectf2025 speed</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-03-07T07:03:45.000Z" title="发表于 2026-03-07 15:03:45">2026-03-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/reverse/">reverse</a></span></div><div class="content">moectf2025 speed题目提示： Did you see my little pony? She runs really fast…  运行软件后出现窗口，出现后立马闪退 当然你可以录视频截屏看到窗口内容，在后面我们会知道内容就是flag 也可以来好好研究一下底层逻辑： 首先找到窗口函数，winmain  f5反汇编 得到  红色部分可能不太清楚，那个就是销毁窗口函数，我们只要调试然后在这里做断点就ok了 然后就可以看到停留的窗口 调试方法：f2断点，断电为红色圆圈的时候，按软件上面的运行键|&gt;  以下是我掉过的坑，看到flag就直接去找flag的线索了，没思考题目的意思 得到的flag也是错的 12345678910111213141516171819202122  for ( i = 0; i &lt; 100; ++i )  &#123;    if ( i &gt;= (unsigned int)&#x27;d&#x27; )      j____report_rangecheckfailure();    Destination[i] = 0;  &#1...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/233dbe6e.html" title="LSB 1">LSB 1</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-03-07T07:03:07.000Z" title="发表于 2026-03-07 15:03:07">2026-03-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/misc/">misc</a></span></div><div class="content">LSB1知识点： LSB（Least Significant Bit）就是利用图片颜色的“微小误差”来藏东西：  原理：计算机用二进制（如 10101011）表示颜色。最后一位（最右边）对颜色的影响非常小。 操作：把这一位改掉（0变1或1变0），人的肉眼根本看不出图片变色了。 隐写：把秘密文件（比如另一张图或文字）也变成 0 和 1，替换掉大图里成千上万个像素的最后一位。 提取：用工具（如 StegSolve）把这些最后一位重新抠出来拼好，秘密文件就现身了。    解题思路： 题目为png 结果在图片里面发现二进制小线条 然后打开看发现存在嵌套png 这里有个问题：因为png图片在提出数据后还存在png，说明就是嵌套  保存save bin 为什么？为了保持原始数据 保存为png打开发现flag  </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/badcd591.html" title="ningen 1">ningen 1</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-03-07T07:03:07.000Z" title="发表于 2026-03-07 15:03:07">2026-03-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/misc/">misc</a></span></div><div class="content">ningen1010打开发现有压缩包的标识， 拿到kali虚拟机里面，binwalk和foremost一下得到压缩包 密码既然提示了就爆破，得到密码即为zip文件解压密码 打开后获得flag  </div></div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/#content-inner">9</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">qyt</div><div class="author-info-description">不要放弃自由去选择保障，到头来你两者都得不到</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">87</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">26</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/2829750658t-svg" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.zhihu.com/people/7e5acf574f89c3cba9460c739673e2cf" target="_blank" title="知乎"><i class="fab fa-zhihu"></i></a><a class="social-icon" href="https://xhslink.com/m/2t0Ndc1uvYL" target="_blank" title="小红书"><i class="fas fa-notes-medical"></i></a><a class="social-icon" href="https://163cn.tv/Z9ohElT" target="_blank" title="网易云音乐"><i class="fas fa-music"></i></a><a class="social-icon" href="https://www.instagram.com/tenyeahqweyeah?igsh=NG92enl2NTE0NGMx&amp;utm_source=qr" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">很高兴能向你展示我的博客</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/e2b06f23.html" title="reverse1">reverse1</a><time datetime="2026-03-07T07:03:51.000Z" title="发表于 2026-03-07 15:03:51">2026-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/f8cca232.html" title="reverse2">reverse2</a><time datetime="2026-03-07T07:03:51.000Z" title="发表于 2026-03-07 15:03:51">2026-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/5828cfdd.html" title="xor 1">xor 1</a><time datetime="2026-03-07T07:03:51.000Z" title="发表于 2026-03-07 15:03:51">2026-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/f11be5b3.html" title="内涵的软件1">内涵的软件1</a><time datetime="2026-03-07T07:03:51.000Z" title="发表于 2026-03-07 15:03:51">2026-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/77de94ea.html" title="新年快乐 1">新年快乐 1</a><time datetime="2026-03-07T07:03:51.000Z" title="发表于 2026-03-07 15:03:51">2026-03-07</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/categories/" title="查看更多">
+      <i class="fas fa-angle-right"></i></a>
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/crypto/"><span class="card-category-list-name">crypto</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/ctf%E5%AD%A6%E4%B9%A0/"><span class="card-category-list-name">ctf学习</span><span class="card-category-list-count">10</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/ctf%E5%AD%A6%E4%B9%A0/crypto/"><span class="card-category-list-name">crypto</span><span class="card-category-list-count">3</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/ctf%E5%AD%A6%E4%B9%A0/crypto/ook%E7%BC%96%E7%A0%81/"><span class="card-category-list-name">ook编码</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/ctf%E5%AD%A6%E4%B9%A0/crypto/rsa/"><span class="card-category-list-name">rsa</span><span class="card-category-list-count">2</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/ctf%E5%AD%A6%E4%B9%A0/misc/"><span class="card-category-list-name">misc</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/ctf%E5%AD%A6%E4%B9%A0/web/"><span class="card-category-list-name">web</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/ctf%E5%AD%A6%E4%B9%A0/%E7%BD%91%E8%AF%BE%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">网课笔记</span><span class="card-category-list-count">1</span></a></li></ul></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/web-ssrf/" style="font-size: 1.1em; color: #999">web-ssrf</a> <a href="/tags/web-xss/" style="font-size: 1.1em; color: #999">web-xss</a> <a href="/tags/web-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" style="font-size: 1.1em; color: #999">web-信息收集</a> <a href="/tags/misc/" style="font-size: 1.1em; color: #999">misc</a> <a href="/tags/web-%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/" style="font-size: 1.1em; color: #999">web-逻辑漏洞</a> <a href="/tags/web-xml/" style="font-size: 1.1em; color: #999">web-xml</a> <a href="/tags/%E7%A2%B0%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AF%86%E7%A0%81/" style="font-size: 1.1em; color: #999">碰到的一些密码</a> <a href="/tags/ssrf/" style="font-size: 1.1em; color: #999">ssrf</a> <a href="/tags/web-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-%E5%8C%85%E5%90%AB/" style="font-size: 1.1em; color: #999">web-文件上传+包含</a> <a href="/tags/web-sql%E6%B3%A8%E5%85%A5/" style="font-size: 1.1em; color: #999">web-sql注入</a> <a href="/tags/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" style="font-size: 1.1em; color: #999">第一篇博客</a> <a href="/tags/web-%E6%9C%AA%E6%95%B4%E7%90%86/" style="font-size: 1.1em; color: #999">web-未整理</a> <a href="/tags/git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" style="font-size: 1.1em; color: #999">git使用方法</a> <a href="/tags/linux%E5%91%BD%E4%BB%A4/" style="font-size: 1.1em; color: #999">linux命令</a> <a href="/tags/CTF/" style="font-size: 1.5em; color: #99a9bf">CTF</a> <a href="/tags/pwn/" style="font-size: 1.1em; color: #999">pwn</a> <a href="/tags/%E7%A2%B0%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BC%96%E7%A0%81/" style="font-size: 1.1em; color: #999">碰到的一些编码</a> <a href="/tags/ssti%E6%B3%A8%E5%85%A5/" style="font-size: 1.1em; color: #999">ssti注入</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 1.1em; color: #999">笔记</a> <a href="/tags/%E5%BF%AB%E9%80%9F%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E2%80%94%E2%80%94POP-%E9%93%BE/" style="font-size: 1.1em; color: #999">快速简单学习反序列化——POP 链</a> <a href="/tags/ctf%E7%9B%B8%E5%85%B3/" style="font-size: 1.1em; color: #999">ctf相关</a> <a href="/tags/misc%E7%AC%94%E8%AE%B0/" style="font-size: 1.1em; color: #999">misc笔记</a> <a href="/tags/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/" style="font-size: 1.1em; color: #999">逻辑漏洞</a> <a href="/tags/dirsearch-sqlmap/" style="font-size: 1.1em; color: #999">dirsearch+sqlmap</a> <a href="/tags/%E5%AF%86%E7%A0%81%E7%AC%94%E8%AE%B0/" style="font-size: 1.1em; color: #999">密码笔记</a> <a href="/tags/crypto/" style="font-size: 1.1em; color: #999">crypto</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/03/">
+            <span class="card-archive-list-date">
+              三月 2026
+            </span>
+            <span class="card-archive-list-count">61</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/01/">
+            <span class="card-archive-list-date">
+              一月 2026
+            </span>
+            <span class="card-archive-list-count">25</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/11/">
+            <span class="card-archive-list-date">
+              十一月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">87</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-03-07T08:23:43.022Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By qyt</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: str => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: subtitleType => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        btf.getScript('https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  },
+  processSubtitle: (content, extraContents = []) => {
+    if (true) {
+      const sub = ["HOW'S EVERYTHING GOING?","最近怎么样呢，我的朋友?"].slice()
+
+      if (extraContents.length > 0) {
+        sub.unshift(...extraContents)
+      }
+
+      if (typeof content === 'string') {
+        sub.unshift(content)
+      } else if (Array.isArray(content)) {
+        sub.unshift(...content)
+      }
+
+      sub.length > 0 && typedJSFn.init(sub)
+    } else {
+      document.getElementById('subtitle').textContent = typeof content === 'string' ? content :
+        (Array.isArray(content) && content.length > 0 ? content[0] : '')
+    }
+  }
+}
+btf.addGlobalFn('pjaxSendOnce', () => { typed.destroy() }, 'typedDestroy')
+</script><script>function subtitleType () {
+  typedJSFn.processSubtitle(["HOW'S EVERYTHING GOING?","最近怎么样呢，我的朋友?"])
+}
+typedJSFn.run(subtitleType)</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
