@@ -12,15 +12,15 @@ nav:
   fixed: true
 
 # 首页背景
-index_img: /images/bj2.jpg
-default_top_img: /images/bj2.jpg
+index_img: https://cdn.jsdelivr.net/gh/2829750658t-svg/Screenshots@main/img/20260308163912075.jpg
+default_top_img: https://cdn.jsdelivr.net/gh/2829750658t-svg/Screenshots@main/img/20260308163912075.jpg
 
 # 首页文章节选样式 (注意冒号后的空格！)
 index_post_style: left_and_right
 
-# 搜索 adaptive_background
+# 搜索 adaptive_background，把 enable 改成 false
 adaptive_background:
-  enable: true # 开启自适应背景颜色
+  enable: false # 关闭自适应背景颜色（关键！否则背景图不显示）
 
 # 首页副标题打字机效果
 subtitle:
@@ -32,6 +32,16 @@ subtitle:
 # 开启首页大图下方的向下滚动箭头
 chat_button:
   scroll_down: true
+
+# 页面背景设置（没有就新增）
+background:
+  enable: true
+  url: https://cdn.jsdelivr.net/gh/2829750658t-svg/Screenshots@main/img/20260308163912075.jpg # 你的背景图CDN
+  repeat: no-repeat
+  fixed: true # 滚动时背景固定
+  size: cover # 背景铺满屏幕
+  opacity: 1 # 背景图本身不透明
+
 
 # 1. 菜单配置
 menu:
@@ -154,3 +164,14 @@ inject:
     - <meta name="google-site-verification" content="xcoxCJdnrLSrFpybmYmk6WSRqz-H1rnZB7BKSjdkWD0" />
     - <meta name="google-site-verification" content="H8Bhbw_EXOKyVq27SUdcn_avXaVqBOWzs2lPJV_HSVw" />
 
+# 找到这个部分并修改
+seo:
+  # 开启规范链接，这会告诉 Google 哪个 URL 才是“正版”
+  canonical: true
+
+# 8.文章卡片样式（没有就新增）
+post_card:
+  enable: true
+  background: rgba(255, 255, 255, 0.8) # 80%不透明（0.8可改0.7/0.6）
+  shadow: false # 关闭阴影，更通透
+  radius: 8px # 保留圆角（可选）
