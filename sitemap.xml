@@ -29,15 +29,6 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/posts/web/b%E7%AB%99%E7%BD%91%E8%AF%BEsql%E7%AC%94%E8%AE%B0+%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://24kmagic.site/posts/web/php%E4%B8%8B%E5%AE%B6%E6%97%8F%E4%BB%8B%E7%BB%8D.html</loc>
     
     <lastmod>2026-06-17</lastmod>
@@ -47,43 +38,16 @@
   </url>
   
   <url>
+    <loc>https://24kmagic.site/posts/web/b%E7%AB%99%E7%BD%91%E8%AF%BEsql%E7%AC%94%E8%AE%B0+%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://24kmagic.site/posts/web/web%E5%AD%A6%E4%B9%A0%E4%B8%BA%E4%BB%80%E4%B9%88post%E4%BC%A0%E5%8F%82%E5%92%8Ccookie%E7%9A%84%E5%88%86%E9%9A%94%E7%AC%A6%E5%8F%B7%E4%B8%8D%E5%90%8C%EF%BC%9F.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/web/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8web-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-POP%20%E9%93%BE.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/web/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8web-%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/%E6%97%A5%E8%AE%B0/git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/%E6%97%A5%E8%AE%B0/md%E6%96%87%E4%BB%B6%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E4%B8%8A%E4%BC%A0%E5%8D%9A%E5%AE%A2%E5%AF%BC%E8%87%B4%E7%9A%84%E4%BA%8B%E6%95%85%E2%80%94%E2%80%94%E6%9B%B4%E6%96%B0%E9%80%9A%E7%9F%A5.html</loc>
     
     <lastmod>2026-06-17</lastmod>
     
@@ -110,6 +74,33 @@
   </url>
   
   <url>
+    <loc>https://24kmagic.site/posts/web/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8web-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-POP%20%E9%93%BE.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/%E6%97%A5%E8%AE%B0/git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/%E6%97%A5%E8%AE%B0/md%E6%96%87%E4%BB%B6%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E4%B8%8A%E4%BC%A0%E5%8D%9A%E5%AE%A2%E5%AF%BC%E8%87%B4%E7%9A%84%E4%BA%8B%E6%95%85%E2%80%94%E2%80%94%E6%9B%B4%E6%96%B0%E9%80%9A%E7%9F%A5.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://24kmagic.site/posts/%E6%97%A5%E8%AE%B0/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2omg.html</loc>
     
     <lastmod>2026-06-17</lastmod>
@@ -119,7 +110,7 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/about/</loc>
+    <loc>https://24kmagic.site/posts/web/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8web-%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E.html</loc>
     
     <lastmod>2026-06-17</lastmod>
     
@@ -137,7 +128,7 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8crypto%E5%8F%8Abuuctf%E9%A2%98%E8%A7%A3.html</loc>
+    <loc>https://24kmagic.site/about/</loc>
     
     <lastmod>2026-06-17</lastmod>
     
@@ -155,7 +146,7 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/posts/misc/Ook%E7%BC%96%E7%A0%81%E8%AF%A6%E8%A7%A3.html</loc>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8crypto%E5%8F%8Abuuctf%E9%A2%98%E8%A7%A3.html</loc>
     
     <lastmod>2026-06-17</lastmod>
     
@@ -164,7 +155,7 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8web-%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E5%8F%8Abuuctf%E8%A5%BF%E7%94%B5%E9%A2%98%E8%A7%A3.html</loc>
+    <loc>https://24kmagic.site/posts/misc/Ook%E7%BC%96%E7%A0%81%E8%AF%A6%E8%A7%A3.html</loc>
     
     <lastmod>2026-06-17</lastmod>
     
@@ -200,33 +191,6 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/vulfocusspring-core-rceSpring%20Framework%20%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E-%E6%BC%8F%E6%B4%9E%E7%AE%80%E6%98%93%E8%A7%A3%E6%9E%90+%E9%9D%B6%E5%9C%BA%E4%BD%BF%E7%94%A8%E5%BB%BA%E8%AE%AE.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/vulfocuswordpress_cve-2021-21389%E7%AE%80%E6%B4%81%E7%89%88%E9%A2%98%E8%A7%A3+%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/xxs%E7%9F%A5%E8%AF%86%E7%82%B9%E7%AE%80%E7%9F%AD%E9%80%9F%E8%AE%B0.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8ssti%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5%E5%8F%8Actf%E9%A2%98%E8%A7%A3.html</loc>
     
     <lastmod>2026-06-17</lastmod>
@@ -254,24 +218,6 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8web-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0+%E5%8C%85%E5%90%AB%E5%8F%8Abuuctf%E8%A5%BF%E7%94%B5%E9%A2%98%E8%A7%A3.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%E4%B8%80%E5%88%86%E9%92%9F%E9%80%9F%E9%80%9ACVE-2019-13956%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0Discuz!ML%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8web-%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E6%94%B6%E9%9B%86%E5%8F%8Abuuctf%E8%A5%BF%E7%94%B5%E9%A2%98%E8%A7%A3.html</loc>
     
     <lastmod>2026-06-17</lastmod>
@@ -281,7 +227,7 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BNPUCTF2020%5DEzShiro%2048.html</loc>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8web-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0+%E5%8C%85%E5%90%AB%E5%8F%8Abuuctf%E8%A5%BF%E7%94%B5%E9%A2%98%E8%A7%A3.html</loc>
     
     <lastmod>2026-06-17</lastmod>
     
@@ -290,16 +236,7 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BRootersCTF2019%5DI_3_Flask%201.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BSCTF2019%5DFlag%20Shop%201.html</loc>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8web-%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E5%8F%8Abuuctf%E8%A5%BF%E7%94%B5%E9%A2%98%E8%A7%A3.html</loc>
     
     <lastmod>2026-06-17</lastmod>
     
@@ -326,6 +263,15 @@
   </url>
   
   <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BWUSTCTF2020%5DCV%20Maker%201.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BSWPUCTF%202025%20%E7%A7%8B%E5%AD%A3%E6%96%B0%E7%94%9F%E8%B5%9B%5Dezez_include%E4%B8%A4%E7%A7%8D%E8%AF%A6%E7%BB%86%E8%A7%A3%E6%B3%95.html</loc>
     
     <lastmod>2026-06-17</lastmod>
@@ -335,7 +281,7 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BWUSTCTF2020%5DCV%20Maker%201.html</loc>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5Bb01lers2020%5DLife%20on%20Mars%201.html</loc>
     
     <lastmod>2026-06-17</lastmod>
     
@@ -371,6 +317,24 @@
   </url>
   
   <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/cve_2022_22890%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0-%E6%B2%A1%E6%9C%89%E5%85%AC%E7%BD%91ip%E6%80%8E%E4%B9%88%E8%BF%9B%E8%A1%8C%E5%8F%8D%E5%BC%B9shell-spring-data-mongo.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/shiro%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%88CVE-2016-4437%EF%BC%89%E9%A2%98%E8%A7%A3+%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BD%E6%8F%90%E9%86%92.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5B%E7%BA%A2%E6%98%8E%E8%B0%B7CTF%202021%5Dwrite_shell%201.html</loc>
     
     <lastmod>2026-06-17</lastmod>
@@ -381,33 +345,6 @@
   
   <url>
     <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/cve_2018_16509%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E4%B9%8B%E6%B2%99%E7%9B%92%E7%BB%95%E8%BF%87%EF%BC%88ghostscript%EF%BC%89.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/cve_2022_22890%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0-%E6%B2%A1%E6%9C%89%E5%85%AC%E7%BD%91ip%E6%80%8E%E4%B9%88%E8%BF%9B%E8%A1%8C%E5%8F%8D%E5%BC%B9shell-spring-data-mongo.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BRCTF2015%5DEasySQL%201.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/shiro%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%88CVE-2016-4437%EF%BC%89%E9%A2%98%E8%A7%A3+%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BD%E6%8F%90%E9%86%92.html</loc>
     
     <lastmod>2026-06-17</lastmod>
     
@@ -434,7 +371,214 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5Bb01lers2020%5DLife%20on%20Mars%201.html</loc>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/vulfocusspring-core-rceSpring%20Framework%20%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E-%E6%BC%8F%E6%B4%9E%E7%AE%80%E6%98%93%E8%A7%A3%E6%9E%90+%E9%9D%B6%E5%9C%BA%E4%BD%BF%E7%94%A8%E5%BB%BA%E8%AE%AE.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/vulfocuswordpress_cve-2021-21389%E7%AE%80%E6%B4%81%E7%89%88%E9%A2%98%E8%A7%A3+%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/xxs%E7%9F%A5%E8%AF%86%E7%82%B9%E7%AE%80%E7%9F%AD%E9%80%9F%E8%AE%B0.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%E4%B8%80%E5%88%86%E9%92%9F%E9%80%9F%E9%80%9ACVE-2019-13956%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0Discuz!ML%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/NewStarCTF2025-Week4-Web-ssti%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F-ssrf%E4%B8%8Essti%E6%B3%A8%E5%85%A5.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/Shiro%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%EF%BC%88CVE-2020-13933%EF%BC%89.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BASIS%202019%5DUnicorn%20shop%201.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5B0CTF%202016%5Dpiapiapia%201.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BBJDCTF2020%5DEasySearch%201.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BCSCCTF%202019%20Qual%5DFlaskLight%201.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BGWCTF%202019%5D%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%201.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BGDOUCTF%202023%5Dhate%20eat%20snake.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BCISCN2019%20%E6%80%BB%E5%86%B3%E8%B5%9B%20Day2%20Web1%5DEasyweb%201.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BGWCTF%202019%5D%E6%88%91%E6%9C%89%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%201.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BGWCTF%202019%5D%E6%9E%AF%E7%87%A5%E7%9A%84%E6%8A%BD%E5%A5%96%201.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BGYCTF2020%5DEasyThinking1%E7%AE%80%E5%8D%95%E8%A7%A3%E6%9E%90.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BGXYCTF2019%5DStrongestMind%201.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BMRCTF2020%5D%E5%A5%97%E5%A8%83%201.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BNPUCTF2020%5DEzShiro%2048.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BRCTF2015%5DEasySQL%201.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BRootersCTF2019%5DI_3_Flask%201.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BHarekazeCTF2019%5Dencode_and_encode%201.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BSCTF2019%5DFlag%20Shop%201.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BGYCTF2020%5DFlaskApp%201%E9%A2%98%E8%A7%A3-flask%E6%A8%A1%E6%9D%BFssti%E6%B3%A8%E5%85%A5+pin%E7%A0%81%E7%A0%B4%E8%A7%A3.html</loc>
     
     <lastmod>2026-06-17</lastmod>
     
@@ -497,6 +641,24 @@
   </url>
   
   <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/NewStar%20CTF%202025%20Week1%20-%20%E5%AE%87%E5%AE%99%E7%9A%84%E4%B8%AD%E5%BF%83%E6%98%AF%20PHP.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/NewStar%20CTF%202025%20Week1-Web%E7%99%BD%E5%B8%BD%E5%B0%8F%20K%20%E7%9A%84%E6%95%85%E4%BA%8B%EF%BC%881%EF%BC%89.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/NewStar%20CTF%202025%20Week2%20-%20Web%20DD%20%E5%8A%A0%E9%80%9F%E5%99%A8.html</loc>
     
     <lastmod>2026-06-17</lastmod>
@@ -524,15 +686,6 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/NewStar%20CTF%202025%20Week3-mirror_gate%E9%A2%98%E8%A7%A3%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90+%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/NewStarCTF2025-Week3-Web%20MyGO!!!.html</loc>
     
     <lastmod>2026-06-17</lastmod>
@@ -551,34 +704,7 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/NewStarCTF2025-Week4-Web%20%E6%AD%A6%E5%8A%9F%E7%A7%98%E7%B1%8D.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/NewStar%20CTF%202025%20Week1%20-%20%E5%AE%87%E5%AE%99%E7%9A%84%E4%B8%AD%E5%BF%83%E6%98%AF%20PHP.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/NewStarCTF2025-Week4-Web%20%E7%99%BD%E5%B8%BD%E5%B0%8F%20K%20%E7%9A%84%E6%95%85%E4%BA%8B%EF%BC%882%EF%BC%89.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/NewStarCTF2025-Week4-Web-ssti%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F-ssrf%E4%B8%8Essti%E6%B3%A8%E5%85%A5.html</loc>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/NewStarCTF2025-Week4-Web%20%E5%B0%8F%20E%20%E7%9A%84%E7%A7%98%E5%AF%86%E8%AE%A1%E5%88%92.html</loc>
     
     <lastmod>2026-06-17</lastmod>
     
@@ -596,7 +722,7 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/Shiro%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%EF%BC%88CVE-2020-13933%EF%BC%89.html</loc>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/NewStarCTF2025-Week4-Web%20%E6%AD%A6%E5%8A%9F%E7%A7%98%E7%B1%8D.html</loc>
     
     <lastmod>2026-06-17</lastmod>
     
@@ -605,7 +731,7 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5B0CTF%202016%5Dpiapiapia%201.html</loc>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/NewStarCTF2025-Week4-Web%20%E7%99%BD%E5%B8%BD%E5%B0%8F%20K%20%E7%9A%84%E6%95%85%E4%BA%8B%EF%BC%882%EF%BC%89.html</loc>
     
     <lastmod>2026-06-17</lastmod>
     
@@ -614,7 +740,7 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BASIS%202019%5DUnicorn%20shop%201.html</loc>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/NewStar%20CTF%202025%20Week3-mirror_gate%E9%A2%98%E8%A7%A3%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90+%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.html</loc>
     
     <lastmod>2026-06-17</lastmod>
     
@@ -623,133 +749,7 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BBJDCTF2020%5DEasySearch%201.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BCISCN2019%20%E6%80%BB%E5%86%B3%E8%B5%9B%20Day2%20Web1%5DEasyweb%201.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BCSCCTF%202019%20Qual%5DFlaskLight%201.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BGDOUCTF%202023%5Dhate%20eat%20snake.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BGWCTF%202019%5D%E6%88%91%E6%9C%89%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%201.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BGWCTF%202019%5D%E6%9E%AF%E7%87%A5%E7%9A%84%E6%8A%BD%E5%A5%96%201.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BGWCTF%202019%5D%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%201.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BGYCTF2020%5DEasyThinking1%E7%AE%80%E5%8D%95%E8%A7%A3%E6%9E%90.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BGYCTF2020%5DFlaskApp%201%E9%A2%98%E8%A7%A3-flask%E6%A8%A1%E6%9D%BFssti%E6%B3%A8%E5%85%A5+pin%E7%A0%81%E7%A0%B4%E8%A7%A3.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BHarekazeCTF2019%5Dencode_and_encode%201.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BMRCTF2020%5D%E5%A5%97%E5%A8%83%201.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/NewStarCTF2025-Week4-Web%20%E5%B0%8F%20E%20%E7%9A%84%E7%A7%98%E5%AF%86%E8%AE%A1%E5%88%92.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/NewStar%20CTF%202025%20Week1-Web%E7%99%BD%E5%B8%BD%E5%B0%8F%20K%20%E7%9A%84%E6%95%85%E4%BA%8B%EF%BC%881%EF%BC%89.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BGXYCTF2019%5DStrongestMind%201.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/reverse/buuctf/reverse3%201.html</loc>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/reverse/buuctf/reverse1.html</loc>
     
     <lastmod>2026-06-17</lastmod>
     
@@ -767,7 +767,7 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/reverse/buuctf/xor%201.html</loc>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/reverse/buuctf/reverse3%201.html</loc>
     
     <lastmod>2026-06-17</lastmod>
     
@@ -794,6 +794,15 @@
   </url>
   
   <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/reverse/buuctf/xor%201.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/reverse/%E8%A5%BF%E7%94%B5/moectf2025%20base.html</loc>
     
     <lastmod>2026-06-17</lastmod>
@@ -803,7 +812,7 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/reverse/buuctf/reverse1.html</loc>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/reverse/%E8%A5%BF%E7%94%B5/moectf2025%20catch.html</loc>
     
     <lastmod>2026-06-17</lastmod>
     
@@ -830,7 +839,7 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/reverse/%E8%A5%BF%E7%94%B5/moectf2025%20catch.html</loc>
+    <loc>https://24kmagic.site/posts/crypto/%E5%AF%86%E7%A0%81%E5%AD%A6crypto%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html</loc>
     
     <lastmod>2026-06-17</lastmod>
     
@@ -875,7 +884,7 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/misc/BUUCTF%20MISC%20%E4%B9%9D%E8%BF%9E%E7%8E%AF.html</loc>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/misc/BUUCTF%20MISC%20%E5%B0%8F%E6%98%8E%E7%9A%84%E4%BF%9D%E9%99%A9%E7%AE%B1%201.html</loc>
     
     <lastmod>2026-06-17</lastmod>
     
@@ -911,15 +920,6 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/misc/BUUCTF%20MISC%20%E5%B0%8F%E6%98%8E%E7%9A%84%E4%BF%9D%E9%99%A9%E7%AE%B1%201.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/misc/%5BBJDCTF2020%5D%E8%97%8F%E8%97%8F%E8%97%8F%201.html</loc>
     
     <lastmod>2026-06-17</lastmod>
@@ -929,16 +929,7 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/misc/%5BWUSTCTF2020%5Dfind_me%201.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/misc/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8misc%E5%8F%8Abuuctf%E8%A5%BF%E7%94%B5%E9%A2%98%E8%A7%A3.html</loc>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/misc/BUUCTF%20MISC%20%E4%B9%9D%E8%BF%9E%E7%8E%AF.html</loc>
     
     <lastmod>2026-06-17</lastmod>
     
@@ -965,7 +956,16 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/misc/BUUCTF/ningen%201.html</loc>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/misc/%5BWUSTCTF2020%5Dfind_me%201.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/misc/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8misc%E5%8F%8Abuuctf%E8%A5%BF%E7%94%B5%E9%A2%98%E8%A7%A3.html</loc>
     
     <lastmod>2026-06-17</lastmod>
     
@@ -983,16 +983,7 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/misc/BUUCTF/rar%201.html</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/misc/BUUCTF/zip%E4%BC%AA%E5%8A%A0%E5%AF%86%201.html</loc>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/misc/BUUCTF/ningen%201.html</loc>
     
     <lastmod>2026-06-17</lastmod>
     
@@ -1010,7 +1001,7 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/misc/BUUCTF/%E6%9D%A5%E9%A6%96%E6%AD%8C%E5%90%A7%201.html</loc>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/misc/BUUCTF/rar%201.html</loc>
     
     <lastmod>2026-06-17</lastmod>
     
@@ -1019,7 +1010,7 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/misc/BUUCTF/%E7%88%B1%E5%9B%A0%E6%96%AF%E5%9D%A6%201.html</loc>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/misc/BUUCTF/%E6%9D%A5%E9%A6%96%E6%AD%8C%E5%90%A7%201.html</loc>
     
     <lastmod>2026-06-17</lastmod>
     
@@ -1037,7 +1028,16 @@
   </url>
   
   <url>
-    <loc>https://24kmagic.site/posts/crypto/%E5%AF%86%E7%A0%81%E5%AD%A6crypto%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html</loc>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/misc/BUUCTF/zip%E4%BC%AA%E5%8A%A0%E5%AF%86%201.html</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://24kmagic.site/posts/ctf%E9%A2%98%E8%A7%A3/misc/BUUCTF/%E7%88%B1%E5%9B%A0%E6%96%AF%E5%9D%A6%201.html</loc>
     
     <lastmod>2026-06-17</lastmod>
     
