@@ -1,0 +1,252 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>24kmagic</title><meta name="author" content="qyt"><meta name="copyright" content="qyt"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="不要放弃自由去选择保障，到头来你两者都得不到">
+<meta property="og:type" content="website">
+<meta property="og:title" content="24kmagic">
+<meta property="og:url" content="https://24kmagic.site/page/2/">
+<meta property="og:site_name" content="24kmagic">
+<meta property="og:description" content="不要放弃自由去选择保障，到头来你两者都得不到">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://24kmagic.site/images/avatar.png">
+<meta property="article:author" content="qyt">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://24kmagic.site/images/avatar.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/images/avatar.png"><link rel="canonical" href="https://24kmagic.site/page/2/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '24kmagic',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="google-site-verification" content="xcoxCJdnrLSrFpybmYmk6WSRqz-H1rnZB7BKSjdkWD0" /><meta name="google-site-verification" content="H8Bhbw_EXOKyVq27SUdcn_avXaVqBOWzs2lPJV_HSVw" /><meta name="generator" content="Hexo 8.1.1"></head><body><div class="bg-animation" id="web_bg" style="background: [object Object];"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">112</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page fixed" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/2829750658t-svg/Screenshots@main/img/20260308163912075.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">24kmagic</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">24kmagic</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/2829750658t-svg" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.zhihu.com/people/7e5acf574f89c3cba9460c739673e2cf" target="_blank" title="知乎"><i class="fab fa-zhihu"></i></a><a class="social-icon" href="https://xhslink.com/m/2t0Ndc1uvYL" target="_blank" title="小红书"><i class="fas fa-notes-medical"></i></a><a class="social-icon" href="https://163cn.tv/Z9ohElT" target="_blank" title="网易云音乐"><i class="fas fa-music"></i></a><a class="social-icon" href="https://www.instagram.com/tenyeahqweyeah?igsh=NG92enl2NTE0NGMx&amp;utm_source=qr" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/ctf%E9%A2%98%E8%A7%A3/web/NewStarCTF2025-Week4-Web%20%E5%B0%8F%E7%BE%8A%E8%B5%B0%E8%BF%B7%E5%AE%AB.html" title="NewStarCTF2025-Week4-Web 小羊走迷宫">NewStarCTF2025-Week4-Web 小羊走迷宫</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-05-14T14:24:15.000Z" title="发表于 2026-05-14 22:24:15">2026-05-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E9%A2%98%E8%A7%A3-web/">ctf题解/web</a></span></div><div class="content">NewStarCTF2025-Week4-Web 小羊走迷宫题目：  1.对变量名的绕过ma_ze.path不是合法变量名.是非法的（在 PHP 语法中，. 是字符串连接符），而变量名只能包含字母、数字、下划线，且不能以数字开头。 当你写 $ma.ze = 1; 时，PHP 的代码解析器（Parser）在运行前就会报错。 但是，数组下标可以是任何字符串当你写 $get[&#39;ma.ze&#39;] = 1; 时，这是完全合法的。  原因：中括号 [] 内部的内容被视为一个 String（字符串）。 物理本质：PHP 的数组底层是一个 HashTable（哈希表）。哈希表就像一个字典，它的“索引”可以是任何一段字符串。  那我们就利用数组绕过PHP 8.0 之前的一个 解析 Bug： 当你传 ?ma[ze.path=1 时，按照 PHP 的解析逻辑，[ 之后的内容是**‘数组内部的键名’**。所以就不会检查后面的ze.path 但是也会**把参数名里所有不符合变量规范的字符（点、空格）都强行换成下划线。**因此[变成了&#96;_ 2.写脚本:题目代码： 12345678910...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/ctf%E9%A2%98%E8%A7%A3/web/NewStarCTF2025-Week4-Web%20%E6%AD%A6%E5%8A%9F%E7%A7%98%E7%B1%8D.html" title="NewStarCTF2025-Week4-Web 武功秘籍">NewStarCTF2025-Week4-Web 武功秘籍</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-05-14T14:24:15.000Z" title="发表于 2026-05-14 22:24:15">2026-05-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E9%A2%98%E8%A7%A3-web/">ctf题解/web</a></span></div><div class="content">NewStarCTF2025-Week4-Web 武功秘籍知识点：1.CVE(Common Vulnerablilities and Exposures)  CMS(content management system)   exp:一开始进去是个网站 有很多图片木马上传点，我选择新闻上传，会发现新闻内容里面的图片无法上传，但是可以看到上传页面的有其他图片上传点 1.塞个木马图，抓包改后缀，蚁剑连接 系统管理下数据库管理里面找到木马图片  但是蚁剑连接返回为空  使用disable_functions也不行，因为要求题目是Linux系统  那就重新上传木马直接看phpinfo吧  查看  找到flag，在env里面  </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/ctf%E9%A2%98%E8%A7%A3/web/NewStarCTF2025-Week4-Web%20%E5%B0%8F%20E%20%E7%9A%84%E7%A7%98%E5%AF%86%E8%AE%A1%E5%88%92.html" title="NewStarCTF2025-Week4-Web 小 E 的秘密计划">NewStarCTF2025-Week4-Web 小 E 的秘密计划</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-05-14T14:24:15.000Z" title="发表于 2026-05-14 22:24:15">2026-05-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E9%A2%98%E8%A7%A3-web/">ctf题解/web</a></span></div><div class="content">NewStarCTF2025-Week4-Web 小 E 的秘密计划知识点： 1. git相关 分支 (Branch)：在 Git 内部，分支指向当前最新的 Commit 对象。 HEAD指针：它指向你当前正在工作的分支文件。 Git Reflog：记录的是 HEAD 指针及其分支引用（refs）在本地更新的物理日志。   小 E 最近在秘密研发一个代号为「Project X」的系统。然而，小 E  在开发和部署过程中，习惯性地留下了许多「不经意」的痕迹——无论是临时的备份，还是版本管理上的小疏忽，甚至是 Mac  系统自动生成的文件，都可能成为你解开「Project X」秘密的关键……   御剑扫描找到备份网页url  下载  源代码： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374&lt;!DOCTYPE html&gt;&lt;html lang...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/ctf%E9%A2%98%E8%A7%A3/web/NewStarCTF2025-Week4-Web%20%E5%B0%8F%20E%20%E7%9A%84%E7%95%99%E8%A8%80%E6%9D%BF.html" title="NewStarCTF2025-Week4-Web 小 E 的留言板">NewStarCTF2025-Week4-Web 小 E 的留言板</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-05-14T14:24:15.000Z" title="发表于 2026-05-14 22:24:15">2026-05-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E9%A2%98%E8%A7%A3-web/">ctf题解/web</a></span></div><div class="content">NewStarCTF2025-Week4-Web 小 E 的留言板题目：小 E 的「Project X」系统现已经公开，于是专门为它写了一个用户体验反馈留言板。小 E  每天都会亲自登录这个平台，查看用户反馈，而他的所有关键会话凭证都「安全」地保存在浏览器中。但是这个留言板存在一个巨大漏洞，你是否能利用这个被他忽视的漏洞，向平台「注入」一段特殊的指令，从而在小 E 毫无察觉的情况下，窃取到他浏览器的核心会话令牌呢？   1. 知识点：1.html相关特性（Autofocus）：这是 HTML5 的特性。页面一加载，浏览器会自动把光标投射到带有这个属性的输入框上。 特性（Onfocus）：这是一个事件监听器。它的逻辑是：“只要这个框获得了焦点（被选中），就立刻执行后面的 JavaScript 代码。  2. 思路：1.初次尝试xss注入以往遇到的xss都是有一个触发的按钮，我们点击之后就能触发。 在经过一系列操作后发现以下四个问题： ·过滤了空格，focus，尖括号，script，on ·我们传入的留言被放在了value里面，此时无论你传入什么，浏览器都会把它当成普通文本字符，也只...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/ctf%E9%A2%98%E8%A7%A3/web/NewStarCTF2025-Week4-Web%20%E7%99%BD%E5%B8%BD%E5%B0%8F%20K%20%E7%9A%84%E6%95%85%E4%BA%8B%EF%BC%882%EF%BC%89.html" title="NewStarCTF2025-Week4-Web 白帽小 K 的故事（2）">NewStarCTF2025-Week4-Web 白帽小 K 的故事（2）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-05-14T14:24:15.000Z" title="发表于 2026-05-14 22:24:15">2026-05-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E9%A2%98%E8%A7%A3-web/">ctf题解/web</a></span></div><div class="content">NewStarCTF2025-Week4-Web 白帽小 K 的故事（2）在经过一系列对话后，我们得知 1231.布尔盲注2.找flag3.后端的查询逻辑是：SELECT 1 from Terra.animal WHERE name = &#x27;$name&#x27;  1. 探索：过滤空格，逗号 ，&#x2F; 尝试直接注入 12name=amiya&#x27;and(1=1)%23name=amiya&#x27;and(length(database())=5)%23  回显–&gt; 为真：  为假：  2. 脚本自己的脚本跑不通，去找了个大佬的脚本 具体逻辑是： 12345678910dic = string.digits + string.ascii_letters + &quot;&#123;&#125;-_,&quot;	//拼接字符串，制成字母表out = &quot;&quot;	//准备输出for j in range(1,80):	//从位置的第一位开始循环    for k in dic:	//从字母表的第一位开始循环        payload =...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BASIS%202019%5DUnicorn%20shop%201.html" title="[ASIS 2019]Unicorn shop 1">[ASIS 2019]Unicorn shop 1</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-05-14T14:24:15.000Z" title="发表于 2026-05-14 22:24:15">2026-05-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E9%A2%98%E8%A7%A3-web/">ctf题解/web</a></span></div><div class="content">[ASIS 2019]Unicorn shop 12019年的题目了，7年前，时间太恐怖了 题目如图：一个purchase的提交表单  0x01 思路1.先随便输入购买，进行抓包 没懂，回复是：错误的商品 2.继续试一下html实体编码后的字符： &amp;#49，这个表示1，发现有报错信息 看一下报错是：只能接受一个unicode字符作为参数 12unicodedata.numeric(price)TypeError: need a single Unicode character as parameter  那这样我们只能买id为1价格为1的独角兽了，但是我们第一此买的就是这个，回复显示了：错误的商品 3.试试看unicode，毕竟题目提示“Unicode”，而且你猜unicorn读起来是不是很Unicode很像呢？已知我们肯定需要更多钱去被一个unicode字符表示 ‘price&#x3D;億’数值就是一个亿了 但是又到回复了错误商品wrong commodity 想到购买的商品原来是错的，试试ultra的独角兽  4.payload：1id=4&amp;price=億  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BCISCN2019%20%E6%80%BB%E5%86%B3%E8%B5%9B%20Day2%20Web1%5DEasyweb%201.html" title="[CISCN2019 总决赛 Day2 Web1]Easyweb 1">[CISCN2019 总决赛 Day2 Web1]Easyweb 1</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-05-14T14:24:15.000Z" title="发表于 2026-05-14 22:24:15">2026-05-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E9%A2%98%E8%A7%A3-web/">ctf题解/web</a></span></div><div class="content">[CISCN2019 总决赛 Day2 Web1]Easyweb11. 知识点：1.addslashes()：就是在一些敏感符号前面加上\转义,转义单引号，双引号，反斜杠，null。2.str_replace(): 将需要的东西替换例如这里的str_replace(array(&quot;\\0&quot;,&quot;%00&quot;,&quot;\\&#39;&quot;,&quot;&#39;&quot;),&quot;&quot;,$id); 就是把id里面出现的&quot;\0&quot;,&quot;%00&quot;,&quot;\&#39;&quot;,&quot;&#39;&quot;全部替换成””	-&gt;那就是直接删除了 这里要注意的是：\\0实际上指的是\0,这里用的也是转义，如果只是\0那别人就会以为是空字符null  2. 思路：看到登陆页面猜想是sql注入，但是确实是sql但是注入点不在这里。 御剑扫描扫出来了robots.txt发现了禁扫描的备份文件，但是文件名是在源代码可以看到的  做什么事情之前看一下源代码 很奇怪吧，为什么一张图片也有im...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BGWCTF%202019%5D%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%201.html" title="[GWCTF 2019]你的名字 1">[GWCTF 2019]你的名字 1</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-05-14T14:24:15.000Z" title="发表于 2026-05-14 22:24:15">2026-05-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E9%A2%98%E8%A7%A3-web/">ctf题解/web</a></span></div><div class="content">[GWCTF 2019]你的名字1很容易猜到是模板，但是普通的&#123;&#123;&#125;&#125;不行，但是单个大括号就没被过滤 看来是waf绕过 试了一下&#123;%...%&#125;  我们需要用到lipsum，那么它是什么呢？ 1.lipsum 在 SSTI（服务端模板注入）中，它是 Jinja2 引擎内置的一个生成占位文本（Lorem Ipsum）的函数。 在 Flask&#x2F;Jinja2 的沙箱环境里，很多全局变量（如 os, sys, __builtins__）默认是被禁用的。你直接输入 &#123;&#123; os &#125;&#125; 会报错。 但是，lipsum 通常是默认开启且合法的。 它存在于 Jinja2 的 globals（全局命名空间）中。 因为它是一个函数，它身上带着 Python 函数共有的属性：__globals__。 payload： 1&#123;%print lipsum.__globals__.__builconfigtins__.__impoconfigrt__(&#x27;oconfigs&#x27;).p...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BGYCTF2020%5DEasyThinking1%E7%AE%80%E5%8D%95%E8%A7%A3%E6%9E%90.html" title="[GYCTF2020]EasyThinking1简单解析">[GYCTF2020]EasyThinking1简单解析</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-05-14T14:24:15.000Z" title="发表于 2026-05-14 22:24:15">2026-05-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E9%A2%98%E8%A7%A3-web/">ctf题解/web</a></span></div><div class="content">[GYCTF2020]EasyThinking1简单解析题目：御剑扫描到www.zip，打开  得知是thinkphp框架，网上自行搜索这个版本的漏洞 https://www.cnblogs.com/Litsasuk/articles/18399299 https://xz.aliyun.com/news/8139  思路：1.登陆时session注入，写入文件名长32位的php文件  2.搜索时注入一句话木马，并抓包修改cookie 1&lt;?php eval($_POST[1]); ?&gt;  你的历史记录内容会被写入文件，文件名就是uid，我们只要保证这次记录也写入我们一开始准备好的文件里面就行：即 修改文件名（修改uid）  3.打开文件，蚁剑连接，利用插件绕过禁用函数 文件位置： 1/runtime/session/sess_1234567123456712345671234568.php   蚁剑利用插件   源代码简单探索：解题思路：用户在搜索时和在登陆时都是用的同一个sessionuid，我们可以联想到需要利用这个uid创造文件，写入文件，然后打开文件 以下是...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/ctf%E9%A2%98%E8%A7%A3/web/%5BGYCTF2020%5DFlaskApp%201%E9%A2%98%E8%A7%A3-flask%E6%A8%A1%E6%9D%BFssti%E6%B3%A8%E5%85%A5+pin%E7%A0%81%E7%A0%B4%E8%A7%A3.html" title="[GYCTF2020]FlaskApp 1题解-flask模板ssti注入+pin码破解">[GYCTF2020]FlaskApp 1题解-flask模板ssti注入+pin码破解</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-05-14T14:24:15.000Z" title="发表于 2026-05-14 22:24:15">2026-05-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/ctf%E9%A2%98%E8%A7%A3-web/">ctf题解/web</a></span></div><div class="content">[GYCTF2020]FlaskApp 1题解-flask模板ssti注入+pin码破解0x01 知识点储备：1.CSRF跨站请求伪造CSRF（Cross-Site Request  Forgery，跨站请求伪造）是一种网络攻击形式，攻击者通过伪造用户的请求，利用用户已登录的身份在受信任的网站上执行未授权的操作。此类攻击通常发生在用户登录后，攻击者诱导用户访问恶意链接或页面，从而在用户不知情的情况下执行敏感操作 2.Flask 的 PIN 码了解在开发 Flask 应用时，如果开启了 debug=True 模式，一旦程序运行出错，浏览器就会显示一个详细的报错页面（Traceback）。 为了方便开发者调试，这个页面提供了一个交互式控制台（Interactive Console），能直接在浏览器里输入 Python 代码。 为了有人利用这个控制台远程控制服务器，Flask 的底层工具库 Werkzeug 就设计了 PIN 码。 – #以下引用内容来源于这篇文章，大家可以看看  pin码主要由六个参数构成 probably_public_bits：  username：执行代码时的用...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#content-inner">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/#content-inner">12</a><a class="extend next" rel="next" href="/page/3/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">qyt</div><div class="author-info-description">不要放弃自由去选择保障，到头来你两者都得不到</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">112</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/2829750658t-svg" target="_blank" title="GitHub"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.zhihu.com/people/7e5acf574f89c3cba9460c739673e2cf" target="_blank" title="知乎"><i class="fab fa-zhihu"></i></a><a class="social-icon" href="https://xhslink.com/m/2t0Ndc1uvYL" target="_blank" title="小红书"><i class="fas fa-notes-medical"></i></a><a class="social-icon" href="https://163cn.tv/Z9ohElT" target="_blank" title="网易云音乐"><i class="fas fa-music"></i></a><a class="social-icon" href="https://www.instagram.com/tenyeahqweyeah?igsh=NG92enl2NTE0NGMx&amp;utm_source=qr" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">很高兴能向你展示我的博客</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/ctf%E9%A2%98%E8%A7%A3/web/NewStarCTF2025-Week4-Web-ssti%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F-ssrf%E4%B8%8Essti%E6%B3%A8%E5%85%A5.html" title="NewStarCTF2025-Week4-Web-ssti在哪里？-ssrf与ssti注入">NewStarCTF2025-Week4-Web-ssti在哪里？-ssrf与ssti注入</a><time datetime="2026-05-27T01:00:00.000Z" title="发表于 2026-05-27 09:00:00">2026-05-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/ctf%E9%A2%98%E8%A7%A3/misc/BUUCTF%20MISC%20%E5%B0%8F%E6%98%8E%E7%9A%84%E4%BF%9D%E9%99%A9%E7%AE%B1%201.html" title="BUUCTF MISC 小明的保险箱 1">BUUCTF MISC 小明的保险箱 1</a><time datetime="2026-05-14T14:25:33.000Z" title="发表于 2026-05-14 22:25:33">2026-05-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/ctf%E9%A2%98%E8%A7%A3/misc/BUUCTF%20MISC%20%E4%B9%9D%E8%BF%9E%E7%8E%AF.html" title="BUUCTF MISC 九连环">BUUCTF MISC 九连环</a><time datetime="2026-05-14T14:25:33.000Z" title="发表于 2026-05-14 22:25:33">2026-05-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/ctf%E9%A2%98%E8%A7%A3/misc/BUUCTF%20MISC%20%E7%A5%9E%E7%A7%98%E9%BE%99%E5%8D%B7%E9%A3%8E%201.html" title="BUUCTF MISC 神秘龙卷风 1">BUUCTF MISC 神秘龙卷风 1</a><time datetime="2026-05-14T14:25:33.000Z" title="发表于 2026-05-14 22:25:33">2026-05-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/ctf%E9%A2%98%E8%A7%A3/web/vulfocusrails-cve_2018_3760%E6%BC%8F%E6%B4%9E%E8%AF%A6%E8%A7%A3+%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90.html" title="vulfocusrails-cve_2018_3760漏洞详解+源码分析">vulfocusrails-cve_2018_3760漏洞详解+源码分析</a><time datetime="2026-05-14T14:24:22.000Z" title="发表于 2026-05-14 22:24:22">2026-05-14</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/CTF%E9%A2%98%E8%A7%A3/"><span class="card-category-list-name">CTF题解</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/ctf%E9%A2%98%E8%A7%A3-misc/"><span class="card-category-list-name">ctf题解/misc</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/ctf%E9%A2%98%E8%A7%A3-web/"><span class="card-category-list-name">ctf题解/web</span><span class="card-category-list-count">22</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/CTF/" style="font-size: 1.1em; color: #999">CTF</a> <a href="/tags/SSTI/" style="font-size: 1.1em; color: #999">SSTI</a> <a href="/tags/Web/" style="font-size: 1.1em; color: #999">Web</a> <a href="/tags/SSRF/" style="font-size: 1.1em; color: #999">SSRF</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/05/">
+            <span class="card-archive-list-date">
+              五月 2026
+            </span>
+            <span class="card-archive-list-count">25</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/03/">
+            <span class="card-archive-list-date">
+              三月 2026
+            </span>
+            <span class="card-archive-list-count">54</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/02/">
+            <span class="card-archive-list-date">
+              二月 2026
+            </span>
+            <span class="card-archive-list-count">20</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/01/">
+            <span class="card-archive-list-date">
+              一月 2026
+            </span>
+            <span class="card-archive-list-count">12</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/12/">
+            <span class="card-archive-list-date">
+              十二月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">112</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-06-17T09:39:50.332Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By qyt</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div><div class="footer-beian"><a href="https://beian.miit.gov.cn" target="_blank">浙ICP备2026034087号</a></div><div class="footer_custom_text"><a href="https://beian.miit.gov.cn" target="_blank" style="color: inherit; text-decoration: none;">浙ICP备2026034087号</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: str => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: subtitleType => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        btf.getScript('https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  },
+  processSubtitle: (content, extraContents = []) => {
+    if (true) {
+      const sub = ["HOW'S EVERYTHING GOING?","最近怎么样呢，我的朋友?"].slice()
+
+      if (extraContents.length > 0) {
+        sub.unshift(...extraContents)
+      }
+
+      if (typeof content === 'string') {
+        sub.unshift(content)
+      } else if (Array.isArray(content)) {
+        sub.unshift(...content)
+      }
+
+      sub.length > 0 && typedJSFn.init(sub)
+    } else {
+      document.getElementById('subtitle').textContent = typeof content === 'string' ? content :
+        (Array.isArray(content) && content.length > 0 ? content[0] : '')
+    }
+  }
+}
+btf.addGlobalFn('pjaxSendOnce', () => { typed.destroy() }, 'typedDestroy')
+</script><script>function subtitleType () {
+  typedJSFn.processSubtitle(["HOW'S EVERYTHING GOING?","最近怎么样呢，我的朋友?"])
+}
+typedJSFn.run(subtitleType)</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
