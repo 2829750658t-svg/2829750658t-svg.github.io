@@ -1,0 +1,285 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>NewStarCTF2025-Week4-Web 小 E 的秘密计划 | Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="NewStarCTF2025-Week4-Web 小 E 的秘密计划知识点： 1. git相关 分支 (Branch)：在 Git 内部，分支指向当前最新的 Commit 对象。 HEAD指针：它指向你当前正在工作的分支文件。 Git Reflog：记录的是 HEAD 指针及其分支引用（refs）在本地更新的物理日志。   小 E 最近在秘密研发一个代号为「Project X」的系统。然而，小 E">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NewStarCTF2025-Week4-Web 小 E 的秘密计划">
+<meta property="og:url" content="http://example.com/2026/03/28/ctf%E9%A2%98%E8%A7%A3/web/NewStarCTF2025-Week4-Web%20%E5%B0%8F%20E%20%E7%9A%84%E7%A7%98%E5%AF%86%E8%AE%A1%E5%88%92/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="NewStarCTF2025-Week4-Web 小 E 的秘密计划知识点： 1. git相关 分支 (Branch)：在 Git 内部，分支指向当前最新的 Commit 对象。 HEAD指针：它指向你当前正在工作的分支文件。 Git Reflog：记录的是 HEAD 指针及其分支引用（refs）在本地更新的物理日志。   小 E 最近在秘密研发一个代号为「Project X」的系统。然而，小 E">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/avatar.png">
+<meta property="article:published_time" content="2026-03-28T13:06:49.000Z">
+<meta property="article:modified_time" content="2026-06-22T13:40:21.805Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="EL">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/avatar.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "NewStarCTF2025-Week4-Web 小 E 的秘密计划",
+  "url": "http://example.com/2026/03/28/ctf%E9%A2%98%E8%A7%A3/web/NewStarCTF2025-Week4-Web%20%E5%B0%8F%20E%20%E7%9A%84%E7%A7%98%E5%AF%86%E8%AE%A1%E5%88%92/",
+  "image": "http://example.com/images/avatar.png",
+  "datePublished": "2026-03-28T13:06:49.000Z",
+  "dateModified": "2026-06-22T13:40:21.805Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/favicon.png"><link rel="canonical" href="http://example.com/2026/03/28/ctf%E9%A2%98%E8%A7%A3/web/NewStarCTF2025-Week4-Web%20%E5%B0%8F%20E%20%E7%9A%84%E7%A7%98%E5%AF%86%E8%AE%A1%E5%88%92/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"No results found for: ${query}","hits_stats":"${hits} articles found"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'NewStarCTF2025-Week4-Web 小 E 的秘密计划',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">121</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">70</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">8</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hexo</span></a><a class="nav-page-title" href="/"><span class="site-name">NewStarCTF2025-Week4-Web 小 E 的秘密计划</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">NewStarCTF2025-Week4-Web 小 E 的秘密计划</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-03-28T13:06:49.000Z" title="Created 2026-03-28 21:06:49">2026-03-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-06-22T13:40:21.805Z" title="Updated 2026-06-22 21:40:21">2026-06-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/web/">web</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="NewStarCTF2025-Week4-Web-小-E-的秘密计划"><a href="#NewStarCTF2025-Week4-Web-小-E-的秘密计划" class="headerlink" title="NewStarCTF2025-Week4-Web 小 E 的秘密计划"></a>NewStarCTF2025-Week4-Web 小 E 的秘密计划</h1><p>知识点：</p>
+<h3 id="1-git相关"><a href="#1-git相关" class="headerlink" title="1. git相关"></a>1. git相关</h3><ul>
+<li><strong>分支 (Branch)</strong>：在 Git 内部，分支指向当前最新的 Commit 对象。</li>
+<li><strong>HEAD指针</strong>：它指向你当前正在工作的分支文件。</li>
+<li><strong>Git Reflog</strong>：记录的是 <strong>HEAD 指针及其分支引用（refs）在本地更新的物理日志</strong>。</li>
+</ul>
+<hr>
+<p>小 E 最近在秘密研发一个代号为「Project X」的系统。然而，小 E  在开发和部署过程中，习惯性地留下了许多「不经意」的痕迹——无论是临时的备份，还是版本管理上的小疏忽，甚至是 Mac  系统自动生成的文件，都可能成为你解开「Project X」秘密的关键……</p>
+<hr>
+<p><img src="https://cdn.jsdelivr.net/gh/2829750658t-svg/Screenshots@main/img/20260326110952591.png" alt="image-20260326110952145"></p>
+<p>御剑扫描找到备份网页url</p>
+<p><img src="https://cdn.jsdelivr.net/gh/2829750658t-svg/Screenshots@main/img/20260326100828751.png" alt="image-20260326100828571"></p>
+<p>下载</p>
+<p><img src="https://cdn.jsdelivr.net/gh/2829750658t-svg/Screenshots@main/img/20260326100812660.png" alt="image-20260326100805458"></p>
+<p>源代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;zh-CN&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;title&gt;Project X - 登录系统&lt;/title&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;../css/style.css&quot;&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div class=&quot;floating-shapes&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;floating-shape shape-circle&quot; style=&quot;top: 15%; left: 10%;&quot;&gt;&lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;floating-shape shape-ring&quot; style=&quot;top: 40%; left: 85%;&quot;&gt;&lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;floating-shape shape-polygon&quot; style=&quot;top: 70%; left: 20%;&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    &lt;div class=&quot;login-container&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;login-box&quot;&gt;</span><br><span class="line">            &lt;div class=&quot;login-logo&quot;&gt;</span><br><span class="line">                &lt;h1&gt;PROJECT X&lt;/h1&gt;</span><br><span class="line">                &lt;p&gt;系统访问认证&lt;/p&gt;</span><br><span class="line">                &lt;p&gt;tips: 默认密码使用uuid4生成，不可能被爆破&lt;/p&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">            </span><br><span class="line">            &lt;form id=&quot;login-form&quot;&gt;</span><br><span class="line">                &lt;div class=&quot;input-group&quot;&gt;</span><br><span class="line">                    &lt;label for=&quot;username&quot;&gt;用户ID&lt;/label&gt;</span><br><span class="line">                    &lt;input type=&quot;text&quot; id=&quot;username&quot; placeholder=&quot;输入您的用户ID&quot;&gt;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">                </span><br><span class="line">                &lt;div class=&quot;input-group&quot;&gt;</span><br><span class="line">                    &lt;label for=&quot;password&quot;&gt;密码&lt;/label&gt;</span><br><span class="line">                    &lt;input type=&quot;password&quot; id=&quot;password&quot; placeholder=&quot;输入您的密码&quot;&gt;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">                &lt;div class=&quot;login-actions&quot;&gt;</span><br><span class="line">                    &lt;a href=&quot;/&quot; class=&quot;btn&quot;&gt;返回首页&lt;/a&gt;</span><br><span class="line">                    &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot; id=&quot;login-btn&quot;&gt;验证登录&lt;/button&gt;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">                </span><br><span class="line">                &lt;div class=&quot;login-footer&quot;&gt;</span><br><span class="line">                    &lt;p&gt;版本 5.1.4&lt;/p&gt;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">            &lt;/form&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        document.getElementById(&#x27;login-btn&#x27;).addEventListener(&#x27;click&#x27;, function() &#123;</span><br><span class="line">            const username = document.getElementById(&#x27;username&#x27;).value;</span><br><span class="line">            const password = document.getElementById(&#x27;password&#x27;).value;</span><br><span class="line"></span><br><span class="line">            fetch(&#x27;login.php&#x27;, &#123;</span><br><span class="line">                method: &#x27;POST&#x27;,</span><br><span class="line">                headers: &#123;</span><br><span class="line">                    &#x27;Content-Type&#x27;: &#x27;application/x-www-form-urlencoded&#x27;</span><br><span class="line">                &#125;,</span><br><span class="line">                body: `username=$&#123;encodeURIComponent(username)&#125;&amp;password=$&#123;encodeURIComponent(password)&#125;`</span><br><span class="line">            &#125;)</span><br><span class="line">            .then(response =&gt; &#123;</span><br><span class="line">                if (response.redirected) &#123;</span><br><span class="line">                    window.location.href = response.url;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    return response.text();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">            .then(text =&gt; &#123;</span><br><span class="line">                if (text) &#123;</span><br><span class="line">                    alert(text);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">            .catch(error =&gt; console.error(&#x27;Error:&#x27;, error));</span><br><span class="line">        &#125;);</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>发现user.php，但是根本没有user.php，怎么找到账号密码呢</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">require_once &#x27;user.php&#x27;;</span><br><span class="line">$userData = getUserData();</span><br><span class="line">if ($_SERVER[&#x27;REQUEST_METHOD&#x27;] === &#x27;POST&#x27;) &#123;</span><br><span class="line">    $username = $_POST[&#x27;username&#x27;] ?? &#x27;&#x27;;</span><br><span class="line">    $password = $_POST[&#x27;password&#x27;] ?? &#x27;&#x27;;</span><br><span class="line"></span><br><span class="line">    if ($username === $userData[&#x27;username&#x27;] &amp;&amp; $password === $userData[&#x27;password&#x27;]) &#123;</span><br><span class="line">        header(&#x27;Location: /secret-xxxxxxxxxxxxxxxxxxx&#x27;);</span><br><span class="line">        exit();</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        echo &#x27;登录失败,在git里找找吧&#x27;;</span><br><span class="line">        exit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>直接在文件夹public-555edc76-9621-4997-86b9-01483a50293e内打开cmd，利用git log查找日志和记录，然后得到一些信息</p>
+<p>了解到branch分支：</p>
+<p>想找回<strong>已经删除</strong>的分支，该怎么做？</p>
+<p> -&gt;情况：分支只是被删除了</p>
+<p>1.查看日志</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reflog</span><br></pre></td></tr></table></figure>
+
+<p><strong>寻找目标</strong>：在输出记录里找带有 <code>checkout: moving from &lt;分支名&gt; to &lt;另一个分支名&gt;</code> 或者 <code>commit: &lt;信息&gt;</code> 的记录。</p>
+<p><strong>找回它</strong>：找到那个分支最后一次活跃的 <strong>Commit ID</strong>（比如 <code>abc1234</code>）</p>
+<p>2.直接重建分支：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b &lt;原分支名&gt; abc1234</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">PS C:\Users\21709\Desktop\public-555edc76-9621-4997-86b9-01483a50293e&gt; git log</span><br><span class="line">commit 5fef682d7eceba025c894af4a5f8bf4680666368 (HEAD -&gt; master)	//可以根据时间看出最后删除了什么</span><br><span class="line">Author: admin &lt;admin@admin.com&gt;</span><br><span class="line">Date:   Wed Oct 1 12:14:25 2025 +0800</span><br><span class="line"></span><br><span class="line">    删除提示</span><br><span class="line"></span><br><span class="line">commit 5f8ecc03aee0de892013bba7ce0522876c419b58</span><br><span class="line">Author: admin &lt;admin@admin.com&gt;</span><br><span class="line">Date:   Wed Oct 1 12:14:08 2025 +0800</span><br><span class="line"></span><br><span class="line">    新增提示</span><br><span class="line"></span><br><span class="line">commit 1389b4798a8013a1c90fb2d867243d0da18c5175</span><br><span class="line">Author: admin &lt;admin@admin.com&gt;</span><br><span class="line">Date:   Wed Oct 1 12:10:02 2025 +0800</span><br><span class="line"></span><br><span class="line">    初始化</span><br><span class="line">PS C:\Users\21709\Desktop\public-555edc76-9621-4997-86b9-01483a50293e&gt; git show 5fef68	//我们找找看删除了啥</span><br><span class="line">commit 5fef682d7eceba025c894af4a5f8bf4680666368 (HEAD -&gt; master)</span><br><span class="line">Author: admin &lt;admin@admin.com&gt;</span><br><span class="line">Date:   Wed Oct 1 12:14:25 2025 +0800</span><br><span class="line"></span><br><span class="line">    删除提示</span><br><span class="line"></span><br><span class="line">diff --git a/tips.txt b/tips.txt</span><br><span class="line">deleted file mode 100644</span><br><span class="line">index a7fa1d9..0000000</span><br><span class="line">--- a/tips.txt</span><br><span class="line">+++ /dev/null</span><br><span class="line">@@ -1 +0,0 @@</span><br><span class="line">-tips：什么是branch	//这里提示了分支，那就去看看分支的日志，用git reflog查看</span><br><span class="line">\ No newline at end of file</span><br><span class="line">PS C:\Users\21709\Desktop\public-555edc76-9621-4997-86b9-01483a50293e&gt; git reflog</span><br><span class="line">5fef682 (HEAD -&gt; master) HEAD@&#123;0&#125;: commit: 删除提示</span><br><span class="line">5f8ecc0 HEAD@&#123;1&#125;: commit: 新增提示</span><br><span class="line">1389b47 HEAD@&#123;2&#125;: checkout: moving from test to master</span><br><span class="line">353b98f HEAD@&#123;3&#125;: commit: 测试，这个branch会删	//那我们就去看看删了啥</span><br><span class="line">1389b47 HEAD@&#123;4&#125;: checkout: moving from master to test</span><br><span class="line">1389b47 HEAD@&#123;5&#125;: commit (initial): 初始化</span><br><span class="line">PS C:\Users\21709\Desktop\public-555edc76-9621-4997-86b9-01483a50293e&gt; git checkout 353b98f	//查看</span><br><span class="line">Note: switching to &#x27;353b98f&#x27;.</span><br><span class="line"></span><br><span class="line">You are in &#x27;detached HEAD&#x27; state. You can look around, make experimental</span><br><span class="line">changes and commit them, and you can discard any commits you make in this</span><br><span class="line">state without impacting any branches by switching back to a branch.</span><br><span class="line"></span><br><span class="line">If you want to create a new branch to retain commits you create, you may</span><br><span class="line">do so (now or later) by using -c with the switch command. Example:</span><br><span class="line"></span><br><span class="line">  git switch -c &lt;new-branch-name&gt;</span><br><span class="line"></span><br><span class="line">Or undo this operation with:</span><br><span class="line"></span><br><span class="line">  git switch -</span><br><span class="line"></span><br><span class="line">Turn off this advice by setting config variable advice.detachedHead to false</span><br><span class="line"></span><br><span class="line">HEAD is now at 353b98f 测试，这个branch会删</span><br><span class="line">PS C:\Users\21709\Desktop\public-555edc76-9621-4997-86b9-01483a50293e&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这时候你再重新打开文件夹就会发现多了个文件user.php</p>
+<p><img src="https://cdn.jsdelivr.net/gh/2829750658t-svg/Screenshots@main/img/20260326113707617.png" alt="image-20260326113707335"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/2829750658t-svg/Screenshots@main/img/20260328200236616.png" alt="image-20260328200236540"></p>
+<p>那就拿着账号密码登陆吧</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">function getUserData() &#123;</span><br><span class="line">    return [</span><br><span class="line">        &#x27;username&#x27; =&gt; &#x27;admin&#x27;,</span><br><span class="line">        &#x27;password&#x27; =&gt; &#x27;f75cc3eb-21e0-4713-9c30-998a8edb13de&#x27;</span><br><span class="line">    ];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://cdn.jsdelivr.net/gh/2829750658t-svg/Screenshots@main/img/20260326105223511.png" alt="image-20260326105222806"></p>
+<p>登录得到</p>
+<p><img src="https://cdn.jsdelivr.net/gh/2829750658t-svg/Screenshots@main/img/20260326105201581.png" alt="image-20260326105201217"></p>
+<p>提示是mac</p>
+<h3 id="DS-Store-："><a href="#DS-Store-：" class="headerlink" title=".DS_Store ："></a><strong>.DS_Store ：</strong></h3><ol>
+<li><strong>是啥</strong>：macOS（苹果系统）自动生成的<strong>隐藏文件</strong>。</li>
+<li><strong>存什么</strong>：存文件夹的“显示设置”。比如图标大小、位置、窗口缩放等。</li>
+<li><strong>安全隐患</strong>：如果传到网站服务器，黑客可以下载它并<strong>解析出你文件夹里所有的文件名</strong>（包括隐藏的备份文件）。</li>
+</ol>
+<hr>
+<p>那就是.DS_Store</p>
+<p>打开看看</p>
+<p><img src="https://cdn.jsdelivr.net/gh/2829750658t-svg/Screenshots@main/img/20260326110610202.png" alt="image-20260326110609834"></p>
+<p>得到一个文件txt，然后看到flag文件名了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/2829750658t-svg/Screenshots@main/img/20260326110716464.png" alt="image-20260326110716250"></p>
+<p>拿去到根目录下访问</p>
+<p><img src="https://cdn.jsdelivr.net/gh/2829750658t-svg/Screenshots@main/img/20260326110846051.png" alt="image-20260326110845878"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2026/03/28/ctf%E9%A2%98%E8%A7%A3/web/NewStarCTF2025-Week4-Web%20%E5%B0%8F%20E%20%E7%9A%84%E7%A7%98%E5%AF%86%E8%AE%A1%E5%88%92/">http://example.com/2026/03/28/ctf%E9%A2%98%E8%A7%A3/web/NewStarCTF2025-Week4-Web%20%E5%B0%8F%20E%20%E7%9A%84%E7%A7%98%E5%AF%86%E8%AE%A1%E5%88%92/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Git/">Git</a><a class="post-meta__tags" href="/tags/CTF/">CTF</a><a class="post-meta__tags" href="/tags/EL/">EL</a></div><div class="post-share"><div class="social-share" data-image="/images/avatar.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/03/29/ctf%E9%A2%98%E8%A7%A3/web/NewStarCTF2025-Week4-Web%20%E5%B0%8F%20E%20%E7%9A%84%E7%95%99%E8%A8%80%E6%9D%BF/" title="NewStarCTF2025-Week4-Web 小 E 的留言板"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">NewStarCTF2025-Week4-Web 小 E 的留言板</div></div><div class="info-2"><div class="info-item-1">NewStarCTF2025-Week4-Web 小 E 的留言板题目：小 E 的「Project X」系统现已经公开，于是专门为它写了一个用户体验反馈留言板。小 E  每天都会亲自登录这个平台，查看用户反馈，而他的所有关键会话凭证都「安全」地保存在浏览器中。但是这个留言板存在一个巨大漏洞，你是否能利用这个被他忽视的漏洞，向平台「注入」一段特殊的指令，从而在小 E 毫无察觉的情况下，窃取到他浏览器的核心会话令牌呢？   1. 知识点：1.html相关特性（Autofocus）：这是 HTML5 的特性。页面一加载，浏览器会自动把光标投射到带有这个属性的输入框上。 特性（Onfocus）：这是一个事件监听器。它的逻辑是：“只要这个框获得了焦点（被选中），就立刻执行后面的 JavaScript 代码。  2. 思路：1.初次尝试xss注入以往遇到的xss都是有一个触发的按钮，我们点击之后就能触发。 在经过一系列操作后发现以下四个问题： ·过滤了空格，focus，尖括号，script，on ·我们传入的留言被放在了value里面，此时无论你传入什么，浏览器都会把它当成普通文本字符，也只...</div></div></div></a><a class="pagination-related" href="/2026/03/28/ctf%E9%A2%98%E8%A7%A3/web/%5BGWCTF%202019%5D%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%201/" title="[GWCTF 2019]你的名字 1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">[GWCTF 2019]你的名字 1</div></div><div class="info-2"><div class="info-item-1">[GWCTF 2019]你的名字1很容易猜到是模板，但是普通的{{}}不行，但是单个大括号就没被过滤 看来是waf绕过 试了一下{%...%}  我们需要用到lipsum，那么它是什么呢？ 1.lipsum 在 SSTI（服务端模板注入）中，它是 Jinja2 引擎内置的一个生成占位文本（Lorem Ipsum）的函数。 在 Flask&#x2F;Jinja2 的沙箱环境里，很多全局变量（如 os, sys, __builtins__）默认是被禁用的。你直接输入 {{ os }} 会报错。 但是，lipsum 通常是默认开启且合法的。 它存在于 Jinja2 的 globals（全局命名空间）中。 因为它是一个函数，它身上带着 Python 函数共有的属性：__globals__。  payload： 1&#123;% raw %&#125;&#123;%print lipsum.__globals__.__builconfigtins__.__impoconfigrt__(&#x27;oconfigs&#x27;).poconfigpen(&#x27;ls /&#x27;).r...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/03/07/ctf%E9%A2%98%E8%A7%A3/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8ssti%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5%E5%8F%8Actf%E9%A2%98%E8%A7%A3/" title="快速入门ssti模板注入及ctf题解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-07</div><div class="info-item-2">快速入门ssti模板注入及ctf题解</div></div><div class="info-2"><div class="info-item-1">快速入门ssti模板注入及ctf题解模板注入初步¶ ProbiusOfficial&#x2F;Hello-CTF  前置知识¶在开始之前，我们先大概介绍一下什么是模板，什么又是模板注入。 什么是模板¶模板 是一种用于生成动态内容的工具。   它们通常包含两个基本部分： 比如下图为 Hello-CTFtime 项目中，渲染比赛列表的时候用到的模板： 绿色 部分为 静态内容 ，而 橙色 部分则是 动态占位符   大多数模板的工作流程： 定义模板  -&gt;  传递数据  -&gt; 渲染模板  -&gt; 输出生成  什么是模板注入¶我们之前在说SQL注入的时候，这样描述SQL注入 “通过可控输入点达到非预期执行数据库语句”，比如后台预期的语句是： 1SELECT username,password FROM users WHERE id = &quot;数据传递点&quot;  在预期情况下，数据传递点只会是 1，2，3，4…… 但是我们要是让数据传入点的值为 1&quot; union select 1,group_concat(schema_name) from inform...</div></div></div></a><a class="pagination-related" href="/2026/06/02/ctf%E9%A2%98%E8%A7%A3/web/%E3%80%90BUUCTF%E3%80%91%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202018%5DComment%E9%A2%98%E8%A7%A3/" title="【BUUCTF】[网鼎杯 2018]Comment题解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-06-02</div><div class="info-item-2">【BUUCTF】[网鼎杯 2018]Comment题解</div></div><div class="info-2"><div class="info-item-1">【BUUCTF】[网鼎杯 2018]Comment题解知识点：1.修复git源码git reset --hard传入指定的哈希值后，Git 会在底层同时修改三个区域的状态： HEAD 指针⟶暂存区 (Index)⟶工作区 (Working Directory) 底层操作链： 移动指针：将当前分支（master）和 HEAD 指针强行移动到 bfbdf218902476c5c6164beedd8d2fcf593ea23b 这个 Commit 对象上。 重置暂存区 (Index)：清空当前的暂存区，将该 Commit 对象中记录的 Tree 对象（目录树快照）内容写入暂存区。 覆盖工作区 (Working Directory)：（关键） Git 检查你当前操作系统下的物理磁盘文件夹（即 D:\official\githacker\...），删除不属于该版本的所有文件，并根据 Tree 对象中的 Blob（文件内容）在磁盘中真实解压并还原出所有的 PHP 源码文件。   题目：发帖点击后提示要登陆，密码后缀是666，登录即可 思路：源代码有提示，要去找找原来的git log，开发者做了...</div></div></div></a><a class="pagination-related" href="/2026/03/12/ctf%E9%A2%98%E8%A7%A3/web/NewStar%20CTF%202025%20Week2-%E6%90%9E%E7%82%B9%E5%93%A6%E6%B6%A6%E5%90%89%E5%90%83%E5%90%83%F0%9F%8D%8A/" title="NewStar CTF 2025 Week2-搞点哦润吉吃吃🍊"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-12</div><div class="info-item-2">NewStar CTF 2025 Week2-搞点哦润吉吃吃🍊</div></div><div class="info-2"><div class="info-item-1">NewStar CTF 2025 Week2-搞点哦润吉吃吃🍊登录，账户密码在源代码 登陆后开始挑战，写脚本就行 先要知道几个重要信息，提示抓包，那抓包看看  说明start响应页面的setcookie会作为下面verify页面的session 这里不一样应该是因为过了几次我想到还有一个验证页面  我们只需写一个脚本，满足： 从登陆后的响应中拿到session，和计算式子然后拿到计算结果去挑战 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960import requestsdef auto_challenge():    base_url = &quot;http://127.0.0.1:17375&quot;    headers = &#123;        &quot;User-Agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) A...</div></div></div></a><a class="pagination-related" href="/2026/03/01/ctf%E9%A2%98%E8%A7%A3/web/%5BRCTF2015%5DEasySQL%201/" title="[RCTF2015]EasySQL 1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-01</div><div class="info-item-2">[RCTF2015]EasySQL 1</div></div><div class="info-2"><div class="info-item-1">[RCTF2015]EasySQL1寻找注入点，这里利用的是二次注入， 我的理解是先埋雷，然后打开雷得到想要的内容  我们可以猜测更改密码的后端代码 update 新密码 where username&#x3D;”用户名” 1update password=&#x27;xxxx&#x27; where username=&quot;xxxx&quot;  那这里我们利用报错注入，修改用户名为我们的注入内容即可 1update password=&#x27;xxxx&#x27; where username=&quot;admin&quot;||extractvalue(1,...,0x7e))#  为什么是admin？前面注册的时候发现这个admin用户名已经被注册过了 重新注册，用户名为以下内容： 123admin&quot;||extractvalue(1,concat(0x7e,(select(group_concat(table_name))from(information_schema.tables)where(table_schema)=database()),0x7...</div></div></div></a><a class="pagination-related" href="/2026/03/12/ctf%E9%A2%98%E8%A7%A3/web/NewStar%20CTF%202025%20Week1-Web%E7%99%BD%E5%B8%BD%E5%B0%8F%20K%20%E7%9A%84%E6%95%85%E4%BA%8B%EF%BC%881%EF%BC%89/" title="NewStar CTF 2025 Week1-Web白帽小 K 的故事（1）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-12</div><div class="info-item-2">NewStar CTF 2025 Week1-Web白帽小 K 的故事（1）</div></div><div class="info-2"><div class="info-item-1">NewStar CTF 2025 Week1-Web白帽小 K 的故事（1）对话提示看源代码（下面的图时候来上传完截屏的，有我们需要上传的test.mp3）  源代码在&#x2F;v1&#x2F;onload页面 假设使用post传file&#x3D;文件名 如果文件已经上传成功data.success为true，那么我们就能得到File content: -&gt;猜测onload是执行接口 思路一：那如果我们直接上传木马catflag呢，我们是不是可以直接得到flag？ 思路二：phpinfo(),flag也在里面 ${encodeURIComponent(file)}如果不加这个函数，直接发送 file=../../muma.php：  路径截断：浏览器或服务器可能会把 ../ 识别为改变当前的 URL 路径，导致请求发到错地址。 特殊字符冲突：如果你的文件名包含 &amp; 或 =，后端解析 POST 请求时会把它当成“下一个参数”的开始，导致文件名被切断，服务器找不到文件。  加上它，就是为了把文件名变成符合 URL 规范的纯文本字符串，确保后端能接收到完整的路径字符串...</div></div></div></a><a class="pagination-related" href="/2026/03/07/ctf%E9%A2%98%E8%A7%A3/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8web-sql%E6%B3%A8%E5%85%A5%E5%8F%8Abuuctf%E8%A5%BF%E7%94%B5%E9%A2%98%E8%A7%A3/" title="快速入门web-sql注入及buuctf西电题解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-07</div><div class="info-item-2">快速入门web-sql注入及buuctf西电题解</div></div><div class="info-2"><div class="info-item-1">快速入门web-sql注入及buuctf西电题解08 第八章 天衍真言，星图显圣 题解1.判断字段数order by 2 2.判断回显位 ‘union select  1,2# Welcome 1 3.数据库名 ‘union select database()# Welcome user 4.尝试查询数据库名为user下的所有表名 ‘union select group_concat(table_name),2 from information_schema.tables where table_schema&#x3D;’user’# Welcome flag,users 5.尝试查询 数据库名为user，表名为flag 下的所有列名 ‘union select group_concat(column_name),2 from information_schema.columns where table_schema&#x3D;’user’ and table_name&#x3D;’flag’# Welcome value 6.查找数据 错误答案：’union select va...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comments</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description">不要放弃自由去选择保障，到头来你两者都得不到</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">121</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">70</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/你的GitHub用户名"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/2829750658t-svg" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://blog.csdn.net/2501_93165324?type=blog" target="_blank" title="CSDN"><i class="fas fa-blog" style="color: #fc5531;"></i></a><a class="social-icon" href="https://music.163.com/#/user/home?id=1761301549" target="_blank" title="NetEaseCloud"><i class="fas fa-music" style="color: #c20c0c;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来到我的博客！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#NewStarCTF2025-Week4-Web-%E5%B0%8F-E-%E7%9A%84%E7%A7%98%E5%AF%86%E8%AE%A1%E5%88%92"><span class="toc-number">1.</span> <span class="toc-text">NewStarCTF2025-Week4-Web 小 E 的秘密计划</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-git%E7%9B%B8%E5%85%B3"><span class="toc-number">1.1.</span> <span class="toc-text">1. git相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DS-Store-%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">.DS_Store ：</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/22/%E5%85%A8%E7%AB%99%E6%9B%B4%E6%96%B0%E8%AE%B0%E5%BD%95/" title="全站更新记录">全站更新记录</a><time datetime="2026-06-22T13:33:29.000Z" title="Created 2026-06-22 21:33:29">2026-06-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/22/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" title="我的第一篇博客">我的第一篇博客</a><time datetime="2026-06-22T13:33:29.000Z" title="Created 2026-06-22 21:33:29">2026-06-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/22/linux/%E9%9F%A9%E9%A1%BA%E5%B9%B3linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="韩顺平linux学习笔记">韩顺平linux学习笔记</a><time datetime="2026-06-22T13:08:37.000Z" title="Created 2026-06-22 21:08:37">2026-06-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/22/linux/%E9%BB%91%E9%A9%AClinux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="黑马linux学习笔记">黑马linux学习笔记</a><time datetime="2026-06-22T13:08:12.000Z" title="Created 2026-06-22 21:08:12">2026-06-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/22/ctf%E9%A2%98%E8%A7%A3/web/NewStar%20CTF%202025%20Week3-who'ssti/" title="NewStar CTF 2025 Week3-who'ssti">NewStar CTF 2025 Week3-who'ssti</a><time datetime="2026-06-22T13:06:29.000Z" title="Created 2026-06-22 21:06:29">2026-06-22</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By John Doe</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5</a></span></div><div class="footer_custom_text"><a href="https://beian.miit.gov.cn/" target="_blank">浙ICP备2026034087号</a>
+</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll to Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5"></script><script src="/js/main.js?v=5.5.5"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo-blog-kappa.vercel.app',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const init = (el = document, path = location.pathname) => {
+    twikoo.init({
+      el: el.querySelector('#twikoo-wrap'),
+      envId: 'https://twikoo-blog-kappa.vercel.app',
+      region: '',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      },
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    
+
+    isShuoshuo && (window.shuoshuoComment.destroyTwikoo = () => {
+      if (el.children.length) {
+        el.innerHTML = ''
+        el.classList.add('no-comment')
+      }
+    })
+  }
+
+  const loadTwikoo = (el, path) => {
+    if (typeof twikoo === 'object') setTimeout(() => init(el, path), 0)
+    else btf.getScript('https://cdn.jsdelivr.net/npm/twikoo@1.7.11/dist/twikoo.all.min.js').then(() => init(el, path))
+  }
+
+  if (isShuoshuo) {
+    'Twikoo' === 'Twikoo'
+      ? window.shuoshuoComment = { loadComment: loadTwikoo }
+      : window.loadOtherComment = loadTwikoo
+    return
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading Database</span></div><div class="local-search-input"><input placeholder="搜索文章..." type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.5"></script></div></div></body></html>

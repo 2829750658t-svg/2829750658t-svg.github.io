@@ -1,0 +1,225 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>php下家族介绍 | Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1.include特性：不仅是包含文件，会把文件内容当php代码执行 2.eval特性：处理字符串 3.preg_match：处理字符串">
+<meta property="og:type" content="article">
+<meta property="og:title" content="php下家族介绍">
+<meta property="og:url" content="http://example.com/2026/01/28/ctf/web/php%E4%B8%8B%E5%AE%B6%E6%97%8F%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.include特性：不仅是包含文件，会把文件内容当php代码执行 2.eval特性：处理字符串 3.preg_match：处理字符串">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/avatar.png">
+<meta property="article:published_time" content="2026-01-28T03:10:34.000Z">
+<meta property="article:modified_time" content="2026-06-22T13:40:21.546Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="PHP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/avatar.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "php下家族介绍",
+  "url": "http://example.com/2026/01/28/ctf/web/php%E4%B8%8B%E5%AE%B6%E6%97%8F%E4%BB%8B%E7%BB%8D/",
+  "image": "http://example.com/images/avatar.png",
+  "datePublished": "2026-01-28T03:10:34.000Z",
+  "dateModified": "2026-06-22T13:40:21.546Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/favicon.png"><link rel="canonical" href="http://example.com/2026/01/28/ctf/web/php%E4%B8%8B%E5%AE%B6%E6%97%8F%E4%BB%8B%E7%BB%8D/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"No results found for: ${query}","hits_stats":"${hits} articles found"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'php下家族介绍',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">121</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">70</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">8</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hexo</span></a><a class="nav-page-title" href="/"><span class="site-name">php下家族介绍</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">php下家族介绍</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-01-28T03:10:34.000Z" title="Created 2026-01-28 11:10:34">2026-01-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-06-22T13:40:21.546Z" title="Updated 2026-06-22 21:40:21">2026-06-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/web/">web</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>1.include特性：不仅是包含文件，会把文件内容当php代码执行</p>
+<p>2.eval特性：处理字符串</p>
+<p>3.preg_match：处理字符串</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2026/01/28/ctf/web/php%E4%B8%8B%E5%AE%B6%E6%97%8F%E4%BB%8B%E7%BB%8D/">http://example.com/2026/01/28/ctf/web/php%E4%B8%8B%E5%AE%B6%E6%97%8F%E4%BB%8B%E7%BB%8D/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/PHP/">PHP</a></div><div class="post-share"><div class="social-share" data-image="/images/avatar.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/01/29/ctf%E9%A2%98%E8%A7%A3/reverse/BUUCTF%20%20%E5%86%85%E6%B6%B5%E7%9A%84%E8%BD%AF%E4%BB%B61/" title="BUUCTF  内涵的软件1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">BUUCTF  内涵的软件1</div></div><div class="info-2"><div class="info-item-1">内涵的软件1shift+f12 搜flag，发现无用信息 尝试搜{ 找到flag  </div></div></div></a><a class="pagination-related" href="/2026/01/27/linux/linux%E4%B8%8Bproc_self%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="linux下proc_self学习笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">linux下proc_self学习笔记</div></div><div class="info-2"><div class="info-item-1">Linux /proc 文件系统（/proc/self）的学习笔记出处：https://blog.csdn.net/cjdgg/article/details/119860355 前提知识点：文件句柄（File Descriptor，简称 fd）是 Linux 内核为每个进程分配的唯一标识符（非负整数），用于跟踪该进程打开的文件、管道、网络套接字、设备等资源。  所有 I&#x2F;O 操作（读写文件、网络通信等）都通过文件句柄进行。例如： 0 标准输入（stdin） 1 标准输出（stdout） 2 标准错误（stderr） 其他句柄：普通文件（如 3）、网络套接字等。    内容精简如下： 1. /proc/self 是什么？/proc 目录：Linux 的伪文件系统，存储内核和进程信息（只存在内存中）。 /proc/[pid]：存储特定进程（如 PID 1083）信息的目录。 /proc/self：一个快捷方式。谁访问它，它就指向访问者自己的进程目录。 作用：攻击者在不知道当前进程 PID 的情况下，可以直接用 /proc/self 获取当前进程的信息。 2. 常用子目录&...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/02/06/ctf%E9%A2%98%E8%A7%A3/web/NewStar%20CTF%202025%20Week1%20-%20%E5%AE%87%E5%AE%99%E7%9A%84%E4%B8%AD%E5%BF%83%E6%98%AF%20PHP/" title="NewStar CTF 2025 Week1 - 宇宙的中心是 PHP"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-02-06</div><div class="info-item-2">NewStar CTF 2025 Week1 - 宇宙的中心是 PHP</div></div><div class="info-2"><div class="info-item-1">NewStar CTF 2025 Week1 - 宇宙的中心是 PHP s3kret.php 1234567891011 &lt;?phphighlight_file(__FILE__);include &quot;flag.php&quot;;if(isset($_POST[&#x27;newstar2025&#x27;]))&#123;    $answer = $_POST[&#x27;newstar2025&#x27;];    if(intval($answer)!=47&amp;&amp;intval($answer,0)==47)&#123;        echo $flag;    &#125;else&#123;        echo &quot;你还未参透奥秘&quot;;    &#125;&#125;   重点： 1intval($answer)!=47&amp;&amp;intval($answer,0)==47  -&gt;了解intval PHP 中，intval($value, $base)   如果 $base 是 0，PHP 会根据 $va...</div></div></div></a><a class="pagination-related" href="/2026/03/07/ctf%E9%A2%98%E8%A7%A3/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8web-ssrf%E5%8F%8Abuuctf%E8%A5%BF%E7%94%B5%E9%A2%98%E8%A7%A3/" title="快速入门web-ssrf及buuctf西电题解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-07</div><div class="info-item-2">快速入门web-ssrf及buuctf西电题解</div></div><div class="info-2"><div class="info-item-1">快速入门web-ssrf及buuctf西电题解SSRF &#x3D; 服务器端请求伪造特点 主体是服务器：请求是「服务器发起」的，不是你的电脑； 权限是服务器的权限：服务器能访问的资源（本地文件、内网 IP），你本来访问不到，但通过 SSRF 就能间接访问； 核心是 “伪造请求”：你伪造一个服务器会执行的请求（比如本地文件地址、内网地址），服务器替你执行。  [网鼎杯 2018]Fakebook11.注册登陆界面，sqlmap扫描 1python dirsearch.py -u &quot;http://3992b9c4-b99e-44db-96b6-111d3cb92681.node5.buuoj.cn:81/&quot; -e php --threads 1 --delay 3 -w ./ctf_core.txt      打开备份文件 1234567891011121314151617181920212223242526272829303132333435363738394041424344&lt;?phpclass UserInfo&#123;    public $na...</div></div></div></a><a class="pagination-related" href="/2026/03/16/ctf%E9%A2%98%E8%A7%A3/web/%5BGWCTF%202019%5D%E6%88%91%E6%9C%89%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%201/" title="[GWCTF 2019]我有一个数据库 1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-16</div><div class="info-item-2">[GWCTF 2019]我有一个数据库 1</div></div><div class="info-2"><div class="info-item-1">[GWCTF 2019]我有一个数据库1页面一打开，抓包看到了数据库，一开始想到的sql注入，但明确没有注入点，所以我们扫扫文件看看有什么有用的信息  看到phpmyadmin，可以联想到某项版本下是存在漏洞的  打开phpmyadmin页面，看到了具体的版本  查找这个版本对应的漏洞  phpMyAdmin 4.8.1 远程文件包含漏洞简介phpMyAdmin是一套开源的、基于Web的MySQL数据库管理工具。 在phpMyAdmin 4.8.2 之前的 4.8.x 版本中，其index.php中存在一处文件包含逻辑，通过二次编码即可绕过检查，造成远程文件包含漏洞。 漏洞还原：文件&#x2F;index.php代码 123456789if (! empty($_REQUEST[&#x27;target&#x27;])    &amp;&amp; is_string($_REQUEST[&#x27;target&#x27;])    &amp;&amp; ! preg_match(&#x27;/^index/&#x27;, $_REQUEST[&#x27;target&#x27;...</div></div></div></a><a class="pagination-related" href="/2026/06/02/ctf%E9%A2%98%E8%A7%A3/web/%E3%80%90BUUCTF%E3%80%91%5B%E7%BD%91%E9%BC%8E%E6%9D%AF%202018%5DComment%E9%A2%98%E8%A7%A3/" title="【BUUCTF】[网鼎杯 2018]Comment题解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-06-02</div><div class="info-item-2">【BUUCTF】[网鼎杯 2018]Comment题解</div></div><div class="info-2"><div class="info-item-1">【BUUCTF】[网鼎杯 2018]Comment题解知识点：1.修复git源码git reset --hard传入指定的哈希值后，Git 会在底层同时修改三个区域的状态： HEAD 指针⟶暂存区 (Index)⟶工作区 (Working Directory) 底层操作链： 移动指针：将当前分支（master）和 HEAD 指针强行移动到 bfbdf218902476c5c6164beedd8d2fcf593ea23b 这个 Commit 对象上。 重置暂存区 (Index)：清空当前的暂存区，将该 Commit 对象中记录的 Tree 对象（目录树快照）内容写入暂存区。 覆盖工作区 (Working Directory)：（关键） Git 检查你当前操作系统下的物理磁盘文件夹（即 D:\official\githacker\...），删除不属于该版本的所有文件，并根据 Tree 对象中的 Blob（文件内容）在磁盘中真实解压并还原出所有的 PHP 源码文件。   题目：发帖点击后提示要登陆，密码后缀是666，登录即可 思路：源代码有提示，要去找找原来的git log，开发者做了...</div></div></div></a><a class="pagination-related" href="/2026/03/30/ctf%E9%A2%98%E8%A7%A3/web/%5BSUCTF%202019%5DCheckIn1/" title="[SUCTF 2019]CheckIn1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-30</div><div class="info-item-2">[SUCTF 2019]CheckIn1</div></div><div class="info-2"><div class="info-item-1">[SUCTF 2019]CheckIn1老题目图片上传（尖括号过滤，文件头检查，request手动执行，ini配置文件）  1.知识点1.exif_imagetype 到底在查什么？普通检查可能只看文件头的前几个字符（如 GIF89a），但 exif_imagetype() 函数更严格：  特征签名检查：它会读取文件的前几个字节，并对比内置的 Magic Number（魔数） 表。 结构完整性：它不仅看开头，还会简单判断文件结构是否符合该图片格式的规范。 报错原因：如果开头写了 GIF89a，但后面紧跟着全是 PHP 代码，该函数可能会因为找不到图片应有的数据结构而返回 false，从而触发 not image! 的提示。  2.为什么木马中post不行，换成request却可以？——服务器的配置限制POST 长度&#x2F;开关限制： 在极少数极端环境下，服务器可能限制了 POST 数据的大小，或者在 Web 服务器层（如 Nginx）禁止了对某些目录的 POST 请求。 3. .user.ini让用户在没有权限修改全局 php.ini 的情况下，微调某个目录的设置。 规则： ...</div></div></div></a><a class="pagination-related" href="/2026/02/02/ctf%E9%A2%98%E8%A7%A3/web/%5B%E7%BA%A2%E6%98%8E%E8%B0%B7CTF%202021%5Dwrite_shell%201/" title="[红明谷CTF 2021]write_shell 1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-02-02</div><div class="info-item-2">[红明谷CTF 2021]write_shell 1</div></div><div class="info-2"><div class="info-item-1">[红明谷CTF 2021]write_shell1看到一个url  得到地址： sandbox&#x2F;331f5a2fec4659f9c8cd3a470a780b69&#x2F;  源代码 1234567891011121314151617181920212223242526272829303132333435363738&lt;?phperror_reporting(0);highlight_file(__FILE__);function check($input)&#123;    if(preg_match(&quot;/&#x27;| |_|php|;|~|\\^|\\+|eval|&#123;|&#125;/i&quot;,$input))&#123;    	//正则需要绕过        // if(preg_match(&quot;/&#x27;| |_|=|php/&quot;,$input))&#123;        die(&#x27;hacker!!!&#x27;);    &#125;else&#123;        return $input;...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comments</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description">不要放弃自由去选择保障，到头来你两者都得不到</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">121</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">70</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/你的GitHub用户名"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/2829750658t-svg" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://blog.csdn.net/2501_93165324?type=blog" target="_blank" title="CSDN"><i class="fas fa-blog" style="color: #fc5531;"></i></a><a class="social-icon" href="https://music.163.com/#/user/home?id=1761301549" target="_blank" title="NetEaseCloud"><i class="fas fa-music" style="color: #c20c0c;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来到我的博客！</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/22/%E5%85%A8%E7%AB%99%E6%9B%B4%E6%96%B0%E8%AE%B0%E5%BD%95/" title="全站更新记录">全站更新记录</a><time datetime="2026-06-22T13:33:29.000Z" title="Created 2026-06-22 21:33:29">2026-06-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/22/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" title="我的第一篇博客">我的第一篇博客</a><time datetime="2026-06-22T13:33:29.000Z" title="Created 2026-06-22 21:33:29">2026-06-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/22/linux/%E9%9F%A9%E9%A1%BA%E5%B9%B3linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="韩顺平linux学习笔记">韩顺平linux学习笔记</a><time datetime="2026-06-22T13:08:37.000Z" title="Created 2026-06-22 21:08:37">2026-06-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/22/linux/%E9%BB%91%E9%A9%AClinux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="黑马linux学习笔记">黑马linux学习笔记</a><time datetime="2026-06-22T13:08:12.000Z" title="Created 2026-06-22 21:08:12">2026-06-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/22/ctf%E9%A2%98%E8%A7%A3/web/NewStar%20CTF%202025%20Week3-who'ssti/" title="NewStar CTF 2025 Week3-who'ssti">NewStar CTF 2025 Week3-who'ssti</a><time datetime="2026-06-22T13:06:29.000Z" title="Created 2026-06-22 21:06:29">2026-06-22</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By John Doe</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5</a></span></div><div class="footer_custom_text"><a href="https://beian.miit.gov.cn/" target="_blank">浙ICP备2026034087号</a>
+</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="Scroll to Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5"></script><script src="/js/main.js?v=5.5.5"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo-blog-kappa.vercel.app',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const init = (el = document, path = location.pathname) => {
+    twikoo.init({
+      el: el.querySelector('#twikoo-wrap'),
+      envId: 'https://twikoo-blog-kappa.vercel.app',
+      region: '',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      },
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    
+
+    isShuoshuo && (window.shuoshuoComment.destroyTwikoo = () => {
+      if (el.children.length) {
+        el.innerHTML = ''
+        el.classList.add('no-comment')
+      }
+    })
+  }
+
+  const loadTwikoo = (el, path) => {
+    if (typeof twikoo === 'object') setTimeout(() => init(el, path), 0)
+    else btf.getScript('https://cdn.jsdelivr.net/npm/twikoo@1.7.11/dist/twikoo.all.min.js').then(() => init(el, path))
+  }
+
+  if (isShuoshuo) {
+    'Twikoo' === 'Twikoo'
+      ? window.shuoshuoComment = { loadComment: loadTwikoo }
+      : window.loadOtherComment = loadTwikoo
+    return
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading Database</span></div><div class="local-search-input"><input placeholder="搜索文章..." type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.5"></script></div></div></body></html>
